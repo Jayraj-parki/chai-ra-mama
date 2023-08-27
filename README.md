@@ -2,13 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Follow step to get stardted
+Follow below steps to get started
 
 ```bash
 git clone https://github.com/Jayraj-parki/chai-ra-mama.git
 # to install all packages run below command
 npm install
-
+# create .env.local file add all environment varialbles
 ```
 First, run the development server:
 
