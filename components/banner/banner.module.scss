@@ -1,0 +1,46 @@
+@import "../../styles/var";
+.banner {
+    .bannerInner {
+      // height:1000px
+      position: relative;
+      height: max-content;
+      .imageContainer {
+        img {
+          object-fit: cover;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+          filter:  brightness(40%);;
+        }
+      }
+      .bannerItem {
+        position: absolute;
+        top: 0;
+        height: 500px;
+      //   background: #000;
+        .bannerHeading {
+          font-size: 55px;
+          font-weight: bold;
+          .text_orange{
+            color: $primary-orange;
+          }
+          .text_blue{
+            color: $primary-blue;
+          }
+
+        }
+        .bannerText{
+          font-size: 18px;
+        }
+        .orderBtn{
+          button{
+              background: $primary-red;
+              font-size: 18px;
+              font-weight: bold;
+              padding: 10px 30px;
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,25 @@
+@import "../../styles/var";
+.homeCard{
+    &:hover{
+        background-color:$primary-dark; 
+         
+        .cardText{
+            color: $primary-light;
+        }     
+      }
+    .icon{
+        font-size: 100px;
+        color: $primary-blue;
+    }
+    .cardTitle{
+        color: $primary-orange;
+        font-weight: bold;
+        
+    }
+    .cardText{
+        color:$text-gray;
+    }
+    border-radius:20px ;
+    transform: translateY(-150px);
+    
+}
