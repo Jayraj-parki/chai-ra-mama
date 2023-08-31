@@ -1,0 +1,24 @@
+@import "../../styles/var";
+.testimonial {
+    background-color: $primary-light-pink;
+  .heading {
+    font-weight: 700;
+
+    .text_orange {
+      color: $primary-orange;
+    }
+    .text_blue {
+      color: $primary-blue;
+    }
+  }
+  div {
+    
+    img {
+    //   width: 100%;
+      object-fit: cover;
+      height:130px;
+      width: 140px;
+      border-radius: 50%;
+    }
+  }
+}

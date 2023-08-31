@@ -2,14 +2,14 @@
 .aboutus{
     .about_img{
         img{
-            object-fit: cover;
-            // width: max-content;
-            position: relative;
-            height: max-content;
-            background-size: cover;
+            height: 100%;
+            width: 100%;
         }
     }
     .about_text{
+        h1{
+            font-weight: 700;  
+        }
         p{
             font-size: 18px;
             text-align: justify;

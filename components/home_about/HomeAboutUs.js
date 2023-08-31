@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import style from "./aboutus.module.scss"
+import style from "./homeAbout.module.scss"
 import Image from "next/image"
-const AboutUs = () => {
+const HomeAboutUs = () => {
     const [about,setAbout]=useState({
         aboutImg:"/assets/images/image 7.png",
         description:"dummy text"
@@ -17,7 +17,7 @@ const AboutUs = () => {
         }
     },[])
     return (
-        <div className={style.aboutus + " container-fluid mb-5"}>
+        <div className={style.aboutus + " container-fluid mb-5 pb-5"}>
             <div className="row  col-9 mx-auto d-flex justify-content-between ">
                 <div className={style.about_img + "  col-6 text-center"}>
                     <Image className="  col-12 mx-auto" src={about.aboutImg} height={100} width={100} objectFit="cover" alt="about image" />
@@ -31,4 +31,4 @@ const AboutUs = () => {
     )
 }
 
-export default AboutUs
+export default HomeAboutUs

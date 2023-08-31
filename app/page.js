@@ -1,23 +1,36 @@
 "use client"
-import HeaderCard from "@/components/card/HeaderCard"
 import style from "./page.module.scss"
-import Banner from "@/components/banner/Banner"
-
-import AboutUs from "@/components/about/AboutUs"
+import HomeBanner from "@/components/home_banner/HomeBanner"
+import HomeHeaderCard from "@/components/home_headerCard/HomeHeaderCard"
+import HomeAboutUs from "@/components/home_about/HomeAboutUs"
+import HomeGallery from "@/components/home_gallery/HomeGallery"
+import HomeMenu from "@/components/home_menu/HomeMenu"
+import HomeTestimonial from "@/components/home_testimonial/HomeTestimonial"
+import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
 
 const page = () => {
   return (
     <>
       {/* banner */}
-      <Banner />
+      <HomeBanner />
 
       {/* card */}
-      <HeaderCard />
-
+      <HomeHeaderCard />
 
       {/* about us */}
-      <AboutUs />
+      <HomeAboutUs />
 
+      {/* Our gallery */}
+      <HomeGallery />
+
+      {/* menu */}
+      <HomeMenu/>
+
+      {/* Testimonials */}
+      <HomeTestimonial/>
+
+      {/* Get in Touch */}
+      <HomeGetInTouch/>
     </>
   )
 }
