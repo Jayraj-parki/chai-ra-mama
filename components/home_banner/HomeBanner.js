@@ -32,7 +32,7 @@ function HomeBanner() {
                     </div>
                     <div className={style.bannerItem + " d-flex flex-row justify-content-center row mx-auto col-11 m-0  p-0 my-auto"}>
                         <div className={style.text + " col-8 my-auto"}>
-                            <h1 className={style.bannerHeading + " text-center mb-4 text-light"}>&ldquo; {banner.bannerHeading.heading1}<span className={style.text_blue}> { banner.bannerHeading.bold1}</span> {banner.bannerHeading.heading2} <span className={style.text_orange}>{banner.bannerHeading.bold2}</span> &rdquo;</h1>
+                            <h1 className={style.bannerHeading + " text-center mb-4 text-light"}>&ldquo; {banner.bannerHeading.heading1}<span className={style.text_blue}> {banner.bannerHeading.bold1}</span> {banner.bannerHeading.heading2} <span className={style.text_orange}>{banner.bannerHeading.bold2}</span> &rdquo;</h1>
                             <p className={style.bannerText + " row mx-auto text-light col-10 text-center"}>{banner.bannerText}
                             </p>
                         </div>
