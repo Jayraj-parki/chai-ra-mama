@@ -1,0 +1,32 @@
+@import "../../styles/var";
+.container {
+  .wcuCard {
+    div{
+        z-index:100;
+    }
+    .iconContainer {
+        position: relative;
+        z-index: 100;
+      .icon {
+        font-size: 100px;
+      }
+      .circle {
+          z-index: -1;
+        position: absolute;
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        background-color: $primary-coffee-light;
+        bottom: 0;
+        right: 0;
+    }
+    }
+    .cardTitle {
+      font-size: 20px;
+    }
+    .cardText {
+      color: $text-gray;
+      font-size: 18px;
+    }
+  }
+}

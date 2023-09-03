@@ -8,7 +8,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-export const Footer = () => {
+const Footer = () => {
     return (
         <div className={style.footer + " container-fluid m-0 p-0"}>
             <div className={style.footerInner + " d-flex justify-content-center mx-auto m-0 p-0  "}>
@@ -91,3 +91,4 @@ export const Footer = () => {
         </div>
     );
 };
+export default Footer;

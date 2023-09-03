@@ -7,7 +7,6 @@ import HomeGallery from "@/components/home_gallery/HomeGallery"
 import HomeMenu from "@/components/home_menu/HomeMenu"
 import HomeTestimonial from "@/components/home_testimonial/HomeTestimonial"
 import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
-import { Footer } from "@/components/footer/Footer"
 
 const page = () => {
   return (
@@ -33,8 +32,6 @@ const page = () => {
       {/* Get in Touch */}
       <HomeGetInTouch />
 
-      {/* footer */}
-      <Footer />
     </>
   )
 }

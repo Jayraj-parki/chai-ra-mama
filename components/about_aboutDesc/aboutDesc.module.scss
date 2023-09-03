@@ -1,0 +1,31 @@
+@import "../../styles/var";
+.aboutDesc {
+  .about_img {
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .about_title {
+    background-color: $primary-coffee;
+    font-size: 20px;
+    width: fit-content;
+  }
+  .about_desc {
+    color: $text-gray;
+    font-size: 18px;
+  }
+  .about_list {
+    ul {
+      li {
+        list-style: none;
+        font-size: 18px;
+        font-weight: 600;
+        .icon {
+            font-size: 28px;
+          color: $primary-coffee;
+        }
+      }
+    }
+  }
+}
