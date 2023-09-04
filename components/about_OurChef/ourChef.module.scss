@@ -1,0 +1,28 @@
+@import "../../styles/var";
+.wcu {
+  .wcu_title {
+    background-color: $primary-coffee;
+    font-size: 20px;
+    width: fit-content;
+  }
+  @import "../../styles/var";
+
+  .wcuCard {
+   
+    .imgContainer {
+     img{
+        height: 250px;
+        // width: 200px;
+        border-radius: 50px 50px 50px 0px;
+     } 
+      
+    }
+    .name {
+      font-size: 20px;
+    }
+    .experince {
+      color: $primary-coffee;
+      font-size: 18px;
+    }
+  }
+}
