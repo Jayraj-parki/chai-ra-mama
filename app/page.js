@@ -24,13 +24,14 @@ const page = () => {
       <HomeGallery />
 
       {/* menu */}
-      <HomeMenu/>
+      <HomeMenu />
 
       {/* Testimonials */}
-      <HomeTestimonial/>
+      <HomeTestimonial />
 
       {/* Get in Touch */}
-      <HomeGetInTouch/>
+      <HomeGetInTouch />
+
     </>
   )
 }

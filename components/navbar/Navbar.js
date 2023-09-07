@@ -3,23 +3,42 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import style from "./navbar.module.scss"
-import { set } from 'mongoose';
+import { usePathname } from 'next/navigation';
+
 
 const Navbar = () => {
     const [collapse, setCollapse] = useState(true)
-    const [activeLink, setActiveLink] = useState("home")
-    const [logoImg,setLogoImg]=useState("")
-    useEffect(()=>{
-        try{
-            const data=require("@/data/headerData.json")
+    const [activeLink, setActiveLink] = useState("/")
+    const [logoImg, setLogoImg] = useState("")
+    const url = usePathname()
+    useEffect(() => {
+        try {
+            const data = require("@/data/headerData.json")
             setLogoImg(data.logoImg)
         }
-        catch(e){
+        catch (e) {
             setLogoImg("'/assets/images/logo.png'")
         }
-        
-    },[])
-
+    }, [])
+    useEffect(() => {
+        const handleNavlink = () => {
+            try {
+                if (url.toLowerCase().includes("about")) setActiveLink("aboutus")
+                else if (url.toLowerCase().includes("menu")) setActiveLink("menu")
+                else if (url.toLowerCase().includes("franchise")) setActiveLink("franchise")
+                else if (url.toLowerCase().includes("gallery")) setActiveLink("gallery")
+                else if (url.toLowerCase().includes("feedback")) setActiveLink("feedback")
+                else if (url.toLowerCase().includes("storeLocators")) setActiveLink("storeLocators")
+                else if (url.toLowerCase().includes("contactus")) setActiveLink("contactus")
+                else setActiveLink("home")
+            }
+            catch (err) {
+                console.log("err" + err)
+                setActiveLink("home")
+            }
+        }
+        handleNavlink()
+    }, [url])
     return (
 
         <>
@@ -28,7 +47,7 @@ const Navbar = () => {
                 <div className="container-fluid col-10  mx-auto">
                     <div className="navbar-brand  col-2">
                         <Link href="#">
-                            <Image className='bg-info' width={140} height={60} objectFit="cover" alt="logo" src={logoImg} />
+                            <Image src={logoImg} className='bg-info' width={140} height={60} objectFit="cover" alt="logo" />
                         </Link>
                     </div>
                     <button onClick={() => setCollapse(prev => (!prev))} className={`navbar-toggler ${collapse && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded={`${collapse} && "false"`} aria-label="Toggle navigation">
@@ -36,29 +55,29 @@ const Navbar = () => {
                     </button>
                     <div className={`col-10 collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
                         <ul className={style.navlink_container + " row col-12  mx-auto  navbar-nav me-auto mb-2 mb-lg-0"}>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "home" && "border-bottom"} `}>
-                                <Link onClick={() => setActiveLink("home")} className={`nav-link border-2 `} aria-current="page" href="#">Home</Link>
+                            <li className={`nav-item d-flex  col-auto mx-auto ${activeLink == "home" && "border-bottom border-3"} `}>
+                                <Link onClick={() => setActiveLink("home")} className={`nav-link border-3 `} aria-current="page" href="/">Home</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto  ${activeLink == "aboutus" && "border-bottom"}  `}>
-                                <Link onClick={() => setActiveLink("aboutus")} className={`nav-link border-2`} aria-current="page" href="#">About Us</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto  ${activeLink == "aboutus" && "border-bottom border-3"}  `}>
+                                <Link onClick={() => setActiveLink("aboutus")} className={`nav-link `} aria-current="page" href="/aboutUs">About Us</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "menu" && "border-bottom"} `}>
-                                <Link onClick={() => setActiveLink("menu")} className={`nav-link border-2 `} aria-current="page" href="#">Menu</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "menu" && "border-bottom border-3"} `}>
+                                <Link onClick={() => setActiveLink("menu")} className={`nav-link  `} aria-current="page" href="/menu">Menu</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "franchise" && "border-bottom"}`}>
-                                <Link onClick={() => setActiveLink("franchise")} className={`nav-link border-2  `} aria-current="page" href="#">Franchise</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "franchise" && "border-bottom border-3"}`}>
+                                <Link onClick={() => setActiveLink("franchise")} className={`nav-link   `} aria-current="page" href="franchise">Franchise</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "gallery" && "border-bottom"}`}>
-                                <Link onClick={() => setActiveLink("gallery")} className={`nav-link border-2  `} aria-current="page" href="#">Gallery</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "gallery" && "border-bottom border-3"}`}>
+                                <Link onClick={() => setActiveLink("gallery")} className={`nav-link   `} aria-current="page" href="gallery">Gallery</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto  ${activeLink == "feedback" && "border-bottom"} `}>
-                                <Link onClick={() => setActiveLink("feedback")} className={`nav-link border-2 `} aria-current="page" href="#">Feedback</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto  ${activeLink == "feedback" && "border-bottom border-3"} `}>
+                                <Link onClick={() => setActiveLink("feedback")} className={`nav-link  `} aria-current="page" href="feedback">Feedback</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "storeLocators" && "border-bottom"}`}>
-                                <Link onClick={() => setActiveLink("storeLocators")} className={`nav-link border-2  `} aria-current="page" href="#">Store Locators</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "storeLocators" && "border-bottom border-3"}`}>
+                                <Link onClick={() => setActiveLink("storeLocators")} className={`nav-link   `} aria-current="page" href="storeLocators">Store Locators</Link>
                             </li>
-                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "contactus" && "border-bottom"}`}>
-                                <Link onClick={() => setActiveLink("contactus")} className={`nav-link border-2  `} aria-current="page" href="#">Contact Us</Link>
+                            <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "contactus" && "border-bottom border-3"}`}>
+                                <Link onClick={() => setActiveLink("contactus")} className={`nav-link   `} aria-current="page" href="contactus">Contact Us</Link>
                             </li>
 
 
