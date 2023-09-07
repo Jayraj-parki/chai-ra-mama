@@ -1,7 +1,9 @@
 .navbar{
+    z-index: 100;
     background-color: #1F3820;
     height:100px;
     .navlink_container{
+        background-color: #1F3820;
         li{
             a{
                 font-size: 18px ;

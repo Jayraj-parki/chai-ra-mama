@@ -44,16 +44,16 @@ const Navbar = () => {
         <>
 
             <nav className={style.navbar + " navbar navbar-expand-lg  p-3"}>
-                <div className="container-fluid col-10  mx-auto">
+                <div className="container-fluid col-10  mx-auto ">
                     <div className="navbar-brand  col-2">
                         <Link href="#">
-                            <Image src={logoImg} className='bg-info' width={140} height={60} objectFit="cover" alt="logo" />
+                            <Image src={logoImg} className='' width={140} height={60} objectFit="cover" alt="logo" />
                         </Link>
                     </div>
                     <button onClick={() => setCollapse(prev => (!prev))} className={`navbar-toggler ${collapse && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded={`${collapse} && "false"`} aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className={`col-10 collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
+                    <div className={`col-10 collapse  navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
                         <ul className={style.navlink_container + " row col-12  mx-auto  navbar-nav me-auto mb-2 mb-lg-0"}>
                             <li className={`nav-item d-flex  col-auto mx-auto ${activeLink == "home" && "border-bottom border-3"} `}>
                                 <Link onClick={() => setActiveLink("home")} className={`nav-link border-3 `} aria-current="page" href="/">Home</Link>
