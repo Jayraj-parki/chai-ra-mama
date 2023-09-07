@@ -1,5 +1,6 @@
+@import "../../styles/var";
 .navbar{
-    background-color: #1F3820;
+    background-color: $primary-navbar;
     height:100px;
     .navlink_container{
         li{
