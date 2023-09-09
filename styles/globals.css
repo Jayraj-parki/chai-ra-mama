@@ -10,7 +10,9 @@
 *{
   object-fit: cover;
   font-family: sans-serif;
+  z-index: 1;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
