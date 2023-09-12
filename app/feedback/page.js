@@ -5,5 +5,4 @@ const page = () => {
     <div>feedback page</div>
   )
 }
-
 export default page
