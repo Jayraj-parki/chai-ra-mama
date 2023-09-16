@@ -1,18 +1,18 @@
 import connectToDb from "@/utils/connectToDb";
-import footer from "@/models/home/footer";
+import menuCard from "@/models/menu/menuCard"; 
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {
     try {
         await connectToDb();
-        const data = await footer.find()
+        const data = await menuCard.find()
         return NextResponse.json({
             data: data,
         }, { status: 200 })
     }
     catch (e) {
         return NextResponse.json({
-            message: "Error in getting footer details" + e
+            message: "Error in getting menuCard Details" + e
         }, { status: 500 })
     }
 }
@@ -21,14 +21,14 @@ export async function POST(request, response) {
 
         const body = await request.json();
         await connectToDb();
-        await footer.create(body)
+        await menuCard.create(body)
         return NextResponse.json({
-            message: "footer details added successfully",
+            message: "menuCard details added successfully",
         }, { status: 200 })
     }
     catch (e) {
         return NextResponse.json({
-            message: "Error in getting footer details" + e
+            message: "Error in adding menuCard Details" + e
         }, { status: 500 })
     }
 }
@@ -38,31 +38,30 @@ export async function PATCH(request) {
         const id = url.searchParams.get("id")
         const body = await request.json();
         await connectToDb();
-        await footer.findByIdAndUpdate(id, body)
+        await menuCard.findByIdAndUpdate(id, body)
         return NextResponse.json({
-            message: "footer details updated successfully",
+            message: "menuCard details updated successfully",
         }, { status: 200 })
     }
     catch (e) {
         return NextResponse.json({
-            message: "Error in updating footer Details" + e
+            message: "Error in updating menuCard Details" + e
         }, { status: 500 })
     }
 }
-
 export async function DELETE(request, response) {
     try {
         const url = new URL(request.url)
         const id = url.searchParams.get("id")
         await connectToDb();
-        await footer.findByIdAndDelete(id)
+        await menuCard.findByIdAndDelete(id)
         return NextResponse.json({
-            message: "footer details Deleted successfully",
+            message: "menuCard details Deleted successfully",
         }, { status: 200 })
     } 
     catch (e) {
         return NextResponse.json({
-            message: "Error in deleting footer details" + e
+            message: "Error in deleting menuCard Details" + e
         }, { status: 500 })
     }
 }

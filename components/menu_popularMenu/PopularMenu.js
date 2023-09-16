@@ -54,10 +54,10 @@ const PopularMenu = () => {
                                         {val?.items?.map((item) => {
                                             return (
                                                 <div className={style.itemCard + "  m-auto col-6  d-flex justify-content-center align-items-center my-4 p-0  "} >
-                                                    <div className="col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto">
+                                                    <div className={style.cardImage+" col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto"}>
                                                         <Image className="m-0 p-0 rounded-pill" src={item?.img} width={300} height={300} objectFit='cover' alt="menu item" />
                                                     </div>
-                                                    <div className="col-10 border ps-4 py-5 rounded shadow d-flex justify-content-around align-items-center  my-auto">
+                                                    <div className={style.cardBody+" col-10 border ps-4 py-5 rounded shadow d-flex justify-content-around align-items-center  my-auto"}>
                                                         <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{item?.itemName}</h3>
                                                         <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {item?.itemPrice}/-</h6>
                                                     </div>
@@ -77,7 +77,7 @@ const PopularMenu = () => {
                                         {val?.items?.map((item) => {
                                             return (
                                                 <div className={style.itemCard + "  m-auto col-6  d-flex justify-content-center align-items-center my-4 p-0  "} >
-                                                    <div className="col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto">
+                                                    <div className={style.cardImage+" col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto"}>
                                                         <Image className="m-0 p-0 rounded-pill" src={item?.img} width={300} height={300} objectFit='cover' alt="menu item" />
                                                     </div>
                                                     <div className="col-10 border ps-4 py-5 rounded shadow d-flex justify-content-around align-items-center  my-auto">
