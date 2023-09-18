@@ -1,71 +1,74 @@
 import React from 'react'
 import style from "./homeTestimonial.module.scss"
 import Image from 'next/image'
-const HomeTestimonial = () => {
+const HomeTestimonial = ({ props }) => {
     return (
         <div className={style.testimonial + ' container-fluid m-0 my-0 p-0 py-5 d-flex justify-content-center flex-column'}>
             <h1 className={style.heading + " text-center my-5 text-justify"}><span className={style.text_blue}>Testimonials</span></h1>
-            <div className='row col-12 mt-5 col-xl-10 mx-auto d-flex justify-content-center'>
-                <div className={style.cardContainer+' col-10 col-sm-8 col-md-8 col-lg-4 my-5 m-md-1 d-flex justify-content-center flex-column '}>
-                    <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
-                        <Image className='py-2 ' src={"/assets/images/g1.png"} width={50} height={50} objectFit='cover' alt='gallery image' />
-                    </div>
-                    <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
-                        <div className="px-3 row-col-12 mx-auto">
-                            <h3 className="col-12  text-center">Card title</h3>
-                            <p className="col-12 text-center">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
+            {props?.length > 0 &&
+                (<div className='row col-12 mt-5 col-xl-10 mx-auto d-flex justify-content-center'>
+                    <div className={style.cardContainer + ' col-10 col-sm-8 col-md-8 col-lg-4 my-5 m-md-1 d-flex justify-content-center flex-column '}>
+                        <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
+                            <Image className='py-2 ' src={props[0]?.cardImage} width={50} height={50} objectFit='cover' alt='gallery image' />
                         </div>
+                        <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
+                            <div className="px-3 row-col-12 mx-auto">
+                                <h3 className="col-12  text-center">{props[0]?.cardTitle}</h3>
+                                <p className="col-12 text-center">{props[0]?.cardText}</p>
+                            </div>
+                        </div>
+                        <div className={style.circleOne}></div>
+                        <div className={style.circleTwo}></div>
+                        <div className={style.circleThree}></div>
                     </div>
-                    <div className={style.circleOne}></div>
-                    <div className={style.circleTwo}></div>
-                    <div className={style.circleThree}></div>
-                </div>
-            </div>
+                </div>)}
             <div className='row col-12 col-lg-11 mx-auto d-flex justify-content-center  justify-content-lg-between'>
-                <div className={style.cardContainer+'  col-10 col-sm-8 my-5 col-md-8 col-lg-6 col-xl-4 d-flex justify-content-center flex-column '}>
+
+                {props?.length > 1 && (<div className={style.cardContainer + '  col-10 col-sm-8 my-5 col-md-8 col-lg-6 col-xl-4 d-flex justify-content-center flex-column '}>
                     <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
-                        <Image className='py-2 ' src={"/assets/images/g1.png"} width={50} height={50} objectFit='cover' alt='gallery image' />
+                        <Image className='py-2 ' src={props[1]?.cardImage} width={50} height={50} objectFit='cover' alt='gallery image' />
                     </div>
                     <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
                         <div className="px-3 row-col-12 mx-auto">
-                            <h3 className="col-12  text-center">Card title</h3>
-                            <p className="col-12 text-center">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
+                            <h3 className="col-12  text-center">{props[1]?.cardTitle}</h3>
+                            <p className="col-12 text-center">{props[1]?.cardText}</p>
                         </div>
                     </div>
                     <div className={style.circleOne}></div>
                     <div className={style.circleTwo}></div>
                     <div className={style.circleThree}></div>
-                </div>
-                <div className={style.cardContainer+'  col-10 col-sm-8 my-5 col-md-8 col-lg-6 col-xl-4  d-flex justify-content-center flex-column '}>
+                </div>)}
+                {props?.length > 2 && (<div className={style.cardContainer + '  col-10 col-sm-8 my-5 col-md-8 col-lg-6 col-xl-4  d-flex justify-content-center flex-column '}>
                     <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
-                        <Image className='py-2 ' src={"/assets/images/g1.png"} width={50} height={50} objectFit='cover' alt='gallery image' />
+                        <Image className='py-2 ' src={props[2]?.cardImage} width={50} height={50} objectFit='cover' alt='gallery image' />
                     </div>
                     <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
                         <div className="px-3 row-col-12 mx-auto">
-                            <h3 className="col-12  text-center">Card title</h3>
-                            <p className="col-12 text-center">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
+                            <h3 className="col-12  text-center">{props[2]?.cardTitle}</h3>
+                            <p className="col-12 text-center">{props[2]?.cardText}</p>
                         </div>
                     </div>
                     <div className={style.circleOne}></div>
                     <div className={style.circleTwo}></div>
                     <div className={style.circleThree}></div>
-                </div>
+                </div>)}
             </div>
             <div className='row col-12  col-xl-10 mx-auto d-flex justify-content-center'>
-                <div className={style.cardContainer+' col-10 col-sm-8 my-5 col-md-8 col-lg-4 m-5 d-flex justify-content-center flex-column '}>
-                    <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
-                        <Image className='py-2 ' src={"/assets/images/g1.png"} width={50} height={50} objectFit='cover' alt='gallery image' />
-                    </div>
-                    <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
-                        <div className="px-3 row-col-12 mx-auto">
-                            <h3 className="col-12  text-center">Card title</h3>
-                            <p className="col-12 text-center">This is a wider card with supporting text below as a natural lead-in to additional content. </p>
+                {props?.length > 3 && (
+                    <div className={style.cardContainer + ' col-10 col-sm-8 my-5 col-md-8 col-lg-4 m-5 d-flex justify-content-center flex-column '}>
+                        <div className='row col-12 mx-auto p-0 d-flex justify-content-center'>
+                            <Image className='py-2 ' src={props[3]?.cardImage} width={50} height={50} objectFit='cover' alt='gallery image' />
                         </div>
-                    </div>
-                    <div className={style.circleOne}></div>
-                    <div className={style.circleTwo}></div>
-                    <div className={style.circleThree}></div>
-                </div>
+                        <div className="row col-12 mx-auto p-0 d-flex justify-content-center">
+                            <div className="px-3 row-col-12 mx-auto">
+                                <h3 className="col-12  text-center">{props[3]?.cardTitle}</h3>
+                                <p className="col-12 text-center">{props[3]?.cardText}</p>
+                            </div>
+                        </div>
+                        <div className={style.circleOne}></div>
+                        <div className={style.circleTwo}></div>
+                        <div className={style.circleThree}></div>
+                    </div>)}
             </div>
         </div >
     )

@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeGetInTouch from "@/models/homeGetInTouch";
+import homeGetInTouch from "@/models/home/homeGetInTouch";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {
@@ -20,8 +20,9 @@ export async function POST(request, response) {
     try {
 
         const body = await request.json();
+        const{firstName, lastName, email, message}=body;
         await connectToDb();
-        await homeGetInTouch.create(body)
+        await homeGetInTouch.create({firstName, lastName, email, message})
         return NextResponse.json({
             message: "Message sent successfully",
         }, { status: 200 })

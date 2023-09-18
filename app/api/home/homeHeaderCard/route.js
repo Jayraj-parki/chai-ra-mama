@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeHeaderCard from "@/models/homeHeaderCard";
+import homeHeaderCard from "@/models/home/homeHeaderCard";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {

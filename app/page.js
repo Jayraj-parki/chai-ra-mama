@@ -7,30 +7,51 @@ import HomeGallery from "@/components/home_gallery/HomeGallery"
 import HomeMenu from "@/components/home_menu/HomeMenu"
 import HomeTestimonial from "@/components/home_testimonial/HomeTestimonial"
 import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
+import { useEffect, useState } from "react"
 
 const page = () => {
+  const [data, setData] = useState()
+  const getHomeData = async (e) => {
+    try {
+      const result = await fetch("/api/home/all", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json"
+        },
+      })
+      const data = await result.json()
+     setData(data)
+    }
+    catch (err) {
+      console.log("error in signup" + err)
+    }
+  }
+  useEffect(async()=>{
+    await getHomeData()
+    console.log(data)
+  },[])
   return (
     <>
       {/* banner */}
-      <HomeBanner />
+      <HomeBanner props={data?.homeBannerData[0] }/>
 
       {/* card */}
-      <HomeHeaderCard />
+      <HomeHeaderCard props={data?.homeHeaderCardData } />
 
       {/* about us */}
-      <HomeAboutUs />
+      <HomeAboutUs props={data?.homeAboutUsData[0] } />
 
       {/* Our gallery */}
-      <HomeGallery />
+      <HomeGallery props={data?.homeGalleryData } />
 
       {/* menu */}
-      <HomeMenu />
+      <HomeMenu props={data?.homeMenuCardData } />
 
       {/* Testimonials */}
-      <HomeTestimonial />
+      <HomeTestimonial props={data?.homeTestimonialCardData } />
 
       {/* Get in Touch */}
-      <HomeGetInTouch />
+      <HomeGetInTouch props={data?.homeGetInTouchImageData } />
 
     </>
   )

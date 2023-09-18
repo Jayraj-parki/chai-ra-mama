@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeBanner from "@/models/homeBanner";
+import homeBanner from "@/models/home/homeBanner";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {

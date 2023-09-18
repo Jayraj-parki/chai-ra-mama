@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeTestimonialCard from "@/models/homeTestimonialCard";
+import homeTestimonialCard from "@/models/home/homeTestimonialCard";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {

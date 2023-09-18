@@ -3,6 +3,7 @@ import PopularMenu from '@/components/menu_popularMenu/PopularMenu'
 import React from 'react'
 
 const page = () => {
+  
   return (
     <>
       <MenuBanner/>

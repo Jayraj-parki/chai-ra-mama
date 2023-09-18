@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeGetInTouchImage from "@/models/homeGetInTouchImage";
+import homeGetInTouchImage from "@/models/home/homeGetInTouchImage";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {

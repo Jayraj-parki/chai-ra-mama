@@ -1,5 +1,5 @@
 import connectToDb from "@/utils/connectToDb";
-import homeMenuCard from "@/models/homeMenuCard";
+import homeMenuCard from "@/models/home/homeMenuCard";
 import { NextResponse } from "next/server";
 
 export async function GET(request, response) {
