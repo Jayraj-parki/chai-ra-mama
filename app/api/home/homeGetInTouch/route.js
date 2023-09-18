@@ -1,7 +1,7 @@
 import connectToDb from "@/utils/connectToDb";
 import homeGetInTouch from "@/models/home/homeGetInTouch";
 import { NextResponse } from "next/server";
-
+import validator from "validator";
 export async function GET(request, response) {
     try {
         await connectToDb();
@@ -21,6 +21,12 @@ export async function POST(request, response) {
 
         const body = await request.json();
         const{firstName, lastName, email, message}=body;
+        if (!validator.isEmail(email)) {
+            return NextResponse.json({
+                message: "Invalid Email",
+                status:400
+            }, { status: 400 })
+        }
         await connectToDb();
         await homeGetInTouch.create({firstName, lastName, email, message})
         return NextResponse.json({

@@ -2,18 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import style from "./ourChef.module.scss"
 import Image from 'next/image'
-const OurChef = () => {
-    const [cards, setCards] = useState([])
-    useEffect(() => {
-        try {
-            const data = require("@/data/ourChef.json")
-            setCards(data)
-            // console.log(cards)
-        }
-        catch (e) {
+const OurChef = ({props}) => {
 
-        }
-    }, [])
     return (
         <>
             <div className={style.wcu + " container-fluid mt-5 py-5"}>
@@ -28,20 +18,20 @@ const OurChef = () => {
                         <div className={" container-fluid my-5"}>
                             <div className="row  col-12 mx-auto d-flex justify-content-around ">
                                 {
-                                    cards?.map((val) => {
+                                    props?.map((val) => {
                                         return (
-                                            <div key={val?.name + val?.experince} className={style.wcuCard + "  card col-3 rounded-4 d-flex justify-content-center align-items-center  border-1 p-4 pb-0"}>
+                                            <div key={val?._id} className={style.wcuCard + "  card col-3 rounded-4 d-flex justify-content-center align-items-center  border-1 p-4 pb-0"}>
                                                 <div className={style.imgContainer + " col-12 px-2 mx-auto my-3  "}>
-                                                    <Image className={style.bgImg + " d-block w-100 m-0 p-0  "} width={100} height={100} objectFit="cover" src={val?.img} alt="..." />
+                                                    <Image className={style.bgImg + " d-block w-100 m-0 p-0  "} width={100} height={100} objectFit="cover" src={val?.chefImage} alt="..." />
                                                 </div>
                                                 <div className="row col-12 col-12 card-body  px-0 ">
-                                                    <h5 className={style.name + " fw-bold mb-3 card-title text-uppercase "}>{val?.name}</h5>
-                                                    <h5 className={style.experince + " fw-bold mb-3 card-title text-uppercase "}>{val?.experience}</h5>
+                                                    <h5 className={style.name + " fw-bold mb-3 card-title text-uppercase "}>{val?.chefName}</h5>
+                                                    <h5 className={style.experince + " fw-bold mb-3 card-title text-uppercase "}>{val?.year} years experince</h5>
                                                 </div>
                                             </div>
                                         )
                                     })
-                                }
+                                } 
 
                             </div>
                         </div>

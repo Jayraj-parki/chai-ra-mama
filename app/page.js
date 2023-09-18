@@ -26,10 +26,12 @@ const page = () => {
       console.log("error in signup" + err)
     }
   }
-  useEffect(async()=>{
+  const helper = async () => {
     await getHomeData()
-    console.log(data)
-  },[])
+  }
+  useEffect(() => {
+    helper()
+  }, [])
   return (
     <>
       {/* banner */}

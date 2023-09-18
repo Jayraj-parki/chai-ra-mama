@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from "next/image"
 import style from "./homeBanner.module.scss"
-function HomeBanner({props}) {    
+function HomeBanner({props}) {   
     return (
         <>
             <div className={style.banner + "  container-fluid mx-auto m-0 p-0"} data-bs-ride="carousel">
