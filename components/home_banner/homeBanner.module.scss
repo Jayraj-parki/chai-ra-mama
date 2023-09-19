@@ -20,8 +20,27 @@
         height: 500px;
       //   background: #000;
         .bannerHeading {
-          font-size: 55px;
+          font-size: $font-xxl;
           font-weight: bold;
+          
+          @media  screen and (min-width:1500px) {
+            font-size: $font-xxxl;
+          }
+          @media  screen and (max-width:1499px) {
+            font-size: $font-xxl;
+          }
+          @media  screen and (max-width:1399px) {
+            font-size: $font-xl;
+          }
+          @media  screen and (max-width:1199px) {
+            font-size: $font-lg;
+          }
+          @media  screen and (max-width:768px) {
+            font-size: $font-md;
+          }
+          @media  screen and (max-width:576px) {
+            font-size: $font-md;
+          }
           .text_orange{
             color: $primary-orange;
           }
@@ -31,12 +50,15 @@
 
         }
         .bannerText{
-          font-size: 18px;
+          font-size: $font-sm;
+          @media  screen and (max-width:768px) {
+            font-size: $font;
+          }
         }
         .orderBtn{
           button{
               background: $primary-red;
-              font-size: 18px;
+              font-size: $font-sm;
               font-weight: bold;
               padding: 10px 30px;
           }

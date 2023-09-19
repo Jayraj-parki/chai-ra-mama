@@ -11,36 +11,36 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 const Footer = () => {
     return (
         <div className={style.footer + " container-fluid m-0 p-0"}>
-            <div className={style.footerInner + " d-flex justify-content-center mx-auto m-0 p-0  "}>
+            <div className={style.footerInner + "  d-flex justify-content-center mx-auto m-0 p-0  "}>
                 <div className={style.imageContainer + " col-12  p-0 m-0"}>
                     <Image className={style.bgImg + " d-block w-100"} width={100} height={100} objectFit="cover" src={"/assets/images/g1.png"} alt="..." />
                 </div>
                 <div className={style.footerItem + "   row col-10 d-flex mx-auto mt-2 "}>
                     <div className=" row col-12  mb-1 mt-3  mx-auto ">
-                        <div className="  col-auto my-0   m-0 p-0">
+                        <div className=" col-12  d-flex justify-content-center justify-content-md-center col-sm-auto my-0   m-0 p-0">
                             <Link href="#" className="p-0 m-0  d-flex p-0">
                                 <Image className="" width={140} height={100} objectFit="cover" alt="logo" src={"/assets/images/logo.png"}
                                 />
                             </Link>
                         </div>
                     </div>
-                    <div className={" row col-12  m-0  mx-auto "}>
-                        <div className={style.contactUs + " col-4 mt-0 p-0 px-2"}>
-                            <h5 className={style.text + " text-light p-0 mb-5 "}>
+                    <div className={" row col-12  m-0  mx-auto d-flex justify-content-center "}>
+                        <div className={style.contactUs + " col-12 col-md-9  col-lg-4  mb-5 my-lg-0 p-0 px-2"}>
+                            <h5 className={style.text + " text-light text-center text-lg-start py-3 p-lg-0 mb-lg-5 "}>
                                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                             </h5>
-                            <div className={" col-12  p-0 m-0  my-4 d-flex justify-content-start align-items-center"}>
+                            <div className={" col-12  p-0 m-0 my-2 my-lg-4 d-flex justify-content-center justify-content-lg-start align-items-center"}>
                                 <PhoneIcon className="h2 my-auto me-3" />
                                 <span className="">0866241503</span>
                             </div>
-                            <div className={" col-12  p-0 m-0  d-flex justify-content-start align-items-center"}>
+                            <div className={" col-12  p-0 m-0  d-flex justify-content-center justify-content-lg-start  align-items-center"}>
                                 <EmailIcon className="h2 my-auto me-3" />
                                 <span className="">contact@chairamama.in</span>
                             </div>
                         </div>
-                        <div className={style.company + " col-4 p-0 mt-0 px-2"}>
-                            <h1 className="m-0 p-0 h3 fw-bold">Company</h1>
-                            <ul className="m-0 mt-4 px-3">
+                        <div className={style.company + " col-sm-6  col-lg-4 p-0 mt-0 px-2 mb-3"}>
+                            <h1 className="m-0 p-0 h3 fw-bold text-center text-sm-start">Company</h1>
+                            <ul className="m-0 mt-4 px-3 mx-auto text-center text-sm-start">
                                 <li className="my-2 p-0"><Link href="#">FAQs</Link></li>
                                 <li className="my-2 p-0"><Link href="#">Contact Us</Link></li>
                                 <li className="my-2 p-0"><Link href="#">Disclaimer</Link></li>
@@ -49,9 +49,9 @@ const Footer = () => {
                                 <li><Link href="#">Site Map</Link></li>
                             </ul>
                         </div>
-                        <div className={style.quickLink + " col-4 p-0 mt-0 px-2 "}>
-                            <h1 className="m-0 p-0 h3 fw-bold">Quick Links</h1>
-                            <ul className="m-0 mt-4 px-3">
+                        <div className={style.quickLink + "  col-sm-6  col-lg-4 p-0 mt-5 mt-sm-0 px-2 "}>
+                            <h1 className="m-0 p-0 h3 fw-bold text-center text-sm-start">Quick Links</h1>
+                            <ul className="m-0 mt-4 px-3 mx-auto text-center text-sm-start">
                                 <li className="my-2 p-0"><Link href="#">About Us</Link></li>
                                 <li className="my-2 p-0"><Link href="#">Menu</Link></li>
                                 <li className="my-2 p-0"><Link href="#">Gallery</Link></li>

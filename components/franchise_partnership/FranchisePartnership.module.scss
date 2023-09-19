@@ -1,0 +1,30 @@
+@import "../../styles/var";
+.franchisePartnershipDesc {
+  .franchisePartnership_img {
+    img {
+      height: 100%;
+      // height: 500px;
+      width: 100%;
+    }
+  }
+  .franchisePartnership_title {
+    background-color: $primary-coffee;
+    font-size: 20px;
+    width: fit-content;
+  }
+  .franchisePartnership_desc {
+    color: $text-gray;
+    font-size: 18px;
+  }
+  .franchisePartnership_list {
+    input{
+      &::placeholder{
+        color: $text-gray;
+      }
+    }
+    button{
+      background-color: $primary-coffee;
+      padding: 15px 30px;
+    }
+  }
+}

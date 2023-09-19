@@ -4,7 +4,7 @@
   .footerInner {
     // height:1000px
     position: relative;
-    height: max-content;
+    min-height: 580px;;
     .imageContainer {
       .bgImg {
         object-fit: cover;
@@ -13,6 +13,12 @@
         background-repeat: no-repeat;
         filter: brightness(20%);
         min-height: 580px;
+        @media  screen and (max-width:991px) {
+          min-height: 780px;
+        }
+        @media  screen and (max-width:575.5px) {
+          min-height: 1080px;
+        }
       }
     }
     .footerItem {

@@ -1,0 +1,36 @@
+@import "../../styles/var";
+.container {
+  color: $primary-light;
+  .bestCoffee {
+    // height:1000px
+    position: relative;
+    height: max-content;
+    .imageContainer {
+      .bgImg {
+        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        // filter: brightness(20%);
+        min-height: 650px;
+      }
+    }
+    .content {
+      position: absolute;
+      top: 0;
+      .card {
+        background-color: $primary-light;
+        .text {
+          font-size: 18px;
+          color: $text-gray;
+          text-align: justify;
+        }
+        .heading {
+          font-size: 50px;
+          font-weight: bold;
+        }
+      }
+      
+    }
+  }
+}
