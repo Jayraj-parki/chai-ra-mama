@@ -39,6 +39,8 @@ const Navbar = () => {
             }
         }
         handleNavlink()
+        setCollapse(true)
+        SetMenu(true)
     }, [url])
     return (
 
