@@ -1,11 +1,6 @@
 @import "../../styles/var";
 .navbar{
-<<<<<<< HEAD
-    z-index: 100;
-    background-color: #1F3820;
-=======
     background-color: $primary-navbar;
->>>>>>> 10-Sept-23
     height:100px;
     z-index: 1000;
     .icon{
@@ -13,14 +8,10 @@
         font-size: 38px;
     }
     .navlink_container{
-<<<<<<< HEAD
-        background-color: #1F3820;
-=======
         background-color: $primary-navbar;
         @media screen and (max-width: 992px)   {
            padding-bottom: 10px;
         }
->>>>>>> 10-Sept-23
         li{
             a{
                 font-size: 18px ;
