@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 import style from "./page.module.scss"
 import HomeBanner from "@/components/home_banner/HomeBanner"
 import HomeHeaderCard from "@/components/home_headerCard/HomeHeaderCard"
