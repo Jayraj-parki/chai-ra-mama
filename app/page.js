@@ -65,11 +65,11 @@ const page = () => {
 
 // dynamic metadata
 
-export async function generateMetadata({ params }) {
-  return {
-    title: 'Dynamic Title',
-    description: "Dynamic Desciption"
-  }
-}
+// export async function generateMetadata({ params }) {
+//   return {
+//     title: 'Dynamic Title',
+//     description: "Dynamic Desciption"
+//   }
+// }
 
 export default page
