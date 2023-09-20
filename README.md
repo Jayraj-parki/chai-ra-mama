@@ -2,6 +2,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Follow below steps to get started
+
+```bash
+git clone https://github.com/Jayraj-parki/chai-ra-mama.git
+# to install all packages run below command
+npm install
+# create .env.local file add all environment varialbles
+```
 First, run the development server:
 
 ```bash
@@ -25,7 +33,6 @@ To learn more about Next.js, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 

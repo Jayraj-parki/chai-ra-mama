@@ -44,10 +44,10 @@ const Navbar = () => {
 
         <>
 
-            <nav className={style.navbar + " contaner-fluid navbar navbar-expand-lg  p-3"}>
-                <div className="container-fluid col-lg-12 col-xl-11  mx-auto">
-                    <div className="navbar-brand  col-auto">
-                        <Link href="# ">
+            <nav className={style.navbar + " navbar navbar-expand-lg  p-3"}>
+                <div className="container-fluid col-10  mx-auto">
+                    <div className="navbar-brand  col-2">
+                        <Link href="#">
                             <Image src={logoImg} className='bg-info' width={140} height={60} objectFit="cover" alt="logo" />
                         </Link>
                     </div>
@@ -57,8 +57,8 @@ const Navbar = () => {
                             : <CloseIcon onClick={()=>SetMenu(!menu)} className={style.icon + '  border rounded border-2 col-auto '} />
                         }
                     </button>
-                    <div className={`col-auto flex-wrap collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
-                        <ul className={style.navlink_container + " row col-auto  mx-auto  navbar-nav me-auto mb-2 mb-lg-0"}>
+                    <div className={`col-10 collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
+                        <ul className={style.navlink_container + " row col-12  mx-auto  navbar-nav me-auto mb-2 mb-lg-0"}>
                             <li className={`nav-item d-flex  col-auto mx-auto ${activeLink == "home" && "border-bottom border-3"} `}>
                                 <Link onClick={() => setActiveLink("home")} className={`nav-link border-3 `} aria-current="page" href="/">Home</Link>
                             </li>
