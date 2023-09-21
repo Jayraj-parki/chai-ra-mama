@@ -16,7 +16,6 @@ export async function POST(request) {
                 message: "User does not Exist",
             }, { status: 400 })
         }
-        console.log("hii")
 
         const validPassword = await bcryptjs.compare(password, user.password)
         if(!validPassword){

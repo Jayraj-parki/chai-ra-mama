@@ -9,7 +9,6 @@ const FAQ = () => {
         try {
             const data = require("@/data/Accordion.json")
             setAccordion(data)
-            // console.log(Accordion)
         }
         catch (e) {
 

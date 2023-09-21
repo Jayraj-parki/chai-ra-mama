@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 export async function GET(request) {
     try {
         const token=request.cookies.get("token")
-        console.log(token)
         if(!token){
             return NextResponse.json({
                 message: "token doesn't exist",

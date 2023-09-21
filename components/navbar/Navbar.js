@@ -50,7 +50,7 @@ const Navbar = () => {
                 <div className="container-fluid col-lg-12 col-xl-11  mx-auto">
                     <div className="navbar-brand  col-auto">
                         <Link href="# ">
-                            <Image src={logoImg} className='bg-info' width={140} height={60} objectFit="cover" alt="logo" />
+                            <Image src={logoImg || "/assets/images/logo.png"} className='bg-info' width={140} height={60} objectFit="cover" alt="logo" />
                         </Link>
                     </div>
                     <button onClick={() => setCollapse(prev => (!prev))} className={`navbar-toggler shadow-none border-0  outline-none ${collapse && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded={`${collapse} && "false"`} aria-label="Toggle navigation">

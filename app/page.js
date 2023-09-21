@@ -23,7 +23,7 @@ const page = () => {
      setData(data)
     }
     catch (err) {
-      console.log("error in signup" + err)
+      console.log("error in fetching home data" + err)
     }
   }
   const helper = async () => {

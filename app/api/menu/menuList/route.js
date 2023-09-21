@@ -2,6 +2,9 @@ import connectToDb from "@/utils/connectToDb";
 import menuList from "@/models/menu/menuList"; 
 import { NextResponse } from "next/server";
 
+
+// If deleting any menuList also make sure that menucard under that list should be deleted
+
 export async function GET(request, response) {
     try {
         await connectToDb();
