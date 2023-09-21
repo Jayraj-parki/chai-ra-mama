@@ -1,19 +1,9 @@
 "use client";
 import Image from "next/image";
 import style from "./popularMenu.module.scss"
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 const PopularMenu = ({ menuListData, menuCardData }) => {
     const [activeTab, setActiveTab] = useState("all")
-    const [tabs, setTabs] = useState([])
-    useEffect(() => {
-        try {
-            const data = require("@/data/menuTabs.json")
-            setTabs(data)
-        }
-        catch (e) {
-
-        }
-    }, [])
     return (
         <div className={style.popularMenu + " container-fluid  pb-5"}>
             <div className='row col-12 py-5 '>
@@ -55,9 +45,7 @@ const PopularMenu = ({ menuListData, menuCardData }) => {
                                             <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{val?.itemName}</h3>
                                             <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {val?.itemPrice}/-</h6>
                                         </div>
-
                                     </div>
-
                                 )
                             })}
                         </div>
