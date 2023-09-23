@@ -12,12 +12,20 @@
         background-position: center;
         background-repeat: no-repeat;
         // filter: brightness(20%);
-        min-height: 650px;
+        height: 100%;
+        @media screen and (min-width: 992px) {
+          min-height: 650px;
+          width: 50%;
+        }
       }
     }
     .content {
-      position: absolute;
-      top: 0;
+      position: relative;
+      @media screen and (min-width: 992px) {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
       .card {
         background-color: $primary-light;
         .text {
@@ -28,9 +36,14 @@
         .heading {
           font-size: 50px;
           font-weight: bold;
+          @media screen and (max-width: 786px) {
+            font-size: 40px;
+          }
+          @media screen and (max-width: 576px) {
+            font-size: 25px;
+          }
         }
       }
-      
     }
   }
 }

@@ -2,7 +2,7 @@
 .aboutDesc {
   .about_img {
     img {
-      height: 100%;
+      height: 90%;
       width: 100%;
     }
   }
@@ -14,15 +14,22 @@
   .about_desc {
     color: $text-gray;
     font-size: 18px;
+    p {
+      text-align: justify;
+    }
   }
   .about_list {
     ul {
       li {
         list-style: none;
-        font-size: 18px;
-        font-weight: 600;
+        
+        p{
+          font-size: 18px;
+          font-weight: 600;
+          text-align: justify;
+        }
         .icon {
-            font-size: 28px;
+          font-size: 28px;
           color: $primary-coffee;
         }
       }

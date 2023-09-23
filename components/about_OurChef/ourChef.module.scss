@@ -8,11 +8,13 @@
   @import "../../styles/var";
 
   .wcuCard {
-   
+    @media screen and (max-width:1400px) {
+     transform: scaleX(0.98);
+   }
     .imgContainer {
      img{
-        height: 250px;
-        // width: 200px;
+        height: 300px;
+        width: 300px;
         border-radius: 50px 50px 50px 0px;
      } 
       
