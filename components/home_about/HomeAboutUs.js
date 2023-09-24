@@ -3,19 +3,6 @@ import React, { useEffect, useState } from 'react'
 import style from "./homeAbout.module.scss"
 import Image from "next/image"
 const HomeAboutUs = ({props}) => {
-    const [about, setAbout] = useState({
-        aboutImg: "/assets/images/image 7.png",
-        description: "dummy text"
-    })
-    useEffect(() => {
-        try {
-            const data = require("@/data/aboutData.json")
-            setAbout({ aboutImg: data.aboutImg, description: data.description })
-        }
-        catch (e) {
-
-        }
-    }, [])
     return (
         <div className={style.aboutus + " container-fluid mb-md-5 pb-md-5"}>
             <div className="row col-sm-11 col-xxl-10 mx-auto d-flex justify-content-between ">

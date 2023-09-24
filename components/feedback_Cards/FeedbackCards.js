@@ -42,13 +42,13 @@ const FeedbackCards = ({ props }) => {
                 {
                     cards?.map((val) => {
                         return (
-                            <div key={val?.name + "" + val?.rating} className="col-sm-10 col-md-6 col-lg-5 col-xl-4 mb-5 ">
-                                <div className={style.card + " row col-12 border border-2 d-flex justify-content-center flex-column align-items-start   rounded p-2 px-4  mx-auto"}>
+                            <div key={val?.name + "" + val?.rating} className="col-sm-10 col-md-6 col-lg-5 col-xl-4 mb-5 d-flex flex-column ">
+                                <div className={style.card + " row col-12 border border-2 d-flex justify-content-center flex-row align-items-start   rounded p-2 px-4  mx-auto"}>
                                     <div className={style.rating + " col-12 d-flex   my-3"}>
                                         <StarRating rating={parseFloat(val?.rating)} />
                                     </div>
                                     <div className={style.textContainer + " col-12 d-flex  p-0 mb-auto"}>
-                                        <p className={style.feedbackText + " p-0 m-0"}>{val?.feedbackText}</p>
+                                        <p className={style.feedbackText + " p-2 m-0"}>{val?.feedbackText}</p>
                                     </div>
                                 </div>
                                 <div className={style.feedbackProfile + "  row rounded  px-2 py-3 col-12 mx-auto d-flex justify-content-center align-items-center"}>

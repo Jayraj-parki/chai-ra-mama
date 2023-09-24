@@ -1,7 +1,9 @@
 @import "../../styles/var";
 .feedbackCards {
   .card {
-    min-height: 300px;
+    width: 100%;
+    height: 300px;
+    
     .rating {
       height: min-content !important;
       .icon {
@@ -9,7 +11,16 @@
       }
     }
     .textContainer{
-      height: min-content;
+      height:220px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 6px;
+        background-color: $primary-coffee-light;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-coffee;
+      }
+
     }
     .feedbackText {
       text-align: justify;
