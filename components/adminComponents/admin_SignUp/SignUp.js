@@ -1,21 +1,22 @@
 "use client"
 import React, { useRef } from 'react'
 import style from "./SignUp.module.scss"
-import { Padding } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 const SignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+    const router =useRouter()
     const handleSignup = async (e) => {
-        // e.preventDefault()
+        e.preventDefault()
         const firstName = firstNameRef.current.value.trim()
         const lastName = lastNameRef.current.value.trim()
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
-
+        
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
             alert("please fill all the fields correctly")
         }
@@ -35,6 +36,12 @@ const SignUp = () => {
                 })
                 const data = await result.json()
                 alert(data.message)
+                firstNameRef.current.value=null
+                lastNameRef.current.value=null
+                emailRef.current.value=null
+                passwordRef.current.value=null
+                confirmPasswordRef.current.value=null
+                router.push("/admin/signin")
             }
             catch (e) {
                 console.log("error in signup")
@@ -50,7 +57,7 @@ const SignUp = () => {
 
                 <div className={style.container + ' row col-11 col-sm-12 col-xl-10 p-3 flex-wrap mx-auto d-flex justify-content-between align-content-center'}>
                     <div className="row col-12 shadow rounded-3 col-sm-10 col-md-6 py-3 mx-auto  mt-md-0 p-0 d-flex justify-content-center">
-                        <form className={style.form + " form row col-12 mx-auto needs-validation"}>
+                        <form className={style.form + " form row col-12 py-3 mx-auto needs-validation"}>
                             <div className="col-6 mb-4">
                                 <input type="text" ref={firstNameRef} required className="  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="First name" />
                             </div>

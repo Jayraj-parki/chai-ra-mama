@@ -23,6 +23,8 @@ const SignIn = () => {
                 })
                 const data = await result.json()
                 alert(data.message)
+                emailRef.current.value=null
+                passwordRef.current.value=null
             }
             catch (e) {
                 console.log("error in signIn")
