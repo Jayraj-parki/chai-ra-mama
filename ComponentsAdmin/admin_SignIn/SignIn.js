@@ -1,9 +1,14 @@
 "use client"
 import React, { useRef } from 'react'
 import style from "./signIn.module.scss"
+import { useRouter } from "next/navigation"
+import { useAuth } from '@/app/layout';
+
 const SignIn = () => {
+    const {login} = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+    const router = useRouter();
     const handleLogin=async()=>{
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
@@ -22,9 +27,11 @@ const SignIn = () => {
                     })
                 })
                 const data = await result.json()
+                login()
                 alert(data.message)
                 emailRef.current.value=null
                 passwordRef.current.value=null
+                router.push("/admin/home")
             }
             catch (e) {
                 console.log("error in signIn")

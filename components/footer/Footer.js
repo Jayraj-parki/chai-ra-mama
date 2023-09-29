@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
-import AdminFooter from '../adminFooter/AdminFooter';
+import AdminFooter from '@/ComponentsAdmin/adminFooter/AdminFooter';
 import UserFooter from '../userFooter/UserFooter';
 const Footer = () => {
     const url = usePathname()
-    const [userRole, setUserRole] = useState("user")
+    const [userRole, setUserRole] = useState("")
     useEffect(() => {
         if (url.toLowerCase().includes("admin")) {
             setUserRole("admin")
@@ -17,10 +17,10 @@ const Footer = () => {
     return (
         <>
             {
-                userRole == "admin" ?
-                    <AdminFooter />
-                    : <UserFooter />
-
+                userRole == "admin" && <AdminFooter />
+            }
+            {
+                userRole == "user" && <UserFooter />
             }
 
         </>

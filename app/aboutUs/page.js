@@ -10,13 +10,8 @@ import { useEffect, useState } from "react"
 const page = () => {
   const [data, setData] = useState()
   const getAboutusData = async (e) => {
-    try {
-      const result = await fetch("/api/aboutus/all", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json"
-        },
-      })
+    try { 
+      const result = await fetch("/api/aboutus/all", { next:{revalidate:1800}})
       const data = await result.json()
       setData(data)
     }

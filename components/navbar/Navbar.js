@@ -2,26 +2,27 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation';
 import UserNavbar from '../userNavbar/UserNavbar';
-import AdminNavbar from '../adminNavbar/AdminNavbar';
+import AdminNavbar from '@/ComponentsAdmin/adminNavbar/AdminNavbar';
 const Navbar = () => {
     const url = usePathname()
-    const [userRole, setUserRole] = useState("user")
+    const [userRole, setUserRole] = useState("")
     useEffect(() => {
-        if(url.toLowerCase().includes("admin")){
+        if (url.toLowerCase().includes("admin")) {
             setUserRole("admin")
         }
-        else{
+        else {
             setUserRole("user")
         }
     }, [url])
     return (
         <>
             {
-                userRole == "admin" ?
-                    <AdminNavbar />
-                    : <UserNavbar />
-
+                userRole == "admin" && <AdminNavbar />
             }
+            {
+                userRole == "user" && <UserNavbar />
+            }
+
         </>
     )
 }

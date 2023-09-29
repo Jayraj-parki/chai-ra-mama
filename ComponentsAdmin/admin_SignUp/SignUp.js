@@ -1,14 +1,16 @@
 "use client"
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import style from "./SignUp.module.scss"
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/layout';
 const SignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
-    const router =useRouter()
+    const { user, logout } = useAuth()
+    const router = useRouter()
     const handleSignup = async (e) => {
         e.preventDefault()
         const firstName = firstNameRef.current.value.trim()
@@ -16,11 +18,11 @@ const SignUp = () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
-        
+
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
             alert("please fill all the fields correctly")
         }
-        else if(password!=confirmPassword){
+        else if (password != confirmPassword) {
             alert("Confirm password not matched")
         }
         else {
@@ -36,11 +38,11 @@ const SignUp = () => {
                 })
                 const data = await result.json()
                 alert(data.message)
-                firstNameRef.current.value=null
-                lastNameRef.current.value=null
-                emailRef.current.value=null
-                passwordRef.current.value=null
-                confirmPasswordRef.current.value=null
+                firstNameRef.current.value = null
+                lastNameRef.current.value = null
+                emailRef.current.value = null
+                passwordRef.current.value = null
+                confirmPasswordRef.current.value = null
                 router.push("/admin/signin")
             }
             catch (e) {
@@ -50,6 +52,11 @@ const SignUp = () => {
 
     }
 
+    useEffect(() => {
+        if (user) {
+            router.push("/admin/home")
+        }
+    }, [user])
     return (
         <>
             <div className={style.signUp + ' container-fluid m-0 my-5 p-0 py-5'}>

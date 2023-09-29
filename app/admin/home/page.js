@@ -1,6 +1,4 @@
-
 "use client"
-import SignIn from "@/ComponentsAdmin/admin_SignIn/SignIn"
 import React, { useEffect } from 'react'
 import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
@@ -9,15 +7,16 @@ const page = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if (user) {
-      router.push("/admin/home")
+    if (!user) {
+      router.push("/admin/signin")
     }
   }, [user])
   return (
 
     <>
       {
-        <SignIn />
+
+        user && <div>page</div>
       }
     </>
   )

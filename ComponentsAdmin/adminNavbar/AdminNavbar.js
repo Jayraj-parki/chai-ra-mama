@@ -6,12 +6,37 @@ import style from "./adminNavbar.module.scss"
 import { usePathname } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { useAuth } from '@/app/layout';
+import { useRouter } from "next/navigation"
 const AdminNavbar = () => {
+    const { user, logout } = useAuth()
     const [collapse, setCollapse] = useState(true)
-    const [activeLink, setActiveLink] = useState("signin")
+    const [activeLink, setActiveLink] = useState("")
     const [logoImg, setLogoImg] = useState("")
     const [menu, SetMenu] = useState(true)
     const url = usePathname()
+    const router = useRouter();
+    const LogOut = async() => {
+        setActiveLink("")
+        logout()
+        try {
+            const result = await fetch("/api/admin/logout", {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
+            const data = await result.json()
+            if ("success" in data) {
+                router.push("/admin/signin")
+            }
+        }
+        catch (e) {
+            console.log("error in logout"+e)
+        }
+    }
+
+
     useEffect(() => {
         try {
             const data = require("@/data/headerData.json")
@@ -55,13 +80,22 @@ const AdminNavbar = () => {
                     </button>
                     <div className={`col-auto   flex-wrap collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
                         <ul className={style.navlink_container + "  row col-12  mx-auto  navbar-nav  d-flex justify-content-center justify-content-lg-end  mb-2 mb-lg-0"}>
-                            <li className={`nav-item d-flex  col-auto mx-auto mx-lg-0  ${activeLink == "signin" && "border-bottom border-3"} `}>
-                                <Link onClick={() => setActiveLink("signin")} className={`nav-link border-3 `} aria-current="page" href="/admin/signin">Sign In</Link>
-                            </li>
-                            <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "signup" && "border-bottom border-3"}  `}>
-                                <Link onClick={() => setActiveLink("signup")} className={`nav-link `} aria-current="page" href="/admin/signup">Sign Up</Link>
-                            </li>
-                            
+                            {
+                                !user ?
+                                    <>
+                                        <li className={`nav-item d-flex  col-auto mx-auto mx-lg-0  ${activeLink == "signin" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("signin")} className={`nav-link border-3 `} aria-current="page" href="/admin/signin">Sign In</Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "signup" && "border-bottom border-3"}  `}>
+                                            <Link onClick={() => setActiveLink("signup")} className={`nav-link `} aria-current="page" href="/admin/signup">Sign Up</Link>
+                                        </li>
+                                    </>
+                                    :
+                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
+                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/admin/signin">Logout</Link>
+                                    </li>
+                            }
+
                             {/* after login */}
                             {/* todo: create navbar for admin */}
 

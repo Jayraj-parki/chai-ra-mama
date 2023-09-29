@@ -8,12 +8,7 @@ const page = () => {
   const [data, setData] = useState({})
   const getMenuData = async (e) => {
     try {
-      const result = await fetch("/api/menu/all", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json"
-        },
-      })
+      const result = await fetch("/api/menu/all",  { next:{revalidate:1800}})
       const pageData = await result.json()
       setData(pageData)
     }

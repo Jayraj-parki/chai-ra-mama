@@ -13,14 +13,9 @@ const page = () => {
   const [data, setData] = useState()
   const getHomeData = async (e) => {
     try {
-      const result = await fetch("/api/home/all", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json"
-        },
-      })
+      const result = await fetch("/api/home/all",  { next:{revalidate:1800}}) 
       const data = await result.json()
-     setData(data)
+      setData(data)
     }
     catch (err) {
       console.log("error in fetching home data" + err)
