@@ -5,17 +5,17 @@ import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
 
 const SignIn = () => {
-    const {login} = useAuth()
+    const { login } = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const router = useRouter();
-    const handleLogin=async()=>{
+    const handleLogin = async () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
-        if(!email||!password){
+        if (!email || !password) {
             alert("please fill all input field")
         }
-        else{
+        else {
             try {
                 const result = await fetch("/api/admin/signIn", {
                     method: "POST",
@@ -27,11 +27,17 @@ const SignIn = () => {
                     })
                 })
                 const data = await result.json()
-                login()
-                alert(data.message)
-                emailRef.current.value=null
-                passwordRef.current.value=null
-                router.push("/admin/home")
+                if (data?.status == 200) {
+                    login()
+                    alert(data?.message)
+                    emailRef.current.value = null
+                    passwordRef.current.value = null
+                    router.push("/admin/home")
+                }
+                else{
+                    alert(data?.message)
+
+                }
             }
             catch (e) {
                 console.log("error in signIn")
@@ -39,7 +45,7 @@ const SignIn = () => {
         }
 
     }
-    
+
     return (
         <>
             <div className={style.signIn + ' container-fluid m-0 my-5 p-0 py-5'}>

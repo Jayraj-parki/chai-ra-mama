@@ -8,6 +8,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
+import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PersonIcon from '@mui/icons-material/Person';
 const AdminNavbar = () => {
     const { user, logout } = useAuth()
     const [collapse, setCollapse] = useState(true)
@@ -51,6 +54,8 @@ const AdminNavbar = () => {
             try {
                 if (url.toLowerCase().includes("signin")) setActiveLink("signin")
                 else if (url.toLowerCase().includes("signup")) setActiveLink("signup")
+                else if (url.toLowerCase().includes("home")) setActiveLink("home")
+                else if (url.toLowerCase().includes("profile")) setActiveLink("profile")
             }
             catch (err) {
                 console.log("err" + err)
@@ -65,7 +70,7 @@ const AdminNavbar = () => {
 
         <>
 
-            <nav className={style.navbar + " contaner-fluid navbar navbar-expand-lg  p-3"}>
+            <nav className={style.navbar + " contaner-fluid navbar bg-light navbar-expand-lg shadow-sm  px-3"}>
                 <div className="container-fluid col-lg-12 col-xl-11  mx-auto">
                     <div className="navbar-brand  col-auto">
                         <Link href="# ">
@@ -91,9 +96,17 @@ const AdminNavbar = () => {
                                         </li>
                                     </>
                                     :
-                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
-                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/admin/signin">Logout</Link>
+                                    <>
+                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "home" && "border-bottom border-3"} `}>
+                                        <Link onClick={() => setActiveLink("home")}  className={`nav-link `} aria-current="page" href="/admin/home"><HomeIcon className={style.icon+` `}/></Link>
                                     </li>
+                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "profile" && "border-bottom border-3"} `}>
+                                        <Link onClick={()=>setActiveLink("profile")} className={`nav-link `} aria-current="page" href="/admin/profile"><PersonIcon className={style.icon+` `}/></Link>
+                                    </li>
+                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
+                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/admin/signin"><LogoutIcon className={style.icon+` `}/></Link>
+                                    </li>
+                                    </>
                             }
 
                             {/* after login */}

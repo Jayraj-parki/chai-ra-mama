@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ['latin'] })
 import Footer from '@/components/footer/Footer'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { checkUserLogin } from '@/utils/CheckUserLogin'
+import style from "./page.module.scss"
 const AuthContext = createContext();
 export function useAuth() {
   return useContext(AuthContext);
@@ -38,7 +39,9 @@ export default function RootLayout({ children }) {
         <main>
           <AuthContext.Provider value={{ user, login, logout }}>
             <Navbar />
-            {children}
+            <div className={style.bodyContent}>
+              {children}
+            </div>
             <Footer />
           </AuthContext.Provider>
         </main>

@@ -1,21 +1,25 @@
 @import "../../styles/var";
 .navbar{
-    background-color: $bb-dark;
-    height:100px;
+    // background-color: $white-light;
+    height:80px;
     z-index: 1000;
     .icon{
         color: $primary-light;
         font-size: 38px;
     }
     .navlink_container{
-        background-color: $bb-dark;
+        // background-color: $white-light;
         @media screen and (max-width: 992px)   {
            padding-bottom: 10px;
         }
         li{
             a{
                 font-size: 18px ;
-                color:#F6F7F6;
+                color:$bb-dark;
+                .icon{
+                    color: $bb-dark;
+                    font-size: $font-lg - 8px ;
+                }
                 @media screen and (max-width: 1100px) and (min-width:990px)  {
                     font-size: 14px;
                 }
