@@ -1,0 +1,22 @@
+@import "../../styles/var";
+.cmsEdit {
+  .modal{
+    background-color: #00000079;
+    // img{
+    //   width: min-content;
+    //   max-width: 200px;
+    //   height:min-content;
+    //   max-height:300px ;
+    // }
+  }
+  .header {
+    .icon {
+      font-size: $font-lg;
+      color: $bb-dark;
+    }
+    .heading {
+      color: $bb-dark;
+    }
+  }
+  
+}

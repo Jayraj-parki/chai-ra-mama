@@ -28,11 +28,11 @@ const SignIn = () => {
                 })
                 const data = await result.json()
                 if (data?.status == 200) {
+                    router.push("/admin/home")
                     login()
                     alert(data?.message)
                     emailRef.current.value = null
                     passwordRef.current.value = null
-                    router.push("/admin/home")
                 }
                 else{
                     alert(data?.message)

@@ -1,0 +1,39 @@
+import React, { useState } from 'react'
+import style from "./cmsEdit.module.scss"
+import PagesIcon from '@mui/icons-material/Pages';
+import Image from 'next/image';
+import Link from 'next/link';
+const CmsEdit = ({ id }) => {
+  return (
+
+    <div className={' container-fluid my-4  '}>
+      <div className={style.cmsEdit + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
+        <div className={style.header + ' row col-12 mx-auto'}>
+          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Why to choose us</h3>
+        </div>
+        <hr />
+        <div className='row col-12 mx-auto mt-5'>
+          <div>
+            <div className="mb-4">
+              <label for="editEmail" className="form-label">Heading</label>
+              <input type="text" className="form-control" id="editEmail" aria-describedby="emailHelp"  placeholder='write heading here'/>
+            </div>
+            <div className="mb-4">
+              <label for="editImage" className="form-label">Upload Image</label>
+              <Image className={style.image+" rounded w-100 h-100 mb-4"}  width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
+              <input type="file" accept="image/*" className="form-control" id="editImage" />
+            </div>
+            <div className="mb-4">
+              <label for="editContent" className="form-label">Content</label>
+              <textarea type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
+            </div>
+
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CmsEdit

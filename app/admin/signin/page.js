@@ -10,14 +10,15 @@ const page = () => {
 
   useEffect(() => {
     if (user) {
-      router.push("/admin/home")
+      const lastVisitedPage = localStorage.getItem('lastVisitedPage');
+      router.push(lastVisitedPage || '/admin/home');
     }
-  }, [user])
+  }, [user,router])
   return (
 
     <>
       {
-        <SignIn />
+        !user && <SignIn />
       }
     </>
   )

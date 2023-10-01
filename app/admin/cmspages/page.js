@@ -2,10 +2,10 @@
 import React, { useEffect } from 'react'
 import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
-import SiteContent from '@/ComponentsAdmin/siteContent/SiteContent';
-import SiteSetting from '@/ComponentsAdmin/siteSetting/SiteSetting';
+import CmsPages from '@/ComponentsAdmin/cmsPages/CmsPages';
+
 const page = () => {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const page = () => {
     }
     else {
       // Store the current page location in localStorage
-      localStorage.setItem('lastVisitedPage', '/admin/home');
+      localStorage.setItem('lastVisitedPage', '/admin/cmspages');
     }
   }, [user,router])
   return (
@@ -22,8 +22,7 @@ const page = () => {
       {
         user &&
         <div className='container-fluid p-lg-4  m-0'>
-          <SiteContent />
-          <SiteSetting/>
+          <CmsPages/>
         </div>
       }
     </>
