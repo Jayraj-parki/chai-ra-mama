@@ -32,13 +32,13 @@ const SiteContent = () => {
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Home Banners</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./headers" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer3+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><ImageIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Header Images</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./client-feedback" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer4+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><GroupIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Client Feedback</p></div>

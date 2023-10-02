@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import style from "./homeBanner.module.scss"
-import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
+import style from "./headers.module.scss"
+import ImageIcon from '@mui/icons-material/Image';
 import Image from 'next/image';
 import Link from 'next/link';
-const HomeBanners = () => {
+const HeadersList = () => {
   const [modal, setModal] = useState({
     active: false,
     image: "",
@@ -16,10 +16,10 @@ const HomeBanners = () => {
   }
   return (
 
-    <div className={style.homeBanner + ' container-fluid my-4  shadow rounded-4 p-4'}>
+    <div className={style.headers + ' container-fluid my-4  shadow rounded-4 p-4'}>
       <div className={style.header + ' row col-12 mx-auto'}>
-        <ViewCarouselIcon className={style.icon + ' col-auto my-auto p-0 '} />
-        <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Home Banners</h3>
+        <ImageIcon className={style.icon + ' col-auto my-auto p-0 '} />
+        <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Header Images</h3>
       </div>
       <hr />
       <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -41,16 +41,17 @@ const HomeBanners = () => {
         <table className="col-12 table table-bordered table-hover  text-center">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Title</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
           </thead>
           <tbody>
             <tr className=''>
               <td className='align-middle' >1</td>
+              <td className='align-middle' >About</td>
               <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./homebanner/edit/12345" className='btn btn-primary text-decoration-none mx-2'>Edit</Link>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <Link href="./headers/edit/12345" className='btn btn-primary text-decoration-none mx-2'>Edit</Link>
               </td>
             </tr>
           </tbody>
@@ -60,4 +61,4 @@ const HomeBanners = () => {
   )
 }
 
-export default HomeBanners
+export default HeadersList

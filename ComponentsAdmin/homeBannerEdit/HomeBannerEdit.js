@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import style from "./homeBannerEdit.module.scss"
-import PagesIcon from '@mui/icons-material/Pages';
 import Image from 'next/image';
-import Link from 'next/link';
 const HomeBannerEdit = ({ id }) => {
   return (
 
@@ -29,7 +27,7 @@ const HomeBannerEdit = ({ id }) => {
               <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
               <input type="file" accept="image/*" className="form-control" id="editImage2" />
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center">Submit</button>
           </div>
         </div>
       </div>

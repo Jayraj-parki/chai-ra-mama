@@ -37,7 +37,7 @@ const CmsPages = () => {
           </div>
         </div>
       </div>
-      <div className='row col-12 mx-auto mt-5'>
+      <div className={style.tableContainer+' row col-12 mx-auto mt-5'}>
         <table className="col-12 table table-bordered table-hover  text-center">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>

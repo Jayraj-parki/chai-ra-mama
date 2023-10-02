@@ -2,12 +2,6 @@
 .homeBanner {
   .modal{
     background-color: #00000079;
-    // img{
-    //   width: min-content;
-    //   max-width: 200px;
-    //   height:min-content;
-    //   max-height:300px ;
-    // }
   }
   .header {
     .icon {
@@ -18,13 +12,25 @@
       color: $bb-dark;
     }
   }
-  table{
-   
-    img{
-      width: min-content;
-      max-width: 200px;
-      height:min-content;
-      max-height:300px ;
+  .tableContainer {
+    overflow: auto;
+
+    table {
+      thead{
+        th{
+          min-width: 200px;
+          &:nth-child(1){
+            min-width: 80px;
+          }
+        }
+      }
+      img {
+        width: min-content;
+        max-width: 200px;
+        height: min-content;
+        max-height: 300px;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
-import style from "./cmsEdit.module.scss"
+import style from "./clientFeedbackEdit.module.scss"
 import Image from 'next/image';
-const CmsEdit = ({ id }) => {
+const ClientFeedbackEdit = ({ id }) => {
   return (
 
     <div className={' container-fluid my-4  '}>
-      <div className={style.cmsEdit + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
+      <div className={style.clientFeedbackEdit + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
         <div className={style.header + ' row col-12 mx-auto'}>
-          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Why to choose us</h3>
+          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add or Edit Client Feedback</h3>
         </div>
         <hr />
-        <div className='row col-12 mx-auto mt-5'>
-          <div>
-            <div className="mb-4">
-              <label for="editHeading" className="form-label">Heading</label>
-              <input type="text" className="form-control" id="editHeading" aria-describedby="emailHelp"  placeholder='write heading here'/>
+        <div className='row col-12 mx-auto mt-2'>
+          <div className=''>
+            <div className="mb-4 ">
+              <label for="editName" className="form-label">Name</label>
+              <input type="text" className="form-control" id="editName" aria-describedby="emailHelp" placeholder='write heading here' />
             </div>
-            <div className="mb-4">
+            <div className="mb-4 ">
               <label for="editImage" className="form-label">Upload Image</label>
-              <Image className={style.image+" rounded w-100 h-100 mb-4"}  width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
+              <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
               <input type="file" accept="image/*" className="form-control" id="editImage" />
             </div>
             <div className="mb-4">
@@ -29,8 +29,8 @@ const CmsEdit = ({ id }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
-export default CmsEdit
+export default ClientFeedbackEdit

@@ -1,5 +1,5 @@
 @import "../../styles/var";
-.cmsPages {
+.headers {
   .modal{
     background-color: #00000079;
   }
@@ -14,6 +14,7 @@
   }
   .tableContainer {
     overflow: auto;
+
     table {
       thead{
         th{

@@ -83,8 +83,8 @@ const AdminNavbar = () => {
                             : <CloseIcon onClick={() => SetMenu(!menu)} className={style.icon + '  border rounded border-2 col-auto '} />
                         }
                     </button>
-                    <div className={`col-auto   flex-wrap collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
-                        <ul className={style.navlink_container + "  row col-12  mx-auto  navbar-nav  d-flex justify-content-center justify-content-lg-end  mb-2 mb-lg-0"}>
+                    <div className={`col-auto bg-light  flex-wrap collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
+                        <ul className={style.navlink_container + "  row col-12    mx-auto  navbar-nav  d-flex justify-content-center justify-content-lg-end  mb-2 mb-lg-0"}>
                             {
                                 !user ?
                                     <>
