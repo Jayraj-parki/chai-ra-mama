@@ -22,8 +22,7 @@ const ClientFeedback = () => {
           <GroupIcon className={style.icon + ' col-auto my-auto p-0 '} />
           <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Client Feedback</h3>
         </div>
-        <Link href="./client-feedback/edit/12345" className='col-auto  ms-auto btn btn-success text-decoration-none m-2'> Add Client Feedback</Link>
-
+        <Link href="./client-feedback/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Client Feedback</Link>
       </div>
       <hr />
       <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -55,8 +54,8 @@ const ClientFeedback = () => {
               <td className='align-middle' >Abc Xyz</td>
               <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./client-feedback/edit/12345" className='btn btn-primary text-decoration-none mx-2'>Edit</Link>
-                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
+                <Link href="./client-feedback/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
+                <button className='btn btn-danger text-decoration-none m-2 text-capitalize'>Delete</button>
               </td>
             </tr>
           </tbody>

@@ -17,9 +17,12 @@ const HomeBanners = () => {
   return (
 
     <div className={style.homeBanner + ' container-fluid my-4  shadow rounded-4 p-4'}>
-      <div className={style.header + ' row col-12 mx-auto'}>
-        <ViewCarouselIcon className={style.icon + ' col-auto my-auto p-0 '} />
-        <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Home Banners</h3>
+      <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
+        <div className='col-auto  d-flex flex-row justify-content-start '>
+          <ViewCarouselIcon className={style.icon + ' col-auto my-auto p-0 '} />
+          <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Home Banners</h3>
+        </div>
+        <Link href="./homebanner/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Home Banners</Link>
       </div>
       <hr />
       <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -49,7 +52,7 @@ const HomeBanners = () => {
               <td className='align-middle' >1</td>
               <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./homebanner/edit/12345" className='btn btn-primary text-decoration-none mx-2'>Edit</Link>
+                <Link href="./homebanner/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
                 <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
               </td>
             </tr>

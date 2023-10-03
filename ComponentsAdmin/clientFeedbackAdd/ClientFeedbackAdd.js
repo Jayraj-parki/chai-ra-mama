@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import style from "./clientFeedbackEdit.module.scss"
+import style from "./clientFeedbackAdd.module.scss"
 import Image from 'next/image';
-const ClientFeedbackEdit = ({ id }) => {
+const ClientFeedbackAdd = () => {
   return (
 
     <div className={' container-fluid my-4  '}>
-      <div className={style.clientFeedbackEdit + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
+      <div className={style.clientFeedbackAdd + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
         <div className={style.header + ' row col-12 mx-auto'}>
-          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Edit Client Feedback</h3>
+          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add Client Feedback</h3>
         </div>
         <hr />
         <div className='row col-12 mx-auto mt-2'>
@@ -25,7 +25,7 @@ const ClientFeedbackEdit = ({ id }) => {
               <label for="editContent" className="form-label">Content</label>
               <textarea type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
             </div>
-            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
+            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center">Submit</button>
           </div>
         </div>
       </div>
@@ -33,4 +33,4 @@ const ClientFeedbackEdit = ({ id }) => {
   )
 }
 
-export default ClientFeedbackEdit
+export default ClientFeedbackAdd

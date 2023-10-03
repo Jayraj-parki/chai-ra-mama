@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import style from "./headers.module.scss"
-import ImageIcon from '@mui/icons-material/Image';
+import style from "./gallery.module.scss"
+import CollectionsIcon from '@mui/icons-material/Collections';
 import Image from 'next/image';
 import Link from 'next/link';
-const HeadersList = () => {
+const Gallery = () => {
   const [modal, setModal] = useState({
     active: false,
     image: "",
@@ -16,13 +16,13 @@ const HeadersList = () => {
   }
   return (
 
-    <div className={style.headers + ' container-fluid my-4  shadow rounded-4 p-4'}>
+    <div className={style.gallery + ' container-fluid my-4  shadow rounded-4 p-4'}>
       <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
         <div className='col-auto  d-flex flex-row justify-content-start '>
-          <ImageIcon className={style.icon + ' col-auto my-auto p-0 '} />
-          <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Header Images</h3>
+          <CollectionsIcon className={style.icon + ' col-auto my-auto p-0 '} />
+          <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>gallery images</h3>
         </div>
-        <Link href="./headers/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</Link>
+        <Link href="./gallery/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add gallery images</Link>
       </div>
       <hr />
       <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -44,17 +44,16 @@ const HeadersList = () => {
         <table className="col-12 table table-bordered table-hover  text-center">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Title</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
           </thead>
           <tbody>
             <tr className=''>
               <td className='align-middle' >1</td>
-              <td className='align-middle' >About</td>
               <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./headers/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
+                <Link href="./gallery/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
+                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
               </td>
             </tr>
           </tbody>
@@ -64,4 +63,4 @@ const HeadersList = () => {
   )
 }
 
-export default HeadersList
+export default Gallery
