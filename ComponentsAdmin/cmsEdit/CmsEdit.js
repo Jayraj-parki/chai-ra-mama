@@ -25,7 +25,7 @@ const CmsEdit = ({ id }) => {
               <label for="editContent" className="form-label">Content</label>
               <textarea type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
             </div>
-            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center">Submit</button>
+            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Submit</button>
           </div>
         </div>
       </div>

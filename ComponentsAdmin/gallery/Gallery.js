@@ -23,6 +23,7 @@ const Gallery = () => {
           <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>gallery images</h3>
         </div>
         <Link href="./gallery/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add gallery images</Link>
+        <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
       <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -41,7 +42,7 @@ const Gallery = () => {
         </div>
       </div>
       <div className={style.tableContainer+' row col-12 mx-auto mt-5'}>
-        <table className="col-12 table table-bordered table-hover  text-center">
+        <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>

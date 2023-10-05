@@ -17,7 +17,7 @@ const GalleryAdd = ({ id }) => {
               <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
               <input type="file" accept="image/*" className="form-control" id="editImage2" />
             </div>
-            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center">submit</button>
+            <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
           </div>
         </div>
       </div>

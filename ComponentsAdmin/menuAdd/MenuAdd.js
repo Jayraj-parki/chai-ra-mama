@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import style from "./headersAdd.module.scss"
+import style from "./menuAdd.module.scss"
 import Image from 'next/image';
-const HeadersAdd = () => {
+const MenuAdd = () => {
   return (
 
     <div className={' container-fluid my-4  '}>
-      <div className={style.headersAdd + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
+      <div className={style.menuAdd + 'row col-12 col-lg-8 shadow rounded-4  col-xl-6 p-4 mx-auto'}>
         <div className={style.header + ' row col-12 mx-auto'}>
-          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add  Header</h3>
+          <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add  Menu</h3>
         </div>
         <hr />
         <div className='row col-12 mx-auto mt-2'>
@@ -29,4 +29,4 @@ const HeadersAdd = () => {
   )
 }
 
-export default HeadersAdd
+export default MenuAdd

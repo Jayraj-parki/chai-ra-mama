@@ -80,7 +80,6 @@ const SignUp = () => {
                             <div className="col-12 mb-4">
                                 <input type="password" ref={confirmPasswordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Confirm Password" />
                             </div>
-
                             <div className={style.submitBtn + " col-12  "}>
                                 <button onClick={handleSignup} type="button" className="row col-12 mx-auto d-flex justify-content-center text-light  rounded  border-0 outline-none">Submit</button>
                             </div>
