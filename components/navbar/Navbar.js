@@ -16,7 +16,6 @@ const Navbar = () => {
     }, [url])
     return (
         <>
-<<<<<<< HEAD
 
             <nav className={style.navbar + " navbar navbar-expand-lg  p-3"}>
                 <div className="container-fluid col-10  mx-auto">
@@ -66,14 +65,6 @@ const Navbar = () => {
                 </div>
             </nav>
 
-=======
-            {
-                userRole == "admin" && <AdminNavbar />
-            }
-            {
-                userRole == "user" && <UserNavbar />
-            }
->>>>>>> 58e7d92
 
         </>
     )
