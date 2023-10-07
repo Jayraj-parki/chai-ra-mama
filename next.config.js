@@ -9,7 +9,7 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['page.js', 'js'],
-  basePath: '/admin',
+  // basePath: '/admin',
   async rewrites() {
     return [
       {
