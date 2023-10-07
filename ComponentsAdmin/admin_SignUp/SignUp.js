@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import style from "./SignUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
@@ -9,7 +9,7 @@ const SignUp = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
-    const { user, logout } = useAuth()
+    const { user } = useAuth()
     const router = useRouter()
     const handleSignup = async (e) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ const SignUp = () => {
                 emailRef.current.value = null
                 passwordRef.current.value = null
                 confirmPasswordRef.current.value = null
-                router.push("/admin/signin")
+                router.push("/auth/signin")
             }
             catch (e) {
                 console.log("error in signup")

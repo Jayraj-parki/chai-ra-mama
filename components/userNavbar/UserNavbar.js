@@ -34,8 +34,8 @@ const UserNavbar = () => {
                 else setActiveLink("home")
             }
             catch (err) {
-                console.log("err" + err)
                 setActiveLink("home")
+                console.log("err" + err)
             }
         }
         handleNavlink()

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from "./store.module.scss"
 import StoreIcon from '@mui/icons-material/Store';
 import Image from 'next/image';

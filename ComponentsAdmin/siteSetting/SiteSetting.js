@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from "./siteSetting.module.scss"
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';

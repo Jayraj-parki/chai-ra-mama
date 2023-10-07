@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from "./homeTestimonial.module.scss"
 import Image from 'next/image'
 const HomeTestimonial = ({ props }) => {

@@ -6,12 +6,14 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import Footer from '@/components/footer/Footer'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { checkUserLogin } from '@/utils/CheckUserLogin'
+import { checkUserLogin } from '@/services/CheckUserLogin'
 import style from "./page.module.scss"
+
 const AuthContext = createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
+
 export default function RootLayout({ children }) {
   const [user, setUser] = useState("")
   const getUser = async () => {
@@ -24,12 +26,9 @@ export default function RootLayout({ children }) {
       setUser("")
     }
   }
-  const login = () => {
-    getUser()
-  }
-  const logout = () => {
-    setUser("")
-  }
+  const login = () => getUser()
+  const logout = () => setUser("")
+
   useEffect(() => {
     getUser()
   }, [])
@@ -45,7 +44,6 @@ export default function RootLayout({ children }) {
             <Footer />
           </AuthContext.Provider>
         </main>
-
       </body>
     </html>
   )

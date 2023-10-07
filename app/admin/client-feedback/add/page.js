@@ -1,21 +1,9 @@
 "use client"
-import React, { useEffect } from 'react'
+
 import { useAuth } from '@/app/layout';
-import { useRouter } from "next/navigation"
 import ClientFeedbackAdd from '@/ComponentsAdmin/clientFeedbackAdd/ClientFeedbackAdd';
 const page = () => {
   const { user } = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!user) {
-      router.push("/admin/signin")
-    }
-    else {
-      // Store the current page location in localStorage
-      localStorage.setItem('lastVisitedPage', `/admin/client-feedback/add`);
-    }
-  }, [user,router])
   return (
     <>
       {

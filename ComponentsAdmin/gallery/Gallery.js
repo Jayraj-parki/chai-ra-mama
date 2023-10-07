@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from "./gallery.module.scss"
 import CollectionsIcon from '@mui/icons-material/Collections';
 import Image from 'next/image';

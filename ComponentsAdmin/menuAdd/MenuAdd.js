@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import style from "./menuAdd.module.scss"
 import Image from 'next/image';
 const MenuAdd = () => {

@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./franchisePartnerProfit.module.scss"
-import Image from "next/image"
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 const FranchisePartnerProfit = () => {
     const [about, setAbout] = useState({

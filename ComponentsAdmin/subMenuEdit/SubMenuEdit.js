@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+
 import style from "./subMenuEdit.module.scss"
-import Image from 'next/image';
 const SubMenuEdit = () => {
   return (
 

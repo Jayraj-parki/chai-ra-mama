@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from "./siteContent.module.scss"
 import PagesIcon from '@mui/icons-material/Pages';
 import SourceIcon from '@mui/icons-material/Source';

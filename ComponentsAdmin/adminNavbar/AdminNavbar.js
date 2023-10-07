@@ -31,7 +31,7 @@ const AdminNavbar = () => {
             })
             const data = await result.json()
             if ("success" in data) {
-                router.push("/admin/signin")
+                router.push("/auth/signin")
             }
         }
         catch (e) {
@@ -89,10 +89,10 @@ const AdminNavbar = () => {
                                 !user ?
                                     <>
                                         <li className={`nav-item d-flex  col-auto mx-auto mx-lg-0  ${activeLink == "signin" && "border-bottom border-3"} `}>
-                                            <Link onClick={() => setActiveLink("signin")} className={`nav-link border-3 `} aria-current="page" href="/admin/signin">Sign In</Link>
+                                            <Link onClick={() => setActiveLink("signin")} className={`nav-link border-3 `} aria-current="page" href="/auth/signin">Sign In</Link>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "signup" && "border-bottom border-3"}  `}>
-                                            <Link onClick={() => setActiveLink("signup")} className={`nav-link `} aria-current="page" href="/admin/signup">Sign Up</Link>
+                                            <Link onClick={() => setActiveLink("signup")} className={`nav-link `} aria-current="page" href="/auth/signup">Sign Up</Link>
                                         </li>
                                     </>
                                     :
@@ -104,7 +104,7 @@ const AdminNavbar = () => {
                                         <Link onClick={()=>setActiveLink("profile")} className={`nav-link `} aria-current="page" href="/admin/profile"><PersonIcon className={style.icon+` `}/></Link>
                                     </li>
                                     <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
-                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/admin/signin"><LogoutIcon className={style.icon+` `}/></Link>
+                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/auth/signin"><LogoutIcon className={style.icon+` `}/></Link>
                                     </li>
                                     </>
                             }

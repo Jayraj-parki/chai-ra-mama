@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from "./clientFeedback.module.scss"
 import GroupIcon from '@mui/icons-material/Group';
 import Image from 'next/image';

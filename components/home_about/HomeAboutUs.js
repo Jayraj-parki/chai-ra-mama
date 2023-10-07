@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from 'react'
 import style from "./homeAbout.module.scss"
 import Image from "next/image"
 const HomeAboutUs = ({props}) => {

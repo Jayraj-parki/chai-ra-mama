@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import style from "./faq.module.scss"
 import { useEffect, useState } from 'react';
 const FAQ = () => {

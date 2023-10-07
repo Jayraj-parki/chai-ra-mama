@@ -1,22 +1,10 @@
 "use client"
-import React, { useEffect } from 'react'
+import React  from 'react'
 import { useAuth } from '@/app/layout';
-import { useRouter } from "next/navigation"
 import CmsEdit from '@/ComponentsAdmin/cmsEdit/CmsEdit';
 
 const page = ({params}) => {
   const { user } = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!user) {
-      router.push("/admin/signin")
-    }
-    else {
-      // Store the current page location in localStorage
-      localStorage.setItem('lastVisitedPage', `/admin/cmspages/edit/${params?.id}`);
-    }
-  }, [user,router])
   return (
     <>
       {

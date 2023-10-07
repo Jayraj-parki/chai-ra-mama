@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import style from "./clientFeedbackAdd.module.scss"
 import Image from 'next/image';
 const ClientFeedbackAdd = () => {

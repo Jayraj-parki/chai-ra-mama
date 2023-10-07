@@ -1,13 +1,6 @@
 import React from "react";
 import style from "./adminFooter.module.scss";
-import Image from "next/image";
-import Link from "next/link";
-import PhoneIcon from "@mui/icons-material/Phone";
-import EmailIcon from "@mui/icons-material/Email";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+
 const AdminFooter = () => {
 
     return (

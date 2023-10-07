@@ -1,5 +1,4 @@
 "use client"
-import Image from "next/image"
 import style from "./storeCards.module.scss"
 import { useEffect, useState } from "react";
 import LocationOnIcon from '@mui/icons-material/LocationOn';

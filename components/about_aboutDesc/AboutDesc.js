@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from "./aboutDesc.module.scss"
 import Image from 'next/image'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';

@@ -1,7 +1,6 @@
-import React from 'react'
+
 import style from "./bestCoffee.module.scss"
 import Image from 'next/image'
-import Link from 'next/link'
 const BestCoffee = ({ props }) => {
     return (
         <>

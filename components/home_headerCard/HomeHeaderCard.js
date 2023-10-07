@@ -1,9 +1,6 @@
 "use client"
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
 import style from "./homeHeaderCard.module.scss"
-import FreeBreakfastIcon from '@mui/icons-material/FreeBreakfast';
-
 function HomeHeaderCard({ props }) {
 
     return (

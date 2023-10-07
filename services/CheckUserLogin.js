@@ -10,7 +10,7 @@ export const checkUserLogin = async () => {
         return data
     }
     catch (e) {
-        console.log("error in Event")
+        console.log("error in authentication")
         return null
     }
 }

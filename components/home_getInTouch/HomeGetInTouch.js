@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import style from "./home_getInTouch.module.scss"
 import Image from 'next/image'
 const HomeGetInTouch = ({ props }) => {

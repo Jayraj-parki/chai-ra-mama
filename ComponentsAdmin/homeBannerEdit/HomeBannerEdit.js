@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from "./homeBannerEdit.module.scss"
 import Image from 'next/image';
 const HomeBannerEdit = ({ id }) => {

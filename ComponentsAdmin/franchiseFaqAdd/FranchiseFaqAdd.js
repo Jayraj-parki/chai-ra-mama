@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+
 import style from "./franchiseFaqAdd.module.scss"
-import Image from 'next/image';
 const FranchiseFaqAdd = ({ id }) => {
   return (
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import style from "./menu.module.scss"
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import Image from 'next/image';

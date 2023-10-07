@@ -1,6 +1,5 @@
 import FeedbackCards from '@/components/feedback_Cards/FeedbackCards'
 import FeedbackBanner from '@/components/feedback_banner/FeedbackBanner'
-import React from 'react'
 
 const page = () => {
   return (

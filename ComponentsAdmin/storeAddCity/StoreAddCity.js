@@ -1,6 +1,4 @@
-import React, { useState } from 'react'
 import style from "./storeAddCity.module.scss"
-import Image from 'next/image';
 const StoreAddCity = () => {
   return (
 

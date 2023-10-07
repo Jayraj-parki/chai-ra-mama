@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import style from "./headersAdd.module.scss"
 import Image from 'next/image';
 const HeadersAdd = () => {

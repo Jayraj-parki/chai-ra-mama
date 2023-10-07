@@ -1,4 +1,4 @@
-import React from 'react'
+
 import style from "./contactDetails.module.scss"
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';

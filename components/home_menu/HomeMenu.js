@@ -1,5 +1,4 @@
 "use client"
-import React, { useEffect, useState } from 'react'
 import style from "./homeMenu.module.scss"
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
