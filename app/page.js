@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-// "use client"
-import style from "./page.module.scss"
-=======
 "use client"
->>>>>>> 58e7d92
 import HomeBanner from "@/components/home_banner/HomeBanner"
 import HomeHeaderCard from "@/components/home_headerCard/HomeHeaderCard"
 import HomeAboutUs from "@/components/home_about/HomeAboutUs"
