@@ -7,7 +7,7 @@ const Navbar = () => {
     const url = usePathname()
     const [userRole, setUserRole] = useState("")
     useEffect(() => {
-        if (url.toLowerCase().includes("admin")) {
+        if (url.toLowerCase().includes("admin")||url.toLowerCase().includes("auth")) {
             setUserRole("admin")
         }
         else {
