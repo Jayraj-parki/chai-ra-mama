@@ -9,7 +9,12 @@ const nextConfig = {
     return config;
   },
   pageExtensions: ['page.js', 'js'],
-  // basePath: '/admin',
+  cookies: {
+    secure: true,
+    httpOnly: true,
+    domain: '.vercel.app',
+    expires: 60 * 60 * 24 , // 1 days
+  },
   async rewrites() {
     return [
       {

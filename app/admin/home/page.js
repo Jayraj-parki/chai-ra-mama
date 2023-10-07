@@ -7,13 +7,13 @@ const page = () => {
 
   return (
     <>
-      {/* {
+      {
         user &&
-      } */}
         <div className='container-fluid p-lg-4  m-0'>
           <SiteContent />
           <SiteSetting/>
         </div>
+      }
     </>
   )
 }
