@@ -12,11 +12,8 @@ const nextConfig = {
   cookies: {
     secure: true,
     httpOnly: true,
-    domain: '.vercel.app',
+    domain: 'seven-oct.vercel.app',
     expires: 60 * 60 * 24 , // 1 days
-  },
-  headers: {
-    acceptCookies: [/^session-cookie$/, /^auth-cookie$/],
   },
   async rewrites() {
     return [
