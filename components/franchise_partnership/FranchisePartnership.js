@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-=======
-
->>>>>>> 58e7d92
 import style from "./FranchisePartnership.module.scss"
 import Image from 'next/image'
 const FranchisePartnership = () => {
