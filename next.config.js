@@ -15,6 +15,9 @@ const nextConfig = {
     domain: '.vercel.app',
     expires: 60 * 60 * 24 , // 1 days
   },
+  headers: {
+    acceptCookies: [/^session-cookie$/, /^auth-cookie$/],
+  },
   async rewrites() {
     return [
       {
