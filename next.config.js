@@ -8,7 +8,8 @@ const nextConfig = {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
-
+  pageExtensions: ['page.js', 'js'],
+  basePath: '/admin',
   async rewrites() {
     return [
       {
