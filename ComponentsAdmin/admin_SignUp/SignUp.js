@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useRef } from 'react'
-import style from "./SignUp.module.scss"
+import style from "./signUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
 const SignUp = () => {

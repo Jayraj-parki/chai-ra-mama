@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import style from "./clientFeedback.module.scss"
 import GroupIcon from '@mui/icons-material/Group';

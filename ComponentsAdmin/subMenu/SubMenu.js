@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import style from "./subMenu.module.scss"
 import WidgetsIcon from '@mui/icons-material/Widgets';

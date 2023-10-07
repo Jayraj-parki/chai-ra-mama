@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import style from "./franchiseFaq.module.scss"
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';

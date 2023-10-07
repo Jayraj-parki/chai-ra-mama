@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import style from "./homeBanner.module.scss"
 import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';

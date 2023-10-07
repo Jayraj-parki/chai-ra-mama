@@ -1,3 +1,4 @@
+"use client"
 import { useState } from 'react'
 import style from "./headers.module.scss"
 import ImageIcon from '@mui/icons-material/Image';
@@ -22,7 +23,7 @@ const HeadersList = () => {
           <ImageIcon className={style.icon + ' col-auto my-auto p-0 '} />
           <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Header Images</h3>
         </div>
-        <Link href="./headers/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</Link>
+        <Link href="./page-headers/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</Link>
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
@@ -55,7 +56,7 @@ const HeadersList = () => {
               <td className='align-middle' >About</td>
               <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./headers/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
+                <Link href="./page-headers/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
               </td>
             </tr>
           </tbody>
