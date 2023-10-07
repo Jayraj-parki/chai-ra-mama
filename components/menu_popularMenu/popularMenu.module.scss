@@ -39,11 +39,21 @@
         img {
           width: 90px;
           height:90px;
+          z-index: 100;
         }
       }
       .itemCard{
-        img{
-          transform: translateX(50px);
+        .cardImage{
+          img{
+            transform: translateX(50px);
+            @media screen and (max-width:500px) {
+              transform: translateX(20px);
+            }
+          }
+          z-index: 100;  
+        }
+        .cardBody{
+          z-index: 1;
         }
         .price{
           color: $primary-coffee;

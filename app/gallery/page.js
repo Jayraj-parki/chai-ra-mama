@@ -1,8 +1,13 @@
-import React from 'react'
+import GalleryCard from '@/components/gallery_GalleryCards/GalleryCard'
+import GalleryBanner from '@/components/gallery_banner/GalleryBanner'
+
 
 const page = () => {
   return (
-    <div>gallery page</div>
+    <>
+      <GalleryBanner />
+      <GalleryCard/>
+    </>
   )
 }
 

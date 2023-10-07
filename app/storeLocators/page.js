@@ -1,8 +1,12 @@
-import React from 'react'
+import StoreCards from '@/components/store_Cards/StoreCards'
+import StoreBanner from '@/components/store_banner/StoreBanner'
 
 const page = () => {
   return (
-    <div>storeLocators page</div>
+    <>
+    <StoreBanner/>
+    <StoreCards/>
+    </>
   )
 }
 

@@ -2,9 +2,17 @@
 .franchisePartnershipDesc {
   .franchisePartnership_img {
     img {
-      height: 100%;
+      height  : 90%;
       // height: 500px;
       width: 100%;
+    }
+  }
+  .heading {
+    h1 {
+      @media screen and (max-width:500px) {
+        font-size: 25px;
+        
+      }
     }
   }
   .franchisePartnership_title {
@@ -15,14 +23,17 @@
   .franchisePartnership_desc {
     color: $text-gray;
     font-size: 18px;
+    p{
+      text-align: justify;
+    }
   }
   .franchisePartnership_list {
-    input{
-      &::placeholder{
+    input {
+      &::placeholder {
         color: $text-gray;
       }
     }
-    button{
+    button {
       background-color: $primary-coffee;
       padding: 15px 30px;
     }

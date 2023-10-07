@@ -1,48 +1,22 @@
 "use client";
-import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import style from "./navbar.module.scss"
 import { usePathname } from 'next/navigation';
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
+import UserNavbar from '../userNavbar/UserNavbar';
+import AdminNavbar from '@/ComponentsAdmin/adminNavbar/AdminNavbar';
 const Navbar = () => {
-    const [collapse, setCollapse] = useState(true)
-    const [activeLink, setActiveLink] = useState("/")
-    const [logoImg, setLogoImg] = useState("")
-    const [menu, SetMenu] = useState(true)
     const url = usePathname()
+    const [userRole, setUserRole] = useState("")
     useEffect(() => {
-        try {
-            const data = require("@/data/headerData.json")
-            setLogoImg(data.logoImg)
+        if (url.toLowerCase().includes("admin")) {
+            setUserRole("admin")
         }
-        catch (e) {
-            setLogoImg("'/assets/images/logo.png'")
+        else {
+            setUserRole("user")
         }
-    }, [])
-    useEffect(() => {
-        const handleNavlink = () => {
-            try {
-                if (url.toLowerCase().includes("about")) setActiveLink("aboutus")
-                else if (url.toLowerCase().includes("menu")) setActiveLink("menu")
-                else if (url.toLowerCase().includes("franchise")) setActiveLink("franchise")
-                else if (url.toLowerCase().includes("gallery")) setActiveLink("gallery")
-                else if (url.toLowerCase().includes("feedback")) setActiveLink("feedback")
-                else if (url.toLowerCase().includes("storeLocators")) setActiveLink("storeLocators")
-                else if (url.toLowerCase().includes("contactus")) setActiveLink("contactus")
-                else setActiveLink("home")
-            }
-            catch (err) {
-                console.log("err" + err)
-                setActiveLink("home")
-            }
-        }
-        handleNavlink()
     }, [url])
     return (
-
         <>
+<<<<<<< HEAD
 
             <nav className={style.navbar + " navbar navbar-expand-lg  p-3"}>
                 <div className="container-fluid col-10  mx-auto">
@@ -92,6 +66,14 @@ const Navbar = () => {
                 </div>
             </nav>
 
+=======
+            {
+                userRole == "admin" && <AdminNavbar />
+            }
+            {
+                userRole == "user" && <UserNavbar />
+            }
+>>>>>>> 58e7d92
 
         </>
     )

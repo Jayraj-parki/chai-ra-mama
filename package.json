@@ -13,15 +13,20 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.7",
+    "@reduxjs/toolkit": "^1.9.5",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.1",
-    "eslint": "8.48.0",
+    "cookies-next": "^4.0.0",
     "eslint-config-next": "13.4.19",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^5.8.1",
     "mongoose": "^7.4.5",
     "next": "13.4.19",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-loading-skeleton": "^3.3.1",
-    "sass": "^1.66.1"
+    "react-redux": "^8.1.2",
+    "sass": "^1.66.1",
+    "validator": "^13.11.0"
   }
 }

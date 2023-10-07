@@ -1,0 +1,16 @@
+@import "../../styles/var";
+.clientFeedbackEdit {
+  .modal{
+    background-color: #00000079;
+  }
+  .header {
+    .icon {
+      font-size: $font-lg;
+      color: $bb-dark;
+    }
+    .heading {
+      color: $bb-dark;
+    }
+  }
+  
+}
