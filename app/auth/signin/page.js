@@ -4,6 +4,7 @@ import SignIn from "@/ComponentsAdmin/admin_SignIn/SignIn"
 import { useEffect } from 'react'
 import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
+
 const page = () => {
   const { user } = useAuth()
   const router = useRouter()
@@ -14,7 +15,6 @@ const page = () => {
     }
   }, [user,router])
   return (
-
     <>
       {
         !user && <SignIn />

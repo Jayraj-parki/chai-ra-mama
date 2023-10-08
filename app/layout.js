@@ -8,6 +8,7 @@ import Footer from '@/components/footer/Footer'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { checkUserLogin } from '@/services/CheckUserLogin'
 import style from "./page.module.scss"
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext();
 export function useAuth() {
@@ -17,8 +18,9 @@ export function useAuth() {
 export default function RootLayout({ children }) {
   const [user, setUser] = useState("")
   const getUser = async () => {
+    const cookie = Cookies.get("teaToken")
     try {
-      const data = await checkUserLogin()
+      const data = await checkUserLogin(cookie)
       if ("id" in data) setUser(data?.id)
       else setUser("")
     }
@@ -27,10 +29,12 @@ export default function RootLayout({ children }) {
     }
   }
   const login = () => getUser()
-  const logout = () => setUser("")
-
+  const logout = () => {
+    setUser("")
+    Cookies.remove('teaToken');
+  }
   useEffect(() => {
-    getUser()
+    getUser("cookie")
   }, [])
   return (
     <html lang="en">

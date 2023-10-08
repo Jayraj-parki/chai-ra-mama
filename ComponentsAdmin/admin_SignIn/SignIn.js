@@ -3,8 +3,10 @@ import { useRef } from 'react'
 import style from "./signIn.module.scss"
 import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
+import { userSignIn } from '@/services/userSignIn';
 
 const SignIn = () => {
+    
     const { login } = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
@@ -16,32 +18,14 @@ const SignIn = () => {
             alert("please fill all input field")
         }
         else {
-            try {
-                const result = await fetch("/api/admin/signIn", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        email, password
-                    })
-                })
-                const data = await result.json()
-                if (data?.status == 200) {
-                    router.push("/admin/home")
-                    login()
-                    alert(data?.message)
-                    emailRef.current.value = null
-                    passwordRef.current.value = null
-                }
-                else{
-                    alert(data?.message)
+            const token =await userSignIn({ email, password})
+            if(token){
+                router.push("/admin/home")
+                login()
+            }
+            emailRef.current.value = null
+            passwordRef.current.value = null
 
-                }
-            }
-            catch (e) {
-                console.log("error in signIn")
-            }
         }
 
     }

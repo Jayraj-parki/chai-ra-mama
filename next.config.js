@@ -4,17 +4,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    auth: true,
+  },
   webpack(config) {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
   pageExtensions: ['page.js', 'js'],
-  cookies: {
-    secure: true,
-    httpOnly: true,
-    domain: 'the-api.vercel.app',
-    expires: 60 * 60 * 24 , 
-  },
   async rewrites() {
     return [
       {

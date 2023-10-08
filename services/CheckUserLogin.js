@@ -1,10 +1,14 @@
-export const checkUserLogin = async () => {
+
+export const checkUserLogin = async (cookie) => {
     try {
         const result = await fetch("/api/admin/auth", {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                token:cookie
+            })
         })
         const data = await result.json()
         return data
