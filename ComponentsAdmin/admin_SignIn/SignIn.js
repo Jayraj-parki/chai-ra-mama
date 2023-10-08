@@ -3,31 +3,25 @@ import { useRef } from 'react'
 import style from "./signIn.module.scss"
 import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
-import { userSignIn } from '@/services/userSignIn';
+import { adminSignIn } from '@/services/adminSignIn';
 
 const SignIn = () => {
-    
+
     const { login } = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const router = useRouter();
+    
     const handleLogin = async () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
-        if (!email || !password) {
-            alert("please fill all input field")
+        const token = await adminSignIn({ email, password })
+        if (token) {
+            router.push("/admin/home")
+            login()
         }
-        else {
-            const token =await userSignIn({ email, password})
-            if(token){
-                router.push("/admin/home")
-                login()
-            }
-            emailRef.current.value = null
-            passwordRef.current.value = null
-
-        }
-
+        emailRef.current.value = null
+        passwordRef.current.value = null
     }
 
     return (

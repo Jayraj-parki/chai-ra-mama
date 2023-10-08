@@ -1,7 +1,8 @@
 "use client"
-import  { useState } from 'react'
+import { useState } from 'react'
 import style from "./home_getInTouch.module.scss"
 import Image from 'next/image'
+import { getInTouch } from '@/services/getInTouch'
 const HomeGetInTouch = ({ props }) => {
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
@@ -9,32 +10,11 @@ const HomeGetInTouch = ({ props }) => {
     const [message, setMessage] = useState()
 
     const handleGetInTouch = async () => {
-
-        if (!firstName.trim() || !lastName.trim() || !email.trim() || !message.trim()) {
-            alert("please fill all the fields correctly")
-        }
-        else {
-            try {
-                const result = await fetch("/api/home/homeGetInTouch", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        firstName, lastName, email, message
-                    })
-                })
-                const data = await result.json()
-                alert(data.message)
-                setFirstName("")
-                setLastName("")
-                setEmail("")
-                setMessage("")
-            }
-            catch (e) {
-                console.log("error in sending message")
-            }
-        }
+        await getInTouch({ firstName, lastName, email, message })
+        setFirstName("")
+        setLastName("")
+        setEmail("")
+        setMessage("")
     }
     return (
         <div className={style.getInTouch + ' container-fluid m-0 my-5 p-0 py-5'}>

@@ -6,6 +6,7 @@ import style from "./userNavbar.module.scss"
 import { usePathname } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { handleUserNavbar } from '@/utils/handleUserNavbar';
 const UserNavbar = () => {
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("/")
@@ -22,25 +23,7 @@ const UserNavbar = () => {
         }
     }, [])
     useEffect(() => {
-        const handleNavlink = () => {
-            try {
-                if (url.toLowerCase().includes("about")) setActiveLink("aboutus")
-                else if (url.toLowerCase().includes("menu")) setActiveLink("menu")
-                else if (url.toLowerCase().includes("franchise")) setActiveLink("franchise")
-                else if (url.toLowerCase().includes("gallery")) setActiveLink("gallery")
-                else if (url.toLowerCase().includes("feedback")) setActiveLink("feedback")
-                else if (url.toLowerCase().includes("storeLocators")) setActiveLink("storeLocators")
-                else if (url.toLowerCase().includes("contactus")) setActiveLink("contactus")
-                else setActiveLink("home")
-            }
-            catch (err) {
-                setActiveLink("home")
-                console.log("err" + err)
-            }
-        }
-        handleNavlink()
-        setCollapse(true)
-        SetMenu(true)
+        handleUserNavbar({url,setCollapse,SetMenu,setActiveLink})        
     }, [url])
     return (
 

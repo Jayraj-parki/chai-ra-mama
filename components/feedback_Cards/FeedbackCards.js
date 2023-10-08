@@ -28,6 +28,7 @@ const StarRating = ({ rating }) => {
 
 const FeedbackCards = ({ props }) => {
     const [cards, setCards] = useState()
+    
     useEffect(() => {
         try {
             const data = require("@/data/feedback.json")

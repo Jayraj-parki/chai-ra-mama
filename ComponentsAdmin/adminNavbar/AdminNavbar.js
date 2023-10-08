@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation"
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonIcon from '@mui/icons-material/Person';
+import { adminLogout } from '@/services/adminLogout';
+import { handleAdminNavbar } from '@/utils/handleAdminNavbar';
 const AdminNavbar = () => {
     const { user, logout } = useAuth()
     const [collapse, setCollapse] = useState(true)
@@ -19,27 +21,15 @@ const AdminNavbar = () => {
     const [menu, SetMenu] = useState(true)
     const url = usePathname()
     const router = useRouter();
-    const LogOut = async() => {
-        setActiveLink("")
-        logout()
-        try {
-            const result = await fetch("/api/admin/logout", {
-                method: "GET",
-                headers: {
-                    "Content-type": "application/json"
-                }
-            })
-            const data = await result.json()
-            if ("success" in data) {
-                router.push("/auth/signin")
-            }
-        }
-        catch (e) {
-            console.log("error in logout"+e)
-        }
+    const LogOut = async () => {
+        await adminLogout({ setActiveLink, logout })
+        router.push("/auth/signin")
     }
+    useEffect(() => {
+        handleAdminNavbar({ url, setCollapse, SetMenu, setActiveLink })
+    }, [url])
 
-
+    // todo: remove once created api for this 
     useEffect(() => {
         try {
             const data = require("@/data/headerData.json")
@@ -49,27 +39,8 @@ const AdminNavbar = () => {
             setLogoImg("'/assets/images/logo.png'")
         }
     }, [])
-    useEffect(() => {
-        const handleNavlink = () => {
-            try {
-                if (url.toLowerCase().includes("signin")) setActiveLink("signin")
-                else if (url.toLowerCase().includes("signup")) setActiveLink("signup")
-                else if (url.toLowerCase().includes("home")) setActiveLink("home")
-                else if (url.toLowerCase().includes("profile")) setActiveLink("profile")
-            }
-            catch (err) {
-                console.log("err" + err)
-                setActiveLink("signin")
-            }
-        }
-        handleNavlink()
-        setCollapse(true)
-        SetMenu(true)
-    }, [url])
     return (
-
         <>
-
             <nav className={style.navbar + " contaner-fluid navbar bg-light navbar-expand-lg shadow-sm  px-3"}>
                 <div className="container-fluid col-lg-12 col-xl-11  mx-auto">
                     <div className="navbar-brand  col-auto">
@@ -97,22 +68,17 @@ const AdminNavbar = () => {
                                     </>
                                     :
                                     <>
-                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "home" && "border-bottom border-3"} `}>
-                                        <Link onClick={() => setActiveLink("home")}  className={`nav-link `} aria-current="page" href="/admin/home"><HomeIcon className={style.icon+` `}/></Link>
-                                    </li>
-                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "profile" && "border-bottom border-3"} `}>
-                                        <Link onClick={()=>setActiveLink("profile")} className={`nav-link `} aria-current="page" href="/admin/profile"><PersonIcon className={style.icon+` `}/></Link>
-                                    </li>
-                                    <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
-                                        <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/auth/signin"><LogoutIcon className={style.icon+` `}/></Link>
-                                    </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "home" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("home")} className={`nav-link `} aria-current="page" href="/admin/home"><HomeIcon className={style.icon + ` `} /></Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "profile" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("profile")} className={`nav-link `} aria-current="page" href="/admin/profile"><PersonIcon className={style.icon + ` `} /></Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
+                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/auth/signin"><LogoutIcon className={style.icon + ` `} /></Link>
+                                        </li>
                                     </>
                             }
-
-                            {/* after login */}
-                            {/* todo: create navbar for admin */}
-
-
                         </ul>
 
                     </div>

@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import style from "./signUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
+import { adminSignUp } from '@/services/adminSignUp';
 const SignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
@@ -11,6 +12,7 @@ const SignUp = () => {
     const confirmPasswordRef = useRef(null);
     const { user } = useAuth()
     const router = useRouter()
+
     const handleSignup = async (e) => {
         e.preventDefault()
         const firstName = firstNameRef.current.value.trim()
@@ -18,37 +20,13 @@ const SignUp = () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
-
-        if (!firstName || !lastName || !email || !password || !confirmPassword) {
-            alert("please fill all the fields correctly")
-        }
-        else if (password != confirmPassword) {
-            alert("Confirm password not matched")
-        }
-        else {
-            try {
-                const result = await fetch("/api/admin/signUp", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        firstName, lastName, email, password
-                    })
-                })
-                const data = await result.json()
-                alert(data.message)
-                firstNameRef.current.value = null
-                lastNameRef.current.value = null
-                emailRef.current.value = null
-                passwordRef.current.value = null
-                confirmPasswordRef.current.value = null
-                router.push("/auth/signin")
-            }
-            catch (e) {
-                console.log("error in signup")
-            }
-        }
+        await adminSignUp({ firstName, lastName, email, password, confirmPassword })
+        firstNameRef.current.value = null
+        lastNameRef.current.value = null
+        emailRef.current.value = null
+        passwordRef.current.value = null
+        confirmPasswordRef.current.value = null
+        router.push("/auth/signin")
 
     }
 
