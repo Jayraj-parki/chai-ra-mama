@@ -4,17 +4,20 @@ import style from "./headers.module.scss"
 import ImageIcon from '@mui/icons-material/Image';
 import Image from 'next/image';
 import Link from 'next/link';
+import ImageModal from '../imageModal/ImageModal';
+import HeadersEdit from '../headersEdit/HeadersEdit';
+import HeadersAdd from '../headerAdd/HeadersAdd';
 const HeadersList = () => {
   const [modal, setModal] = useState({
     active: false,
     image: "",
   })
-  const showImage = (img) => {
-    setModal({ active: true, image: img })
-  }
-  const closeImage = () => {
-    setModal({ active: false, image: "" })
-  }
+  const [editData, setEditData] = useState({
+    active: false,
+    heading: "",
+    image: ""
+  })
+  const [addData,setAddData]=useState(false)
   return (
 
     <div className={style.headers + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -23,25 +26,17 @@ const HeadersList = () => {
           <ImageIcon className={style.icon + ' col-auto my-auto p-0 '} />
           <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Header Images</h3>
         </div>
-        <Link href="./page-headers/add" className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</Link>
+        <button  onClick={()=>setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</button>
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
-      <div className={style.modal + ` modal fade ${modal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <button onClick={closeImage} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body d-flex justify-content-center align-items-center">
-              <Image className="rounded w-100 h-100" width={250} height={200} objectFit="cover" src={modal?.image || "/assets/images/1.png"} alt="..." />
-            </div>
-            <div className="modal-footer">
-              <button onClick={closeImage} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* image modal */}
+      <ImageModal modal={modal} setModal={setModal} />
+      {/* Edit data modal */}
+      <HeadersEdit editData={editData} setEditData={setEditData} image={editData?.image} heading={editData?.heading} />
+      {/* Add data modal  */}
+      <HeadersAdd addData={addData} setAddData={setAddData} />
+      {/* Data Table */}
       <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
         <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
           <thead className='border'>
@@ -54,9 +49,9 @@ const HeadersList = () => {
             <tr className=''>
               <td className='align-middle' >1</td>
               <td className='align-middle' >About</td>
-              <td className='align-middle'> <Image onClick={() => showImage("/assets/images/g1.png")} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
+              <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <Link href="./page-headers/edit/12345" className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</Link>
+                <button onClick={() => setEditData({ active: true, image: "/assets/images/g1.png", heading: "heading" })} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
               </td>
             </tr>
           </tbody>
