@@ -4,9 +4,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  experimental: {
-    auth: true,
-  },
   webpack(config) {
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;

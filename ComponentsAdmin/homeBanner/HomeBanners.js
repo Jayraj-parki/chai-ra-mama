@@ -28,7 +28,7 @@ const HomeBanners = () => {
         <button onClick={()=>setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Home Banners</button>
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
-      <hr />
+      <hr /> 
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
       {/* Edit data modal */}
