@@ -9,9 +9,9 @@ const FranchiseFaqAdd = ({ addData, setAddData }) => {
             <button onClick={() => setAddData(false)} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body  d-flex justify-content-center align-items-center">
-
+ 
             <div className={' container-fluid my-4  '}>
-              <div className={style.franchiseFaqAdd + 'row col-12 col-lg-10 shadow rounded-4  mx-auto'}>
+              <div className={style.franchiseFaqAdd + 'row col-12 col-lg-10 shadow rounded-4 p-4  mx-auto'}>
                 <div className={style.header + ' row col-12 mx-auto'}>
                   <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add Franchise Question</h3>
                 </div>
