@@ -1,16 +1,22 @@
 @import "../../styles/var";
-.storeEditCity {
-  .modal{
-    background-color: #00000079;
+.modal {
+  background-color: #00000079;
+  &::-webkit-scrollbar {
+    width: 0px;
+    background-color: $primary-coffee-light;
   }
-  .header {
-    .icon {
-      font-size: $font-lg;
-      color: $bb-dark;
-    }
-    .heading {
-      color: $bb-dark;
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary-coffee;
+  }
+  .storeEditCity {
+    .header {
+      .icon {
+        font-size: $font-lg;
+        color: $bb-dark;
+      }
+      .heading {
+        color: $bb-dark;
+      }
     }
   }
-  
 }
