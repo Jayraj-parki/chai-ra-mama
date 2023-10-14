@@ -3,6 +3,7 @@ import { useState } from 'react'
 import style from "./galleryAdd.module.scss"
 import Image from 'next/image';
 const GalleryAdd = ({ addData, setAddData }) => {
+  const [image, setImage] = useState("");
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -21,7 +22,7 @@ const GalleryAdd = ({ addData, setAddData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
-                      <label for="editImage2" className="form-label">add Image</label>
+                      <label for="editImage2" className="form-label text-capitalize">add Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
                       <input type="file" accept="image/*" className="form-control" id="editImage2" />
                     </div>

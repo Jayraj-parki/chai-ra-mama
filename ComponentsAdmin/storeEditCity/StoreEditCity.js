@@ -1,22 +1,17 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./storeEditCity.module.scss"
-const StoreEditCity = ({ city, editData, setEditData }) => {
-  const [state, setState] = useState({})
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
 
-  const handleInput = (event) => {
-    const { name, value } = event?.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
-
+const StoreEditCity = ({ editData, setEditData }) => {
+  const [city, setCity] = useState({})
   useEffect(() => {
-    setState({
-      cityName: city,
-    })
-  }, [city])
+    setCity(editData?.city)
+  }, [editData])
+
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -33,9 +28,12 @@ const StoreEditCity = ({ city, editData, setEditData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editCity" className="form-label">City Name</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.cityName} name="cityName" type="text" className="form-control" id="editCity" aria-describedby="emailHelp" placeholder='Write city name here' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">City Name</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={city} onChange={(value) => setCity(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
                   </div>

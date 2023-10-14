@@ -1,8 +1,15 @@
 "use client"
 import style from "./headersAdd.module.scss"
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
+import { useState } from "react";
+
 const HeadersAdd = ({ addData, setAddData }) => {
-  
+  const [headerName, setHeaderName] = useState();
+  const [image, setImage] = useState();
 
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -20,12 +27,15 @@ const HeadersAdd = ({ addData, setAddData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editHeading" className="form-label">Heading</label>
-                      <input type="text" className="form-control" id="editHeading" aria-describedby="emailHelp" placeholder='write heading here' />
+                  <div className={" mb-4 "}>
+                      <label className="form-label">Header Name</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={headerName} onChange={(value) => setHeaderName(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <div className="mb-4 ">
-                      <label for="editImage" className="form-label">Upload Image</label>
+                      <label for="editImage" className="form-label">Upload Header Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
                       <input type="file" accept="image/*" className="form-control" id="editImage" />
                     </div>

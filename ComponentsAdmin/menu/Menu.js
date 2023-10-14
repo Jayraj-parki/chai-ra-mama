@@ -33,7 +33,7 @@ const Menu = () => {
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
       {/* edit data model */}
-      <MenuEdit editData={editData} setEditData={setEditData} heading={editData?.heading} image={editData?.image}  />
+      <MenuEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <MenuAdd addData={addData} setAddData={setAddData} />
 

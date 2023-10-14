@@ -28,7 +28,7 @@ const SubMenu = () => {
       </div>
       <hr />
       {/* edit data model */}
-      <SubMenuEdit editData={editData} setEditData={setEditData} heading={editData?.heading} price={editData?.price} />
+      <SubMenuEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <SubMenuAdd addData={addData} setAddData={setAddData} />
 

@@ -26,7 +26,7 @@ const FranchiseFaq = () => {
       <hr />
 
       {/* Edit data modal */}
-      <FranchiseFaqEdit editData={editData} setEditData={setEditData} question={editData?.question} answer={editData?.answer}/>
+      <FranchiseFaqEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <FranchiseFaqAdd addData={addData} setAddData={setAddData}/>
 

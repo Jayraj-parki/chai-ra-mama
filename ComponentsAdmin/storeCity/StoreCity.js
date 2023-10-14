@@ -26,7 +26,7 @@ const StoreCity = () => {
       <hr />
      
       {/* edit data model */}
-      <StoreEditCity editData={editData} setEditData={setEditData} city={editData?.city}/>
+      <StoreEditCity editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <StoreAddCity addData={addData} setAddData={setAddData}/>
 

@@ -1,22 +1,20 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./franchiseFaqEdit.module.scss"
-const FranchiseFaqEdit = ({ question, answer, editData, setEditData }) => {
-  const [state, setState] = useState({})
-  const handleInput = (event) => {
-    const { name, value } = event?.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
 
+const FranchiseFaqEdit = ({ editData, setEditData }) => {
+  const [question, setQuestion] = useState();
+  const [answer, setAnswer] = useState();
   useEffect(() => {
-    setState({
-      question: question,
-      answer: answer,
-    })
-  }, [question])
+    if (editData) {
+      setAnswer(editData?.answer || '')
+      setQuestion(editData?.question||"")
+    }
+  }, [editData]);
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -34,14 +32,19 @@ const FranchiseFaqEdit = ({ question, answer, editData, setEditData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editName" className="form-label">Question</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.question} name="question" type="text" className="form-control" id="editName" aria-describedby="emailHelp" placeholder='write heading here' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Question</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={question} onChange={(value) => setQuestion(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
-
-                    <div className="mb-4">
-                      <label for="editContent" className="form-label">Answer</label>
-                      <textarea onChange={(e) => handleInput(e)} value={state?.answer} name="answer" type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Answer</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={answer} onChange={(value) => setAnswer(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Submit</button>
                   </div>

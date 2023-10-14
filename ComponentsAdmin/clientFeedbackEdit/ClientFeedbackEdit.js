@@ -1,25 +1,25 @@
 "use client"
 import { useEffect, useState } from "react";
+import Image from "next/image"
 import style from "./clientFeedbackEdit.module.scss"
-import Image from 'next/image';
-const ClientFeedbackEdit = ({ name, image, content, editData, setEditData }) => {
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
 
-  const [state, setState] = useState({})
-  const handleInput = (event) => {
-    const { name, value } = event?.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
-
+const ClientFeedbackEdit = ({ editData, setEditData }) => {
+  const [clientName,setClientName]=useState("")
+  const [clientFeedback,setClientFeedback]=useState("")
+  const [image, setImage] = useState("");
   useEffect(() => {
-    setState({
-      clientName: name,
-      clientImage: image,
-      clientContent: content
-    })
-  }, [name])
+    if (editData) {
+      setClientName(editData?.name||"")
+      setClientFeedback(editData?.content||"")
+      setImage(editData?.image);
+    }
+  }, [editData]);
+  
+
 
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -37,18 +37,24 @@ const ClientFeedbackEdit = ({ name, image, content, editData, setEditData }) => 
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editName" className="form-label">Name</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.clientName} name="clientName" type="text" className="form-control" id="editName" aria-describedby="emailHelp" placeholder='write heading here' />
-                    </div>
-                    <div className="mb-4 ">
-                      <label for="editImage" className="form-label">Upload Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input  type="file" accept="image/*" className="form-control" id="editImage" />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Client Name</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={clientName} onChange={(value) => setClientName(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <div className="mb-4">
-                      <label for="editContent" className="form-label">Content</label>
-                      <textarea onChange={(e) => handleInput(e)} value={state?.clientContent} name="clientContent" type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
+                      <label className="form-label">Edit Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={ "/assets/images/1.png"} alt="..." />
+                      <input type="file" accept="image/*" className="form-control" id="editImage2" />
+                    </div>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Client Feedback</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={clientFeedback} onChange={(value) => setClientFeedback(value)}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
                   </div>

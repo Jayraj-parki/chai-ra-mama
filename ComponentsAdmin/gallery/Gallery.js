@@ -32,7 +32,7 @@ const Gallery = () => {
        {/* image modal */}
        <ImageModal modal={modal} setModal={setModal} />
       {/* Edit data modal */}
-      <GalleryEdit editData={editData} setEditData={setEditData} image={editData?.image}/>
+      <GalleryEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <GalleryAdd addData={addData} setAddData={setAddData}/>
 

@@ -33,7 +33,7 @@ const HeadersList = () => {
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
       {/* Edit data modal */}
-      <HeadersEdit editData={editData} setEditData={setEditData} image={editData?.image} heading={editData?.heading} />
+      <HeadersEdit editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <HeadersAdd addData={addData} setAddData={setAddData} />
       {/* Data Table */}

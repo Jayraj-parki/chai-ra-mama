@@ -1,28 +1,25 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./subMenuEdit.module.scss"
-const SubMenuEdit = ({ heading, price, editData, setEditData }) => {
-  const [state, setState] = useState({})
-  const handleInput = (event) => {
-    const { name, value } = event?.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
+
+const SubMenuEdit = ({ editData, setEditData }) => {
+  const [itemName, setItemName] = useState()
+  const [itemPrice, setItemPrice] = useState()
 
   useEffect(() => {
-    setState({
-      subMenuHeading: heading,
-      subMenuPrice: price,
-    })
-  }, [heading])
+    setItemName(editData?.heading)
+    setItemPrice(editData?.price)
+  }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <button onClick={() => setEditData({ active: false, heading: "", price:"" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button onClick={() => setEditData({ active: false, heading: "", price: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div>
             <div className={' container-fluid my-4  '}>
@@ -34,13 +31,19 @@ const SubMenuEdit = ({ heading, price, editData, setEditData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editHeading" className="form-label">Heading</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.subMenuHeading} name="subMenuHeading" type="text" className="form-control" id="editHeading" aria-describedby="emailHelp" placeholder='write heading here' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Item Name</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={itemName} onChange={(value) => setItemName(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
-                    <div className="mb-4 ">
-                      <label for="editPrice" className="form-label">price</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.subMenuPrice} name="subMenuPrice" type="number" className="form-control" id="editPrice" placeholder='Enter Price of Item' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Item Price</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={itemPrice} onChange={(value) => setItemPrice(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
                   </div>
