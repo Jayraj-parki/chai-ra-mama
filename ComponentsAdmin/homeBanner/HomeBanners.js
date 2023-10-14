@@ -32,7 +32,7 @@ const HomeBanners = () => {
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
       {/* Edit data modal */}
-      <HomeBannerEdit editData={editData} setEditData={setEditData} image={editData?.image}/>
+      <HomeBannerEdit editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <HomeBannerAdd addData={addData} setAddData={setAddData}/>
 

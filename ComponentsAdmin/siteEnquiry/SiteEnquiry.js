@@ -27,7 +27,7 @@ const SiteEnquiry = () => {
       </div>
       <hr />
       {/* edit data model */}
-      <SiteEnquiryEdit editData={editData} setEditData={setEditData} heading={editData?.heading} image={editData?.image}  />
+      <SiteEnquiryEdit editData={editData} setEditData={setEditData}  />
       {/* Add data modal  */}
       <SiteEnquiryAdd addData={addData} setAddData={setAddData} />
 

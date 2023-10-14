@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react'
 import style from "./galleryEdit.module.scss"
 import Image from 'next/image';
-const GalleryEdit = ({ image, editData, setEditData }) => {
-  const [state, setState] = useState("")
+const GalleryEdit = ({ editData, setEditData }) => {
+  const [image, setImage] = useState("")
   useEffect(() => {
-    setState(image)
-  }, [image])
+    setImage(editData?.image)
+  }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -25,7 +25,7 @@ const GalleryEdit = ({ image, editData, setEditData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
-                      <label for="editImage2" className="form-label">Edit Image</label>
+                      <label className="form-label">Edit Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
                       <input type="file" accept="image/*" className="form-control" id="editImage2" />
                     </div>

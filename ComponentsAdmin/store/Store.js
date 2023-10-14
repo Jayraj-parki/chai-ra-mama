@@ -26,7 +26,7 @@ const Store = () => {
       </div>
       <hr />
         {/* edit data model */}
-      <EditStore editData={editData} setEditData={setEditData} heading={editData?.heading} phone={editData?.phone} />
+      <EditStore editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <AddStore addData={addData} setAddData={setAddData}/>
 

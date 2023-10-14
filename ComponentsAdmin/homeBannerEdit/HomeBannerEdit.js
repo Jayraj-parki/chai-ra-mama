@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react'
 import style from "./homeBannerEdit.module.scss"
 import Image from 'next/image';
-const HomeBannerEdit = ({ image, editData, setEditData }) => {
-  const [state, setState] = useState("")
+const HomeBannerEdit = ({editData, setEditData }) => {
+  const [image, setImage] = useState("");
   useEffect(() => {
-    setState(image)
-  }, [image])
+    setState(editData?.image)
+  }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">

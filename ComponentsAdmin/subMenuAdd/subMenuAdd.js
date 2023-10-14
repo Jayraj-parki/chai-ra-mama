@@ -1,5 +1,15 @@
+"use client"
 import style from "./subMenuAdd.module.scss"
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
+import { useState } from "react";
+
 const SubMenuAdd = ({ addData, setAddData }) => {
+  const [itemName, setItemName] = useState()
+  const [itemPrice, setItemPrice] = useState()
+
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -17,13 +27,19 @@ const SubMenuAdd = ({ addData, setAddData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editHeading" className="form-label">Heading</label>
-                      <input type="text" className="form-control" id="editHeading" aria-describedby="emailHelp" placeholder='write heading here' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Item Name</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={itemName} onChange={(value) => setItemName(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
-                    <div className="mb-4 ">
-                      <label for="editPrice" className="form-label">Price</label>
-                      <input type="number" className="form-control" id="editPrice" placeholder='Enter price of Item' />
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Item Price</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={itemPrice} onChange={(value) => setItemPrice(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
                   </div>

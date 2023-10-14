@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./clientFeedback.module.scss"
 import GroupIcon from '@mui/icons-material/Group';
 import Image from 'next/image';
@@ -19,6 +19,9 @@ const ClientFeedback = () => {
     content: ""
   })
   const [addData,setAddData]=useState(false)
+  useEffect(()=>{
+
+  },[editData])
   return (
 
     <div className={style.clientFeedback + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -34,7 +37,7 @@ const ClientFeedback = () => {
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
       {/* edit data model */}
-      <ClientFeedbackEdit editData={editData} setEditData={setEditData} name={editData?.name} image={editData?.image} content={editData?.content} />
+      <ClientFeedbackEdit editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <ClientFeedbackAdd addData={addData} setAddData={setAddData}/>
 
@@ -53,7 +56,7 @@ const ClientFeedback = () => {
               <td className='align-middle' >Abc Xyz</td>
               <td className='align-middle'> <Image onClick={() =>setModal({ active: true, image: "/assets/images/g1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <button onClick={() => setEditData({ active: true, name: "name", image: "/assets/images/g1.png", content: "content" })}  className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
+                <button onClick={() => setEditData({ name: "<p>content</p>", image: "<img src='/assets/images/g1.png'/>", content: "<p>content</p>" ,active: true})}  className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
                 <button className='btn btn-danger text-decoration-none m-2 text-capitalize'>Delete</button>
               </td>
             </tr>

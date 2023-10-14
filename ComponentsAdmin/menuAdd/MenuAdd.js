@@ -1,6 +1,15 @@
+"use client"
 import style from "./menuAdd.module.scss"
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+import { formats, modules } from "@/utils/ReactTextEditor";
+import { useState } from "react";
+
 const MenuAdd = ({ addData, setAddData }) => {
+  const [menuHeading, setMenuHeading] = useState()
+  const [image, setImage] = useState()
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -18,9 +27,12 @@ const MenuAdd = ({ addData, setAddData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                    <div className="mb-4 ">
-                      <label for="editHeading" className="form-label">Heading</label>
-                      <input type="text" className="form-control" id="editHeading" aria-describedby="emailHelp" placeholder='write heading here' />
+                  <div className={" mb-4 "}>
+                      <label className="form-label">Menu heading</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={menuHeading} onChange={(value) => setMenuHeading(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <div className="mb-4 ">
                       <label for="editImage" className="form-label">Upload Image</label>
