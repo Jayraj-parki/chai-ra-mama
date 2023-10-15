@@ -1,5 +1,6 @@
 
 "use client"
+import { useState } from "react";
 import style from "./homeBannerAdd.module.scss"
 import Image from 'next/image';
 const HomeBannerAdd = ({ addData, setAddData }) => {
