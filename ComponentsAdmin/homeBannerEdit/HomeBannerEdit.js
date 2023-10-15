@@ -5,7 +5,7 @@ import Image from 'next/image';
 const HomeBannerEdit = ({editData, setEditData }) => {
   const [image, setImage] = useState("");
   useEffect(() => {
-    setState(editData?.image)
+    setImage(editData?.image)
   }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -26,7 +26,7 @@ const HomeBannerEdit = ({editData, setEditData }) => {
                   <div>
                     <div className="mb-4">
                       <label for="editImage2" className="form-label">Edit Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={state || "/assets/images/1.png"} alt="..." />
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={editData?.image || "/assets/images/1.png"} alt="..." />
                       <input type="file" accept="image/*" className="form-control" id="editImage2" />
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>

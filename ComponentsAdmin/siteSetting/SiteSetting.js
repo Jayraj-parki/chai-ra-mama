@@ -19,7 +19,7 @@ const SiteSetting = () => {
             </div>
             <hr />
             <div className='row col-12 mx-auto  px-2 px-lg-3'>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./site-details" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer1+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><SettingsApplicationsIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Site Details</p></div>
