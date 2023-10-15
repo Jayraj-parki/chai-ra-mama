@@ -26,7 +26,7 @@ const SiteEnquiry = () => {
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
-      {/* edit data model */}
+      {/* edit data modal */}
       <SiteEnquiryEdit editData={editData} setEditData={setEditData}  />
       {/* Add data modal  */}
       <SiteEnquiryAdd addData={addData} setAddData={setAddData} />
@@ -49,7 +49,7 @@ const SiteEnquiry = () => {
               <td className='align-middle'>903865823932 </td>
               <td className='text-center align-middle'>
                 <button onClick={() => setEditData({ active: true, name: "namae", email: "admin@gmail.com", phone:"903865823932" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
               </td>
             </tr>
           </tbody>

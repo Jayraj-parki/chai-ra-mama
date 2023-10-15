@@ -32,7 +32,7 @@ const Menu = () => {
       <hr />
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
-      {/* edit data model */}
+      {/* edit data modal */}
       <MenuEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <MenuAdd addData={addData} setAddData={setAddData} />
@@ -57,7 +57,7 @@ const Menu = () => {
               </td>
               <td className='text-center align-middle'>
                 <button onClick={() => setEditData({ active: true, heading: "heading", image: "/assets/images/g1.png" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
               </td>
             </tr>
           </tbody>

@@ -2,23 +2,22 @@
 import { useEffect, useState } from "react";
 import style from "./cmsEdit.module.scss"
 import Image from 'next/image';
-const CmsEdit = ({ heading, image, content,editData,setEditData }) => {
-  const [state, setState] = useState({})
-  const handleInput = (event) => {
-    const { name, value } = event?.target;
-    setState({
-      ...state,
-      [name]: value,
-    });
-  };
+import { formats, modules } from "@/utils/ReactTextEditor";
+import dynamic from 'next/dynamic';
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import 'react-quill/dist/quill.snow.css';
+
+const CmsEdit = ({ editData, setEditData }) => {
+  const [cmsHeading, setCmsHeading] = useState()
+  const [cmsImage, setCmsImage] = useState()
+  const [cmsContent, setCmsContent] = useState()
+ 
 
   useEffect(() => {
-    setState({
-      itemHeading: heading,
-      itemImage: image,
-      itemContent: content
-    })
-  }, [heading])
+    setCmsHeading(editData?.heading)
+    setCmsImage(editData?.image)
+    setCmsContent(editData?.content)
+  }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -31,23 +30,26 @@ const CmsEdit = ({ heading, image, content,editData,setEditData }) => {
             <div className={' container-fluid my-4 '}>
               <div className={style.cmsEdit + 'row col-12 col-lg-10  shadow rounded-4   p-4 mx-auto'}>
                 <div className={style.header + ' row col-12 mx-auto'}>
-                  <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>{state?.itemHeading || "Edit here"}</h3>
+                  <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>{"Edit here"}</h3>
                 </div>
                 <hr />
                 <div className='row col-12 mx-auto mt-5'>
                   <div>
                     <div className="mb-4">
                       <label for="editHeading" className="form-label">Heading</label>
-                      <input onChange={(e) => handleInput(e)} value={state?.itemHeading} name="itemHeading" type="text" className="form-control" id="editHeading" aria-describedby="emailHelp" placeholder='write heading here' />
+                      <input onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label for="editImage" className="form-label">Upload Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={state?.itemImage || "/assets/images/1.png"} alt="..." />
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
                       <input type="file" accept="image/*" className="form-control" id="editImage" />
                     </div>
-                    <div className="mb-4">
-                      <label for="editContent" className="form-label">Content</label>
-                      <textarea onChange={(e) => handleInput(e)} value={state?.itemContent} name="itemContent" type="text" className="form-control" id="editContent" placeholder='write content description here'></textarea>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Content</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={cmsContent} onChange={(value) => setCmsContent(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
                   </div>

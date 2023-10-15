@@ -50,7 +50,7 @@ const HomeBanners = () => {
               <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
                 <button onClick={() => setEditData({ active: true, image: "/assets/images/g1.png" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
               </td>
             </tr>
           </tbody>

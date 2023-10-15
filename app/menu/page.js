@@ -5,7 +5,7 @@ import { getMenuData } from '@/services/getMenuData'
 import { useEffect, useState } from "react"
 
 const page = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState()
   const helper = async () => {
     await getMenuData(setData)
   }

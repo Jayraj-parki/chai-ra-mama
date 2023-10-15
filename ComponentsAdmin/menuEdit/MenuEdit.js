@@ -2,10 +2,6 @@
 import { useEffect, useState } from "react";
 import style from "./menuEdit.module.scss"
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
 
 const MenuEdit = ({editData, setEditData }) => {
   const [menuHeading, setMenuHeading] = useState()
@@ -33,10 +29,8 @@ const MenuEdit = ({editData, setEditData }) => {
                   <div className=''>
                   <div className={" mb-4 "}>
                       <label className="form-label">Menu heading</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={menuHeading} onChange={(value) => setMenuHeading(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={menuHeading} onChange={(e)=>setMenuHeading(e.target?.value)} name="menuHeading" type="text" className="form-control" placeholder='write something here' />
+                    
                     </div>
                     <div className="mb-4 ">
                       <label className="form-label">Upload Image</label>

@@ -16,6 +16,7 @@ const Store = () => {
   return (
 
     <div className={style.store + ' container-fluid my-4  shadow rounded-4 p-4'}>
+      
       <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
         <div className='col-auto  d-flex flex-row justify-content-start '>
           <StoreIcon className={style.icon + ' col-auto my-auto p-0 '} />
@@ -25,7 +26,7 @@ const Store = () => {
         <Link href="../" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
-        {/* edit data model */}
+        {/* edit data modal */}
       <EditStore editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <AddStore addData={addData} setAddData={setAddData}/>

@@ -1,10 +1,6 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./siteEnquiryAdd.module.scss"
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
 
 const SiteEnquiryAdd = ({ addData, setAddData }) => {
   const [contactName, setContactName] = useState()
@@ -28,24 +24,15 @@ const SiteEnquiryAdd = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={contactName} onChange={(value) => setContactName(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={contactName} onChange={(e) => setContactName(e.target?.value)} name="contactName" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Email</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={contactEmail} onChange={(value) => setContactEmail(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={contactEmail} onChange={(e) => setContactEmail(e.target?.value)} name="contactEmail" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Phone</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={contactPhone} onChange={(value) => setContactPhone(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={contactPhone} onChange={(e) => setContactPhone(e.target?.value)} name="contactPhone" type="text" className="form-control" placeholder='write something here' />
                     </div>
 
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>

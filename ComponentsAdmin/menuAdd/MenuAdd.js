@@ -29,10 +29,8 @@ const MenuAdd = ({ addData, setAddData }) => {
                   <div className=''>
                   <div className={" mb-4 "}>
                       <label className="form-label">Menu heading</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={menuHeading} onChange={(value) => setMenuHeading(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={menuHeading} onChange={(e)=>setMenuHeading(e.target?.value)} name="menuHeading" type="text" className="form-control" placeholder='write something here' />
+                    
                     </div>
                     <div className="mb-4 ">
                       <label for="editImage" className="form-label">Upload Image</label>

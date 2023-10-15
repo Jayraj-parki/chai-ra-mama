@@ -27,7 +27,7 @@ const SubMenu = () => {
         <Link href="../" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
-      {/* edit data model */}
+      {/* edit data modal */}
       <SubMenuEdit editData={editData} setEditData={setEditData}/>
       {/* Add data modal  */}
       <SubMenuAdd addData={addData} setAddData={setAddData} />
@@ -48,7 +48,7 @@ const SubMenu = () => {
               <td className='align-middle'> 30</td>
               <td className='text-center align-middle'>
                 <button onClick={() => setEditData({ active: true, heading: "heading", price: "20" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
               </td>
             </tr>
           </tbody>

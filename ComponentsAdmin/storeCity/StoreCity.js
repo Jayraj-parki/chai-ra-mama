@@ -25,7 +25,7 @@ const StoreCity = () => {
       </div>
       <hr />
      
-      {/* edit data model */}
+      {/* edit data modal */}
       <StoreEditCity editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <StoreAddCity addData={addData} setAddData={setAddData}/>
@@ -48,7 +48,7 @@ const StoreCity = () => {
               </td>
               <td className='text-center align-middle'>
                 <button onClick={() => setEditData({ active: true, city: "city" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none mx-2'>Delete</button>
+                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
               </td>
             </tr>
           </tbody>

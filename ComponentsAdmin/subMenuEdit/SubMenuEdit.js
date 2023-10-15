@@ -33,17 +33,13 @@ const SubMenuEdit = ({ editData, setEditData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Item Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={itemName} onChange={(value) => setItemName(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={itemName} onChange={(e)=>setItemName(e.target?.value)} name="itemName" type="text" className="form-control" placeholder='write something here' />
+                    
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Item Price</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={itemPrice} onChange={(value) => setItemPrice(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={itemPrice} onChange={(e)=>setItemPrice(e.target?.value)} name="itemPrice" type="text" className="form-control" placeholder='write something here' />
+                    
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
                   </div>

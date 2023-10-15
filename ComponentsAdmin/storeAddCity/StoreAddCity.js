@@ -1,13 +1,9 @@
 "use client"
 import style from "./storeAddCity.module.scss"
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
 import { useState } from "react";
 
 const StoreAddCity = ({ addData, setAddData }) => {
-  const [city, setCity] = useState({})
+  const [city, setCity] = useState()
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -28,10 +24,8 @@ const StoreAddCity = ({ addData, setAddData }) => {
                   <div className=''>
                   <div className={" mb-4 "}>
                       <label className="form-label">City Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={city} onChange={(value) => setCity(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={city} onChange={(e)=>setCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='write something here' />
+                   
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
                   </div>

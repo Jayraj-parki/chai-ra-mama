@@ -1,13 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./storeEditCity.module.scss"
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
 
 const StoreEditCity = ({ editData, setEditData }) => {
-  const [city, setCity] = useState({})
+  const [city, setCity] = useState()
   useEffect(() => {
     setCity(editData?.city)
   }, [editData])
@@ -30,10 +26,7 @@ const StoreEditCity = ({ editData, setEditData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">City Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={city} onChange={(value) => setCity(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={city} onChange={(e)=>setCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
                   </div>
