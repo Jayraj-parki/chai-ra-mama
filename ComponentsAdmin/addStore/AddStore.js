@@ -1,14 +1,11 @@
 "use client"
 import style from "./addStore.module.scss"
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
+
 import { useState } from "react";
 
 const AddStore = ({ addData, setAddData }) => {
-  const [storeHeading,setStoreHeading]=useState()
-  const [storeContact,setStoreContact]=useState()
+  const [storeHeading, setStoreHeading] = useState()
+  const [storeContact, setStoreContact] = useState()
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -28,18 +25,12 @@ const AddStore = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Store Heading</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={storeHeading} onChange={(value) => setStoreHeading(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )} 
+                      <input value={storeHeading} onChange={(e) => setStoreHeading(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Store Contact Number</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={storeContact} onChange={(value) => setStoreContact(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
-                    </div> 
+                      <input value={storeContact} onChange={(e) => setStoreContact(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write something here' />
+                    </div>
                     <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
                   </div>
                 </div>

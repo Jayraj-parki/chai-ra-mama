@@ -31,10 +31,8 @@ const ClientFeedbackAdd = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={clientName} onChange={(value) => setClientName(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
+
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Add Image</label>

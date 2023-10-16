@@ -2,10 +2,6 @@
 import { useEffect, useState } from 'react'
 import style from "./headersEdit.module.scss"
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
 
 const HeadersEdit = ({ editData, setEditData }) => {
   const [headerName, setHeaderName] = useState();
@@ -35,10 +31,7 @@ const HeadersEdit = ({ editData, setEditData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Header Name</label>
-                      {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={headerName} onChange={(value) => setHeaderName(value)} formats={formats}
-                          placeholder="Write something..." />
-                      )}
+                      <input value={headerName} onChange={(e)=>setHeaderName(e.target?.value)} name="headerName" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4 ">
                       <label className="form-label">Upload Header Image</label>

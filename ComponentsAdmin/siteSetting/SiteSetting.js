@@ -25,43 +25,43 @@ const SiteSetting = () => {
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Site Details</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./links-and-tags" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer2+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><LinkIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Social Links & SEO Tags</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./pagewise-tags" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer3+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><TagIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Pagewise SEO Tags</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./manage-uploads" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer4+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><UploadIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Manage uploads</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./change-password" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer5+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><LockResetIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Change Password</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./site-logs" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer6+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><LoginIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Site Logs</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./approve-account" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer7+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><HowToRegIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Approve account</p></div>
                     </div>
                 </Link>
-                <Link href="/" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./approved-users" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer8+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><VerifiedUserIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Verified account</p></div>

@@ -36,7 +36,7 @@ const ClientFeedback = () => {
       <hr />
       {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
-      {/* edit data model */}
+      {/* edit data modal */}
       <ClientFeedbackEdit editData={editData} setEditData={setEditData} />
       {/* Add data modal  */}
       <ClientFeedbackAdd addData={addData} setAddData={setAddData}/>
@@ -56,7 +56,7 @@ const ClientFeedback = () => {
               <td className='align-middle' >Abc Xyz</td>
               <td className='align-middle'> <Image onClick={() =>setModal({ active: true, image: "/assets/images/g1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
               <td className='text-center align-middle'>
-                <button onClick={() => setEditData({ name: "<p>content</p>", image: "<img src='/assets/images/g1.png'/>", content: "<p>content</p>" ,active: true})}  className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
+                <button onClick={() => setEditData({ name: "content", image: "/assets/images/g1.png", content: "<p>content</p>" ,active: true})}  className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
                 <button className='btn btn-danger text-decoration-none m-2 text-capitalize'>Delete</button>
               </td>
             </tr>
