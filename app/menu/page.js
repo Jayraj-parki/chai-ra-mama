@@ -15,7 +15,7 @@ const page = () => {
   return (
     <>
       <MenuBanner />
-      <PopularMenu menuListData={data.menuListData} menuCardData={data.menuCardData} />
+      <PopularMenu menuListData={data?.menuListData} menuCardData={data?.menuCardData} />
     </>
   )
 }

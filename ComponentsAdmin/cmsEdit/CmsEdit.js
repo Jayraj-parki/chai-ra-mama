@@ -6,17 +6,27 @@ import { formats, modules } from "@/utils/ReactTextEditor";
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
+import { ImageUploder } from "@/utils/ImageUploader";
+import { useCmsData } from "@/app/admin/cmspages/page";
 
 const CmsEdit = ({ editData, setEditData }) => {
+  const {helper}=useCmsData()
   const [cmsHeading, setCmsHeading] = useState()
   const [cmsImage, setCmsImage] = useState()
   const [cmsContent, setCmsContent] = useState()
- 
+  const [_id,setId]=useState()
+
+  const UpdateData=async()=>{ 
+    await ImageUploder({cmsHeading,cmsContent,cmsImage,_id})
+    setEditData({ active: false, heading: "", image: "", content: "" })
+    helper()
+  }
 
   useEffect(() => {
     setCmsHeading(editData?.heading)
     setCmsImage(editData?.image)
     setCmsContent(editData?.content)
+    setId(editData?._id)
   }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -30,10 +40,10 @@ const CmsEdit = ({ editData, setEditData }) => {
             <div className={' container-fluid my-4 '}>
               <div className={style.cmsEdit + 'row col-12 col-lg-10  shadow rounded-4   p-4 mx-auto'}>
                 <div className={style.header + ' row col-12 mx-auto'}>
-                  <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>{"Edit here"}</h3>
+                  <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>{"Edit here: "}</h3>
                 </div>
                 <hr />
-                <div className='row col-12 mx-auto mt-5'>
+                <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
                       <label for="editHeading" className="form-label">Heading</label>
@@ -41,8 +51,8 @@ const CmsEdit = ({ editData, setEditData }) => {
                     </div>
                     <div className="mb-4">
                       <label for="editImage" className="form-label">Upload Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage" />
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof cmsImage==="string"  && cmsImage?.includes("http") ? cmsImage : cmsImage!=null&& cmsImage instanceof File?URL.createObjectURL(cmsImage):"/assets/images/1.png"} hidden={cmsImage ? false : true} alt="..." />
+                      <input type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control" id="editImage" />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Content</label>
@@ -51,7 +61,7 @@ const CmsEdit = ({ editData, setEditData }) => {
                           placeholder="Write something..." />
                       )}
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
+                    <button onClick={UpdateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
                   </div>
                 </div>
               </div>

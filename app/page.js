@@ -18,10 +18,10 @@ const page = () => {
     helper()
   }, [])
   return (
-    <>
-      <HomeBanner props={data?.homeBannerData[0]} />
+    <> 
+      <HomeBanner props={data?.homeBannerData} />
       <HomeHeaderCard props={data?.homeHeaderCardData} />
-      <HomeAboutUs props={data?.homeAboutUsData[0]} />
+      <HomeAboutUs props={data?.homeAboutUsData} />
       <HomeGallery props={data?.homeGalleryData} />
       <HomeMenu props={data?.homeMenuCardData} />
       <HomeTestimonial props={data?.homeTestimonialCardData} />
