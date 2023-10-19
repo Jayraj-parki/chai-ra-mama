@@ -2,18 +2,19 @@
 import Image from "next/image";
 import style from "./galleryCard.module.scss"
 import { useEffect, useState } from "react";
+import { useGalleryContext } from "@/app/gallery/page";
+import { groupImagesByProduct } from "@/utils/groupImagesByProduct";
 const GalleryCard = () => {
+    const { galleryData } = useGalleryContext()
     const [activeTab, setActiveTab] = useState("all")
-    const [tabs, setTabs] = useState([])
+    const [products, setProduct] = useState()
+    const mapData = async () => {
+        await groupImagesByProduct({ galleryData, setProduct })
+        console.log(products)
+    }
     useEffect(() => {
-        try {
-            const data = require("@/data/menuTabs.json")
-            setTabs(data)
-        }
-        catch (e) {
-
-        }
-    }, [])
+        mapData()
+    }, [galleryData])
     return (
         <div className={style.galleryCard + " container-fluid px-0 mx-auto  pb-5"}>
             <div className='row col-12 py-5 mx-auto '>
@@ -26,10 +27,10 @@ const GalleryCard = () => {
                             </li>
 
                             {
-                                tabs?.map((val) => {
+                                Object?.keys(products || {})?.map((val, index) => {
                                     return (
-                                        <li key={val?.title} className={` nav-item col-auto m-2`} role="presentation">
-                                            <button onClick={() => setActiveTab(val?.title)} className={`${activeTab == val?.title ? style.active_tab : style.not_active} nav-link text-uppercase ${activeTab == val?.title && "active"} `} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected={`false ${activeTab == val?.title ? "true" : "false"} `}>{val?.title}</button>
+                                        <li key={index + " " + val} className={` nav-item col-auto m-2`} role="presentation">
+                                            <button onClick={() => setActiveTab(val)} className={`${activeTab == val ? style.active_tab : style.not_active} nav-link text-uppercase ${activeTab == val && "active"} `} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected={`false ${activeTab == val ? "true" : "false"} `}>{val}</button>
                                         </li>
                                     )
                                 })
@@ -40,32 +41,27 @@ const GalleryCard = () => {
                     <div className={style.galleryItem + " row col-md-11 col-xxl-12 p-0  mx-auto tab-content  m-0 my-5"} id="pills-tabContent">
                         <div className={` row col-12    p-0 mx-auto d-flex justify-content-center align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == "all" ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             {
-                                tabs?.map((val) => {
-                                    return (
-
-                                        val?.items?.map((item) => {
-                                            return (
-                                                <div key={val?.title+item?.itmeName+"all"} className=' col-sm-10  p-2  col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-xxl-1 '>
-                                                    <Image className=' rounded-3 h-100 w-100' src={item?.img} width={400} height={300} objectFit='cover' alt='gallery image' />
-                                                </div>
-                                            )
-                                        })
-
-
-                                    )
-                                })
+                                Object?.keys(products || {})?.map((val) =>
+                                    products[val]?.map((item, index) => {
+                                        return (
+                                            item?<div key={index + "" + item + "all"} className=' col-sm-10  p-2  col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-xxl-1 '>
+                                                <Image className=' rounded-3 h-100 w-100' src={item} width={400} height={300} objectFit='cover' alt='...' />
+                                            </div>:null
+                                        )
+                                    })
+                                )
                             }
                         </div>
                         {
-                            tabs?.map((val) => {
+                            Object?.keys(products || {})?.map((val, index) => {
                                 return (
-                                    <div className={` row col-12    p-0 mx-auto d-flex justify-content-center align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == val?.title ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                    <div className={` row col-12    p-0 mx-auto d-flex justify-content-center align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == val ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         {
-                                            val?.items?.map((item) => {
+                                            products[val]?.map((item, index) => {
                                                 return (
-                                                    <div key={val?.title+item?.itmeName+"sep"} className=' col-sm-10  p-2  col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-xxl-1 '>
-                                                        <Image className=' rounded-3 h-100 w-100' src={item?.img} width={400} height={300} objectFit='cover' alt='gallery image' />
-                                                    </div>
+                                                    item?<div key={index + "" + item} className=' col-sm-10  p-2  col-md-6 col-lg-5 col-xl-4 col-xxl-3 m-xxl-1 '>
+                                                        <Image className=' rounded-3 h-100 w-100' src={item} width={400} height={300} objectFit='cover' alt='...' />
+                                                    </div>:null
                                                 )
                                             })
                                         }

@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { handleEditorChange } from "@/utils/handleEditorChange";
 import { useState } from "react";
 const ClientFeedbackAdd = ({ addData, setAddData }) => {
   const [clientName, setClientName] = useState("")

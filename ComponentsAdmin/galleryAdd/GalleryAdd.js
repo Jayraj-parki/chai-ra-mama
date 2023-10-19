@@ -1,9 +1,30 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from "./galleryAdd.module.scss"
 import Image from 'next/image';
+import { AddGalleryData } from '@/services/AddGalleryData';
+import { useGalleryData } from '@/app/admin/gallery/page';
 const GalleryAdd = ({ addData, setAddData }) => {
-  const [image, setImage] = useState("");
+  const { helper} = useGalleryData()
+  const [galleryTitle, setGalleryTitle] = useState("")
+  const [galleryImage, setGalleryImage] = useState("");
+  const imageRef = useRef()
+
+
+  const AddData=async()=>{
+    console.log(galleryImage=="")
+    await AddGalleryData({galleryImage,galleryTitle,helper,setAddData,clearForm})
+  }
+
+  const clearForm = () => {
+    setGalleryImage("")
+    setGalleryTitle("")
+    imageRef.current.value = ""
+  }
+  useEffect(()=>{
+    clearForm()
+  },[])
+
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -22,11 +43,18 @@ const GalleryAdd = ({ addData, setAddData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
-                      <label for="editImage2" className="form-label text-capitalize">add Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage2" />
+                      <label className="form-label text-capitalize">Title</label>
+                      <input value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter title here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
+                    <div className="mb-4">
+                      <label className="form-label text-capitalize">add Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof galleryImage === "string" && galleryImage?.includes("http") ? galleryImage : galleryImage != null && galleryImage instanceof File ? URL.createObjectURL(galleryImage) : "/assets/images/1.png"} hidden={galleryImage ? false : true} alt="..." />
+                      <input onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                    </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>
