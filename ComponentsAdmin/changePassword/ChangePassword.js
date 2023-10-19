@@ -4,6 +4,7 @@ import style from "./changePassword.module.scss"
 import Link from 'next/link';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import { useAuth } from '@/app/layout';
+import { changePassword } from '@/services/changePassword';
 
 const ChangePassword = () => {
   const {user}=useAuth()
@@ -11,33 +12,10 @@ const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState()
   const [confirmNewPassword, setConfirmNewPassword] = useState()
   const ChangePasswordHandler = async() => {
-    if (!currentPassword.trim() || !newPassword.trim() || !confirmNewPassword.trim()) {
-      alert("please fill all the fields correctly")
-    }
-    else if (newPassword.trim() != confirmNewPassword.trim()) {
-      alert("Confirm password not matching with new password")
-    }
-    else {
-      try {
-        const result = await fetch("/api/admin/changePassword", {
-          method: "PATCH",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify({
-            _id:user,
-            password:currentPassword.trim(),
-            newPassword:newPassword.trim()
-          })
-        })
-        const data = await result.json()
-        alert(data?.message)
-      }
-      catch (e) {
-        console.log("Error: while changing error" + e)
-      }
-    }
-
+    await changePassword({ currentPassword,newPassword,confirmNewPassword,user})
+    setCurrentPassword("")
+    setNewPassword("")
+    setConfirmNewPassword("")
   }
   return (
 

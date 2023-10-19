@@ -42,7 +42,7 @@ const ClientFeedbackAdd = ({ addData, setAddData }) => {
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Feedback</label>
                       {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={clientFeedback} onChange={(value) => setClientFeedback(value)}
+                        <ReactQuill modules={modules}  formats={formats} value={clientFeedback} onChange={(value) => setClientFeedback(value)}
                           placeholder="Write something..." />
                       )}
                     </div>
