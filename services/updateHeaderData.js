@@ -8,7 +8,7 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
         if (typeof headerImage === "string" && headerImage.includes("http")) {
             url = headerImage
         }
-        else if (headerImage.trim()!="") {
+        else if (headerImage != "") {
             const imageRef = ref(storage, `images/${headerImage.name + v4()}`)
             const snapshot = await uploadBytes(imageRef, headerImage);
             url = await getDownloadURL(snapshot.ref);

@@ -7,7 +7,7 @@ export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent,_id }) =>
         if(typeof cmsImage==="string" && cmsImage.includes("http")){
             url=cmsImage
         }
-        else if (cmsImage.trim()!="") {
+        else if (cmsImage!="") {
             const imageRef = ref(storage, `images/${cmsImage.name + v4()}`)
             const snapshot = await uploadBytes(imageRef, cmsImage);
             url = await getDownloadURL(snapshot.ref);

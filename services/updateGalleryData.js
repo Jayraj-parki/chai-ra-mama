@@ -12,7 +12,7 @@ export const updateGalleryData = async ({_id, galleryImage, galleryTitle ,helper
             if (typeof galleryImage === "string" && galleryImage.includes("http")) {
                 url = galleryImage
             }
-            else if (galleryImage.trim()!="") {
+            else if (galleryImage!="") {
                 const imageRef = ref(storage, `images/${galleryImage.name + v4()}`)
                 const snapshot = await uploadBytes(imageRef, galleryImage);
                 url = await getDownloadURL(snapshot.ref);
