@@ -1,7 +1,7 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const ImageUploder = async ({ cmsHeading, cmsImage, cmsContent,_id }) => {
+export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent,_id }) => {
     try {
         let url=""
         if(typeof cmsImage==="string" && cmsImage.includes("http")){
