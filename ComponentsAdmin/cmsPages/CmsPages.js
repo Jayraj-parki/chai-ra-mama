@@ -41,7 +41,7 @@ const CmsPages = () => {
           </thead>
           <tbody>
             {data?.map((val,index) => 
-                 <tr key={index} className=''>
+                 <tr key={val?.cmsId+""+index+""+Math?.random(1000)} className=''>
                   <td >{val?.cmsId}</td>
                   <td className='px-3 text-start'>{val?.cmsHeading }</td>
                   <td > <Image onClick={() => setModal({ active: true, image: val?.cmsImage || "/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.cmsImage || "/assets/images/1.png"} alt="..." /></td>

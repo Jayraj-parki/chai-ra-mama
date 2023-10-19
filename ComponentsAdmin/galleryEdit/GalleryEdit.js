@@ -1,18 +1,36 @@
 "use client"
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from "./galleryEdit.module.scss"
 import Image from 'next/image';
+import { useGalleryData } from '@/app/admin/gallery/page';
+import { updateGalleryData } from '@/services/updateGalleryData';
 const GalleryEdit = ({ editData, setEditData }) => {
-  const [image, setImage] = useState("")
+  const { helper } = useGalleryData()
+  const [galleryTitle, setGalleryTitle] = useState("")
+  const [galleryImage, setGalleryImage] = useState("");
+  const [_id, setId] = useState("")
+  const imageRef = useRef()
+
+  const updateData = async () => {
+    await updateGalleryData({ _id,galleryImage, galleryTitle ,helper,setEditData,clearForm})
+  }
+  const clearForm = () => {
+    setGalleryImage("")
+    setGalleryTitle("")
+    imageRef.current.value = ""
+  }
   useEffect(() => {
-    setImage(editData?.image)
+    clearForm()
+    setGalleryTitle(editData?.title)
+    setGalleryImage(editData?.image)
+    setId(editData?._id)
   }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <button onClick={() => setEditData({ active: false, image: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button onClick={() => setEditData({ active: false, _id: "", title: "", image: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body  d-flex justify-content-center align-items-center">
 
@@ -25,18 +43,25 @@ const GalleryEdit = ({ editData, setEditData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
-                      <label className="form-label">Edit Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage2" />
+                      <label className="form-label text-capitalize">Title</label>
+                      <input value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter title here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
+                    <div className="mb-4">
+                      <label className="form-label">Edit Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof galleryImage === "string" && galleryImage?.includes("http") ? galleryImage : galleryImage != null && galleryImage instanceof File ? URL.createObjectURL(galleryImage) : "/assets/images/1.png"} hidden={galleryImage ? false : true} alt="..." />
+                      <input onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                    </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">update</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="modal-footer">
-            <button onClick={() => setEditData({ active: false, image: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button onClick={() => setEditData({ active: false, _id: "", title: "", image: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
