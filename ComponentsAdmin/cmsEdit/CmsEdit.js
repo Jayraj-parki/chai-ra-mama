@@ -6,7 +6,7 @@ import { formats, modules } from "@/utils/ReactTextEditor";
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
-import { ImageUploder } from "@/utils/ImageUploader";
+import { updateCmsData } from "@/services/updateCmsData";
 import { useCmsData } from "@/app/admin/cmspages/page";
 
 const CmsEdit = ({ editData, setEditData }) => {
@@ -17,7 +17,7 @@ const CmsEdit = ({ editData, setEditData }) => {
   const [_id,setId]=useState()
 
   const UpdateData=async()=>{ 
-    await ImageUploder({cmsHeading,cmsContent,cmsImage,_id})
+    await updateCmsData({cmsHeading,cmsContent,cmsImage,_id})
     setEditData({ active: false, heading: "", image: "", content: "" })
     helper()
   }
