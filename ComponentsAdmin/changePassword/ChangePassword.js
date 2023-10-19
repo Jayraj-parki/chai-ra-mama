@@ -3,12 +3,42 @@ import { useState } from 'react'
 import style from "./changePassword.module.scss"
 import Link from 'next/link';
 import LockResetIcon from '@mui/icons-material/LockReset';
+import { useAuth } from '@/app/layout';
 
 const ChangePassword = () => {
-  const [currentPassword,setCurrentPassword]=useState()
-  const [newPassword,setNewPassword]=useState()
-  const [confirmNewPassword,setConfirmNewPassword]=useState()
- 
+  const {user}=useAuth()
+  const [currentPassword, setCurrentPassword] = useState()
+  const [newPassword, setNewPassword] = useState()
+  const [confirmNewPassword, setConfirmNewPassword] = useState()
+  const ChangePasswordHandler = async() => {
+    if (!currentPassword.trim() || !newPassword.trim() || !confirmNewPassword.trim()) {
+      alert("please fill all the fields correctly")
+    }
+    else if (newPassword.trim() != confirmNewPassword.trim()) {
+      alert("Confirm password not matching with new password")
+    }
+    else {
+      try {
+        const result = await fetch("/api/admin/changePassword", {
+          method: "PATCH",
+          headers: {
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify({
+            _id:user,
+            password:currentPassword.trim(),
+            newPassword:newPassword.trim()
+          })
+        })
+        const data = await result.json()
+        alert(data?.message)
+      }
+      catch (e) {
+        console.log("Error: while changing error" + e)
+      }
+    }
+
+  }
   return (
 
     <div className={style.changePassword + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -26,17 +56,17 @@ const ChangePassword = () => {
             <tbody>
               <tr className=''>
                 <td className='align-middle' >Current Password</td>
-                <td className='align-middle' ><input value={currentPassword} onChange={(e)=>setCurrentPassword(e.target?.value)} name="currentPassword" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={currentPassword} onChange={(e) => setCurrentPassword(e.target?.value)} name="currentPassword" type="password" className="form-control" placeholder='Write current password' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >New Password</td>
-                <td className='align-middle' ><input value={newPassword} onChange={(e)=>setNewPassword(e.target?.value)} name="newPassword" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={newPassword} onChange={(e) => setNewPassword(e.target?.value)} name="newPassword" type="password" className="form-control" placeholder='Write new password' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Confirm new Password</td>
-                <td className='align-middle' ><input value={confirmNewPassword} onChange={(e)=>setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="password" className="form-control" placeholder='confirm new password' />
                 </td>
               </tr>
 
@@ -44,7 +74,7 @@ const ChangePassword = () => {
           </table>
         </div>
         <div className='col-12'>
-         <button type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Confirm</button>
+          <button onClick={ChangePasswordHandler} type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Confirm</button>
         </div>
       </div>
     </div>
