@@ -3,6 +3,7 @@ export const getInTouch = async ({ firstName, lastName, email, message }) => {
         alert("please fill all the fields correctly")
     }
     else {
+        
         try {
             const result = await fetch("/api/home/homeGetInTouch", {
                 method: "POST",
