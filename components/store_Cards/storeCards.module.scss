@@ -22,11 +22,13 @@
       }
     }
     .mapLink{
-      a{
+      button{
         background-color: $primary-coffee;
         color: $primary-light;
         text-decoration: none;
         font-size: $font-sm;
+        outline: none;
+        border: none;
       }
     }
     .badge{

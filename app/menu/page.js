@@ -1,21 +1,29 @@
 "use client"
 import MenuBanner from '@/components/menu_banner/MenuBanner'
 import PopularMenu from '@/components/menu_popularMenu/PopularMenu'
-import { getMenuData } from '@/services/getMenuData'
-import { useEffect, useState } from "react"
-
+import { getAllSubMenuPageData } from '@/services/getAllSubMenuData'
+import { getMenuPageData } from '@/services/getMenuPageData'
+import { createContext, useContext, useEffect, useState } from "react"
+const menuUiContext=createContext()
+export const useMenuUiContext=()=>{
+  return useContext(menuUiContext)
+}
 const page = () => {
-  const [data, setData] = useState()
+  const [menuData, setMenuData] = useState()
+  const [subMenuData, setSubMenuData] = useState()
   const helper = async () => {
-    await getMenuData(setData)
+    await getMenuPageData(setMenuData)
+    await getAllSubMenuPageData(setSubMenuData)
   }
   useEffect(() => {
     helper()
   }, [])
   return (
     <>
+    <menuUiContext.Provider value={{menuData,subMenuData}}>
       <MenuBanner />
-      <PopularMenu menuListData={data?.menuListData} menuCardData={data?.menuCardData} />
+      <PopularMenu  />
+    </menuUiContext.Provider>
     </>
   )
 }

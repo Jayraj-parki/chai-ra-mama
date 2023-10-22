@@ -1,9 +1,15 @@
 "use client";
 import Image from "next/image";
 import style from "./popularMenu.module.scss"
-import {  useState } from "react";
-const PopularMenu = ({ menuListData, menuCardData }) => {
+import { useEffect, useState } from "react";
+import { useMenuUiContext } from "@/app/menu/page";
+const PopularMenu = () => {
+    const { menuData, subMenuData } = useMenuUiContext()
     const [activeTab, setActiveTab] = useState("all")
+    const [products, setProduct] = useState([])
+
+    useEffect(() => {
+    }, [menuData])
     return (
         <div className={style.popularMenu + " container-fluid  pb-5"}>
             <div className='row col-12 py-5 mx-auto'>
@@ -21,10 +27,10 @@ const PopularMenu = ({ menuListData, menuCardData }) => {
                             </li>
 
                             {
-                                menuListData?.map((val) => {
+                                menuData?.map((val) => {
                                     return (
                                         <li key={val?._id} className={` nav-item col-auto m-2`} role="presentation">
-                                            <button onClick={() => setActiveTab(val?._id)} className={`${activeTab == val?._id ? style.active_tab : style.not_active} nav-link text-uppercase ${activeTab == val?._id && "active"} `} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected={`false ${activeTab == val?._id ? "true" : "false"} `}>{val?.itemName}</button>
+                                            <button onClick={() => setActiveTab(val?._id)} className={`${activeTab == val?._id ? style.active_tab : style.not_active} nav-link text-uppercase ${activeTab == val?._id && "active"} `} id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected={`false ${activeTab == val?._id ? "true" : "false"} `}>{val?.menuName}</button>
                                         </li>
                                     )
                                 })
@@ -35,7 +41,7 @@ const PopularMenu = ({ menuListData, menuCardData }) => {
                     <div className={style.menuItems + " row col-xl-11  mx-auto tab-content p-0 p-md-2  my-5"} id="pills-tabContent">
 
                         <div className={` row col-12 mx-auto d-flex justify-content-center p-0 align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == "all" ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                            {menuCardData?.map((val) => {
+                            {subMenuData?.map((val) => {
                                 return (
                                     <div key={val._id+"all"} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0 d-flex justify-content-center align-items-center my-4 p-0  "} >
                                         <div className={style.cardImage + " col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto"}>
@@ -51,11 +57,11 @@ const PopularMenu = ({ menuListData, menuCardData }) => {
                         </div>
 
                         {
-                            menuListData?.map((val) => {
+                            menuData?.map((val) => {
                                 return (
                                     <div key={val._id+"items"} className={` row col-12 mx-auto d-flex justify-content-center align-items-center flexwrap p-0  mb-4 tab-pane fade ${activeTab == val?._id ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                                        {menuCardData?.map((item) => {
-                                            if (val._id == item.itemCategory) {
+                                        {subMenuData?.map((item) => {
+                                            if (val._id == item?.parentId) {
 
                                                 return (
                                                     <div key={item._id+""+val._id} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0  d-flex justify-content-center align-items-center my-4 p-0  "} >
@@ -77,9 +83,9 @@ const PopularMenu = ({ menuListData, menuCardData }) => {
                             })
                         }
                     </div>
-                    <div className="row  col-12 mx-auto d-flex justify-content-center ">
+                    {/* <div className="row  col-12 mx-auto d-flex justify-content-center ">
                         <button className={style.loadmore + " col-auto fw-bold text-light rounded px-5 text-uppercase text-center py-3 outline-none border-0 "}>Load more</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

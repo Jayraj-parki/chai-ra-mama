@@ -13,7 +13,7 @@ import { useClientFeedbackContext } from '@/app/admin/client-feedback/page';
 const ClientFeedback = () => {
   const{clientFbData, helper}= useClientFeedbackContext()
   const [modal, setModal] = useState({ active: false, image: "" })
-  const [editData, setEditData] = useState({ active: false, name: "", image: "", content: "", _id: "" })
+  const [editData, setEditData] = useState({ active: false, name: "", image: "", content: "",designation:"", _id: "" })
   const [addData, setAddData] = useState(false)
   const deleteData = async (_id) => {
     await deleteClientFbData({ _id, helper })
@@ -44,6 +44,7 @@ const ClientFeedback = () => {
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Name</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Designation</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Feedback</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
           </thead>
@@ -54,9 +55,10 @@ const ClientFeedback = () => {
                   <td className='align-middle' >{index+1}</td>
                   <td className='align-middle' >{val?.clientName}</td>
                   <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: val?.clientImage||"/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.clientImage||"/assets/images/1.png"} alt="..." /></td>
+                  <td className='align-middle' >{val?.clientDesignation}</td>
                   <td className='align-middle' dangerouslySetInnerHTML={{ __html: val?.clientComment}}></td>
                   <td className='text-center align-middle'>
-                    <button onClick={() => setEditData({ name:val?.clientName,_id:val?._id, image: val?.clientImage, content:val?.clientComment, active: true })} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
+                    <button onClick={() => setEditData({ name:val?.clientName,_id:val?._id,designation:val?.clientDesignation, image: val?.clientImage, content:val?.clientComment, active: true })} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
                     <button onClick={()=>deleteData(val?._id)} className='btn btn-danger text-decoration-none m-2 text-capitalize'>Delete</button>
                   </td>
                 </tr>

@@ -1,10 +1,10 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const AddClientFbData = async ({clientImage, clientName,clientComment,helper, clearForm, setAddData }) => {
+export const AddClientFbData = async ({clientImage, clientDesignation,clientName,clientComment,helper, clearForm, setAddData }) => {
     try {
         let url = ""
-        if (clientImage == "" || clientComment.trim()==""||clientName.trim()=="") {
+        if (clientImage == "" || clientComment.trim()==""||clientName.trim()==""||clientDesignation.trim()=="") {
             alert("Please fill all the fields")
         }
         else {
@@ -25,6 +25,7 @@ export const AddClientFbData = async ({clientImage, clientName,clientComment,hel
                 body: JSON.stringify({
                     clientName:clientName,
                     clientComment:clientComment,
+                    clientDesignation:clientDesignation,
                     clientImage:url
                 })
             })

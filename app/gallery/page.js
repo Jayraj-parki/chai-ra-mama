@@ -12,7 +12,7 @@ const page = () => {
   const [galleryData, setData] = useState()
   const helper = async () => {
     await getGalleryData(setData)
-  }
+  } 
   useEffect(() => {
     helper()
   }, [])

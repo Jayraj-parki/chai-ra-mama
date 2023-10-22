@@ -1,18 +1,10 @@
 "use client";
+import { useFaqUiContext } from "@/app/franchise/page";
 import style from "./faq.module.scss"
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 const FAQ = () => {
-    const [accordion, setAccordion] = useState([])
+    const {faqs}=useFaqUiContext()
     const [activeAcc,setActiveAcc]=useState(0)
-    useEffect(() => {
-        try {
-            const data = require("@/data/Accordion.json")
-            setAccordion(data)
-        }
-        catch (e) {
-
-        }
-    }, [])
     return (
         <div className={style.faq + " container-fluid  pb-5 px-0"}>
             <div className='row col-12 py-5 mx-auto  p-0'>
@@ -27,16 +19,16 @@ const FAQ = () => {
                         <div className="row  col-xl-10 mx-auto d-flex justify-content-around ">
                             <div className={style.custom+" accordion accordion-flush"} id="accordionFlushExample">
                                 {
-                                    accordion?.map((val, index) => {
+                                    faqs?.map((val, index) => {
                                         return (
                                             <div key={val.title+""+index} className="accordion-item my-2">
                                                 <h1 className={" accordion-header  "} id={`flush-heading${index}`} onClick={()=>index!=activeAcc?setActiveAcc(index) :setActiveAcc(-1)}>
-                                                    <button className={style.faqHeading+`  accordion-button  outline-none shadow-none border-0 ${index!=activeAcc && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${index}`} aria-expanded="false" aria-controls={`flush-collapse${index}`}>
-                                                       {val?.title}
+                                                    <button dangerouslySetInnerHTML={{__html:val?.faqQuestion}} className={style.faqHeading+`  accordion-button  outline-none shadow-none border-0 ${index!=activeAcc && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${index}`} aria-expanded="false" aria-controls={`flush-collapse${index}`}>
+                                                       
                                                     </button>
                                                 </h1>
                                                 <div id={`flush-collaps${index}`} className={style.content+` accordion-collapse collapse p-3  ${index==activeAcc && "show"} `} aria-labelledby={`flush-heading${index}`} data-bs-parent="#accordionFlushExample">
-                                                    <div className="accordion-body">{val?.content}</div>
+                                                    <div className="accordion-body" dangerouslySetInnerHTML={{__html:val?.faqAnswer}}></div>
                                                 </div>
                                             </div>
                                         )

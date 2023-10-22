@@ -12,16 +12,18 @@ const ClientFeedbackAdd = ({ addData, setAddData }) => {
   const { helper } = useClientFeedbackContext()
   const [clientName, setClientName] = useState("")
   const [clientComment, setClientComment] = useState("")
+  const [clientDesignation, setClientDesignation] = useState("")
   const [clientImage, setclientImage] = useState("");
   const imageRef = useRef()
 
   const AddData = async () => {
-    await AddClientFbData({ clientName, clientImage, clientComment, helper, setAddData, clearForm })
+    await AddClientFbData({ clientName,clientDesignation, clientImage, clientComment, helper, setAddData, clearForm })
   }
   const clearForm = () => {
     setClientName("")
     setClientComment("")
     setclientImage("")
+    setClientDesignation("")
     imageRef.current.value = ""
   }
   useEffect(() => {
@@ -48,7 +50,10 @@ const ClientFeedbackAdd = ({ addData, setAddData }) => {
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Name</label>
                       <input  autocomplete="off"   value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
-
+                    </div>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Client Designation</label>
+                      <input  autocomplete="off"   value={clientDesignation} onChange={(e) => setClientDesignation(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Add Image</label>

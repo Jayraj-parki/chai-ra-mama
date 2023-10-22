@@ -1,10 +1,10 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const updateClientFbData = async ({ _id, clientImage, clientName,clientComment,helper, clearForm, setEditData }) => {
+export const updateClientFbData = async ({ _id, clientImage, clientName,clientDesignation,clientComment,helper, clearForm, setEditData }) => {
     try {
         let url = ""
-        if (clientImage == "" || clientComment.trim()==""||clientName.trim()=="") {
+        if (clientImage == "" || clientComment.trim()==""||clientName.trim()=="",clientDesignation.trim()=="") {
             alert("Please fill all the fields")
         }
         else {
@@ -26,6 +26,7 @@ export const updateClientFbData = async ({ _id, clientImage, clientName,clientCo
                     _id: _id,
                     clientName:clientName,
                     clientComment:clientComment,
+                    clientDesignation:clientDesignation,
                     clientImage:url
                 })
             })
@@ -33,7 +34,7 @@ export const updateClientFbData = async ({ _id, clientImage, clientName,clientCo
             alert(data?.message)
             helper()
             clearForm()
-            setEditData({ active: false, _id: "", image: "",content:"",name:"" })
+            setEditData({ active: false, _id: "", image: "",content:"",designation:"",name:"" })
         }
     }
     catch (err) {

@@ -13,26 +13,29 @@ const ClientFeedbackEdit = ({ editData, setEditData }) => {
   const { helper } = useClientFeedbackContext()
   const [clientName, setClientName] = useState("")
   const [clientComment, setClientComment] = useState("")
+  const [clientDesignation, setClientDesignation] = useState("")
   const [clientImage, setclientImage] = useState("");
   const [_id, setId] = useState("")
   const imageRef = useRef()
 
   const updateData = async () => {
-    await updateClientFbData({ _id, clientName, clientImage, clientComment, helper, setEditData, clearForm })
+    await updateClientFbData({ _id, clientName, clientImage, clientComment,clientDesignation, helper, setEditData, clearForm })
   }
 
   const clearForm = () => {
     setClientName("")
     setClientComment("")
     setclientImage("")
+    setClientDesignation("")
     imageRef.current.value = ""
   }
   useEffect(() => {
     clearForm()
     setClientName(editData?.name)
     setClientComment(editData?.content)
-    setclientImage(editData?.image);
     setId(editData?._id)
+    setclientImage(editData?.image);
+    setClientDesignation(editData?.designation);
   }, [editData]);
 
 
@@ -56,7 +59,10 @@ const ClientFeedbackEdit = ({ editData, setEditData }) => {
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Name</label>
                       <input  autocomplete="off"   value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
-
+                    </div>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Client Designation</label>
+                      <input  autocomplete="off"   value={clientDesignation} onChange={(e) => setClientDesignation(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Edit Image</label>
@@ -80,7 +86,7 @@ const ClientFeedbackEdit = ({ editData, setEditData }) => {
             </div >
           </div>
           <div className="modal-footer">
-            <button onClick={() => setEditData({ active: false,_id:"", name: "", image: "", content: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button onClick={() => setEditData({ active: false,_id:"", name: "", image: "", content: "",designation:"" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
