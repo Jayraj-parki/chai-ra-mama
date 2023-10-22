@@ -5,11 +5,31 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AddMenuData } from "@/services/AddMenuData";
+import { useMenuContext } from "@/app/admin/menu/page";
 
 const MenuAdd = ({ addData, setAddData }) => {
-  const [menuHeading, setMenuHeading] = useState()
-  const [image, setImage] = useState()
+  const { menuData, helper } = useMenuContext()
+  const [menuName, setMenuName] = useState()
+  const [menuImage, setMenuImage] = useState()
+  const [menuContent, setMenuContent] = useState()
+  const [products, setProduct] = useState([])
+  const imageRef = useRef()
+  const AddData = async () => {
+    await AddMenuData({ menuName, menuImage, menuContent, helper, setAddData, clearForm })
+  }
+
+  const clearForm = () => {
+    setMenuContent("")
+    setMenuImage("")
+    setMenuName("")
+    imageRef.current.value = ""
+    setProduct(Array.from(new Set(menuData?.map((val) => val?.menuName?.toUpperCase()))))
+  }
+  useEffect(() => {
+    clearForm()
+  }, [menuData])
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -27,17 +47,38 @@ const MenuAdd = ({ addData, setAddData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                  <div className={" mb-4 "}>
-                      <label className="form-label">Menu heading</label>
-                      <input value={menuHeading} onChange={(e)=>setMenuHeading(e.target?.value)} name="menuHeading" type="text" className="form-control" placeholder='write something here' />
-                    
+                    <div className="mb-4">
+                      <label className="form-label text-capitalize">Choose an existing title or enter a new one</label>
+                      <select class="form-select" value={products.includes(menuName)?menuName:""} onChange={(e) => setMenuName(e.target?.value)}>
+                        <option value="" disabled selected>Select Existing Title</option>
+                        {
+                          products?.map((val, index) => {
+                            return (
+                              <option key={index + " " + val} value={val}>{val}</option>
+                            )
+                          })
+                        }
+                      </select>
+                    </div>
+                    <div className={" mb-4 "}>
+                      <input  autocomplete="off"   value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
                     </div>
                     <div className="mb-4 ">
-                      <label for="editImage" className="form-label">Upload Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage" />
+                      <label className="form-label text-capitalize">add Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof menuImage === "string" && menuImage?.includes("http") ? menuImage : menuImage != null && menuImage instanceof File ? URL.createObjectURL(menuImage) : "/assets/images/1.png"} hidden={menuImage ? false : true} alt="..." />
+                      <input  autocomplete="off"   onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Content</label>
+                      {typeof document !== 'undefined' && (
+                        <ReactQuill modules={modules} value={menuContent} onChange={(value) => setMenuContent(value)} formats={formats}
+                          placeholder="Write something..." />
+                      )}
+                    </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>

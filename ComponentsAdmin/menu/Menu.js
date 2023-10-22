@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./menu.module.scss"
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import Image from 'next/image';
@@ -7,17 +7,20 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import MenuEdit from '../menuEdit/MenuEdit';
 import MenuAdd from '../menuAdd/MenuAdd';
+import { useMenuContext } from '@/app/admin/menu/page';
+import { deleteMenuData } from '@/services/deleteMenuData';
 const Menu = () => {
-  const [modal, setModal] = useState({
-    active: false,
-    image: "",
-  })
-  const [editData, setEditData] = useState({
-    active: false,
-    heading: "",
-    image: "",
-  })
+  const { menuData, helper } = useMenuContext()
+  const [modal, setModal] = useState({ active: false, image: "" })
   const [addData, setAddData] = useState(false)
+  const [editData, setEditData] = useState({ active: false, _id: "", title: "", image: "", content: "" })
+
+  const deleteData = async (_id) => {
+    await deleteMenuData({ _id, helper })
+  }
+  useEffect(() => {
+    helper()
+  }, [])
   return (
 
     <div className={style.menu + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -30,36 +33,37 @@ const Menu = () => {
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />
-      {/* image modal */}
       <ImageModal modal={modal} setModal={setModal} />
-      {/* edit data modal */}
-      <MenuEdit editData={editData} setEditData={setEditData}/>
-      {/* Add data modal  */}
+      <MenuEdit editData={editData} setEditData={setEditData} />
       <MenuAdd addData={addData} setAddData={setAddData} />
 
-      {/* Data Table */}
       <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
         <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Heading</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Menu Title</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Content</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Add sub menu</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
           </thead>
           <tbody>
-            <tr className=''>
-              <td className='align-middle' >1</td>
-              <td className='align-middle' >Tea</td>
-              <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })}  className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." /></td>
-              <td className='text-center align-middle'>
-                <Link href="./menu/submenu/12345" className='btn btn-secondary text-decoration-none mx-2  text-capitalize'>Add sub menu</Link>
-              </td>
-              <td className='text-center align-middle'>
-                <button onClick={() => setEditData({ active: true, heading: "heading", image: "/assets/images/g1.png" })}   className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                <button className='btn btn-danger text-decoration-none m-2'>Delete</button>
-              </td>
-            </tr>
+            {
+              menuData?.map((val, index) =>
+                <tr key={val?.menuName+""+index+""+Math?.random(10000)} className=''>
+                  <td className='align-middle' >{index+1}</td>
+                  <td className='align-middle' >{val?.menuName}</td>
+                  <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: val?.menuImage||"/assets/images/g1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.menuImage||"/assets/images/g1.png"} alt="..." /></td>
+                  <td className='align-middle' dangerouslySetInnerHTML={{__html:val?.menuContent}} ></td>
+                  <td className='text-center align-middle'>
+                    <Link href={`./menu/submenu/${val?._id}`} className='btn btn-secondary text-decoration-none mx-2  text-capitalize'>Add sub menu</Link>
+                  </td>
+                  <td className='text-center align-middle'>
+                    <button onClick={() => setEditData({ active: true,_id:val?._id, title: val?.menuName, image: val?.menuImage ,content:val?.menuContent})} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
+                    <button onClick={()=>deleteData(val?._id)} className='btn btn-danger text-decoration-none m-2'>Delete</button>
+                  </td>
+                </tr>
+              )}
           </tbody>
         </table>
       </div>

@@ -33,7 +33,7 @@ const CmsEdit = ({ editData, setEditData }) => {
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <button onClick={() => setEditData({ active: false, heading: "", image: "", content: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button onClick={() => setEditData({ active: false,_id:"", heading: "", image: "", content: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body  d-flex justify-content-center align-items-center">
 
@@ -47,12 +47,12 @@ const CmsEdit = ({ editData, setEditData }) => {
                   <div>
                     <div className="mb-4">
                       <label for="editHeading" className="form-label">Heading</label>
-                      <input onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
+                      <input  autocomplete="off"   onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label for="editImage" className="form-label">Upload Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof cmsImage==="string"  && cmsImage?.includes("http") ? cmsImage : cmsImage!=null&& cmsImage instanceof File?URL.createObjectURL(cmsImage):"/assets/images/1.png"} hidden={cmsImage ? false : true} alt="..." />
-                      <input type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control" id="editImage" />
+                      <input  autocomplete="off"   type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control" id="editImage" />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Content</label>
@@ -68,7 +68,7 @@ const CmsEdit = ({ editData, setEditData }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button onClick={() => setEditData({ active: false, heading: "", image: "", content: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button onClick={() => setEditData({ active: false, heading: "",_id:"", image: "", content: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

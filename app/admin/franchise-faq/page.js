@@ -1,16 +1,30 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import FranchiseFaq from '@/ComponentsAdmin/franchiseFaq/FranchiseFaq';
-
+import { getFaqData } from '@/services/getFaqData';
+import { createContext, useContext, useEffect, useState } from 'react';
+const faqContext = createContext()
+export const usefaqContext = () => {
+  return useContext(faqContext)
+}
 const page = () => {
   const { user } = useAuth()
+  const [faqData, setData] = useState()
+  const helper = async () => {
+    await getFaqData(setData)
+  }
+  useEffect(() => {
+    if (user) helper()
+  }, [])
   return (
     <>
       {
-        user && 
-        <div className='container-fluid p-lg-4  m-0'>
-          <FranchiseFaq/>
-        </div>
+        user &&
+        <faqContext.Provider value={{faqData,helper}}>
+          <div className='container-fluid p-lg-4  m-0'>
+            <FranchiseFaq />
+          </div>
+        </faqContext.Provider>
       }
     </>
   )

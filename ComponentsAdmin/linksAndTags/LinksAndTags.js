@@ -23,22 +23,22 @@ const LinksAndTags = () => {
             <tbody>
               <tr className=''>
                 <td className='align-middle' >Facebook</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >instagram</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >youtube</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >whatsapp</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
 

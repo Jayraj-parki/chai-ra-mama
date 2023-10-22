@@ -12,7 +12,7 @@ export const deleteGalleryData = async ({ _id, helper }) => {
                 })
             })
             const data = await result.json()
-            alert(data.message)
+            alert(data?.message)
             helper()
         }
     }

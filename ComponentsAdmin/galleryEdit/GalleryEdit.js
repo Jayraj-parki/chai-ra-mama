@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { useGalleryData } from '@/app/admin/gallery/page';
 import { updateGalleryData } from '@/services/updateGalleryData';
 const GalleryEdit = ({ editData, setEditData }) => {
-  const { helper } = useGalleryData()
+  const { data,helper } = useGalleryData()
   const [galleryTitle, setGalleryTitle] = useState("")
   const [galleryImage, setGalleryImage] = useState("");
   const [_id, setId] = useState("")
   const imageRef = useRef()
-
+  const [products, setProduct] = useState([])
   const updateData = async () => {
     await updateGalleryData({ _id,galleryImage, galleryTitle ,helper,setEditData,clearForm})
   }
@@ -18,6 +18,8 @@ const GalleryEdit = ({ editData, setEditData }) => {
     setGalleryImage("")
     setGalleryTitle("")
     imageRef.current.value = ""
+    setProduct(Array.from(new Set(data?.map((val) => val?.galleryTitle?.toUpperCase()))))
+
   }
   useEffect(() => {
     clearForm()
@@ -42,14 +44,26 @@ const GalleryEdit = ({ editData, setEditData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
+                  <div className="mb-4">
+                      <label className="form-label text-capitalize">Choose an existing title or enter a new one</label>
+                      <select class="form-select" value={products.includes(galleryTitle)?galleryTitle:""} onChange={(e) => setGalleryTitle(e.target?.value)}>
+                      <option value="" disabled selected>Select Existing Title</option>
+                        {
+                          products?.map((val, index) => {
+                            return (
+                              <option key={index + " " + val} value={val}>{val}</option>
+                            )
+                          })
+                        }
+                      </select>
+                    </div>
                     <div className="mb-4">
-                      <label className="form-label text-capitalize">Title</label>
-                      <input value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter title here' />
+                     <input  autocomplete="off"   value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter title here' />
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Edit Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof galleryImage === "string" && galleryImage?.includes("http") ? galleryImage : galleryImage != null && galleryImage instanceof File ? URL.createObjectURL(galleryImage) : "/assets/images/1.png"} hidden={galleryImage ? false : true} alt="..." />
-                      <input onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                      <input  autocomplete="off"   onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                     </div>
                     <div className='row col-12 '>
                       <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

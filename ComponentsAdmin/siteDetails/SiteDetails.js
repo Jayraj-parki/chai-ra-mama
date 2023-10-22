@@ -27,27 +27,27 @@ const SiteDetails = () => {
             <tbody>
               <tr className=''>
                 <td className='align-middle' >Site name</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Site Phone number</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Site Email Id</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >From Email Id</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Forget password Email id</td>
-                <td className='align-middle' ><input name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
             </tbody>
@@ -71,7 +71,7 @@ const SiteDetails = () => {
                 <td className='align-middle' >Logo</td>
                 <td className='align-middle' >
                   <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." />
-                  <input type="file" accept="image/*" className="form-control" id="editImage" />
+                  <input  autocomplete="off"   type="file" accept="image/*" className="form-control" id="editImage" />
                   <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                   <p> <small>Please upload (210 x 160) pixel images to maintain designs</small></p>
                 </td>
@@ -81,7 +81,7 @@ const SiteDetails = () => {
                 <td className='align-middle' >Site Favicon</td>
                 <td className='align-middle' >
                   <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." />
-                  <input type="file" accept="image/*" className="form-control" id="editImage" />
+                  <input  autocomplete="off"   type="file" accept="image/*" className="form-control" id="editImage" />
                   <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                   <p> <small>Please upload (80 x 80) pixel images to maintain designs</small></p>
                 </td>

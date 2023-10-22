@@ -1,10 +1,25 @@
 
 "use client"
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./homeBannerAdd.module.scss"
 import Image from 'next/image';
+import { useHomeBannerContext } from "@/app/admin/homebanner/page";
+import { AddHomeBanner } from "@/services/AddHomeBanner";
 const HomeBannerAdd = ({ addData, setAddData }) => {
-  const [image, setImage] = useState("");
+  const { helper } = useHomeBannerContext()
+  const [bannerImage, setBannerImage] = useState("");
+  const imageRef = useRef()
+  const AddData = async () => {
+    await AddHomeBanner({ bannerImage, helper, setAddData, clearForm })
+  }
+
+  const clearForm = () => {
+    setBannerImage("")
+    imageRef.current.value = ""
+  }
+  useEffect(() => {
+    clearForm()
+  }, [])
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -23,11 +38,14 @@ const HomeBannerAdd = ({ addData, setAddData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div>
                     <div className="mb-4">
-                      <label for="editImage2" className="form-label">Add Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage2" />
+                      <label className="form-label">Add Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof bannerImage === "string" && bannerImage?.includes("http") ? bannerImage : bannerImage != null && bannerImage instanceof File ? URL.createObjectURL(bannerImage) : "/assets/images/1.png"} hidden={bannerImage ? false : true} alt="..." />
+                      <input  autocomplete="off"   onChange={(e) => setBannerImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Submit</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>

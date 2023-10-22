@@ -5,16 +5,28 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
+import { usefaqContext } from "@/app/admin/franchise-faq/page";
+import { updateFaqData } from "@/services/updateFaqData";
 
 const FranchiseFaqEdit = ({ editData, setEditData }) => {
-  const [question, setQuestion] = useState();
-  const [answer, setAnswer] = useState();
+  const {helper}=usefaqContext()
+  const [faqQuestion, setFaqQuestion] = useState();
+  const [faqAnswer, setFaqAnswer] = useState();
+  const [_id, setId] = useState("")
+  
+  const updateData = async () => {
+    await updateFaqData({ _id, faqQuestion,faqAnswer, helper, setEditData, clearForm })
+  }
+  const clearForm = () => {
+    setFaqAnswer("")
+    setFaqQuestion("")
+  }
   useEffect(() => {
-    if (editData) {
-      setAnswer(editData?.answer || '')
-      setQuestion(editData?.question||"")
-    }
-  }, [editData]);
+    clearForm()
+    setFaqQuestion(editData?.question)
+    setFaqAnswer(editData?.answer)
+    setId(editData?._id)
+  }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -35,19 +47,22 @@ const FranchiseFaqEdit = ({ editData, setEditData }) => {
                     <div className={" mb-4 "}>
                       <label className="form-label">Question</label>
                       {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={question} onChange={(value) => setQuestion(value)} formats={formats}
+                        <ReactQuill modules={modules} value={faqQuestion} onChange={(value) => setFaqQuestion(value)} formats={formats}
                           placeholder="Write something..." />
                       )}
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Answer</label>
                       {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules} value={answer} onChange={(value) => setAnswer(value)} formats={formats}
+                        <ReactQuill modules={modules} value={faqAnswer} onChange={(value) => setFaqAnswer(value)} formats={formats}
                           placeholder="Write something..." />
                       )}
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Submit</button>
-                  </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">update</button>
+                    </div>
+                    </div>
                 </div>
               </div>
             </div >

@@ -1,9 +1,21 @@
 "use client"
+import { AddStoreCityData } from "@/services/AddStoreCityData";
 import style from "./storeAddCity.module.scss"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useStoreLocatorContext } from "@/app/admin/store/page";
 
 const StoreAddCity = ({ addData, setAddData }) => {
-  const [city, setCity] = useState()
+  const { storeCityData, helper } = useStoreLocatorContext()
+  const [storeCity, setStoreCity] = useState()
+  const AddData = async () => {
+    await AddStoreCityData({ storeCity, helper, setAddData, clearForm })
+  }
+  const clearForm = () => {
+    setStoreCity("")
+  }
+  useEffect(() => {
+    clearForm()
+  }, [storeCityData])
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -22,12 +34,14 @@ const StoreAddCity = ({ addData, setAddData }) => {
                 <hr />
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
-                  <div className={" mb-4 "}>
+                    <div className={" mb-4 "}>
                       <label className="form-label">City Name</label>
-                      <input value={city} onChange={(e)=>setCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='write something here' />
-                   
+                      <input  autocomplete="off"   value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='Write city name here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>

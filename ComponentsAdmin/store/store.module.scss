@@ -16,6 +16,9 @@
     overflow: auto;
 
     table {
+      button{
+        color: $white-light;
+      }
       thead{
         th{
           min-width: 200px;

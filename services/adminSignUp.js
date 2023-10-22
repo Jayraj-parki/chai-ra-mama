@@ -17,7 +17,7 @@ export const adminSignUp = async ({ firstName, lastName, email, password ,confir
                 })
             })
             const data = await result.json()
-            alert(data.message)
+            alert(data?.message)
         }
         catch (e) {
             console.log("error in signUp" + e)

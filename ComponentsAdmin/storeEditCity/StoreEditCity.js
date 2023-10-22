@@ -1,11 +1,24 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./storeEditCity.module.scss"
+import { useStoreLocatorContext } from "@/app/admin/store/page";
+import { updateStoreCityData } from "@/services/updateStoreCityData";
 
 const StoreEditCity = ({ editData, setEditData }) => {
-  const [city, setCity] = useState()
+  const { helper } = useStoreLocatorContext()
+  const [storeCity, setStoreCity] = useState()
+  const [_id, setId] = useState("")
+
+  const updateData = async () => {
+    await updateStoreCityData({ _id, storeCity, helper, setEditData, clearForm })
+  }
+  const clearForm = () => {
+    setStoreCity("")
+  }
   useEffect(() => {
-    setCity(editData?.city)
+    clearForm()
+    setStoreCity(editData?.city)
+    setId(editData?._id)
   }, [editData])
 
   return (
@@ -26,16 +39,19 @@ const StoreEditCity = ({ editData, setEditData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">City Name</label>
-                      <input value={city} onChange={(e)=>setCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='Write city name here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">update</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div >
           </div>
           <div className="modal-footer">
-            <button onClick={() => setEditData({ active: false, city: ""})} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button onClick={() => setEditData({ active: false, city: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

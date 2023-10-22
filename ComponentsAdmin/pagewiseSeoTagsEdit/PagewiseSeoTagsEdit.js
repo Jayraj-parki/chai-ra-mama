@@ -34,7 +34,7 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                   <div className="text-capitalize">
                     <div className="mb-4">
                       <label  className="form-label">Title</label>
-                      <input onChange={(e) => setPageTitle(e.target.value)} value={pageTitle} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
+                      <input  autocomplete="off"   onChange={(e) => setPageTitle(e.target.value)} value={pageTitle} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta tags</label>
@@ -42,11 +42,11 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta keywords</label>
-                      <input onChange={(e) => setPageMetaKeyword(e.target.value)} value={pageMetaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='write something here...' ></input>
+                      <input  autocomplete="off"   onChange={(e) => setPageMetaKeyword(e.target.value)} value={pageMetaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='write something here...' ></input>
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta description</label>
-                      <input onChange={(e) => setPageMetaDescription(e.target.value)} value={pageMetaDescription} name="pageMetaDescription" type="text" className="form-control" placeholder='write something here...' ></input>
+                      <input  autocomplete="off"   onChange={(e) => setPageMetaDescription(e.target.value)} value={pageMetaDescription} name="pageMetaDescription" type="text" className="form-control" placeholder='write something here...' ></input>
                     </div>
                    
                     

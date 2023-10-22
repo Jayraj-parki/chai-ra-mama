@@ -15,7 +15,7 @@ export const getInTouch = async ({ firstName, lastName, email, message }) => {
                 })
             })
             const data = await result.json()
-            alert(data.message)
+            alert(data?.message)
         }
         catch (e) {
             console.log("Error in get in touch")

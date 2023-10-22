@@ -24,7 +24,7 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
             })
         })
         const data = await result.json()
-        alert(data.message)
+        alert(data?.message)
         helper()
         setEditData({ active: false, image: "", title: "", _id: "" })
 

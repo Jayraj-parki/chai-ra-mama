@@ -3,8 +3,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 export const updateGalleryData = async ({_id, galleryImage, galleryTitle ,helper,setEditData,clearForm}) => {
     try {
-        if (galleryTitle.trim() == "") {
-            alert("Title is missing")
+        if (galleryTitle.trim() == ""||galleryImage=="") {
+            alert("Please fill all the fields")
             return
         }
         else {
@@ -29,7 +29,7 @@ export const updateGalleryData = async ({_id, galleryImage, galleryTitle ,helper
                 })
             })
             const data = await result.json()
-            alert(data.message)
+            alert(data?.message)
             helper()
             clearForm()
             setEditData({ active: false, _id: "", title: "", image: "" })

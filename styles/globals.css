@@ -13,6 +13,14 @@
   z-index: 1;
 }
 
+.ql-toolbar{
+  position: relative !important;
+  z-index: 109999 !important  ;
+}
+.ql-container{
+  
+  z-index: 2000;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {

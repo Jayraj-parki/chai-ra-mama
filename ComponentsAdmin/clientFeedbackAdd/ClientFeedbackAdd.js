@@ -5,11 +5,28 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { AddClientFbData } from "@/services/AddClientFbData";
+import { useClientFeedbackContext } from "@/app/admin/client-feedback/page";
 const ClientFeedbackAdd = ({ addData, setAddData }) => {
+  const { helper } = useClientFeedbackContext()
   const [clientName, setClientName] = useState("")
-  const [clientFeedback, setClientFeedback] = useState("")
-  const [image, setImage] = useState();
+  const [clientComment, setClientComment] = useState("")
+  const [clientImage, setclientImage] = useState("");
+  const imageRef = useRef()
+
+  const AddData = async () => {
+    await AddClientFbData({ clientName, clientImage, clientComment, helper, setAddData, clearForm })
+  }
+  const clearForm = () => {
+    setClientName("")
+    setClientComment("")
+    setclientImage("")
+    imageRef.current.value = ""
+  }
+  useEffect(() => {
+    clearForm()
+  }, [])
 
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -30,22 +47,25 @@ const ClientFeedbackAdd = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Name</label>
-                      <input value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
+                      <input  autocomplete="off"   value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
 
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Add Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                      <input type="file" accept="image/*" className="form-control" id="editImage2" />
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof clientImage === "string" && clientImage?.includes("http") ? clientImage : clientImage != null && clientImage instanceof File ? URL.createObjectURL(clientImage) : "/assets/images/1.png"} hidden={clientImage ? false : true} alt="..." />
+                      <input  autocomplete="off"   onChange={(e) => setclientImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" id="editImage2" />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Client Feedback</label>
                       {typeof document !== 'undefined' && (
-                        <ReactQuill modules={modules}  formats={formats} value={clientFeedback} onChange={(value) => setClientFeedback(value)}
+                        <ReactQuill modules={modules} formats={formats} value={clientComment} onChange={(value) => setClientComment(value)}
                           placeholder="Write something..." />
                       )}
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Submit</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>

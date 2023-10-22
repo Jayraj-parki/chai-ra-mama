@@ -40,15 +40,15 @@ const ContactDetails = () => {
                     </div>
                     <div className={style.card + ' row col-12 mx-auto  px-1 px-lg-3 d-flex justify-content-between'}>
                         <div className="col-md-6 my-3">
-                            <input required type="text" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Name" />
+                            <input  autocomplete="off"   required type="text" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Name" />
                         </div>
                         <div className="col-md-6 my-3">
-                            <input required type="email" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Email" />
+                            <input  autocomplete="off"   required type="email" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Email" />
                         </div>
                     </div>
                     <div className={style.card + ' row col-12 mx-auto px-1 px-lg-3  d-flex justify-content-between'}>
                         <div className="col-12 my-3">
-                            <input required type="text" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Subject" />
+                            <input  autocomplete="off"   required type="text" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Subject" />
                         </div>
                         <div className="col-12 mt-4">
                             <textarea required type="text" className=" px-3  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Enter your Message" ></textarea>

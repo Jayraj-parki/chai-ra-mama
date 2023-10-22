@@ -1,14 +1,29 @@
 "use client"
 import { useEffect, useState } from 'react'
 import style from "./editStore.module.scss"
+import { useStoreContext } from '@/app/admin/store/add-store/[id]/page'
+import { updateStoreData } from '@/services/updateStoreData'
 
 const EditStore = ({ editData, setEditData }) => {
-  const [storeHeading, setStoreHeading] = useState()
-  const [storeContact, setStoreContact] = useState()
-
+  const { helper } = useStoreContext()
+  const [storeAddress, setStoreAddress] = useState()
+  const [storePhone, setStorePhone] = useState()
+  const [storeMap, setStoreMap] = useState()
+  const [_id, setId] = useState("")
+  const updateData = async () => {
+    await updateStoreData({ _id, storeAddress, storeMap, storePhone, helper, setEditData, clearForm })
+  }
+  const clearForm = () => {
+    setStoreMap("")
+    setStoreAddress("")
+    setStorePhone("")
+  }
   useEffect(() => {
-    setStoreHeading(editData?.heading)
-    setStoreContact(editData?.phone)
+    clearForm()
+    setStoreAddress(editData?.address)
+    setStoreMap(editData?.map)
+    setStorePhone(editData?.phone)
+    setId(editData?._id)
   }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -27,14 +42,21 @@ const EditStore = ({ editData, setEditData }) => {
                 <div className='row col-12 mx-auto mt-2'>
                   <div className=''>
                     <div className={" mb-4 "}>
-                      <label className="form-label">Store Heading</label>
-                      <input value={storeHeading} onChange={(e) => setStoreHeading(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write something here' />
+                      <label className="form-label">Store Address</label>
+                      <input autocomplete="off" value={storeAddress} onChange={(e) => setStoreAddress(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write address here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Store Contact Number</label>
-                      <input value={storeContact} onChange={(e) => setStoreContact(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" value={storePhone} onChange={(e) => setStorePhone(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write phone number here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
+                    <div className={" mb-4 "}>
+                      <label className="form-label">Store Map Link</label>
+                      <input autocomplete="off" value={storeMap} onChange={(e) => setStoreMap(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write map link here' />
+                    </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">update</button>
+                    </div>
                   </div>
                 </div>
               </div>

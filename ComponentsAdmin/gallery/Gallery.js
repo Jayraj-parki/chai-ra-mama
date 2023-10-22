@@ -50,7 +50,7 @@ const Gallery = () => {
           <tbody>
             {
               data?.map((val, index) =>
-                <tr key={val?.galleryTitle+""+index+""+Math?.random(1000)} className=''>
+                <tr key={val?.galleryTitle+""+index+""+Math?.random(10000)} className=''>
                   <td className='align-middle' >{index+1}</td>
                   <td className='align-middle' >{val?.galleryTitle }</td>
                   <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: val?.galleryImage||"/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.galleryImage || "/assets/images/1.png"} alt="..." /></td>

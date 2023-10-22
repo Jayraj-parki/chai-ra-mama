@@ -1,15 +1,29 @@
 "use client"
 import style from "./subMenuAdd.module.scss"
-import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
-import 'react-quill/dist/quill.snow.css';
-import { formats, modules } from "@/utils/ReactTextEditor";
-import { useState } from "react";
+import Image from "next/image"
+import { useEffect, useRef, useState } from "react";
+import { useSubMenuContext } from "@/app/admin/menu/submenu/[id]/page";
+import { AddSubMenuData } from "@/services/AddSubMenuData";
 
 const SubMenuAdd = ({ addData, setAddData }) => {
+  const { helper, pId } = useSubMenuContext()
   const [itemName, setItemName] = useState()
   const [itemPrice, setItemPrice] = useState()
+  const [itemImage, setItemImage] = useState()
+  const imageRef = useRef()
+  const AddData = async () => {
+    await AddSubMenuData({ parentId: pId, itemName, itemImage, itemPrice, helper, setAddData, clearForm })
+  }
 
+  const clearForm = () => {
+    setItemPrice("")
+    setItemName("")
+    setItemImage("")
+    imageRef.current.value = ""
+  }
+  useEffect(() => {
+    clearForm()
+  }, [])
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -29,16 +43,22 @@ const SubMenuAdd = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Item Name</label>
-                      <input value={itemName} onChange={(e)=>setItemName(e.target?.value)} name="itemName" type="text" className="form-control" placeholder='write something here' />
-                    
+                      <input  autocomplete="off"   value={itemName} onChange={(e) => setItemName(e.target?.value)} name="itemName" type="text" className="form-control" placeholder='write something here' />
+
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Item Price</label>
-                      <input value={itemPrice} onChange={(e)=>setItemPrice(e.target?.value)} name="itemPrice" type="text" className="form-control" placeholder='write something here' />
-                    
-                    
+                      <input  autocomplete="off"   value={itemPrice} onChange={(e) => setItemPrice(e.target?.value)} name="itemPrice" type="text" className="form-control" placeholder='write something here' />
                     </div>
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
+                    <div className="mb-4 ">
+                      <label className="form-label text-capitalize">add Image</label>
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof itemImage === "string" && itemImage?.includes("http") ? itemImage : itemImage != null && itemImage instanceof File ? URL.createObjectURL(itemImage) : "/assets/images/1.png"} hidden={itemImage ? false : true} alt="..." />
+                      <input  autocomplete="off"   onChange={(e) => setItemImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                    </div>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>

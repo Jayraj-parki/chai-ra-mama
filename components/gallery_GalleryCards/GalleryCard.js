@@ -10,7 +10,6 @@ const GalleryCard = () => {
     const [products, setProduct] = useState()
     const mapData = async () => {
         await groupImagesByProduct({ galleryData, setProduct })
-        console.log(products)
     }
     useEffect(() => {
         mapData()

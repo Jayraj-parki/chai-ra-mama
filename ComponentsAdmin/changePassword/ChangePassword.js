@@ -34,17 +34,17 @@ const ChangePassword = () => {
             <tbody>
               <tr className=''>
                 <td className='align-middle' >Current Password</td>
-                <td className='align-middle' ><input value={currentPassword} onChange={(e) => setCurrentPassword(e.target?.value)} name="currentPassword" type="password" className="form-control" placeholder='Write current password' />
+                <td className='align-middle' ><input  autocomplete="off"   value={currentPassword} onChange={(e) => setCurrentPassword(e.target?.value)} name="currentPassword" type="password" className="form-control" placeholder='Write current password' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >New Password</td>
-                <td className='align-middle' ><input value={newPassword} onChange={(e) => setNewPassword(e.target?.value)} name="newPassword" type="password" className="form-control" placeholder='Write new password' />
+                <td className='align-middle' ><input  autocomplete="off"   value={newPassword} onChange={(e) => setNewPassword(e.target?.value)} name="newPassword" type="password" className="form-control" placeholder='Write new password' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Confirm new Password</td>
-                <td className='align-middle' ><input value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="password" className="form-control" placeholder='confirm new password' />
+                <td className='align-middle' ><input  autocomplete="off"   value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="password" className="form-control" placeholder='confirm new password' />
                 </td>
               </tr>
 

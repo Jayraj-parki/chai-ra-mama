@@ -23,7 +23,7 @@ export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent,_id }) =>
             })
         })
         const data = await result.json()
-        alert(data.message)
+        alert(data?.message)
     }
     catch (err) {
         console.log("CMS ERROR: " + err)

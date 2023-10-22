@@ -15,7 +15,7 @@ const page = () => {
     await getHeaders(setData)
   }
   useEffect(() => {
-    helper()
+    if(user) helper()
   }, [])
   return (
     <>

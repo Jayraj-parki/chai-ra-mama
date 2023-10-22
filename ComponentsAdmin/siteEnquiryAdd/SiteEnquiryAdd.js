@@ -1,11 +1,26 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./siteEnquiryAdd.module.scss"
+import { useSiteEnquiryContext } from "@/app/admin/site-enquiries/page";
+import { AddSiteEnquiryData } from "@/services/AddSiteEnquiryData";
 
 const SiteEnquiryAdd = ({ addData, setAddData }) => {
+  const { helper } = useSiteEnquiryContext()
   const [contactName, setContactName] = useState()
   const [contactEmail, setContactEmail] = useState()
   const [contactPhone, setContactPhone] = useState()
+
+  const AddData = async () => {
+    await AddSiteEnquiryData({ contactEmail, contactName, contactPhone, helper, setAddData, clearForm })
+  }
+  const clearForm = () => {
+    setContactEmail("")
+    setContactName("")
+    setContactPhone("")
+  }
+  useEffect(() => {
+    clearForm()
+  }, [])
   return (
     <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
@@ -24,18 +39,21 @@ const SiteEnquiryAdd = ({ addData, setAddData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Name</label>
-                      <input value={contactName} onChange={(e) => setContactName(e.target?.value)} name="contactName" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" value={contactName} onChange={(e) => setContactName(e.target?.value)} name="contactName" type="text" className="form-control" placeholder='write name here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Email</label>
-                      <input value={contactEmail} onChange={(e) => setContactEmail(e.target?.value)} name="contactEmail" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" value={contactEmail} onChange={(e) => setContactEmail(e.target?.value)} name="contactEmail" type="email" className="form-control" placeholder='write email here' />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Contact Phone</label>
-                      <input value={contactPhone} onChange={(e) => setContactPhone(e.target?.value)} name="contactPhone" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" value={contactPhone} onChange={(e) => setContactPhone(e.target?.value)} name="contactPhone" type="text" className="form-control" placeholder='write phone here' />
                     </div>
 
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                    </div>
                   </div>
                 </div>
               </div>
