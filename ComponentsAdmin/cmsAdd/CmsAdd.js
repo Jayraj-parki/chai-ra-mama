@@ -20,7 +20,7 @@ const CmsAdd = ({ addData, setAddData }) => {
   const UpdateData = async() => {
 
   //   if (cmsImage == null) return;
-  //   const imageRef = ref(storage, `images/${cmsImage.name + v4()}`)
+  //   const imageRef = ref(storage, `images/${v4()+cmsImage.name  }`)
   //   const snapshot = await uploadBytes(imageRef, cmsImage);
   //   const url = await getDownloadURL(snapshot.ref);
   //   console.log(url);

@@ -68,11 +68,7 @@ const UserNavbar = () => {
                             <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "contactus" && "border-bottom border-3"}`}>
                                 <Link onClick={() => setActiveLink("contactus")} className={`nav-link   `} aria-current="page" href="contactus">Contact Us</Link>
                             </li>
-
-
-
                         </ul>
-
                     </div>
                 </div>
             </nav>

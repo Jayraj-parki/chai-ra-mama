@@ -13,7 +13,7 @@ export const AddHomeBanner = async ({bannerImage, helper, clearForm, setAddData 
                 url = bannerImage
             }
             else if (bannerImage != "") {
-                const imageRef = ref(storage, `images/${bannerImage?.name + v4()}`)
+                const imageRef = ref(storage, `images/${v4()+bannerImage?.name  }`)
                 const snapshot = await uploadBytes(imageRef, bannerImage);
                 url = await getDownloadURL(snapshot.ref);
             }

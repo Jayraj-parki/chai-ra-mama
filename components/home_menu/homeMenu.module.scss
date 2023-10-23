@@ -23,11 +23,12 @@
     }
   }
   .viewMore{
-    button{
+    a{
       background-color: $primary-orange;
       color: $primary-light;
       font-weight: 700;
       font-size: 18px;
+      text-decoration: none;
     }
   }
 }

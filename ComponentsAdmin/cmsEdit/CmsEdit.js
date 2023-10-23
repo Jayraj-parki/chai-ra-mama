@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import style from "./cmsEdit.module.scss"
 import Image from 'next/image';
 import { formats, modules } from "@/utils/ReactTextEditor";
@@ -10,19 +10,24 @@ import { updateCmsData } from "@/services/updateCmsData";
 import { useCmsData } from "@/app/admin/cmspages/page";
 
 const CmsEdit = ({ editData, setEditData }) => {
-  const {helper}=useCmsData()
+  const { helper } = useCmsData()
   const [cmsHeading, setCmsHeading] = useState()
   const [cmsImage, setCmsImage] = useState()
   const [cmsContent, setCmsContent] = useState()
-  const [_id,setId]=useState()
+  const [_id, setId] = useState()
+  const imageRef = useRef()
+  const UpdateData = async () => {
+    await updateCmsData({ cmsHeading, cmsContent, cmsImage, _id ,clearForm,helper,setEditData})
 
-  const UpdateData=async()=>{ 
-    await updateCmsData({cmsHeading,cmsContent,cmsImage,_id})
-    setEditData({ active: false, heading: "", image: "", content: "" })
-    helper()
   }
-
+  const clearForm = () => {
+    setCmsHeading("")
+    setCmsImage("")
+    imageRef.current.value = ""
+    setCmsContent("")
+  }
   useEffect(() => {
+    clearForm()
     setCmsHeading(editData?.heading)
     setCmsImage(editData?.image)
     setCmsContent(editData?.content)
@@ -33,7 +38,7 @@ const CmsEdit = ({ editData, setEditData }) => {
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header">
-            <button onClick={() => setEditData({ active: false,_id:"", heading: "", image: "", content: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button onClick={() => setEditData({ active: false, _id: "", heading: "", image: "", content: "" })} type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body  d-flex justify-content-center align-items-center">
 
@@ -47,12 +52,12 @@ const CmsEdit = ({ editData, setEditData }) => {
                   <div>
                     <div className="mb-4">
                       <label for="editHeading" className="form-label">Heading</label>
-                      <input  autocomplete="off"   onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
+                      <input autocomplete="off" onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label for="editImage" className="form-label">Upload Image</label>
-                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof cmsImage==="string"  && cmsImage?.includes("http") ? cmsImage : cmsImage!=null&& cmsImage instanceof File?URL.createObjectURL(cmsImage):"/assets/images/1.png"} hidden={cmsImage ? false : true} alt="..." />
-                      <input  autocomplete="off"   type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control" id="editImage" />
+                      <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof cmsImage === "string" && cmsImage?.includes("http") ? cmsImage : cmsImage != null && cmsImage instanceof File ? URL.createObjectURL(cmsImage) : "/assets/images/1.png"} hidden={cmsImage ? false : true} alt="..." />
+                      <input autocomplete="off" type="file" onChange={(e) => setCmsImage(e.target.files[0])} ref={imageRef} accept="image/*" className="form-control" id="editImage" />
                     </div>
                     <div className={" mb-4 "}>
                       <label className="form-label">Content</label>
@@ -68,7 +73,7 @@ const CmsEdit = ({ editData, setEditData }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button onClick={() => setEditData({ active: false, heading: "",_id:"", image: "", content: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button onClick={() => setEditData({ active: false, heading: "", _id: "", image: "", content: "" })} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>

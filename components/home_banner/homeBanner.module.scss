@@ -14,6 +14,30 @@
           filter:  brightness(40%);;
         }
       }
+      .prev{
+        position: absolute;
+        top:0px;
+        left: 0px;
+        height: 580px;
+        cursor: pointer;
+        z-index: 99999;
+        .icon{
+          filter: drop-shadow(5px 5px 5px #222); 
+          font-size: $font-xxl;
+        }
+      }
+      .next{
+        position: absolute;
+        top:0px;
+        right: 0px;
+        height: 580px;
+        cursor: pointer;
+        z-index: 99999;
+        .icon{
+          font-size: $font-xxl;
+          filter: drop-shadow(4px 4px 5px #222); 
+        }
+      }
       .bannerItem {
         position: absolute;
         top: 0;

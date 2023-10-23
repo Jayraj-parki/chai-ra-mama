@@ -1,6 +1,15 @@
+"use client"
+import { useHeaderAndCMSUiContext } from "@/app/layout"
 import style from "./FranchisePartnership.module.scss"
 import Image from 'next/image'
+import { useEffect, useState } from "react"
 const FranchisePartnership = () => {
+    const {cmsData}=useHeaderAndCMSUiContext()
+    const [state,setState]=useState()
+    
+    useEffect(() => {
+        setState(cmsData?.find(item => item?.cmsId === "FranchisePartner"))
+    }, [cmsData])
     return (
         <div className={style.franchisePartnershipDesc + " container-fluid my-5 pb-lg-5"}>
             <div className="row  col-12 mx-auto  d-flex justify-content-center align-items-center ">
@@ -8,21 +17,17 @@ const FranchisePartnership = () => {
                 <div className={" row col-12 d-flex d-lg-none mx-auto mb-4  d-flex justify-content-lg-start justify-content-center  "}>
                         <h2 className={style.franchisePartnership_title + " p-2 px-3 text-start fw-bold text-light mx-lg-0 text-uppercase  rounded"}>Partnership</h2>
                     </div>
-                    <Image className="  col-12 mx-auto" src={"/assets/images/franchisePartner.png"} height={100} width={100} objectFit="cover" alt="about image" />
+                    <Image className="  col-12 mx-auto" src={state?.cmsImage} height={100} width={100} objectFit="cover" alt="Franchise image" />
                 </div>
                 <div className='col-lg-6 col-xxl-5 py-5 '>
                     <div className={" row col-12 d-none d-lg-flex mx-auto mb-4  d-flex justify-content-lg-start justify-content-center  "}>
                         <h2 className={style.franchisePartnership_title + " p-2 px-3 text-start fw-bold text-light mx-lg-0 text-uppercase  rounded"}>Partnership</h2>
                     </div>
                     <div className={style.heading + " row col-12 col-md-10  mx-auto col-lg-12 d-flex  mb-3 d-flex mx-auto   d-flex justify-content-center  "}>
-                        <h1 className=" col-12  fw-bold  text-uppercase  p-0 text-center text-lg-start">Franchise Partnership</h1>
+                        <h1 className=" col-12  fw-bold  text-uppercase  p-0 text-center text-lg-start">{state?.cmsHeading}</h1>
                     </div>
                     <div className={style.franchisePartnership_desc + "  col-md-10  mx-auto col-lg-12 d-flex mb-3   "}>
-                        <p className="  ">
-                            Mauris rhoncus orci in imperdiet placerat. Vestibulum
-                            euismod nisl suscipit ligula volutpat, a feugiat urna
-                            maximus. Cras massa nibhtincidunt.
-                        </p>
+                        <p className="  " dangerouslySetInnerHTML={{__html:state?.cmsContent}}></p>
                     </div>
                     <div className={style.franchisePartnership_list + " row col-12  mx-auto col-lg-12 d-flex  p-0 justify-content-around align-items-center  "}>
                         <div className="col-12  p-0  col-md-8 col-xl-9 mx-auto">

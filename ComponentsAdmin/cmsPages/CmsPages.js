@@ -13,6 +13,7 @@ const CmsPages = () => {
   const [modal, setModal] = useState({ active: false, image: "",})
   const [editData, setEditData] = useState({ active: false, heading: "", image: "", content: "", _id:""})
   const [addData, setAddData] = useState(false)
+  const NA=`<p className="text-center">NA</p>`
   useEffect(()=>{
     helper()
   },[])
@@ -22,8 +23,8 @@ const CmsPages = () => {
       <div className={style.header + ' row col-12 mx-auto'}>
         <PagesIcon className={style.icon + ' col-auto my-auto p-0 '} />
         <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>CMS Pages</h3>
-        <button onClick={() => setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add CMS Page</button>
-        <Link href="./home" className='col-auto  btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
+        {/* <button onClick={() => setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add CMS Page</button> */}
+        <Link href="./home" className='col-auto  btn btn-dark text-light  text-decoration-none ms-auto text-capitalize'> Go back</Link>
       </div>
       <hr />
 
@@ -37,15 +38,17 @@ const CmsPages = () => {
             <th className='text-capitalize p-2 pb-4 border text-center' >IDs</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Heading</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Content</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
           </thead>
           <tbody>
             {data?.map((val,index) => 
                  <tr key={val?.cmsId+""+index+""+Math?.random(10000)} className=''>
-                  <td >{val?.cmsId}</td>
-                  <td className='px-3 text-start'>{val?.cmsHeading }</td>
-                  <td > <Image onClick={() => setModal({ active: true, image: val?.cmsImage || "/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.cmsImage || "/assets/images/1.png"} alt="..." /></td>
-                  <td ><button onClick={() => setEditData({ active: true,_id:val?._id, heading: val?.cmsHeading, image: val?.cmsImage, content: val?.cmsContent })} className='btn btn-primary text-decoration-none '>Edit</button></td>
+                  <td className='px-3 text-center align-middle'>{val?.cmsId}</td>
+                  <td className='px-3 text-center align-middle'>{val?.cmsHeading ||"NA" }</td>
+                  <td className='px-3 text-center align-middle' > <Image onClick={() => setModal({ active: true, image: val?.cmsImage || "/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.cmsImage || "/assets/images/1.png"} alt="..." /></td>
+                  <td className='px-3 text-start align-middle' dangerouslySetInnerHTML={{__html:val?.cmsContent ||"<p>NA</p>" }}></td>
+                  <td className='px-3 text-center align-middle' ><button onClick={() => setEditData({ active: true,_id:val?._id, heading: val?.cmsHeading, image: val?.cmsImage, content: val?.cmsContent })} className='btn btn-primary text-decoration-none '>Edit</button></td>
                 </tr>
               )}
           </tbody>

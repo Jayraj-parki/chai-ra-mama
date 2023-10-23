@@ -9,14 +9,28 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { checkUserLogin } from '@/services/CheckUserLogin'
 import style from "./page.module.scss"
 import Cookies from 'js-cookie';
+import { getHeaders } from '@/services/getHeaders'
+import { getCmsData } from '@/services/getCmsData'
 
 const AuthContext = createContext();
 export function useAuth() {
   return useContext(AuthContext);
 }
 
+const headerCMSUiContext = createContext()
+export const useHeaderAndCMSUiContext = () => {
+  return useContext(headerCMSUiContext)
+}
+
 export default function RootLayout({ children }) {
   const [user, setUser] = useState("")
+  const [headers, setHeaders] = useState()
+  const [cmsData, setCmsData] = useState()
+  const getHeaderAndCms = async () => {
+    await getHeaders(setHeaders)
+    await getCmsData(setCmsData)
+  }
+
   const getUser = async () => {
     const cookie = Cookies.get("teaToken")
     try {
@@ -35,6 +49,7 @@ export default function RootLayout({ children }) {
   }
   useEffect(() => {
     getUser("cookie")
+    getHeaderAndCms()
   }, [])
   return (
     <html lang="en">
@@ -42,9 +57,11 @@ export default function RootLayout({ children }) {
         <main>
           <AuthContext.Provider value={{ user, login, logout }}>
             <Navbar />
-            <div className={style.bodyContent}>
-              {children}
-            </div>
+            <headerCMSUiContext.Provider value={{headers,cmsData}}>
+              <div className={style.bodyContent}>
+                {children}
+              </div>
+            </headerCMSUiContext.Provider>
             <Footer />
           </AuthContext.Provider>
         </main>

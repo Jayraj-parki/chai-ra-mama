@@ -9,7 +9,7 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
             url = headerImage
         }
         else if (headerImage != "") {
-            const imageRef = ref(storage, `images/${headerImage.name + v4()}`)
+            const imageRef = ref(storage, `images/${v4()+headerImage.name  }`)
             const snapshot = await uploadBytes(imageRef, headerImage);
             url = await getDownloadURL(snapshot.ref);
         }

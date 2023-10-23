@@ -6,26 +6,17 @@ import HomeGallery from "@/components/home_gallery/HomeGallery"
 import HomeMenu from "@/components/home_menu/HomeMenu"
 import HomeTestimonial from "@/components/home_testimonial/HomeTestimonial"
 import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
-import { useEffect, useState } from "react"
-import { getHomeData } from "@/services/getHomeData"
 
 const page = () => {
-  const [data, setData] = useState()
-  const helper = async () => {
-    await getHomeData(setData)
-  }
-  useEffect(() => {
-    helper()
-  }, [])
   return (
     <> 
-      <HomeBanner props={data?.homeBannerData} />
-      <HomeHeaderCard props={data?.homeHeaderCardData} />
-      <HomeAboutUs props={data?.homeAboutUsData} />
-      <HomeGallery props={data?.homeGalleryData} />
-      <HomeMenu props={data?.homeMenuCardData} />
-      <HomeTestimonial props={data?.homeTestimonialCardData} />
-      <HomeGetInTouch props={data?.homeGetInTouchImageData} />
+      <HomeBanner />
+      <HomeHeaderCard />
+      <HomeAboutUs/>
+      <HomeGallery />
+      <HomeMenu  />
+      <HomeTestimonial />
+      <HomeGetInTouch />
     </>
   )
 }

@@ -8,8 +8,9 @@
   @import "../../styles/var";
 
   .wcuCard {
+    transform: scaleX(0.99);
     @media screen and (max-width:1400px) {
-     transform: scaleX(0.98);
+      transform: scaleX(0.98);
    }
     .imgContainer {
      img{

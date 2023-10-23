@@ -1,8 +1,14 @@
 "use client";
+import { useHeaderAndCMSUiContext } from "@/app/layout";
 import style from "./ourChef.module.scss"
 import Image from 'next/image'
-const OurChef = ({props}) => {
-
+import { useEffect, useState } from "react";
+const OurChef = () => {
+    const { cmsData } = useHeaderAndCMSUiContext()
+    const [state, setState] = useState()
+    useEffect(() => {
+        setState(cmsData?.filter(item => item?.cmsId?.startsWith("Chef")))
+    }, [cmsData])
     return (
         <>
             <div className={style.wcu + " container-fluid mt-5 py-5"}>
@@ -17,20 +23,22 @@ const OurChef = ({props}) => {
                         <div className={" container-fluid my-5 p-0"}>
                             <div className="row  col-12 p-0 mx-auto d-flex justify-content-around ">
                                 {
-                                    props?.map((val) => {
+                                    state?.map((val) => {
                                         return (
-                                            <div key={val?._id} className={style.wcuCard + "  card col-md-6 my-2 col-xl-4 col-xxl-3 rounded-4 d-flex justify-content-center align-items-center  border-1 p-4 pb-0"}>
-                                                <div className={style.imgContainer + " col-12  mx-auto my-3  "}>
-                                                    <Image className={style.bgImg + " d-block m-0 p-0 mx-auto  "} width={100} height={100} objectFit="cover" src={val?.chefImage} alt="..." />
+                                            val?.cmsHeading ?
+                                                <div key={val?._id} className={style.wcuCard + "  card col-md-6 my-2 col-xl-4 col-xxl-3 rounded-4 d-flex justify-content-center align-items-center  border-1 p-4 pb-0"}>
+                                                    <div className={style.imgContainer + " col-12  mx-auto my-3  "}>
+                                                        <Image className={style.bgImg + " d-block m-0 p-0 mx-auto  "} width={100} height={100} objectFit="cover" src={val?.cmsImage} alt="..." />
+                                                    </div>
+                                                    <div className="row col-12 col-12 card-body  px-0 ">
+                                                        <h5 className={style.name + " fw-bold mb-3 card-title text-center text-uppercase "}>{val?.cmsHeading}</h5>
+                                                        <h5 className={style.experince + " fw-bold mb-3 card-title text-center text-uppercase "} dangerouslySetInnerHTML={{ __html: val?.cmsContent }}></h5>
+                                                    </div>
                                                 </div>
-                                                <div className="row col-12 col-12 card-body  px-0 ">
-                                                    <h5 className={style.name + " fw-bold mb-3 card-title text-center text-uppercase "}>{val?.chefName}</h5>
-                                                    <h5 className={style.experince + " fw-bold mb-3 card-title text-center text-uppercase "}>{val?.year} years experince</h5>
-                                                </div>
-                                            </div>
+                                                : null
                                         )
                                     })
-                                } 
+                                }
 
                             </div>
                         </div>

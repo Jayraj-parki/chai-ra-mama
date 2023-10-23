@@ -14,7 +14,7 @@ export const updateMenuData = async ({_id, menuName,menuImage,menuContent ,helpe
             }
             else if (menuImage!="") {
                 
-                const imageRef = ref(storage, `images/${menuImage.name + v4()}`)
+                const imageRef = ref(storage, `images/${v4()+menuImage.name  }`)
                 const snapshot = await uploadBytes(imageRef, menuImage);
                 url = await getDownloadURL(snapshot.ref);
             }

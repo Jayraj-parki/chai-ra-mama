@@ -1,8 +1,15 @@
 "use client";
 import Image from "next/image";
 import style from "./whyToChooseus.module.scss"
+import { useHeaderAndCMSUiContext } from "@/app/layout";
+import { useEffect, useState } from "react";
 
-const WhyToChooseUs = ({ props }) => {
+const WhyToChooseUs = () => {
+    const {cmsData}=useHeaderAndCMSUiContext()
+    const [state,setState]=useState()
+    useEffect(() => {
+        setState(cmsData?.filter(item => item?.cmsId?.startsWith("WhyToChooseUsCard")))
+    }, [cmsData])
     return (
         <div className={style.wcu + " container-fluid  pb-md-5"}>
             <div className='row col-12 py-5 mx-auto p-0'>
@@ -16,22 +23,22 @@ const WhyToChooseUs = ({ props }) => {
                     <div className={" container-fluid my-5  p-0"}>
                         <div className="row  col-12 col-xxl-10 mx-auto d-flex justify-content-around ">
                             {
-                                props?.map((val) => {
+                                state?.map((val) => {
                                     return (
+                                        val?.cmsHeading ?
                                         <div key={val?._id} className={style.wcuCard + "  col-sm-9 card col-md-6   my-2  col-xl-4  d-flex justify-content-center align-items-center  border-1 py-4"}>
                                             <div className={style.iconContainer + " col-auto mx-auto "}>
                                                 <div className={style.icon + " col-12 px-2 mx-auto my-3  "}>
-                                                    <Image className={style.bgImg + " d-block w-100 m-0 p-0  "} width={100} height={100} objectFit="cover" src={val?.cardImage} alt="..." />
+                                                    <Image className={style.bgImg + " d-block w-100 m-0 p-0  "} width={100} height={100} objectFit="cover" src={val?.cmsImage} alt="..." />
                                                 </div>
                                                 <div className={style.circle}></div>
                                             </div>
                                             <div className="row col-12 col-12 card-body  px-0 ">
-                                                <h5 className={style.cardTitle + " fw-bold mb-4 card-title text-uppercase text-center"}>{val?.cardTitle}</h5>
-                                                <p className={style.cardText + " card-text text-center"}>
-                                                    {val?.cardText}
-                                                </p>
+                                                <h5 className={style.cardTitle + " fw-bold mb-4 card-title text-uppercase text-center"}>{val?.cmsHeading}</h5>
+                                                <p className={style.cardText + " card-text text-center"} dangerouslySetInnerHTML={{__html:val?.cmsContent}}></p>
                                             </div>
                                         </div>
+                                        :null
                                     )
                                 })
                             }

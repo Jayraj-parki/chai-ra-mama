@@ -13,7 +13,7 @@ export const AddMenuData = async ({ menuName,menuImage,menuContent ,helper,setAd
                 url = menuImage
             }
             else if (menuImage!="") {
-                const imageRef = ref(storage, `images/${menuImage.name + v4()}`)
+                const imageRef = ref(storage, `images/${v4()+menuImage.name  }`)
                 const snapshot = await uploadBytes(imageRef, menuImage);
                 url = await getDownloadURL(snapshot.ref);
             }

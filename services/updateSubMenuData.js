@@ -14,7 +14,7 @@ export const updateSubMenuData = async ({_id, itemPrice,itemName,itemImage,helpe
             }
             else if (itemImage!="") {
                 
-                const imageRef = ref(storage, `images/${itemImage.name + v4()}`)
+                const imageRef = ref(storage, `images/${v4()+itemImage.name  }`)
                 const snapshot = await uploadBytes(imageRef, itemImage);
                 url = await getDownloadURL(snapshot.ref);
             }
