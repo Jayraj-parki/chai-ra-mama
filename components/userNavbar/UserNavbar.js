@@ -10,18 +10,9 @@ import { handleUserNavbar } from '@/utils/handleUserNavbar';
 const UserNavbar = () => {
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("/")
-    const [logoImg, setLogoImg] = useState("")
+    const [logoImg, setLogoImg] = useState("/assets/images/logo.png'")
     const [menu, SetMenu] = useState(true)
     const url = usePathname()
-    useEffect(() => {
-        try {
-            const data = require("@/data/headerData.json")
-            setLogoImg(data.logoImg)
-        }
-        catch (e) {
-            setLogoImg("'/assets/images/logo.png'")
-        }
-    }, [])
     useEffect(() => {
         handleUserNavbar({url,setCollapse,SetMenu,setActiveLink})        
     }, [url])

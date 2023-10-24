@@ -58,7 +58,7 @@ const LinksAndTags = () => {
           <table className=" table table-borderless text-capitalize ">
             <tbody>
               <tr className=''>
-                <td className='align-middle' >Meta tag</td>
+                <td className='align-middle' >Meta Title tag</td>
                 <td className='align-middle' ><textarea name="" type="text" className="form-control" placeholder='write something here' ></textarea>
                 </td>
               </tr>

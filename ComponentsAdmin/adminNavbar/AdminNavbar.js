@@ -17,7 +17,7 @@ const AdminNavbar = () => {
     const { user, logout } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("")
-    const [logoImg, setLogoImg] = useState("")
+    const [logoImg, setLogoImg] = useState('/assets/images/logo.png')
     const [menu, SetMenu] = useState(true)
     const url = usePathname()
     const router = useRouter();
@@ -28,17 +28,7 @@ const AdminNavbar = () => {
     useEffect(() => {
         handleAdminNavbar({ url, setCollapse, SetMenu, setActiveLink })
     }, [url])
-
-    // todo: remove once created api for this 
-    useEffect(() => {
-        try {
-            const data = require("@/data/headerData.json")
-            setLogoImg(data.logoImg)
-        }
-        catch (e) {
-            setLogoImg("'/assets/images/logo.png'")
-        }
-    }, [])
+   
     return (
         <>
             <nav className={style.navbar + " contaner-fluid navbar bg-light navbar-expand-lg shadow-sm  px-3"}>

@@ -1,5 +1,6 @@
 export const getHomeBannerData = async (setData) => {
-    try { 
+
+  try { 
       const result = await fetch("/api/admin/home-banner", { next:{revalidate:1800}})
       const data = await result.json()
       setData(data?.data)

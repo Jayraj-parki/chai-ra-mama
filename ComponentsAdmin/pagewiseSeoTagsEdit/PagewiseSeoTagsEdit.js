@@ -33,11 +33,11 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                 <div className='row col-12 mx-auto mt-5'>
                   <div className="text-capitalize">
                     <div className="mb-4">
-                      <label  className="form-label">Title</label>
+                      <label  className="form-label">Page Name</label>
                       <input  autocomplete="off"   onChange={(e) => setPageTitle(e.target.value)} value={pageTitle} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
                     </div>
                     <div className="mb-4">
-                      <label  className="form-label">meta tags</label>
+                      <label  className="form-label">meta title tags</label>
                       <textarea onChange={(e) => setPageMetaTag(e.target.value)} value={pageMetaTag} name="pageMetaTag" type="text" className="form-control" placeholder='write something here...' ></textarea>
                     </div>
                     <div className="mb-4">

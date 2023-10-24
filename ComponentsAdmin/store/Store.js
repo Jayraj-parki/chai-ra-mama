@@ -6,13 +6,13 @@ import Link from 'next/link';
 import EditStore from '../editStore/EditStore';
 import AddStore from '../addStore/AddStore';
 import { useStoreContext } from '@/app/admin/store/add-store/[id]/page';
-import { deleteStoreData } from '@/services/deleteStoreData';
+import { DeleteDataService } from '@/services/deleteData';
 const Store = () => {
   const { storeData, helper } = useStoreContext()
   const [editData, setEditData] = useState({ active: false, _id: "", address: "", map: "", phone: "", })
   const [addData, setAddData] = useState(false)
   const deleteData = async (_id) => {
-    await deleteStoreData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"stores" })
   }
   useEffect(() => {
     helper()

@@ -8,7 +8,7 @@ import ImageModal from '../imageModal/ImageModal';
 import MenuEdit from '../menuEdit/MenuEdit';
 import MenuAdd from '../menuAdd/MenuAdd';
 import { useMenuContext } from '@/app/admin/menu/page';
-import { deleteMenuData } from '@/services/deleteMenuData';
+import { DeleteDataService } from '@/services/deleteData';
 const Menu = () => {
   const { menuData, helper } = useMenuContext()
   const [modal, setModal] = useState({ active: false, image: "" })
@@ -16,7 +16,7 @@ const Menu = () => {
   const [editData, setEditData] = useState({ active: false, _id: "", title: "", image: "", content: "" })
 
   const deleteData = async (_id) => {
-    await deleteMenuData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"menu" })
   }
   useEffect(() => {
     helper()

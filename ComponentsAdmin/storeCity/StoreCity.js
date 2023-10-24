@@ -6,14 +6,14 @@ import Link from 'next/link';
 import StoreEditCity from '../storeEditCity/StoreEditCity';
 import StoreAddCity from '../storeAddCity/StoreAddCity';
 import { useStoreLocatorContext } from '@/app/admin/store/page';
-import { deleteStoreCityData } from '@/services/deleteStoreCityData';
+import { DeleteDataService } from '@/services/deleteData';
 const StoreCity = () => {
   const { storeCityData, helper } = useStoreLocatorContext()
   const [editData, setEditData] = useState({ active: false, city: "" })
   const [addData, setAddData] = useState(false)
 
   const deleteData = async (_id) => {
-    await deleteStoreCityData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"store-locator" })
   }
   useEffect(() => {
     helper()

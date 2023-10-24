@@ -8,14 +8,14 @@ import ImageModal from '../imageModal/ImageModal';
 import SubMenuEdit from '../subMenuEdit/SubMenuEdit';
 import SubMenuAdd from '../subMenuAdd/subMenuAdd';
 import { useSubMenuContext } from '@/app/admin/menu/submenu/[id]/page';
-import { deleteSubMenuData } from '@/services/deleteSubMenuData';
+import { DeleteDataService } from '@/services/deleteData';
 const SubMenu = () => {
   const { subMenuData, helper } = useSubMenuContext()
   const [modal, setModal] = useState({ active: false, image: "" })
   const [editData, setEditData] = useState({ active: false, _id: "", image: "", title: "", price: "" })
   const [addData, setAddData] = useState(false)
   const deleteData = async (_id) => {
-    await deleteSubMenuData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"sub-menu" })
   }
   useEffect(() => {
     helper()

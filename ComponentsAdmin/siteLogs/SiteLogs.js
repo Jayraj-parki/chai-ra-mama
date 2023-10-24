@@ -10,7 +10,7 @@ const SiteLogs = () => {
     <div className={style.siteLogs + ' container-fluid my-4  shadow rounded-4 p-4'}>
       <div className={style.header + ' row col-12 mx-auto'}>
         <LoginIcon className={style.icon + ' col-auto my-auto p-0 '} />
-        <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>CMS Pages</h3>
+        <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Site Logs</h3>
         <Link href="./home" className='col-auto ms-auto btn btn-dark text-light  text-decoration-none m-2 text-capitalize'> Go back</Link>
       </div>
       <hr />

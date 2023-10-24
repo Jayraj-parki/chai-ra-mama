@@ -8,7 +8,7 @@ import ImageModal from '../imageModal/ImageModal';
 import GalleryEdit from '../galleryEdit/GalleryEdit';
 import GalleryAdd from '../galleryAdd/GalleryAdd';
 import { useGalleryData } from '@/app/admin/gallery/page';
-import { deleteGalleryData } from '@/services/deleteGalleryData';
+import { DeleteDataService } from '@/services/deleteData';
 const Gallery = () => {
   const { data, helper } = useGalleryData()
   const [modal, setModal] = useState({ active: false, image: ""})
@@ -16,7 +16,7 @@ const Gallery = () => {
   const [editData, setEditData] = useState({ active: false, _id:"", title:"", image: ""})
   
   const deleteData=async(_id)=>{
-    await deleteGalleryData({_id,helper})
+    await DeleteDataService({_id,helper,end_url:"gallery"})
   }
   useEffect(() => {
     helper() 

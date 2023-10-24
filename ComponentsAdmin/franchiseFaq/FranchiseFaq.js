@@ -6,13 +6,13 @@ import Link from 'next/link';
 import FranchiseFaqEdit from '../franchiseFaqEdit/FranchiseFaqEdit';
 import FranchiseFaqAdd from '../franchiseFaqAdd/FranchiseFaqAdd';
 import { usefaqContext } from '@/app/admin/franchise-faq/page';
-import { deleteFaqData } from '@/services/deleteFaqData';
+import { DeleteDataService } from '@/services/deleteData';
 const FranchiseFaq = () => {
   const { faqData, helper } = usefaqContext()
   const [editData, setEditData] = useState({ active: false,_id:"", question: "", answer: "" })
   const [addData, setAddData] = useState(false)
   const deleteData = async (_id) => {
-    await deleteFaqData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"franchise-faq" })
   }
   useEffect(() => {
     helper()

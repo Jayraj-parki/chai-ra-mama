@@ -8,15 +8,15 @@ import ImageModal from '../imageModal/ImageModal';
 import ClientFeedbackEdit from '../clientFeedbackEdit/ClientFeedbackEdit';
 import ClientFeedbackAdd from '../clientFeedbackAdd/ClientFeedbackAdd';
 
-import { deleteClientFbData } from '@/services/deleteClientFbData';
 import { useClientFeedbackContext } from '@/app/admin/client-feedback/page';
+import { DeleteDataService } from '@/services/deleteData';
 const ClientFeedback = () => {
   const{clientFbData, helper}= useClientFeedbackContext()
   const [modal, setModal] = useState({ active: false, image: "" })
   const [editData, setEditData] = useState({ active: false, name: "", image: "", content: "",designation:"", _id: "" })
   const [addData, setAddData] = useState(false)
   const deleteData = async (_id) => {
-    await deleteClientFbData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"client-feedback" })
   }
   useEffect(() => {
     helper()

@@ -37,17 +37,27 @@ const SiteDetails = () => {
               </tr>
               <tr className=''>
                 <td className='align-middle' >Site Email Id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >From Email Id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Forget password Email id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
+                </td>
+              </tr>
+              <tr className=''>
+                <td className='align-middle' >Closed On</td>
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='Saturday, Sunday' />
+                </td>
+              </tr>
+              <tr className=''>
+                <td className='align-middle' >Opening Hours</td>
+                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='Mon - Sat (8:00 -6:00)' />
                 </td>
               </tr>
             </tbody>

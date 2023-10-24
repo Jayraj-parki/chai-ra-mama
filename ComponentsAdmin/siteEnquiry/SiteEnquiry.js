@@ -6,14 +6,14 @@ import Link from 'next/link';
 import SiteEnquiryEdit from '../siteEnquiryEdit/SiteEnquiryEdit';
 import SiteEnquiryAdd from '../siteEnquiryAdd/SiteEnquiryAdd';
 import { useSiteEnquiryContext } from '@/app/admin/site-enquiries/page';
-import { deleteSiteEnquiryData } from '@/services/deleteSiteEnquiryData';
+import { DeleteDataService } from '@/services/deleteData';
 const SiteEnquiry = () => {
   const { siteEnqData, helper } = useSiteEnquiryContext()
   const [editData, setEditData] = useState({ active: false, name: "", email: "", phone: "" })
   const [addData, setAddData] = useState(false)
 
   const deleteData = async (_id) => {
-    await deleteSiteEnquiryData({ _id, helper })
+    await DeleteDataService({ _id, helper,end_url:"site-enquiry" })
   }
   useEffect(() => {
     helper()

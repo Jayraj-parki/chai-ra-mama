@@ -8,14 +8,14 @@ import ImageModal from '../imageModal/ImageModal';
 import HomeBannerEdit from '../homeBannerEdit/HomeBannerEdit';
 import HomeBannerAdd from '../homeBannerAdd/HomeBannerAdd';
 import { useHomeBannerContext } from '@/app/admin/homebanner/page';
-import { deleteHomeBanner } from '@/services/deleteHomeBanner';
+import { DeleteDataService } from '@/services/deleteData';
 const HomeBanners = () => {
   const { bannerData, helper } = useHomeBannerContext()
   const [modal, setModal] = useState({ active: false, image: "" })
   const [editData, setEditData] = useState({ active: false, _id: "", image: "" })
   const [addData, setAddData] = useState(false)
   const deleteData=async(_id)=>{
-    await deleteHomeBanner({_id,helper})
+    await DeleteDataService({_id,helper,end_url:"home-banner"})
   }
   useEffect(() => {
     helper()
