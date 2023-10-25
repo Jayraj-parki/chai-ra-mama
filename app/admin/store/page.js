@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import StoreCity from '@/ComponentsAdmin/storeCity/StoreCity';
-import { getStoreCityData } from '@/services/getStoreCityData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 const storeLocatorContext=createContext()
 export const useStoreLocatorContext=()=>{
@@ -11,7 +11,7 @@ const page = () => {
   const { user } = useAuth()
   const [storeCityData,setData]=useState()
   const helper = async () => {
-    await getStoreCityData(setData)
+    await getDataService(setData,"store-locator")
   }
   useEffect(()=>{
     if(user) helper()

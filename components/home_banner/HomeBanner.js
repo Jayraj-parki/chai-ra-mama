@@ -2,17 +2,17 @@
 import Image from "next/image"
 import style from "./homeBanner.module.scss"
 import {  useEffect, useState } from "react"
-import { getHomeBannerData } from "@/services/getHomeBannerData"
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useHeaderAndCMSUiContext } from "@/app/layout"
+import { getDataService } from "@/services/getDataService"
 function HomeBanner() {
     const {cmsData}=useHeaderAndCMSUiContext()
     const [banner, setBanner] = useState()
     const [currentSlide, setCurrentSlide] = useState(0);
     const [state,setState]=useState()
     const fetchBanner = async () => {
-        await getHomeBannerData(setBanner)
+        await getDataService(setBanner,"home-banner")
     } 
     useEffect(() => {
         fetchBanner()

@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import SubMenu from '@/ComponentsAdmin/subMenu/SubMenu';
-import { getSubMenuPageData } from '@/services/getSubMenuData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 const subMenuContext = createContext()
 export const useSubMenuContext = () => {
@@ -11,7 +11,7 @@ const page = ({ params }) => {
   const { user } = useAuth()
   const [subMenuData, setData] = useState()
   const helper = async () => {
-    await getSubMenuPageData({ _id: params?.id, setData })
+    await getDataService(setData,`sub-menu?_id=${params?.id}`)
   }
   useEffect(() => {
     if (user) helper()

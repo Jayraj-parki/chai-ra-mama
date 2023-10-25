@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import FranchiseFaq from '@/ComponentsAdmin/franchiseFaq/FranchiseFaq';
-import { getFaqData } from '@/services/getFaqData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 const faqContext = createContext()
 export const usefaqContext = () => {
@@ -11,7 +11,7 @@ const page = () => {
   const { user } = useAuth()
   const [faqData, setData] = useState()
   const helper = async () => {
-    await getFaqData(setData)
+    await getDataService(setData,"franchise-faq")
   }
   useEffect(() => {
     if (user) helper()

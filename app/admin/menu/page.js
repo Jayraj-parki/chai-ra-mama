@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import Menu from '@/ComponentsAdmin/menu/Menu';
-import { getMenuPageData } from '@/services/getMenuPageData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const menuContext = createContext()
@@ -13,7 +13,7 @@ const page = () => {
   const { user } = useAuth()
   const [menuData, setData] = useState()
   const helper = async () => {
-    await getMenuPageData(setData)
+    await getDataService(setData,"menu")
   }
   useEffect(() => {
     if (user) helper()

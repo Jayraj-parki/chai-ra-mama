@@ -1,8 +1,7 @@
 "use client"
 import MenuBanner from '@/components/menu_banner/MenuBanner'
 import PopularMenu from '@/components/menu_popularMenu/PopularMenu'
-import { getAllSubMenuPageData } from '@/services/getAllSubMenuData'
-import { getMenuPageData } from '@/services/getMenuPageData'
+import { getDataService } from '@/services/getDataService'
 import { createContext, useContext, useEffect, useState } from "react"
 const menuUiContext=createContext()
 export const useMenuUiContext=()=>{
@@ -12,8 +11,8 @@ const page = () => {
   const [menuData, setMenuData] = useState()
   const [subMenuData, setSubMenuData] = useState()
   const helper = async () => {
-    await getMenuPageData(setMenuData)
-    await getAllSubMenuPageData(setSubMenuData)
+    await getDataService(setMenuData,"menu")
+    await getDataService(setSubMenuData,"sub-menu/all")
   }
   useEffect(() => {
     helper()

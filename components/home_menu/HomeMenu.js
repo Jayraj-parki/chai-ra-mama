@@ -4,11 +4,11 @@ import Link from "next/link"
 import Image from 'next/image'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useEffect, useState } from "react";
-import { getMenuPageData } from "@/services/getMenuPageData";
+import { getDataService } from "@/services/getDataService";
 const HomeMenu = () => {
     const [data,setData]=useState()
     const helper=async()=>{
-        await getMenuPageData(setData)
+        await getDataService(setData,"menu")
     }
     useEffect(()=>{
         helper()

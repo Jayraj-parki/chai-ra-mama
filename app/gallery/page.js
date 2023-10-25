@@ -1,7 +1,7 @@
 "use client"
 import GalleryCard from '@/components/gallery_GalleryCards/GalleryCard'
 import GalleryBanner from '@/components/gallery_banner/GalleryBanner'
-import { getGalleryData } from '@/services/getGalleryData'
+import { getDataService } from '@/services/getDataService'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const galleryContext = createContext()
@@ -11,7 +11,7 @@ export const useGalleryContext = () => {
 const page = () => {
   const [galleryData, setData] = useState()
   const helper = async () => {
-    await getGalleryData(setData)
+    await getDataService(setData,"gallery")
   } 
   useEffect(() => {
     helper()

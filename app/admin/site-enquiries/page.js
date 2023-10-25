@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import SiteEnquiry from '@/ComponentsAdmin/siteEnquiry/SiteEnquiry';
-import { getSiteEnquiryData } from '@/services/getSiteEnquiryData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const siteEnquiryContext = createContext()
@@ -13,7 +13,7 @@ const page = () => {
   const { user } = useAuth()
   const [siteEnqData, setData] = useState()
   const helper = async () => {
-    await getSiteEnquiryData(setData)
+    await getDataService(setData,"site-enquiry")
   }
   useEffect(() => {
     if (user) helper()

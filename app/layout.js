@@ -9,8 +9,7 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { checkUserLogin } from '@/services/CheckUserLogin'
 import style from "./page.module.scss"
 import Cookies from 'js-cookie';
-import { getHeaders } from '@/services/getHeaders'
-import { getCmsData } from '@/services/getCmsData'
+import { getDataService } from '@/services/getDataService'
 
 const AuthContext = createContext();
 export function useAuth() {
@@ -27,8 +26,8 @@ export default function RootLayout({ children }) {
   const [headers, setHeaders] = useState()
   const [cmsData, setCmsData] = useState()
   const getHeaderAndCms = async () => {
-    await getHeaders(setHeaders)
-    await getCmsData(setCmsData)
+    await getDataService(setHeaders,"headers")
+    await getDataService(setCmsData,"cms-pages")
   }
 
   const getUser = async () => {

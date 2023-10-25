@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import ClientFeedback from '@/ComponentsAdmin/clientFeedback/ClientFeedback';
-import { getClientFbData } from '@/services/getClientFbData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const clientFeedbackContext = createContext()
@@ -13,7 +13,7 @@ const page = () => {
   const { user } = useAuth()
   const [clientFbData, setData] = useState()
   const helper = async () => {
-    await getClientFbData(setData)
+    await getDataService(setData,"client-feedback")
   }
   useEffect(() => {
     if (user) helper()

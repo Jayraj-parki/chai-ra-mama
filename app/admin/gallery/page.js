@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import Gallery from '@/ComponentsAdmin/gallery/Gallery';
-import { getGalleryData } from '@/services/getGalleryData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 const galleryContext = createContext()
 
@@ -13,7 +13,7 @@ const page = () => {
   const { user } = useAuth()
   const [data, setData] = useState()
   const helper = async () => {
-    await getGalleryData(setData)
+    await getDataService(setData,"gallery")
   }
   useEffect(() => {
     if (user) helper()

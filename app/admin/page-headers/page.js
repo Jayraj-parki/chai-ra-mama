@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import HeadersList from '@/ComponentsAdmin/headersList/HeadersList';
-import { getHeaders } from '@/services/getHeaders';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const headerContext = createContext()
@@ -12,7 +12,7 @@ const page = () => {
   const { user } = useAuth()
   const [headerData, setData] = useState()
   const helper = async () => {
-    await getHeaders(setData)
+    await getDataService(setData,"headers")
   }
   useEffect(() => {
     if(user) helper()

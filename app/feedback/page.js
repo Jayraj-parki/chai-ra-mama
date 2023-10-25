@@ -1,7 +1,7 @@
 "use client"
 import FeedbackCards from '@/components/feedback_Cards/FeedbackCards'
 import FeedbackBanner from '@/components/feedback_banner/FeedbackBanner'
-import { getClientFbData } from '@/services/getClientFbData'
+import { getDataService } from '@/services/getDataService'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const feedbackUiContext = createContext()
@@ -13,7 +13,7 @@ export const useFeedbackuiContext = () => {
 const page = () => {
   const [feedbacks, setData] = useState()
   const helper = async () => {
-    await getClientFbData(setData)
+    await getDataService(setData,"client-feedback")
   }
   useEffect(() => {
     helper()

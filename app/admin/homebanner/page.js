@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import HomeBanners from '@/ComponentsAdmin/homeBanner/HomeBanners';
-import { getHomeBannerData } from '@/services/getHomeBannerData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const homeBannerContext = createContext()
@@ -13,7 +13,7 @@ const page = () => {
   const { user } = useAuth()
   const [bannerData, setData] = useState()
   const helper = async () => {
-    await getHomeBannerData(setData)
+    await getDataService(setData,"home-banner")
   }
   useEffect(() => {
     if (user) helper()

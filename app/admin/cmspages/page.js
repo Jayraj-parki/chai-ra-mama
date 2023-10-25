@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/app/layout';
 import CmsPages from '@/ComponentsAdmin/cmsPages/CmsPages';
-import { getCmsData } from '@/services/getCmsData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 
 const cmsContext = createContext();
@@ -14,7 +14,7 @@ const page = () => {
   const [data, setData] = useState([])
   const { user } = useAuth()
   const helper = async () => {
-    await getCmsData(setData)
+    await getDataService(setData,"cms-pages")
   }
   useEffect(() => {
     if(user) helper()

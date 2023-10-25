@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Link from "next/link"
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useEffect, useState } from "react"
-import { getGalleryData } from "@/services/getGalleryData"
+import { getDataService } from "@/services/getDataService";
 const HomeGallery = () => {
     const [data,setData]=useState()
     const helper=async()=>{
-        await getGalleryData(setData)
+        await getDataService(setData,"gallery")
     }
     useEffect(()=>{
         helper()

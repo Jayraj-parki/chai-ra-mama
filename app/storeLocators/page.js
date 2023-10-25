@@ -1,9 +1,7 @@
 "use client"
 import StoreCards from '@/components/store_Cards/StoreCards'
 import StoreBanner from '@/components/store_banner/StoreBanner'
-import { getAllStoreData } from '@/services/getAllStoreData'
-import { getStoreCityData } from '@/services/getStoreCityData'
-import { getStoreData } from '@/services/getStoreData'
+import { getDataService } from '@/services/getDataService'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const StoreUiContext = createContext()
@@ -15,8 +13,8 @@ const page = () => {
   const [storeCity, setStoreCity] = useState()
   const [storeDetails, setStoreDetails] = useState()
   const helper = async () => {
-    await getStoreCityData(setStoreCity)
-    await getAllStoreData(setStoreDetails)
+    await getDataService(setStoreCity,"store-locator")
+    await getDataService(setStoreDetails,"stores/all")
   }
   useEffect(() => {
     helper()

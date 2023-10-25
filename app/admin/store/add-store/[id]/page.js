@@ -1,7 +1,7 @@
 "use client"
 import { useAuth } from '@/app/layout';
 import Store from '@/ComponentsAdmin/store/Store';
-import { getStoreData } from '@/services/getStoreData';
+import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
 const storeContext = createContext()
 export const useStoreContext = () => {
@@ -11,7 +11,7 @@ const page = ({ params }) => {
   const { user } = useAuth()
   const [storeData,setData]=useState()
   const helper = async () => {
-    await getStoreData({ _id: params?.id, setData })
+    await getDataService(setData,`stores?_id=${params?.id}`)
   }
   useEffect(() => {
     if (user) helper()
