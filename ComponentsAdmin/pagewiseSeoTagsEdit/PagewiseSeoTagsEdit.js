@@ -1,19 +1,32 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./pagewiseSeoTagsEdit.module.scss"
+import { usePageTagContext } from "@/app/admin/pagewise-tags/page";
+import { updatePagewiseTags } from "@/services/updatePagewiseTags";
 
 const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
-  const [pageTitle, setPageTitle] = useState()
-  const [pageMetaTag, setPageMetaTag] = useState()
-  const [pageMetaKeyword, setPageMetaKeyword] = useState()
-  const [pageMetaDescription, setPageMetaDescription] = useState()
- 
-
+  
+  const {helper}=usePageTagContext()
+  const [pageId, setPageId] = useState()
+  const [metaTitle, setMetaTitle] = useState()
+  const [metaKeyword, setMetaKeyword] = useState()
+  const [metaDesc, setMetaDesc] = useState()
+  const [_id, setId] = useState()
+  const clearForm=()=>{
+    setMetaTitle("")
+    setMetaKeyword("")
+    setMetaDesc("")
+  }
+  const updateData = async () => {
+    await updatePagewiseTags({ _id, pageId, metaTitle ,metaDesc, metaKeyword, helper, setEditData, clearForm })
+  }
   useEffect(() => {
-    setPageTitle(editData?.title)
-    setPageMetaTag(editData?.metaTag)
-    setPageMetaKeyword(editData?.metaKeyword)
-    setPageMetaDescription(editData?.metaDescription)
+    clearForm()
+    setPageId(editData?.pId)
+    setId(editData?._id)
+    setMetaTitle(editData?.title)
+    setMetaKeyword(editData?.keyword)
+    setMetaDesc(editData?.desc)
   }, [editData])
   return (
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -33,24 +46,25 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                 <div className='row col-12 mx-auto mt-5'>
                   <div className="text-capitalize">
                     <div className="mb-4">
-                      <label  className="form-label">Page Name</label>
-                      <input  autocomplete="off"   onChange={(e) => setPageTitle(e.target.value)} value={pageTitle} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
+                      <label  className="form-label">Page Id</label>
+                      <input  autocomplete="off" disabled value={pageId}  name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta title tags</label>
-                      <textarea onChange={(e) => setPageMetaTag(e.target.value)} value={pageMetaTag} name="pageMetaTag" type="text" className="form-control" placeholder='write something here...' ></textarea>
+                      <input onChange={(e) => setMetaTitle(e.target.value)} value={metaTitle} name="pageMetaTag" type="text" className="form-control" placeholder='Page title here' />
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta keywords</label>
-                      <input  autocomplete="off"   onChange={(e) => setPageMetaKeyword(e.target.value)} value={pageMetaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='write something here...' ></input>
+                      <textarea  autocomplete="off"   onChange={(e) => setMetaKeyword(e.target.value)} value={metaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='meta keyword here' ></textarea>
                     </div>
                     <div className="mb-4">
                       <label  className="form-label">meta description</label>
-                      <input  autocomplete="off"   onChange={(e) => setPageMetaDescription(e.target.value)} value={pageMetaDescription} name="pageMetaDescription" type="text" className="form-control" placeholder='write something here...' ></input>
+                      <textarea  autocomplete="off"   onChange={(e) => setMetaDesc(e.target.value)} value={metaDesc} name="pageMetaDescription" type="text" className="form-control" placeholder='meta description here' ></textarea>
                     </div>
-                   
-                    
-                    <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">Update</button>
+                    <div className='row col-12 '>
+                      <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                      <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">update</button>
+                    </div>
                   </div>
                 </div>
               </div>

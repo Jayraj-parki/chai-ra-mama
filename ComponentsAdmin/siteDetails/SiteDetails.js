@@ -1,15 +1,47 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./siteDetails.module.scss"
 import Link from 'next/link';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import Image from 'next/image';
 import ImageModal from '../imageModal/ImageModal';
+import { updateSiteDetails } from '@/services/updateSiteDetails';
+import { useSiteDetailsContext } from '@/app/admin/site-details/page';
 const SiteDetails = () => {
-  const [modal, setModal] = useState({
-    active: false,
-    image: "",
-  })
+  const { siteData, helper } = useSiteDetailsContext()
+  const [modal, setModal] = useState({ active: false, image: "" })
+  const [siteName, setSiteName] = useState(siteData?.siteName)
+  const [sitePhone, setSitePhone] = useState(siteData?.sitePhone)
+  const [siteEmail, setSiteEmail] = useState(siteData?.siteEmail)
+  const [siteFromEmail, setSiteFromEmail] = useState(siteData?.siteFromEmail)
+  const [siteForgetPassEmail, setSiteForgetPassEmail] = useState(siteData?.siteForgetPassEmail)
+  const [siteCloseOn, setSiteCloseOn] = useState(siteData?.siteCloseOn)
+  const [siteOpenHr, setSiteOpenHr] = useState(siteData?.siteOpenHr)
+  const [siteLogo, setSiteLogo] = useState(siteData?.siteLogo)
+  const [siteFavIcon, setSiteFavIcon] = useState(siteData?.siteFavIcon)
+  const [siteAddress, setSiteAddress] = useState(siteData?.siteAddress)
+  const [siteMap, setSiteMap] = useState(siteData?.siteMap)
+  const [siteId, setSiteId] = useState(siteData?._id)
+  const updateData = async () => {
+    await updateSiteDetails({ _id: siteId, siteName, sitePhone, siteEmail, siteFromEmail, siteForgetPassEmail, siteCloseOn, siteOpenHr, siteLogo, siteFavIcon, siteAddress, siteMap })
+  }
+  useEffect(() => {
+    setSiteName(siteData?.siteName)
+    setSitePhone(siteData?.sitePhone)
+    setSiteEmail(siteData?.siteEmail)
+    setSiteFromEmail(siteData?.siteFromEmail)
+    setSiteForgetPassEmail(siteData?.siteForgetPassEmail)
+    setSiteCloseOn(siteData?.siteCloseOn)
+    setSiteOpenHr(siteData?.siteOpenHr)
+    setSiteLogo(siteData?.siteLogo)
+    setSiteFavIcon(siteData?.siteFavIcon)
+    setSiteAddress(siteData?.siteAddress)
+    setSiteMap(siteData?.siteMap)
+    setSiteId(siteData?._id)
+  }, [siteData])
+  useEffect(() => {
+    helper()
+  }, [])
   return (
 
     <div className={style.siteDetails + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -27,37 +59,37 @@ const SiteDetails = () => {
             <tbody>
               <tr className=''>
                 <td className='align-middle' >Site name</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={siteName} onChange={(e) => setSiteName(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='Site Name' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Site Phone number</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="text" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={sitePhone} onChange={(e) => setSitePhone(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='Site Phone number' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Site Email Id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={siteEmail} onChange={(e) => setSiteEmail(e.target.value)} autocomplete="off" name="" type="email" className="form-control" placeholder='Site Email Id' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >From Email Id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={siteFromEmail} onChange={(e) => setSiteFromEmail(e.target.value)} autocomplete="off" name="" type="email" className="form-control" placeholder='From Email Id' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Forget password Email id</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='write something here' />
+                <td className='align-middle' ><input value={siteForgetPassEmail} onChange={(e) => setSiteForgetPassEmail(e.target.value)} autocomplete="off" name="" type="email" className="form-control" placeholder='Forget password Id' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Closed On</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='Saturday, Sunday' />
+                <td className='align-middle' ><input value={siteCloseOn} onChange={(e) => setSiteCloseOn(e.target.value)} autocomplete="off" name="" type="email" className="form-control" placeholder='Saturday, Sunday' />
                 </td>
               </tr>
               <tr className=''>
                 <td className='align-middle' >Opening Hours</td>
-                <td className='align-middle' ><input  autocomplete="off"   name="" type="email" className="form-control" placeholder='Mon - Sat (8:00 -6:00)' />
+                <td className='align-middle' ><input value={siteOpenHr} onChange={(e) => setSiteOpenHr(e.target.value)} autocomplete="off" name="" type="email" className="form-control" placeholder='Mon - Sat (8:00 -6:00)' />
                 </td>
               </tr>
             </tbody>
@@ -80,8 +112,8 @@ const SiteDetails = () => {
               <tr className=''>
                 <td className='align-middle' >Logo</td>
                 <td className='align-middle' >
-                  <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." />
-                  <input  autocomplete="off"   type="file" accept="image/*" className="form-control" id="editImage" />
+                  <Image onClick={() => setModal({ active: true, image: siteLogo || "/assets/images/1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof siteLogo === "string" && siteLogo?.includes("http") ? siteLogo : siteLogo != null && siteLogo instanceof File ? URL.createObjectURL(siteLogo) : "/assets/images/1.png"} hidden={siteLogo ? false : true} alt="..." />
+                  <input onChange={(e) => setSiteLogo(e.target?.files[0])} autocomplete="off" type="file" accept="image/*" className="form-control" id="editImage" />
                   <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                   <p> <small>Please upload (210 x 160) pixel images to maintain designs</small></p>
                 </td>
@@ -90,8 +122,8 @@ const SiteDetails = () => {
               <tr className=''>
                 <td className='align-middle' >Site Favicon</td>
                 <td className='align-middle' >
-                  <Image onClick={() => setModal({ active: true, image: "/assets/images/g1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/g1.png"} alt="..." />
-                  <input  autocomplete="off"   type="file" accept="image/*" className="form-control" id="editImage" />
+                  <Image onClick={() => setModal({ active: true, image: siteFavIcon || "/assets/images/1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof siteFavIcon === "string" && siteFavIcon?.includes("http") ? siteFavIcon : siteFavIcon != null && siteFavIcon instanceof File ? URL.createObjectURL(siteFavIcon) : "/assets/images/1.png"} hidden={siteFavIcon ? false : true} alt="..." />
+                  <input onChange={(e) => setSiteFavIcon(e.target?.files[0])} autocomplete="off" type="file" accept="image/*" className="form-control" id="editImage" />
                   <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                   <p> <small>Please upload (80 x 80) pixel images to maintain designs</small></p>
                 </td>
@@ -113,19 +145,18 @@ const SiteDetails = () => {
               <tbody>
                 <tr className=''>
                   <td className='align-middle' >Address</td>
-                  <td className='align-middle' ><textarea name="" type="text" className="form-control" placeholder='write something here' ></textarea>
+                  <td className='align-middle' ><textarea value={siteAddress} onChange={(e) => setSiteAddress(e.target.value)} name="" type="text" className="form-control" placeholder='Address here' ></textarea>
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Map</td>
-                  <td className='align-middle' ><textarea name="" type="text" className="form-control" placeholder='write something here'  ></textarea>
+                  <td className='align-middle' ><textarea value={siteMap} onChange={(e) => setSiteMap(e.target.value)} name="" type="text" className="form-control" placeholder='Address Map here'  ></textarea>
                   </td>
                 </tr>
               </tbody>
             </table>
             <div className='col-12'>
-
-              <button type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
+              <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
             </div>
           </div>
         </div>

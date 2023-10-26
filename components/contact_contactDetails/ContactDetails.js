@@ -1,9 +1,11 @@
-
+"use client"
 import style from "./contactDetails.module.scss"
 import DraftsOutlinedIcon from '@mui/icons-material/DraftsOutlined';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
 import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import { useSiteDataUIContext } from "@/app/layout";
 const ContactDetails = () => {
+    const {siteUIData}=useSiteDataUIContext()
     return (
         <div className={style.contact + ' container-fluid p-2 my-5 pb-5'}>
             <div className={style.cardContainer + ' row col-xl-11 col-xxl-10 mx-auto py-5 p-xl-5   rounded-3 border'}>
@@ -14,8 +16,8 @@ const ContactDetails = () => {
                         </div>
                         <div className='col-8'>
                             <p className={style.title1 + ' text-uppercase fw-bold p-0  mx-0 my-1'}>Contact Us</p>
-                            <p className={style.title2 + ' p-0  mx-0 my-1'}>jayrajparkicet@gmail.com</p>
-                            <p className={style.title3 + ' p-0  mx-0 my-1'}>+91 9087664534</p>
+                            <p className={style.title2 + ' p-0  mx-0 my-1'}>{siteUIData?.siteEmail}</p>
+                            <p className={style.title3 + ' p-0  mx-0 my-1'}>{siteUIData?.sitePhone}</p>
                         </div>
                     </div>
                     <div className={style.card + ' col-md-6 col-lg-4   p-1 p-lg-3 d-flex justify-content-between'}>
@@ -24,8 +26,8 @@ const ContactDetails = () => {
                         </div>
                         <div className='col-8'>
                             <p className={style.title1 + ' text-uppercase fw-bold p-0  mx-0 my-1'}>Our location</p>
-                            <p className={style.title2 + ' p-0  mx-0 my-1'}>hera road 2344-78</p>
-                            <p className={style.title3 + ' p-0  mx-0 my-1'}>Australia 989 - South</p>
+                            <p className={style.title2 + ' p-0  mx-0 my-1'}>{siteUIData?.siteAddress}</p>
+                            <button onClick={()=>window.open(siteUIData?.siteMap||"","_blank")} className={style.title3 + ' p-0 border-0 outline-none mx-0 my-1 bg-transparent text-primary'}>View map</button>
                         </div>
                     </div>
                     <div className={style.card + ' col-md-6 col-lg-4   p-1 p-lg-3 d-flex justify-content-between'}>
@@ -34,8 +36,8 @@ const ContactDetails = () => {
                         </div>
                         <div className='col-8'>
                             <p className={style.title1 + ' text-uppercase fw-bold p-0  mx-0 my-1'}>Opening Hours</p>
-                            <p className={style.title2 + ' p-0  mx-0 my-1'}>Mon - Sat (8:00 -6:00)</p>
-                            <p className={style.title3 + ' p-0  mx-0 my-1'}>Sunday Closed</p>
+                            <p className={style.title2 + ' p-0  mx-0 my-1'}>{siteUIData?.siteOpenHr}</p>
+                            <p className={style.title3 + ' p-0  mx-0 my-1'}>{siteUIData?.siteCloseOn}</p>
                         </div>
                     </div>
                     <div className={style.card + ' row col-12 mx-auto  px-1 px-lg-3 d-flex justify-content-between'}>

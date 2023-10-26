@@ -1,10 +1,14 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./siteLogs.module.scss"
 import LoginIcon from '@mui/icons-material/Login';
 import Link from 'next/link';
+import { useUserLogContext } from '@/app/admin/site-logs/page';
 const SiteLogs = () => {
- 
+  const { logs, helper } = useUserLogContext()
+  useEffect(() => {
+    helper()
+  }, [])
   return (
 
     <div className={style.siteLogs + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -20,16 +24,20 @@ const SiteLogs = () => {
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >User</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >IP address</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >Email Id</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >Login Time</th>
           </thead>
           <tbody>
-            <tr className='text-center'>
-              <td >1</td>
-              <td className='px-3 '>user@gmail.com</td>
-              <td className='px-3 '>10.3.232.32</td>
-              <td className='px-3 '>10-may-2002 10:09:45AM</td>
-             </tr>
+            {
+              logs?.map((val,index) =>
+                <tr key={val?._id} className='text-center'>
+                  <td >{index+1}</td>
+                  <td className='px-3 '>{val?.userName}</td>
+                  <td className='px-3 '>{val?.userEmail}</td>
+                  <td className='px-3 '>{val?.time}</td>
+                </tr>
+              )
+            }
           </tbody>
         </table>
       </div>

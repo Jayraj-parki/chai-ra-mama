@@ -1,10 +1,15 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import style from "./approvedUsers.module.scss"
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import Link from 'next/link';
-const ApprovedUsers = () => {
+import { useApprovedUserContext } from '@/app/admin/approved-users/page';
 
+const ApprovedUsers = () => {
+  const { approvedUser, helper } = useApprovedUserContext()
+  useEffect(() => {
+    helper()
+  }, [])
   return (
     <div className={style.approvedUsers + ' container-fluid my-4  shadow rounded-4 p-4'}>
       <div className={style.header + ' row col-12 mx-auto'}>
@@ -18,19 +23,25 @@ const ApprovedUsers = () => {
         <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
           <thead className='border'>
             <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >User Name</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >User first Name</th>
+            <th className='text-capitalize p-2 pb-4 border text-center' >User last Name</th>
             <th className='text-capitalize p-2 pb-4 border text-center' >User Email</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Verified On</th>
           </thead>
           <tbody>
-            <tr className='text-center'>
-              <td >1</td>
-              <td className='px-3 '>user</td>
-              <td className='px-3 '>user@gmail.com</td>
-              <td className='text-center align-middle'>
-                10-May-2002 12:09:32 Pm
-              </td>
-            </tr>
+            {
+              approvedUser?.map((val, index) =>
+                val?.approval == "approved" ?
+                  <tr className='text-center'>
+                    <td >{index + 1}</td>
+                    <td className='px-3 '>{val?.firstName}</td>
+                    <td className='px-3 '>{val?.lastName}</td>
+                    <td className='text-center align-middle'>
+                      {val?.email}
+                    </td>
+                  </tr>
+                  : null
+              )
+            }
           </tbody>
         </table>
       </div>
