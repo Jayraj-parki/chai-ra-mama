@@ -10,6 +10,9 @@ import { handleUserNavbar } from '@/utils/handleUserNavbar';
 import { useRouter } from "next/navigation"
 import { useAuth, useSiteDataUIContext } from '@/app/layout';
 import { localUserLogout } from '@/services/localUserLogout';
+import LogoutIcon from '@mui/icons-material/Logout';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const UserNavbar = () => {
     const { siteUIData } = useSiteDataUIContext()
     const { userCred, logOutUser } = useAuth()
@@ -20,8 +23,8 @@ const UserNavbar = () => {
     const router = useRouter();
     const url = usePathname()
     const LogOut = async () => {
-        const confirm=window.confirm("Do you really want to Logout?")
-        if(!confirm) return
+        const confirm = window.confirm("Do you really want to Logout?")
+        if (!confirm) return
         await localUserLogout({ setActiveLink, logOutUser })
         router.push("/user-signin")
     }
@@ -84,10 +87,13 @@ const UserNavbar = () => {
                                     :
                                     <>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "dashboard" && "border-bottom border-3"} `}>
-                                            <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard">dashboard</Link>
+                                            <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard"><AccountCircleIcon className={style.navIcon+' p-0'}/></Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "add-to-cart" && "border-bottom border-3"} `}>
+                                            <button onClick={() => setActiveLink("add-to-cart")} className={style.cartBtn+` nav-link `} aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/><span className='d-flex justify-content-center align-items-center'>1</span></button>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
-                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="">Logout</Link>
+                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href=""><LogoutIcon className={style.navIcon+' p-0'}/></Link>
                                         </li>
                                     </>
                             }
