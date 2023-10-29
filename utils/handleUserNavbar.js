@@ -1,6 +1,5 @@
 export const handleUserNavbar = async ({url,setCollapse,SetMenu,setActiveLink}) => {
     try {
-        console.log(url)
         if (url.toLowerCase().includes("about")) setActiveLink("aboutus")
         else if (url.toLowerCase().includes("menu")) setActiveLink("menu")
         else if (url.toLowerCase().includes("franchise")) setActiveLink("franchise")
@@ -8,6 +7,9 @@ export const handleUserNavbar = async ({url,setCollapse,SetMenu,setActiveLink}) 
         else if (url.toLowerCase().includes("feedback")) setActiveLink("feedback")
         else if (url.toLowerCase().includes("storelocators")) setActiveLink("storeLocators")
         else if (url.toLowerCase().includes("contactus")) setActiveLink("contactus")
+        else if (url.toLowerCase().includes("user-signup")) setActiveLink("user-signup")
+        else if (url.toLowerCase().includes("user-signin")) setActiveLink("user-signin")
+        else if (url.toLowerCase().includes("dashboard")) setActiveLink("dashboard")
         else setActiveLink("home")
         setCollapse(true)
         SetMenu(true)

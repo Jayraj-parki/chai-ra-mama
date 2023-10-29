@@ -7,12 +7,12 @@ import { useAuth } from '@/app/layout';
 import { changePassword } from '@/services/changePassword';
 
 const ChangePassword = () => {
-  const {user}=useAuth()
+  const {adminCred}=useAuth()
   const [currentPassword, setCurrentPassword] = useState()
   const [newPassword, setNewPassword] = useState()
   const [confirmNewPassword, setConfirmNewPassword] = useState()
   const ChangePasswordHandler = async() => {
-    await changePassword({ currentPassword,newPassword,confirmNewPassword,user})
+    await changePassword({ currentPassword,newPassword,confirmNewPassword,adminCred})
     setCurrentPassword("")
     setNewPassword("")
     setConfirmNewPassword("")

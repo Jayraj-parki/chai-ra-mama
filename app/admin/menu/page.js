@@ -10,18 +10,18 @@ export const useMenuContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [menuData, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"menu")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <menuContext.Provider value={{menuData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <Menu />

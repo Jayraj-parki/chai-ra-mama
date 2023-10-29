@@ -1,5 +1,5 @@
 
-export const checkUserLogin = async (cookie) => {
+export const checkAdminLoginToken = async (cookie) => {
     try {
         const result = await fetch("/api/admin/auth", {
             method: "POST",

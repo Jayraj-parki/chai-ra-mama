@@ -6,10 +6,11 @@ import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
 import Footer from '@/components/footer/Footer'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { checkUserLogin } from '@/services/CheckUserLogin'
+import { checkAdminLoginToken } from '@/services/checkAdminLoginToken'
 import style from "./page.module.scss"
 import Cookies from 'js-cookie';
 import { getDataService } from '@/services/getDataService'
+import { checkUserLoginToken } from '@/services/checkUserLoginToken'
 
 const siteDataUIContext = createContext()
 export const useSiteDataUIContext = () => {
@@ -27,10 +28,12 @@ export const useHeaderAndCMSUiContext = () => {
 }
 
 export default function RootLayout({ children }) {
-  const [user, setUser] = useState("")
+  const [adminCred, setAdminCred] = useState("")
+  const [userCred, setUserCred] = useState("")
   const [headers, setHeaders] = useState()
   const [cmsData, setCmsData] = useState()
   const [siteUIData, setData] = useState()
+  
   const helper = async () => {
     await getDataService(setData, "site-details/ui")
   }
@@ -39,24 +42,42 @@ export default function RootLayout({ children }) {
     await getDataService(setCmsData, "cms-pages")
   }
 
-  const getUser = async () => {
+  const getAdmin = async () => {
     const cookie = Cookies.get("teaToken")
     try {
-      const data = await checkUserLogin(cookie)
-      if ("id" in data) setUser(data?.id)
-      else setUser("")
+      const data = await checkAdminLoginToken(cookie)
+      if ("id" in data) setAdminCred(data?.id)
+      else setAdminCred("")
     }
     catch (err) {
-      setUser("")
+      setAdminCred("")
     }
   }
-  const login = () => getUser()
-  const logout = () => {
-    setUser("")
+  const getUser = async () => {
+    const cookie = Cookies.get("localUserToken")
+    try {
+      const data = await checkUserLoginToken(cookie)
+      console.log("useToken"+data)
+      if ("id" in data) setUserCred(data?.id)
+      else setUserCred("")
+    }
+    catch (err) {
+      setUserCred("")
+    }
+  }
+  const isAdminLogin = () => getAdmin()
+  const isUserLogin = () => getUser()
+  const logOutAdmin = () => {
+    setAdminCred("")
     Cookies.remove('teaToken');
   }
+  const logOutUser = () => {
+    setUserCred("")
+    Cookies.remove('localUserToken');
+  }
   useEffect(() => {
-    getUser("cookie")
+    getAdmin()
+    getUser()
     getHeaderAndCms()
     helper()
   }, [])
@@ -64,7 +85,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <AuthContext.Provider value={{ user, login, logout }}>
+          <AuthContext.Provider value={{ adminCred,userCred, isAdminLogin, isUserLogin, logOutAdmin,logOutUser }}>
             <siteDataUIContext.Provider value={{siteUIData,helper}}>
               <Navbar />
               <headerCMSUiContext.Provider value={{ headers, cmsData }}>

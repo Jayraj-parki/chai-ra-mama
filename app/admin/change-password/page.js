@@ -3,11 +3,11 @@ import ChangePassword from '@/ComponentsAdmin/changePassword/ChangePassword';
 import { useAuth } from '@/app/layout';
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   return (
     <>
       {
-        user && 
+        adminCred &&  
         <div className='container-fluid p-lg-4  m-0'>
           <ChangePassword/>
         </div>

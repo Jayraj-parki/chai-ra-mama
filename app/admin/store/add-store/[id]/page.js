@@ -8,18 +8,18 @@ export const useStoreContext = () => {
   return useContext(storeContext)
 }
 const page = ({ params }) => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [storeData,setData]=useState()
   const helper = async () => {
     await getDataService(setData,`stores?_id=${params?.id}`)
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <storeContext.Provider value={{pId:params?.id,helper,storeData}}>
           <div className='container-fluid p-lg-4  m-0'>
             <Store/>

@@ -10,18 +10,18 @@ export const useLinkAndTagContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [linkTagData, setData] = useState()
   const helper = async () => {
     await getDataService(setData, "site-link-tags")
   }
   useEffect(() => {
-    if (user) helper() 
+    if (adminCred) helper() 
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <siteLinkAndTagContext.Provider value={{linkTagData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <LinksAndTags />

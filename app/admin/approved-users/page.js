@@ -10,19 +10,19 @@ export const useApprovedUserContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [approvedUser, setData] = useState()
 
   const helper = async () => {
     await getDataService(setData, "approve")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred &&
         <ApprovedUserContext.Provider value={{approvedUser,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <ApprovedUsers />

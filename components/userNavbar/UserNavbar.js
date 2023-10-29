@@ -7,16 +7,26 @@ import { usePathname } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { handleUserNavbar } from '@/utils/handleUserNavbar';
-import { useSiteDataUIContext } from '@/app/layout';
+import { useRouter } from "next/navigation"
+import { useAuth, useSiteDataUIContext } from '@/app/layout';
+import { localUserLogout } from '@/services/localUserLogout';
 const UserNavbar = () => {
-    const {siteUIData}=useSiteDataUIContext()
+    const { siteUIData } = useSiteDataUIContext()
+    const { userCred, logOutUser } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("/")
     const [logoImg, setLogoImg] = useState("/assets/images/logo.png'")
     const [menu, SetMenu] = useState(true)
+    const router = useRouter();
     const url = usePathname()
+    const LogOut = async () => {
+        const confirm=window.confirm("Do you really want to Logout?")
+        if(!confirm) return
+        await localUserLogout({ setActiveLink, logOutUser })
+        router.push("/user-signin")
+    }
     useEffect(() => {
-        handleUserNavbar({url,setCollapse,SetMenu,setActiveLink})        
+        handleUserNavbar({ url, setCollapse, SetMenu, setActiveLink })
     }, [url])
     return (
 
@@ -61,6 +71,26 @@ const UserNavbar = () => {
                             <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "contactus" && "border-bottom border-3"}`}>
                                 <Link onClick={() => setActiveLink("contactus")} className={`nav-link   `} aria-current="page" href="contactus">Contact Us</Link>
                             </li>
+                            {
+                                !userCred ?
+                                    <>
+                                        <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "user-signup" && "border-bottom border-3"}`}>
+                                            <Link onClick={() => setActiveLink("user-signup")} className={`nav-link   `} aria-current="page" href="user-signup">Sign Up</Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto ${activeLink == "user-signin" && "border-bottom border-3"}`}>
+                                            <Link onClick={() => setActiveLink("user-signin")} className={`nav-link   `} aria-current="page" href="user-signin">Sign In</Link>
+                                        </li>
+                                    </>
+                                    :
+                                    <>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "dashboard" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard">dashboard</Link>
+                                        </li>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
+                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="">Logout</Link>
+                                        </li>
+                                    </>
+                            }
                         </ul>
                     </div>
                 </div>

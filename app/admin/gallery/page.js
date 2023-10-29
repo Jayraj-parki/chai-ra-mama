@@ -10,18 +10,18 @@ export const useGalleryData = () => {
 }
  
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [data, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"gallery")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <galleryContext.Provider value={{ data, helper }}>
           <div className='container-fluid p-lg-4  m-0'>
             <Gallery />

@@ -1,4 +1,4 @@
-export const changePassword = async ({ currentPassword,newPassword,confirmNewPassword,user}) => {
+export const changePassword = async ({ currentPassword,newPassword,confirmNewPassword,adminCred}) => {
     if (!currentPassword?.trim() || !newPassword?.trim() || !confirmNewPassword?.trim()) {
         alert("please fill all the fields correctly")
       }
@@ -13,7 +13,7 @@ export const changePassword = async ({ currentPassword,newPassword,confirmNewPas
               "Content-type": "application/json"
             },
             body: JSON.stringify({
-              _id:user,
+              _id:adminCred,
               password:currentPassword.trim(),
               newPassword:newPassword.trim()
             })

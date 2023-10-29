@@ -14,7 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import { adminLogout } from '@/services/adminLogout';
 import { handleAdminNavbar } from '@/utils/handleAdminNavbar';
 const AdminNavbar = () => {
-    const { user, logout } = useAuth()
+    const { adminCred, logOutAdmin } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("")
     const [logoImg, setLogoImg] = useState('/assets/images/logo.png')
@@ -22,7 +22,9 @@ const AdminNavbar = () => {
     const url = usePathname()
     const router = useRouter();
     const LogOut = async () => {
-        await adminLogout({ setActiveLink, logout })
+        const confirm=window.confirm("Do you really want to Logout?")
+        if(!confirm) return
+        await adminLogout({ setActiveLink, logOutAdmin })
         router.push("/auth/signin")
     }
     useEffect(() => {
@@ -47,7 +49,7 @@ const AdminNavbar = () => {
                     <div className={`col-auto bg-light  flex-wrap collapse navbar-collapse ${!collapse && "show"}`} id="navbarSupportedContent">
                         <ul className={style.navlink_container + "  row col-12    mx-auto  navbar-nav  d-flex justify-content-center justify-content-lg-end  mb-2 mb-lg-0"}>
                             {
-                                !user ?
+                                !adminCred ?
                                     <>
                                         <li className={`nav-item d-flex  col-auto mx-auto mx-lg-0  ${activeLink == "signin" && "border-bottom border-3"} `}>
                                             <Link onClick={() => setActiveLink("signin")} className={`nav-link border-3 `} aria-current="page" href="/auth/signin">Sign In</Link>

@@ -10,18 +10,18 @@ export const useSiteEnquiryContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [siteEnqData, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"site-enquiry")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <siteEnquiryContext.Provider value={{ siteEnqData, helper }}>
           <div className='container-fluid p-lg-4  m-0'>
             <SiteEnquiry />

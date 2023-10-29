@@ -1,10 +1,10 @@
 "use client"
 import { useRef } from 'react'
-import style from "./signIn.module.scss"
+import style from "./localSignIn.module.scss"
 import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
-import { adminSignIn } from '@/services/adminSignIn';
-const SignIn = () => {
+import { userSignIn } from '@/services/userSignIn';
+const LocalSignIn = () => {
 
     const {isAdminLogin } = useAuth()
     const emailRef = useRef(null);
@@ -14,9 +14,9 @@ const SignIn = () => {
     const handleLogin = async () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
-        const token = await adminSignIn({ email, password })
+        const token = await userSignIn({ email, password })
         if (token) {
-            router.push("/admin/home")
+            router.push("/dashboard")
            isAdminLogin()
         }
         emailRef.current.value = null
@@ -48,4 +48,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
+export default LocalSignIn

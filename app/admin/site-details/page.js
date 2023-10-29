@@ -10,18 +10,18 @@ export const useSiteDetailsContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [siteData, setData] = useState()
   const helper = async () => {
     await getDataService(setData, "site-details")
   }
   useEffect(() => {
-    if (user) helper() 
+    if (adminCred) helper() 
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <siteDetailsContext.Provider value={{siteData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <SiteDetails />

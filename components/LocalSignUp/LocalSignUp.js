@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useRef } from 'react'
-import style from "./signUp.module.scss"
+import style from "./localSignUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
-import { adminSignUp } from '@/services/adminSignUp';
-const SignUp = () => {
+import { userSignUp } from '@/services/userSignUp';
+const LocalSignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
     const emailRef = useRef(null);
@@ -20,21 +20,15 @@ const SignUp = () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
-        await adminSignUp({ firstName, lastName, email, password, confirmPassword })
+        const result=await userSignUp({ firstName, lastName, email, password, confirmPassword })
         firstNameRef.current.value = null
         lastNameRef.current.value = null
         emailRef.current.value = null
         passwordRef.current.value = null
         confirmPasswordRef.current.value = null
-        router.push("/auth/signin")
-
+        if (result) router.push("/user-signin")
     }
 
-    useEffect(() => {
-        if (adminCred) {
-            router.push("/admin/home")
-        }
-    }, [adminCred])
     return (
         <>
             <div className={style.signUp + ' container-fluid m-0 my-5 p-0 py-5'}>
@@ -70,4 +64,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp
+export default LocalSignUp
