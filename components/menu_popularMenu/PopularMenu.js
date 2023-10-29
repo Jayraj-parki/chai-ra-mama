@@ -6,8 +6,16 @@ import { useMenuUiContext } from "@/app/menu/page";
 const PopularMenu = () => {
     const { menuData, subMenuData } = useMenuUiContext()
     const [activeTab, setActiveTab] = useState("all")
-    const [products, setProduct] = useState([])
-
+    const [cart, setCart] = useState([]);
+    const handleCartAction = (product) => {
+        const isProductInCart = cart.some(item => item.id === product.id);
+        if (isProductInCart) {
+            const updatedCart = cart.filter(item => item.id !== product.id);
+            setCart(updatedCart);
+        } else {
+            setCart([...cart, product]);
+        }
+    };
     useEffect(() => {
     }, [menuData])
     return (
@@ -43,13 +51,18 @@ const PopularMenu = () => {
                         <div className={` row col-12 mx-auto d-flex justify-content-center p-0 align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == "all" ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             {subMenuData?.map((val) => {
                                 return (
-                                    <div key={val._id+"all"} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0 d-flex justify-content-center align-items-center my-4 p-0  "} >
+                                    <div key={val._id + "all"} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0 d-flex justify-content-center align-items-center my-4 p-0  "} >
                                         <div className={style.cardImage + " col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto"}>
                                             <Image className="m-0 p-0 rounded-pill" src={val?.itemImage} width={300} height={300} objectFit='cover' alt="menu item" />
                                         </div>
-                                        <div className={style.cardBody + " col-10 border ps-4 py-5 rounded shadow d-flex justify-content-around align-items-center  my-auto"}>
-                                            <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{val?.itemName}</h3>
-                                            <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {val?.itemPrice}/-</h6>
+                                        <div className={style.cardBody + "  col-10 border px-4 py-5 rounded shadow d-flex justify-content-around align-items-center flex-column my-auto"}>
+                                            <div className="row col-10 mx-auto justify-content-between align-items-center">
+                                                <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{val?.itemName}</h3>
+                                                <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {val?.itemPrice}/-</h6>
+                                            </div>
+                                            <div className="row col-auto ms-auto">
+                                                <button onClick={() => handleCartAction({ id: val?._id, name: val?.itemName })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(item => item?.id === val?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                            </div>
                                         </div>
                                     </div>
                                 )
@@ -59,24 +72,29 @@ const PopularMenu = () => {
                         {
                             menuData?.map((val) => {
                                 return (
-                                    <div key={val._id+"items"} className={` row col-12 mx-auto d-flex justify-content-center align-items-center flexwrap p-0  mb-4 tab-pane fade ${activeTab == val?._id ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                    <div key={val._id + "items"} className={` row col-12 mx-auto d-flex justify-content-center align-items-center flexwrap p-0  mb-4 tab-pane fade ${activeTab == val?._id ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                         {subMenuData?.map((item) => {
                                             if (val._id == item?.parentId) {
 
                                                 return (
-                                                    <div key={item._id+""+val._id} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0  d-flex justify-content-center align-items-center my-4 p-0  "} >
+                                                    <div key={item._id + "" + val._id} className={style.itemCard + "  m-auto col-md-10 col-lg-6 p-0  d-flex justify-content-center align-items-center my-4 p-0  "} >
                                                         <div className={style.cardImage + " col-2 m-0 p-0 d-flex justify-content-center align-items-center my-auto"}>
                                                             <Image className="m-0 p-0 rounded-pill" src={item?.itemImage} width={300} height={300} objectFit='cover' alt="menu item" />
                                                         </div>
-                                                        <div className="col-10 border ps-4 py-5 rounded shadow d-flex justify-content-around align-items-center  my-auto">
-                                                            <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{item?.itemName}</h3>
-                                                            <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {item?.itemPrice}/-</h6>
+                                                        <div className={style.cardBody + "  col-10 border px-4 py-5 rounded shadow d-flex justify-content-around align-items-center flex-column my-auto"}>
+                                                            <div className="row col-10 mx-auto justify-content-between align-items-center ">
+                                                                <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{item?.itemName}</h3>
+                                                                <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {item?.itemPrice}/-</h6>
+                                                            </div>
+                                                            <div className="row col-auto ms-auto">
+                                                                <button onClick={() => handleCartAction({ id: item?._id, name: item?.itemName })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(p => p?.id === item?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                            </div>
                                                         </div>
 
                                                     </div>
                                                 )
                                             }
-                                            else{ return }
+                                            else { return }
                                         })}
                                     </div>
                                 )

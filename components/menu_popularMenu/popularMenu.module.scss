@@ -54,10 +54,16 @@
         }
         .cardBody{
           z-index: 1;
-        }
-        .price{
-          color: $primary-coffee;
-          font-size: 18px;
+          .price{
+            color: $primary-coffee;
+            font-size: 18px;
+          }
+          .addToCart{
+            background-color: $primary-coffee-light;
+            &:active{
+              background-color: $primary-coffee;
+            }
+          }
         }
       }
     }
