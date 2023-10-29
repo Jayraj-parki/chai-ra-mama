@@ -1,5 +1,13 @@
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearForm, setEditData }) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         if (faqQuestion == "" || faqAnswer.trim()=="") {
             alert("Please fill all the fields")
         }

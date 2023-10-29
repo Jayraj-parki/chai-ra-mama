@@ -1,5 +1,13 @@
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 export const updatePagewiseTags = async ({ _id, pageId, metaTitle ,metaDesc, metaKeyword, helper, setEditData, clearForm }) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         if (metaTitle.trim() == "" || metaKeyword.trim()==""||metaDesc.trim()=="") {
             alert("Please fill all the fields")
         }
