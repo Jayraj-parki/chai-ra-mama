@@ -29,11 +29,12 @@ export const useHeaderAndCMSUiContext = () => {
 
 export default function RootLayout({ children }) {
   const [adminCred, setAdminCred] = useState("")
+  const [isAdminAuthorized, setAdminAuthentication] = useState(false)
   const [userCred, setUserCred] = useState("")
   const [headers, setHeaders] = useState()
   const [cmsData, setCmsData] = useState()
   const [siteUIData, setData] = useState()
-  
+
   const helper = async () => {
     await getDataService(setData, "site-details/ui")
   }
@@ -46,7 +47,10 @@ export default function RootLayout({ children }) {
     const cookie = Cookies.get("teaToken")
     try {
       const data = await checkAdminLoginToken(cookie)
-      if ("id" in data) setAdminCred(data?.id)
+      if ("id" in data) {
+        setAdminCred(data?.id)
+        setAdminAuthentication(data?.authorized)
+      }
       else setAdminCred("")
     }
     catch (err) {
@@ -57,7 +61,7 @@ export default function RootLayout({ children }) {
     const cookie = Cookies.get("localUserToken")
     try {
       const data = await checkUserLoginToken(cookie)
-      console.log("useToken"+data)
+      console.log("useToken" + data)
       if ("id" in data) setUserCred(data?.id)
       else setUserCred("")
     }
@@ -85,8 +89,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <AuthContext.Provider value={{ adminCred,userCred, isAdminLogin, isUserLogin, logOutAdmin,logOutUser }}>
-            <siteDataUIContext.Provider value={{siteUIData,helper}}>
+          <AuthContext.Provider value={{ adminCred, userCred, isAdminLogin, isUserLogin, logOutAdmin, logOutUser,isAdminAuthorized }}>
+            <siteDataUIContext.Provider value={{ siteUIData, helper }}>
               <Navbar />
               <headerCMSUiContext.Provider value={{ headers, cmsData }}>
                 <div className={style.bodyContent}>

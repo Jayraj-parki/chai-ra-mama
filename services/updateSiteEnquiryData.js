@@ -1,5 +1,13 @@
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 export const updateSiteEnquiryData = async ({ _id, contactName,contactEmail,contactPhone,helper, clearForm, setEditData }) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         if (contactName.trim() == "" || contactEmail.trim()==""||contactPhone.trim()=="") {
             alert("Please fill all the fields")
         }

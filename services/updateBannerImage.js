@@ -1,8 +1,16 @@
 import { storage } from "@/firebase";
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, setEditData }) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         let url = ""
         if (bannerImage == "") {
             alert("Image is not selected")

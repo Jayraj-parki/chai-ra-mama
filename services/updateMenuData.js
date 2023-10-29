@@ -1,8 +1,16 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 export const updateMenuData = async ({_id, menuName,menuImage,menuContent ,helper,setEditData,clearForm}) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         if (menuName.trim() == ""|| menuImage==""|| menuContent.trim()=="") {
             alert("Please fill all the fields")
             

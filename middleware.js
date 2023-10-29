@@ -14,7 +14,6 @@ export function middleware(req, res) {
     }
     return NextResponse.redirect(new URL("/", req.url));
   }
-  console.log("req"+req.nextUrl.pathname)
   return NextResponse.next();
 }
 

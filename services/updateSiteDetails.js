@@ -1,8 +1,16 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
+import Cookies from 'js-cookie';
+import { checkAdminLoginToken } from './checkAdminLoginToken';
 export const updateSiteDetails = async ({ _id, siteName, sitePhone, siteEmail, siteFromEmail, siteForgetPassEmail, siteCloseOn, siteOpenHr, siteLogo, siteFavIcon, siteAddress, siteMap }) => {
     try {
+        const cookie = Cookies.get("teaToken")
+        const adminAuthData = await checkAdminLoginToken(cookie)
+        if (!adminAuthData?.authorized) {
+            alert("Unautherized User can't perfrom Update Action")
+            return
+        }
         let logo = ""
         let icon=""
         if (typeof siteLogo === "string" && siteLogo.includes("http")) {
