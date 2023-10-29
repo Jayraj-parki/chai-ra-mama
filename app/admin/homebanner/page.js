@@ -10,18 +10,18 @@ export const useHomeBannerContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [bannerData, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"home-banner")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <homeBannerContext.Provider value={{bannerData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <HomeBanners />

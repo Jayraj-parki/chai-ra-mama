@@ -1,6 +1,6 @@
-export const adminLogout=async({setActiveLink,logOutAdmin})=>{
+export const localUserLogout=async({setActiveLink,logOutUser})=>{
     try {
-        const result = await fetch("/api/admin/logout", {
+        const result = await fetch("/api/user/logout", {
             method: "GET",
             headers: {
                 "Content-type": "application/json"
@@ -8,7 +8,7 @@ export const adminLogout=async({setActiveLink,logOutAdmin})=>{
         })
         const data = await result.json()
         setActiveLink("")
-        logOutAdmin()
+        logOutUser()
     }
     catch (e) {
         console.log("error in logout"+e)

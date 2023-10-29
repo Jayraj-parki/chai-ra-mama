@@ -9,19 +9,19 @@ export const useUserVerificationContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [userVerification, setData] = useState()
 
   const helper = async () => {
     await getDataService(setData, "signUp")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred &&
         <userVerificationContext.Provider value={{userVerification,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <ApproveAccount />

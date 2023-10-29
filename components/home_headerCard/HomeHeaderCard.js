@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 function HomeHeaderCard() {
     const { cmsData } = useHeaderAndCMSUiContext()
     const [state, setState] = useState([])
-    console.log(state)
     useEffect(() => {
         setState(cmsData?.filter(item => item?.cmsId?.startsWith("HomeCard")))
     }, [cmsData])

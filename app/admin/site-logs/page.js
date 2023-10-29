@@ -10,18 +10,18 @@ export const useUserLogContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [logs, setData] = useState()
   const helper = async () => {
     await getDataService(setData, "signIn")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user && 
+        adminCred &&  
         <UserLogsContext.Provider value={{logs,helper}}>
         <div className='container-fluid p-lg-4  m-0'>
           <SiteLogs/>

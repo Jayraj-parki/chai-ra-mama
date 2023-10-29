@@ -8,18 +8,18 @@ export const usefaqContext = () => {
   return useContext(faqContext)
 }
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [faqData, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"franchise-faq")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <faqContext.Provider value={{faqData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <FranchiseFaq />

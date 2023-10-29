@@ -4,11 +4,11 @@ import ManageUpload from '@/ComponentsAdmin/manageUpload/ManageUpload';
 import Menu from '@/ComponentsAdmin/menu/Menu';
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   return (
     <>
       {
-        user && 
+        adminCred &&  
         <div className='container-fluid p-lg-4  m-0'>
           <ManageUpload/>
         </div> 

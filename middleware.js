@@ -7,9 +7,18 @@ export function middleware(req, res) {
     }
     return NextResponse.redirect(new URL("/auth/signin", req.url));
   }
+  else if (req.nextUrl.pathname.startsWith("/dashboard")) {
+    const session =  String([...req.headers])
+    if (session.includes('localUserToken')) {
+      return NextResponse.next();
+    }
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+  console.log("req"+req.nextUrl.pathname)
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: '/admin/:path*',
+  matcher: ['/admin/:path*','/dashboard/:path*']
+
 }

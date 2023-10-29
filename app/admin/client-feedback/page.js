@@ -10,19 +10,19 @@ export const useClientFeedbackContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [clientFbData, setData] = useState()
   const helper = async () => {
     await getDataService(setData,"client-feedback")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
 
   return (
     <>
       {
-        user &&
+        adminCred && 
         <clientFeedbackContext.Provider value={{clientFbData,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <ClientFeedback />

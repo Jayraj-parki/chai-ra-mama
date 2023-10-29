@@ -6,18 +6,18 @@ import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (user) {
+    if (adminCred) {
       router.push('/admin/home');
     }
-  }, [user,router])
+  }, [adminCred,router])
   return (
     <>
       {
-        !user && <SignIn />
+        !adminCred &&  <SignIn />
       }
     </>
   )

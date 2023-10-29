@@ -12,17 +12,17 @@ export function useCmsData() {
 
 const page = () => {
   const [data, setData] = useState([])
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const helper = async () => {
     await getDataService(setData,"cms-pages")
   }
   useEffect(() => {
-    if(user) helper()
+    if(adminCred) helper()
   }, [])
   return (
     <>
       {
-        user &&
+        adminCred && 
         <cmsContext.Provider value={{data,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
             <CmsPages />

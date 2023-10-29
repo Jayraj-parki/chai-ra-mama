@@ -10,18 +10,18 @@ export const usePageTagContext = () => {
 }
 
 const page = () => {
-  const { user } = useAuth()
+  const { adminCred } = useAuth()
   const [pageTags, setData] = useState()
   const helper = async () => {
     await getDataService(setData, "pagewise-tag")
   }
   useEffect(() => {
-    if (user) helper()
+    if (adminCred) helper()
   }, [])
   return ( 
     <>
       {
-        user &&
+        adminCred && 
         <pageTagsContext.Provider value={{ pageTags, helper }}>
           <div className='container-fluid p-lg-4  m-0'>
             <PagewiseSeoTags />
