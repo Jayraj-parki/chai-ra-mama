@@ -1,0 +1,27 @@
+@import "../../../styles/var";
+.cart {
+  
+  img {
+    width: 90px;
+    height: 90px;
+    z-index: 100;
+  }
+  overflow: auto;
+  table {
+    thead{
+      th{
+        min-width: 200px;
+        &:nth-child(1){
+          min-width: 80px;
+        }
+      }
+    }
+  }
+
+  .addToCart {
+    background-color: $primary-coffee-light;
+    &:active {
+      background-color: $primary-coffee;
+    }
+  }
+}

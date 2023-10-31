@@ -61,7 +61,7 @@ export default function RootLayout({ children }) {
     const cookie = Cookies.get("localUserToken")
     try {
       const data = await checkUserLoginToken(cookie)
-      console.log("useToken" + data)
+      // console.log("useToken" + data)
       if ("id" in data) setUserCred(data?.id)
       else setUserCred("")
     }
