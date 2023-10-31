@@ -11,7 +11,6 @@ export const checkUserLoginToken = async (cookie) => {
             })
         })
         const data = await result.json()
-        console.log(data)
         return data
     }
     catch (e) {
