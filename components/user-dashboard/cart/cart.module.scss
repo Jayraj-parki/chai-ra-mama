@@ -1,6 +1,5 @@
 @import "../../../styles/var";
 .cart {
-  
   img {
     width: 90px;
     height: 90px;
@@ -8,11 +7,20 @@
   }
   overflow: auto;
   table {
-    thead{
-      th{
+    thead {
+      th {
         min-width: 200px;
-        &:nth-child(1){
+        &:nth-child(1) {
           min-width: 80px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        .quantity {
+         color: $white-light;
+         background-color: $primary-coffee;
+         cursor: pointer;
         }
       }
     }
