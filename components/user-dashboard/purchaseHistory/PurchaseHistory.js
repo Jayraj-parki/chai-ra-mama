@@ -31,7 +31,23 @@ const PurchaseHistory = () => {
                                     <td className='align-middle' >{index + 1}</td>
                                     <td className='align-middle' >{val?.itemName}</td>
                                     <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={val?.itemImage || "/assets/images/1.png"} alt="..." /></td>
-                                    <td className='align-middle'> {val?.itemPrice}</td>
+                                    <td className='align-middle text-start'>
+                                        <table className='table text-center text-capitalize'>
+                                            <tbody>
+                                                <tr>
+                                                    <td className=''>
+                                                        <span className='h6'>{1}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td className=''>
+                                                        Price: {val?.itemPrice} Rs.
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
                                     <td className='text-center align-middle'>
                                         1 Nov 2023pm, 6PM
                                     </td>

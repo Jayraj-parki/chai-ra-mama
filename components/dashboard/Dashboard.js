@@ -4,10 +4,11 @@ import Profile from '../user-dashboard/profile/Profile';
 import Cart from '../user-dashboard/cart/Cart';
 import style from "./dashboard.module.scss"
 import PurchaseHistory from '../user-dashboard/purchaseHistory/PurchaseHistory';
+import MyOrders from '../user-dashboard/myOrders/MyOrders';
 const Dashboard = () => {
     return (
         <>
-            <div className={style.dashboard+" container-fluid my-4 p-5"}>
+            <div className={style.dashboard+" container-fluid my-4 p-md-5"}>
                 <Tabs  defaultActiveKey="profile" id="dashboard-tabs">
                     <Tab eventKey="profile" title="Profile">
                        <Profile/>
@@ -19,8 +20,7 @@ const Dashboard = () => {
                        <PurchaseHistory/>
                         </Tab>
                     <Tab eventKey="myOrders" title="My Orders">
-                        {/* My orders component */}
-                        {/* Display orders with different statuses (start, payment complete, etc.) */}
+                        <MyOrders/>    
                     </Tab>
                     <Tab eventKey="settings" title="Settings">
                         {/* Settings component */}
