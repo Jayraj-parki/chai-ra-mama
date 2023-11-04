@@ -8,7 +8,7 @@ const MyOrders = () => {
     return (
         <div className={style.myOrders + " container-fluid mt-4"}>
             <h3>My Orders</h3>
-            <div className={' row col-12 mx-auto py-3 my-4 rounded-3 border'}>
+            <div className={' row col-12 mx-auto py-3 my-5 shadow rounded-3 border'}>
                 {/* Oops..! No active order found. */}
                 <div className={style.container + ' row col-12 mx-auto '}>
                     <div>
@@ -71,7 +71,7 @@ const MyOrders = () => {
                     )}
                 </div>
             </div>
-            <div className={' row col-12 mx-auto py-3 rounded-3 border'}>
+            <div className={' row col-12 mx-auto py-3 shadow rounded-3 border'}>
                 {/* Oops..! No active order found. */}
                 <div className={style.container + ' row col-12 mx-auto '}>
                     <div>

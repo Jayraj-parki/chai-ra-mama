@@ -3,10 +3,10 @@ import { useRef } from 'react'
 import style from "./localSignIn.module.scss"
 import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
-import { userSignIn } from '@/services/userSignIn';
+import { userSignIn } from '@/services/localUser/userSignIn';
 const LocalSignIn = () => {
 
-    const {isAdminLogin } = useAuth()
+    const {isUserLogin } = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const router = useRouter();
@@ -16,8 +16,8 @@ const LocalSignIn = () => {
         const password = passwordRef.current.value.trim()
         const token = await userSignIn({ email, password })
         if (token) {
-            router.push("/dashboard")
-           isAdminLogin()
+            router.push("/dashboard") 
+           isUserLogin()
         }
         emailRef.current.value = null
         passwordRef.current.value = null

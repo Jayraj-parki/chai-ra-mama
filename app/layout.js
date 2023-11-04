@@ -10,7 +10,7 @@ import { checkAdminLoginToken } from '@/services/checkAdminLoginToken'
 import style from "./page.module.scss"
 import Cookies from 'js-cookie';
 import { getDataService } from '@/services/getDataService'
-import { checkUserLoginToken } from '@/services/checkUserLoginToken'
+import { checkUserLoginToken } from '@/services/localUser/checkUserLoginToken'
 
 const siteDataUIContext = createContext()
 export const useSiteDataUIContext = () => {
