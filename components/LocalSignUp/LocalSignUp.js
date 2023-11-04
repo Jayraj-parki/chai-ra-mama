@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import style from "./localSignUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
-import { userSignUp } from '@/services/userSignUp';
+import { userSignUp } from '@/services/localUser/userSignUp';
 const LocalSignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
