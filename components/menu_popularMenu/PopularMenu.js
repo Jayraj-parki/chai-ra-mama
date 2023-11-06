@@ -3,23 +3,42 @@ import Image from "next/image";
 import style from "./popularMenu.module.scss"
 import { useEffect, useState } from "react";
 import { useMenuUiContext } from "@/app/menu/page";
+import { useAuth } from "@/app/layout";
+import { addToCart } from "@/services/localUser/addToCart";
+import { removeFromCart } from "@/services/localUser/removeFromCart";
 const PopularMenu = () => {
-    const { menuData, subMenuData } = useMenuUiContext()
+    const { userCred, getCountOfAddedCart } = useAuth()
+    const { menuData, subMenuData, cartProduct } = useMenuUiContext()
+    const [cartButton, setCartButton] = useState(true)
     const [activeTab, setActiveTab] = useState("all")
     const [cart, setCart] = useState([]);
-    const handleCartAction = (product) => {
-        const isProductInCart = cart.some(item => item.id === product.id);
+    const handleCartAction = async (product) => {
+        setCartButton(product?.productId)
+        const isProductInCart = cart.find(item => item?.productId === product?.productId);
         if (isProductInCart) {
-            const updatedCart = cart.filter(item => item.id !== product.id);
-            setCart(updatedCart);
+            const updatedCart = cart.filter(item => item?.productId !== product?.productId);
+            const res = await removeFromCart({ uId: isProductInCart?.uId })
+            if (!res) alert("Oops..! Something went wrong")
+            else {
+                setCart(updatedCart); getCountOfAddedCart()
+            }
         } else {
-            setCart([...cart, product]);
+            const uId = await addToCart({ userCred, productId: product?.productId })
+            if (!uId) { alert("Oops..! Something went wrong") }
+            else {
+                setCart([...cart, { ...product, uId }]);
+                getCountOfAddedCart()
+            }
         }
+        setCartButton("")
     };
+
     useEffect(() => {
-    }, [menuData])
+        setCart(cartProduct?.map((val) => ({ productId: val?.productId, uId: val?._id })))
+    }, [cartProduct])
     return (
         <div className={style.popularMenu + " container-fluid  pb-5"}>
+
             <div className='row col-12 py-5 mx-auto'>
                 <div className={" row col-12  d-flex mx-auto mb-5  d-flex justify-content-center "}>
                     <h2 className={style.menu_title + " p-2 px-3 text-center fw-bold text-light text-uppercase text-justify rounded"}>Menu</h2>
@@ -33,7 +52,6 @@ const PopularMenu = () => {
                             <li className={` flex-nowrap  nav-item col-auto m-2  `} role="presentation">
                                 <button onClick={() => setActiveTab("all")} className={`${activeTab == "all" ? style.active_tab : style.not_active} nav-link ${activeTab == "all" && "active"} `} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected={`true   ${activeTab == "all" ? "true" : "false"} `}>All</button>
                             </li>
-
                             {
                                 menuData?.map((val) => {
                                     return (
@@ -43,7 +61,6 @@ const PopularMenu = () => {
                                     )
                                 })
                             }
-
                         </ul>
                     </div>
                     <div className={style.menuItems + " row col-xl-11  mx-auto tab-content p-0 p-md-2  my-5"} id="pills-tabContent">
@@ -61,7 +78,10 @@ const PopularMenu = () => {
                                                 <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {val?.itemPrice}/-</h6>
                                             </div>
                                             <div className="row col-auto ms-auto">
-                                                <button onClick={() => handleCartAction({ id: val?._id, name: val?.itemName })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(item => item?.id === val?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                {cartButton != val?._id ?
+                                                    <button onClick={() => handleCartAction({ productId: val?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(item => item?.productId === val?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                    : "Proccesing"
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -87,10 +107,13 @@ const PopularMenu = () => {
                                                                 <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {item?.itemPrice}/-</h6>
                                                             </div>
                                                             <div className="row col-auto ms-auto">
-                                                                <button onClick={() => handleCartAction({ id: item?._id, name: item?.itemName })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(p => p?.id === item?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                                {cartButton != val?._id ?
+                                                                    <button onClick={() => handleCartAction({ productId: item?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(c => c?.productId === item?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                                    : "Proccesing"
+                                                                }
                                                             </div>
-                                                        </div>
 
+                                                        </div>
                                                     </div>
                                                 )
                                             }

@@ -20,7 +20,7 @@ const Dashboard = () => {
                     <Tab eventKey="purchaseHistory" title="Purchase History">
                         <PurchaseHistory />
                     </Tab>
-                    <Tab eventKey="myOrders" title="My Orders">
+                    <Tab eventKey="myOrders" title="Track Orders">
                         <MyOrders />
                     </Tab>
                     <Tab eventKey="settings" title="Settings">

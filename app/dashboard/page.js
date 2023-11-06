@@ -5,6 +5,7 @@ import { getDataService } from "@/services/getDataService"
 import { createContext, useContext, useEffect, useState } from "react"
 import { useAuth } from "../layout"
 import { getLocalUser } from "@/services/localUser/getLocalUser"
+import { getCartProduct } from "@/services/localUser/getCartProduct"
 const CartUiContext = createContext()
 export const useCartUiContext = () => {
   return useContext(CartUiContext)
@@ -19,19 +20,24 @@ const page = () => {
   const { userCred } = useAuth()
   const [subMenuData, setSubMenuData] = useState()
   const [userProfileData, setUserData] = useState()
+  const [cartProduct, setCartProduct] = useState()
   const helper = async () => {
     await getDataService(setSubMenuData, "sub-menu/all")
   }
   const getUserUtils = async () => {
     await getLocalUser(userCred, setUserData)
   }
-  useEffect(() => { 
+  const getCartData = async () => {
+    await getCartProduct({ userCred, setCartProduct })
+  }
+  useEffect(() => {
     helper()
     getUserUtils()
-  }, [])
+    getCartData()
+  }, [userCred])
   return (
     <>
-      <dashboardContext.Provider value={{ userProfileData, getUserUtils }}>
+      <dashboardContext.Provider value={{ userProfileData, getUserUtils,cartProduct,getCartData }}>
         <CartUiContext.Provider value={{ subMenuData }}>
           <Dashboard />
         </CartUiContext.Provider>

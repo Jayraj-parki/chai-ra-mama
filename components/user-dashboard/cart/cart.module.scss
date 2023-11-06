@@ -28,7 +28,8 @@
 
   .addToCart {
     background-color: $primary-coffee-light;
-    &:active {
+    color: $black-light;
+    &:focus {
       background-color: $primary-coffee;
     }
   }
