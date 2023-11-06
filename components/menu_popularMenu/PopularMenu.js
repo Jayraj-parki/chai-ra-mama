@@ -14,9 +14,9 @@ const PopularMenu = () => {
     const [cart, setCart] = useState([]);
     const handleCartAction = async (product) => {
         setCartButton(product?.productId)
-        const isProductInCart = cart.find(item => item?.productId === product?.productId);
+        const isProductInCart = cart?.find(item => item?.productId === product?.productId);
         if (isProductInCart) {
-            const updatedCart = cart.filter(item => item?.productId !== product?.productId);
+            const updatedCart = cart?.filter(item => item?.productId !== product?.productId);
             const res = await removeFromCart({ uId: isProductInCart?.uId })
             if (!res) alert("Oops..! Something went wrong")
             else {
@@ -26,7 +26,7 @@ const PopularMenu = () => {
             const uId = await addToCart({ userCred, productId: product?.productId })
             if (!uId) { alert("Oops..! Something went wrong") }
             else {
-                setCart([...cart, { ...product, uId }]);
+                setCart(prevCart => (prevCart ? [...prevCart, { ...product, uId }] : [{ ...product, uId }])); 
                 getCountOfAddedCart()
             }
         }

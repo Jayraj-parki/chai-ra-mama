@@ -1,13 +1,26 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from "./myOrders.module.scss"
 import Image from "next/image"
 import StartIcon from '@mui/icons-material/Start';
+import { Button } from '@mui/material';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { useDashboardContext } from '@/app/dashboard/page';
 const MyOrders = () => {
     const arr = ["Start", "payment completed", " Order placed", "packing", "shipping", "delivered"]
+    const {myOrder,getCartData}=useDashboardContext()
+    const fetchLatestData=()=>{
+        getCartData("myOrder","process")
+    }
+    useEffect(() => {
+        console.log(":inside")
+    },[])
     return (
         <div className={style.myOrders + " container-fluid mt-4"}>
-            <h3>My Orders</h3>
+            <div className='row col-12 mx-auto d-flex align-items-center justify-content-between'>
+                <h4 className='col-auto'>My Orders</h4>
+                <Button onClick={fetchLatestData} className=' col-auto bg-dark text-capitalize text-light'><RefreshIcon/> reload</Button>
+            </div>
             <div className={' row col-12 mx-auto py-3 my-5 shadow rounded-3 border'}>
                 {/* Oops..! No active order found. */}
                 <div className={style.container + ' row col-12 mx-auto '}>

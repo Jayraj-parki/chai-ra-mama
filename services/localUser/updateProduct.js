@@ -1,4 +1,4 @@
-export const updateProduct = async ({_id,quantity,userId,update}) => {
+export const updateProduct = async ({_id,quantity,userId,update,totalPrice}) => {
     if (!userId || !_id ) {
         alert("Oops! Something went wrong")
         return false
@@ -14,7 +14,8 @@ export const updateProduct = async ({_id,quantity,userId,update}) => {
                     _id,
                     quantity,
                     userId,
-                    update
+                    update,
+                    totalPrice
                 })
             })
             const data = await result.json()

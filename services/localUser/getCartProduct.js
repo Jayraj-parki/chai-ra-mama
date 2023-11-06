@@ -1,8 +1,8 @@
-export const getCartProduct = async ({ userCred, setCartProduct }) => {
+export const getCartProduct = async ({ userCred, setData,status }) => {
   try {
-    const result = await fetch(`/api/user/product/?userId=${userCred}`, { next: { revalidate: 1800 } })
+    const result = await fetch(`/api/user/product/filter/?userId=${userCred}&status=${status}`, { next: { revalidate: 1800 } })
     const data = await result.json()
-    setCartProduct(data?.data)
+    setData(data?.data)
     // console.log(data)
   }
   catch (err) {

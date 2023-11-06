@@ -21,23 +21,31 @@ const page = () => {
   const [subMenuData, setSubMenuData] = useState()
   const [userProfileData, setUserData] = useState()
   const [cartProduct, setCartProduct] = useState()
+  const [purchaseHistoryProduct, setPurchaseHistoryProduct] = useState()
+  const [myOrder, setMyOrder] = useState()
   const helper = async () => {
     await getDataService(setSubMenuData, "sub-menu/all")
   }
   const getUserUtils = async () => {
     await getLocalUser(userCred, setUserData)
   }
-  const getCartData = async () => {
-    await getCartProduct({ userCred, setCartProduct })
+  const getCartData = async (type,status="Start") => {
+    let setData=setCartProduct
+    if(type=="myCart") setData=setCartProduct
+    else if(type=="purchaseHistory") setData=setPurchaseHistoryProduct
+    else if(type=="myOrder") setData=setMyOrder
+    await getCartProduct({ userCred, setData,status })
   }
   useEffect(() => {
     helper()
     getUserUtils()
-    getCartData()
+    getCartData("myCart","start")
+    getCartData("purchaseHistory","start")
+    getCartData("myOrder","process")
   }, [userCred])
   return (
     <>
-      <dashboardContext.Provider value={{ userProfileData, getUserUtils,cartProduct,getCartData }}>
+      <dashboardContext.Provider value={{ userProfileData, getUserUtils,cartProduct,getCartData,purchaseHistoryProduct ,myOrder}}>
         <CartUiContext.Provider value={{ subMenuData }}>
           <Dashboard />
         </CartUiContext.Provider>
