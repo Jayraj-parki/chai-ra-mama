@@ -20,7 +20,7 @@ const Profile = () => {
     }, [userProfileData])
     return (
         <div className="container my-4">
-            <h3>User Profile</h3>
+            <h4>User Profile</h4>
             <div className="card">
                 <div className="card-body">
                     <div className="form-group mb-3">

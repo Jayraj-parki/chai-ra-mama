@@ -10,7 +10,7 @@ import { removeFromCart } from '@/services/localUser/removeFromCart';
 import { useAuth } from '@/app/layout';
 import { saveCheckoutData } from '@/services/localUser/saveCheckoutData';
 const Cart = () => {
-    const { getCountOfAddedCart } = useAuth()
+    const { getCountOfAddedCart,userCred } = useAuth()
     const { cartProduct, getCartData } = useDashboardContext()
     const onCheckout = () => { return 1 }
     const [productCounts, setProductCounts] = useState([]);
@@ -19,11 +19,11 @@ const Cart = () => {
         const confirm = window.confirm("Do you really want to remove this product? ")
         if (confirm) {
             await removeFromCart({ uId: id })
-            getCartData()
-            getCountOfAddedCart()
+            getCountOfAddedCart()    
             alert("Product removed Successfully")
             setProductCounts(prevCounts => prevCounts.filter(item => item.id !== id));
             setRemovedProduct({...removedProduct,id})
+            getCartData("start")
         }
     }
     const proceeedCheckout = async () => {
@@ -43,7 +43,7 @@ const Cart = () => {
     }, [cartProduct])
     return (
         <div className={style.cart + " container mt-4"}>
-            <h3>My Cart</h3>
+            <h4>My Cart</h4>
             <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
                 {cartProduct?.length > 0 ?
                     <table className="col-12 table table-bordered text-center text-capitalize  ">
@@ -68,9 +68,9 @@ const Cart = () => {
                                                 <tbody>
                                                     <tr>
                                                         <td className=''>
-                                                            <RemoveIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleDecrement(val?._id, setProductCounts, productCounts)} />
+                                                            <RemoveIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleDecrement(val?._id, setProductCounts, productCounts,userCred)} />
                                                             <span className='h6'>{productCounts?.find(item => item.id === val?._id)?.quantity || 1}</span>
-                                                            <AddIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleIncrement(val?._id, setProductCounts, productCounts)} />
+                                                            <AddIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleIncrement(val?._id, setProductCounts, productCounts,userCred)} />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -99,7 +99,7 @@ const Cart = () => {
                 <button className="btn col-6 col-md-4 col-xl-3 btn-success mt-3 ms-auto text-capitalize" onClick={onCheckout}>Checkout</button>
             </div> */}
             {cartProduct?.length > 0 && <div className="row col-auto mx-auto mb-5">
-                <button className="btn col-6 col-md-4 col-xl-3 btn-primary mt-3 ms-auto text-capitalize" onClick={proceeedCheckout}>Proceed for Checkout</button>
+                <button className="btn col-6 col-md-4 col-xl-3 btn-primary mt-3 mx-auto text-capitalize" onClick={proceeedCheckout}>Proceed for Checkout</button>
             </div>}
         </div >
     );
