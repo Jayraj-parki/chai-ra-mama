@@ -14,8 +14,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const UserNavbar = () => {
-    const { siteUIData } = useSiteDataUIContext()
-    const { userCred, logOutUser } = useAuth()
+    const { siteUIData} = useSiteDataUIContext()
+    const { userCred, logOutUser,cartCount,getCountOfAddedCart } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("/")
     const [logoImg, setLogoImg] = useState("/assets/images/logo.png'")
@@ -31,6 +31,9 @@ const UserNavbar = () => {
     useEffect(() => {
         handleUserNavbar({ url, setCollapse, SetMenu, setActiveLink })
     }, [url])
+    useEffect(()=>{
+        getCountOfAddedCart()
+    },[userCred])
     return (
 
         <>
@@ -90,7 +93,7 @@ const UserNavbar = () => {
                                             <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard"><AccountCircleIcon className={style.navIcon+' p-0'}/></Link>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "add-to-cart" && "border-bottom border-3"} `}>
-                                            <button onClick={() => setActiveLink("add-to-cart")} className={style.cartBtn+` nav-link `} aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/><span className='d-flex justify-content-center align-items-center'>1</span></button>
+                                            <button onClick={() => setActiveLink("add-to-cart")} className={style.cartBtn+` nav-link `} aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/>{cartCount && <span className='d-flex justify-content-center align-items-center'>{cartCount}</span>}</button>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
                                             <Link onClick={LogOut} className={`nav-link `} aria-current="page" href=""><LogoutIcon className={style.navIcon+' p-0'}/></Link>
