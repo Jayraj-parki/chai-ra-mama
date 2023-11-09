@@ -9,8 +9,10 @@ import { handleDecrement, handleIncrement } from '@/utils/handleProductQuantity'
 import { removeFromCart } from '@/services/localUser/removeFromCart';
 import { useAuth } from '@/app/layout';
 import { saveCheckoutData } from '@/services/localUser/saveCheckoutData';
+import { updateProduct } from '@/services/localUser/updateProduct';
+import { handlePayment } from '@/services/localUser/handlePayment';
 const Cart = () => {
-    const { getCountOfAddedCart,userCred } = useAuth()
+    const { getCountOfAddedCart, userCred } = useAuth()
     const { cartProduct, getCartData } = useDashboardContext()
     const onCheckout = () => { return 1 }
     const [productCounts, setProductCounts] = useState([]);
@@ -19,15 +21,26 @@ const Cart = () => {
         const confirm = window.confirm("Do you really want to remove this product? ")
         if (confirm) {
             await removeFromCart({ uId: id })
-            getCountOfAddedCart()    
+            getCountOfAddedCart()
             alert("Product removed Successfully")
             setProductCounts(prevCounts => prevCounts.filter(item => item.id !== id));
-            setRemovedProduct({...removedProduct,id})
+            setRemovedProduct({ ...removedProduct, id })
             getCartData("start")
         }
     }
     const proceeedCheckout = async () => {
-        await saveCheckoutData()
+        const userId = userCred;
+        const isUpdated = await updateProduct({ userId, _id: userId, update: "checkout" })
+        let isPaymentSucessful = true
+        // if(isUpdated) isPaymentSucessful=await handlePayment({})
+        if (isPaymentSucessful) {
+            await updateProduct({ userId, _id: userId, update: "payment" })
+            await saveCheckoutData({ userId: userCred })
+        }
+        else {
+            await updateProduct({ userId, _id: userId, update: "cancel" })
+        }
+        getCartData("start")
     }
     useEffect(() => {
         if (cartProduct) {
@@ -68,9 +81,9 @@ const Cart = () => {
                                                 <tbody>
                                                     <tr>
                                                         <td className=''>
-                                                            <RemoveIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleDecrement(val?._id, setProductCounts, productCounts,userCred)} />
+                                                            <RemoveIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleDecrement(val?._id, setProductCounts, productCounts, userCred)} />
                                                             <span className='h6'>{productCounts?.find(item => item.id === val?._id)?.quantity || 1}</span>
-                                                            <AddIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleIncrement(val?._id, setProductCounts, productCounts,userCred)} />
+                                                            <AddIcon className={style.quantity + ' border-1 p-0  rounded mx-2'} onClick={() => handleIncrement(val?._id, setProductCounts, productCounts, userCred)} />
                                                         </td>
                                                     </tr>
                                                     <tr>

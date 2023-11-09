@@ -18,12 +18,14 @@ const page = () => {
     await getDataService(setMenuData,"menu")
     await getDataService(setSubMenuData,"sub-menu/all")
   }
-  const getCartData=async()=>{
-    await getCartProduct({userCred,setCartProduct})
+  const getCartData=async(type,status="Start")=>{
+    let setData=setCartProduct
+    if(type=="myCart") setData=setCartProduct
+    await getCartProduct({ userCred, setData,status })
   }
   useEffect(() => {
     helper()
-    getCartData()
+    getCartData("myCart","start")
   }, [userCred])
   return (
     <>

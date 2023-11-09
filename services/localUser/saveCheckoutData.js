@@ -1,24 +1,25 @@
-export const saveCheckoutData = async ({userCred,productId}) => {
-    if (!userCred || !productId ) {
+export const saveCheckoutData = async ({userId}) => {
+    if (!userId) {
         alert("Oops! Something went wrong")
         return false
     }
     else {
         try {
-            const result = await fetch("/api/user/product", {
+            const result = await fetch("/api/user/purchase", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                   userId:userCred,productId
+                    userId,
+                    purchaseTime:new Date()
                 })
             })
             const data = await result.json()
-            return data?._id
+            return data?.message
         }
         catch (e) {
-            console.log("error in add to cart" + e)
+            console.log("error in saveCheckoutData" + e)
             return null
         }
     }

@@ -13,7 +13,7 @@
     thead {
       th {
         min-width: 100px;
-        &:last-child {
+        &:first-child {
           min-width: 250px;
         }
       }
@@ -42,12 +42,6 @@
     }
     .reqStatus{
       background-color: $grey-light;;
-    }
-    .activeStatus{
-      background-color: $chocolate-dark;
-    }
-    .activeStatus{
-      background-color: $chocolate-dark;
     }
     .statusText {
       small{

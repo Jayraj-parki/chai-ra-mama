@@ -6,7 +6,20 @@ import style from "./dashboard.module.scss"
 import PurchaseHistory from '../user-dashboard/purchaseHistory/PurchaseHistory';
 import MyOrders from '../user-dashboard/myOrders/MyOrders';
 import SettingTab from '../user-dashboard/settingTab/SettingTab';
+import { useEffect } from 'react';
+import { useDashboardContext } from '@/app/dashboard/page';
+import { useAuth } from '@/app/layout';
 const Dashboard = () => {
+    const {helper, getUserUtils,getCartData,getPurchasedProduct}= useDashboardContext()
+    const { userCred } = useAuth()
+    useEffect(()=>{
+        helper()
+        getUserUtils()
+        getCartData("myCart","start")
+        getCartData("purchaseHistory","start")
+        getCartData("myOrder","process")
+        getPurchasedProduct()
+    },[userCred])
     return (
         <>
             <div className={style.dashboard + " container-fluid my-4 p-md-5"}>

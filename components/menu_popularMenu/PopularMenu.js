@@ -31,7 +31,7 @@ const PopularMenu = () => {
             }
         }
         setCartButton("")
-    };
+    }; 
 
     useEffect(() => {
         setCart(cartProduct?.map((val) => ({ productId: val?.productId, uId: val?._id })))

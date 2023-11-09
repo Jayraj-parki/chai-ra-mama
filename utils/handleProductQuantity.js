@@ -25,7 +25,7 @@ export const handleIncrement = async (productId, setProductCounts, productCounts
     ]);
   }
 };
-
+ 
 export const handleDecrement = async(productId, setProductCounts, productCounts,userId) => {
   const productIndex = productCounts.findIndex(item => item.id === productId);
   if (productIndex !== -1 && productCounts[productIndex]?.quantity > 1) {
