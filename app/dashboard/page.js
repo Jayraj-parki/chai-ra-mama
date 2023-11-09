@@ -6,6 +6,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { useAuth } from "../layout"
 import { getLocalUser } from "@/services/localUser/getLocalUser"
 import { getCartProduct } from "@/services/localUser/getCartProduct"
+import { getPurchasedCart } from "@/services/localUser/getPurchasedCart"
 const CartUiContext = createContext()
 export const useCartUiContext = () => {
   return useContext(CartUiContext)
@@ -21,6 +22,7 @@ const page = () => {
   const [subMenuData, setSubMenuData] = useState()
   const [userProfileData, setUserData] = useState()
   const [cartProduct, setCartProduct] = useState()
+  const [purchasedProduct, setPurchaseProduct] = useState()
   const [purchaseHistoryProduct, setPurchaseHistoryProduct] = useState()
   const [myOrder, setMyOrder] = useState()
   const helper = async () => {
@@ -36,16 +38,21 @@ const page = () => {
     else if(type=="myOrder") setData=setMyOrder
     await getCartProduct({ userCred, setData,status })
   }
-  useEffect(() => {
-    helper()
-    getUserUtils()
-    getCartData("myCart","start")
-    getCartData("purchaseHistory","start")
-    getCartData("myOrder","process")
-  }, [userCred])
+  const getPurchasedProduct=async()=>{
+    await getPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
+    await getPurchasedCart({ userCred, setData:setPurchaseProduct,status:"processing" })
+  }
+  // useEffect(() => {
+  //   helper()
+  //   getUserUtils()
+  //   getCartData("myCart","start")
+  //   getCartData("purchaseHistory","start")
+  //   getCartData("myOrder","process")
+  //   getPurchasedProduct()
+  // }, [userCred])
   return (
     <>
-      <dashboardContext.Provider value={{ userProfileData, getUserUtils,cartProduct,getCartData,purchaseHistoryProduct ,myOrder}}>
+      <dashboardContext.Provider value={{ helper,userProfileData, getUserUtils,cartProduct,getCartData,getPurchasedProduct,purchaseHistoryProduct,purchasedProduct ,myOrder}}>
         <CartUiContext.Provider value={{ subMenuData }}>
           <Dashboard />
         </CartUiContext.Provider>

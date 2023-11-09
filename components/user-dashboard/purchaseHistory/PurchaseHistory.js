@@ -3,62 +3,74 @@ import { useDashboardContext } from '@/app/dashboard/page';
 import React, { useEffect, useState } from 'react';
 import style from "./purchaseHistory.module.scss"
 import Image from "next/image"
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { Button } from '@mui/material';
 const PurchaseHistory = () => {
-    const { purchaseHistoryProduct} = useDashboardContext()
+    const { purchaseHistoryProduct, getPurchasedProduct } = useDashboardContext()
+    const fetchLatestData=()=>{getPurchasedProduct("history")}
+    // useEffect(()=>{
+    //     fetchLatestData()
+    // },[])
     return (
-        <div className={style.purchaseHistory + " container mt-4"}>
-            <h4>Purchase History</h4>
-            <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
-                {purchaseHistoryProduct?.length > 0 ?
-                    <table className="col-12 table table-bordered table-hover  text-center text-capitalize  ">
-                        <thead className='border'>
-                            <tr>
 
-                                <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
-                                <th className='text-capitalize p-2 pb-4 border text-center' >Title</th>
-                                <th className='text-capitalize p-2 pb-4 border text-center' >Image</th>
-                                <th className='text-capitalize p-2 pb-4 border text-center' >Price</th>
-                                <th className='text-capitalize p-2 pb-4 border text-center' >Delivered on</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                purchaseHistoryProduct?.map((val, index) =>
-                                    <tr key={val?.itemName + "" + index + "" + Math?.random(10000)} className=''>
-                                        <td className='align-middle' >{index + 1}</td>
-                                        <td className='align-middle' >{val?.menuDetails?.itemName}</td>
-                                        <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={val?.menuDetails?.itemImage || "/assets/images/1.png"} alt="..." /></td>
-                                        <td className='align-middle text-start'>
-                                            <table className='table text-start text-capitalize'>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className='text0start'>
-                                                            <span className='h6'>Unit Price: {val?.menuDetails?.itemPrice} rs.</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className='text0start'>
-                                                            <span className='h6'>Quantity: {val?.quantity}</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className=''>
-                                                            Total Price: {val?.totalPrice} Rs.
-                                                        </td>
-                                                    </tr>
-
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td className='text-center align-middle'>
-                                            {val?.orderTime}
-                                        </td>
-                                    </tr>
-                                )}
-                        </tbody>
-                    </table>
-                    : <p className='text-center'>No Purchase History found..!</p>}
+        <div className={style.purchaseHistory + " container-fluid mt-4"}>
+            <div className='row col-12 mx-auto d-flex align-items-center justify-content-between'>
+                <h4 className='col-auto'>My Orders</h4>
+                <Button onClick={fetchLatestData} className=' col-auto bg-dark text-capitalize text-light'><RefreshIcon /> reload</Button>
             </div>
+            <p>{purchaseHistoryProduct?.length==0  && "Oops..! No active order found."}</p>
+            {
+                purchaseHistoryProduct?.map((val, index) => {
+                    return (
+                        <>
+                            <div key={val?._id + "" + index} className={' row col-12 mx-auto py-3 my-5 shadow rounded-3 border'}>
+                                <div className={style.container + ' row col-12 mx-auto '}>
+                                    <div>
+                                        <table className="col-12 table table-bordered  text-center text-capitalize  ">
+                                            <thead className='border'>
+                                                <tr>
+                                                    <th colSpan={5} className='text-capitalize p-2 pb-4 border text-center' >Summary</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Product Name</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Quantity</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Price</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Image</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr className=''>
+                                                    <td className='align-middle' rowSpan={3} colSpan={5}>
+                                                        <table className='table   text-start text-capitalize' >
+                                                            <tbody>
+                                                                <tr><td>Total price : {val?.amount}</td></tr>
+                                                                <tr><td>Ordered Time: {val?.start?.time}</td></tr>
+                                                                <tr><td>Delivered Time: {val?.completed?.time}</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                {
+                                                    val?.productDetails?.map((product) =>
+
+                                                        <tr className=''>
+                                                            <td className='align-middle' >{product?.menuDetails?.itemName}</td>
+                                                            <td className='align-middle' >{product?.quantity}</td>
+                                                            <td className='align-middle'>{product?.totalPrice}</td>
+                                                            <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={product?.menuDetails?.itemImage || "/assets/images/1.png"} alt="..." /></td>
+                                                        </tr>
+                                                    )
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div >
+                        </>
+                    )
+                }
+                )
+            }
         </div>
     );
 };

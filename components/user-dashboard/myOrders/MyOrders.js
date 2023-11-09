@@ -8,147 +8,97 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useDashboardContext } from '@/app/dashboard/page';
 const MyOrders = () => {
     const arr = ["Start", "payment completed", " Order placed", "packing", "shipping", "delivered"]
-    const {myOrder,getCartData}=useDashboardContext()
-    const fetchLatestData=()=>{
-        getCartData("myOrder","process")
+    const { purchasedProduct, getPurchasedProduct } = useDashboardContext()
+    const fetchLatestData = () => {
+        getPurchasedProduct()
     }
-    useEffect(() => {
-        console.log(":inside")
-    },[])
     return (
         <div className={style.myOrders + " container-fluid mt-4"}>
             <div className='row col-12 mx-auto d-flex align-items-center justify-content-between'>
                 <h4 className='col-auto'>My Orders</h4>
-                <Button onClick={fetchLatestData} className=' col-auto bg-dark text-capitalize text-light'><RefreshIcon/> reload</Button>
+                <Button onClick={fetchLatestData} className=' col-auto bg-dark text-capitalize text-light'><RefreshIcon /> reload</Button>
             </div>
-            <div className={' row col-12 mx-auto py-3 my-5 shadow rounded-3 border'}>
-                {/* Oops..! No active order found. */}
-                <div className={style.container + ' row col-12 mx-auto '}>
-                    <div>
-                        <table className="col-12 table table-bordered  text-center text-capitalize  ">
-                            <thead className='border'>
-                                <tr>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Product Name</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Quantity</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Price</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Image</th>
-                                    <th colSpan={4} className='text-capitalize p-2 pb-4 border text-center' >Summary</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                    <td className='align-middle' rowSpan={3}>
-
-                                        <table className='table   text-start text-capitalize' >
+            <p>{purchasedProduct?.length==0 && "Oops..! No active order found."}</p>
+            {
+                purchasedProduct?.map((val, index) => {
+                    return (
+                        <>
+                            <div key={val?._id + "" + index} className={' row col-12 mx-auto py-3 my-5 shadow rounded-3 border'}>
+                                <div className={style.container + ' row col-12 mx-auto '}>
+                                    <div>
+                                        <table className="col-12 table table-bordered  text-center text-capitalize  ">
+                                            <thead className='border'>
+                                                <tr>
+                                                    <th colSpan={5} className='text-capitalize p-2 pb-4 border text-center' >Summary</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Product Name</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Quantity</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Price</th>
+                                                    <th className='text-capitalize p-2 pb-4 border text-center' >Image</th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Total price : 30 Rs.</td>
+
+                                                <tr className=''>
+                                                    <td className='align-middle' rowSpan={300} colSpan={5}>
+                                                        <table className='table   text-start text-capitalize' >
+                                                            <tbody>
+                                                                <tr><td>Total price : {val?.amount}</td></tr>
+                                                                <tr><td>Order Time: {val?.start?.time}</td></tr>
+                                                                <tr><td>last Status: {val?.activeStatus}</td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
                                                 </tr>
-                                                <tr>
-                                                    <td>Order Time: 20Oct 23, 5:23Pm</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status: Delivered</td>
-                                                </tr>
+                                                {
+                                                    val?.productDetails?.map((product) =>
+
+                                                        <tr className=''>
+                                                            <td className='align-middle' >{product?.menuDetails?.itemName}</td>
+                                                            <td className='align-middle' >{product?.quantity}</td>
+                                                            <td className='align-middle'>{product?.totalPrice}</td>
+                                                            <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={product?.menuDetails?.itemImage || "/assets/images/1.png"} alt="..." /></td>
+                                                        </tr>
+                                                    )
+                                                }
 
                                             </tbody>
                                         </table>
-                                    </td>
-                                </tr>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                </tr>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div className={style.orderStatus + ' py-3 row col-12 mx-auto d-flex justify-content-between align-items-start '}>
-                    {arr?.map((val, index) =>
-                        <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                            <div className={style.statusIcon + ` ${index == 2 && style.activeStatus}  ${index > 2 && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
-                            <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0 pb-0 '>{val}</p><small className='col-12 text-center text-capitalize '>{index < 2 ? "Completed" : index == 2 ? "active" : ""}</small></div>
-                        </div>
-                    )}
-                </div>
-            </div>
-            <div className={' row col-12 mx-auto py-3 shadow rounded-3 border'}>
-                {/* Oops..! No active order found. */}
-                <div className={style.container + ' row col-12 mx-auto '}>
-                    <div>
-                        <table className="col-12 table table-bordered  text-center text-capitalize  ">
-                            <thead className='border'>
-                                <tr>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Product Name</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Quantity</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Price</th>
-                                    <th className='text-capitalize p-2 pb-4 border text-center' >Image</th>
-                                    <th colSpan={4} className='text-capitalize p-2 pb-4 border text-center' >Summary</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                    <td className='align-middle' rowSpan={3}>
-
-                                        <table className='table   text-start text-capitalize' >
-                                            <tbody>
-                                                <tr>
-                                                    <td>Total price : 30 Rs.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Order Time: 20Oct 23, 5:23Pm</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Status: Delivered</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                </tr>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                </tr>
-                                <tr className=''>
-                                    <td className='align-middle' >Tea</td>
-                                    <td className='align-middle' >2</td>
-                                    <td className='align-middle'>30 Rs.</td>
-                                    <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." /></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div className={style.orderStatus + ' py-3 row col-12 mx-auto d-flex justify-content-between align-items-start '}>
-                    {arr?.map((val, index) =>
-                        <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                            <div className={style.statusIcon + ` ${index == 2 && style.activeStatus}  ${index > 2 && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
-                            <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0 pb-0 '>{val}</p><small className='col-12 text-center text-capitalize '>{index < 2 ? "Completed" : index == 2 ? "active" : ""}</small></div>
-                        </div>
-                    )}
-                </div>
-            </div>
+                                    </div>
+                                </div>
+                                <div className={style.orderStatus + ' py-3 row col-12 mx-auto d-flex justify-content-between align-items-start '}>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.start?.status && style.activeStatus}  ${  !val?.start?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Start</p><small className='col-12 text-center text-capitalize '>{val?.start?.status ? "Completed" :""}</small></div>
+                                    </div>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.payment?.status && style.activeStatus}  ${  !val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>payment</p><small className='col-12 text-center text-capitalize '>{val?.payment?.status ? "Completed" :""}</small></div>
+                                    </div>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.orderPlaced?.status && style.activeStatus}  ${  !val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Order Placed</p><small className='col-12 text-center text-capitalize '>{val?.orderPlaced?.status ? "Completed" : val?.payment?.status ? "processing" : ""}</small></div>
+                                    </div>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.packing?.status && style.activeStatus}  ${  !val?.orderPlaced?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Packing</p><small className='col-12 text-center text-capitalize '>{val?.packing?.status ? "Completed" : val?.orderPlaced?.status  ? "processing" : ""}</small></div>
+                                    </div>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.shipping?.status && style.activeStatus}  ${  !val?.packing?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Shipping</p><small className='col-12 text-center text-capitalize '>{val?.shipping?.status ? "Completed" : val?.packing?.status  ? "processing" : ""}</small></div>
+                                    </div>
+                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
+                                        <div className={style.statusIcon + ` ${ !val?.delivered?.status && style.activeStatus}  ${  !val?.shipping?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Delivered</p><small className='col-12 text-center text-capitalize '>{val?.delivered?.status ? "Completed" : val?.shipping?.status ? "processing" : ""}</small></div>
+                                    </div>
+                                </div>
+                            </div >
+                        </>
+                    )
+                }
+                )
+            }
         </div>
     );
 };
-
+ 
 export default MyOrders;

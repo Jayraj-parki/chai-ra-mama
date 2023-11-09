@@ -1,11 +1,15 @@
 "use client"
 import { useState } from "react";
 import style from "./settingTab.module.scss"
+import { changeLocalUserPassword } from "@/services/localUser/changeLocalUserPassword";
+import { useAuth } from "@/app/layout";
 const SettingTab = () => {
+    const {userCred}=useAuth()
     const [currentPassword, setCurrentPassword] = useState()
     const [newPassword, setNewPassword] = useState()
     const [confirmNewPassword, setConfirmNewPassword] = useState()
     const ChangePasswordHandler = async () => {
+        await changeLocalUserPassword({ currentPassword,newPassword,confirmNewPassword,userCred})
         setCurrentPassword("")
         setNewPassword("")
         setConfirmNewPassword("")
