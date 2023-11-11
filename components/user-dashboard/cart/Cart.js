@@ -11,10 +11,11 @@ import { useAuth } from '@/app/layout';
 import { saveCheckoutData } from '@/services/localUser/saveCheckoutData';
 import { updateProduct } from '@/services/localUser/updateProduct';
 import { handlePayment } from '@/services/localUser/handlePayment';
+import { getCartProduct } from '@/services/localUser/getCartProduct';
 const Cart = () => {
     const { getCountOfAddedCart, userCred } = useAuth()
-    const { cartProduct, getCartData } = useDashboardContext()
-    const onCheckout = () => { return 1 }
+    const [cartProduct, setCartProduct] = useState()
+    const helper = async () => { await getCartProduct({ userCred, setData: setCartProduct, status: "start" }) }
     const [productCounts, setProductCounts] = useState([]);
     const [removedProduct, setRemovedProduct] = useState([]);
     const removeCart = async ({ id }) => {
@@ -25,7 +26,7 @@ const Cart = () => {
             alert("Product removed Successfully")
             setProductCounts(prevCounts => prevCounts.filter(item => item.id !== id));
             setRemovedProduct({ ...removedProduct, id })
-            getCartData("start")
+            helper()
         }
     }
     const proceeedCheckout = async () => {
@@ -40,8 +41,11 @@ const Cart = () => {
         else {
             await updateProduct({ userId, _id: userId, update: "cancel" })
         }
-        getCartData("start")
+        helper()
     }
+    useEffect(() => {
+        helper()
+    }, [userCred])
     useEffect(() => {
         if (cartProduct) {
             const updatedProductCounts = cartProduct.map(val => ({
@@ -52,12 +56,11 @@ const Cart = () => {
             }));
             setProductCounts(updatedProductCounts);
         }
-
     }, [cartProduct])
     return (
-        <div className={style.cart + " container mt-4"}>
+        <div className={style.cart + " container col-12  "}>
             <h4>My Cart</h4>
-            <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
+            <div className={style.tableContainer + ' row col-12 mx-auto mt-5 border rounded py-3'}>
                 {cartProduct?.length > 0 ?
                     <table className="col-12 table table-bordered text-center text-capitalize  ">
                         <thead className='border'>
@@ -106,7 +109,7 @@ const Cart = () => {
                                 <td className='align-middle text-end' colSpan={4}>Total Price: {productCounts?.map(val => val.totalPrice)?.reduce((acc, price) => acc + price, 0)}/- Rs. </td>
                             </tr>
                         </tbody>
-                    </table> : <p className='text-center'>No Product Added to Cart</p>}
+                    </table> : <p className='text-center'>No Product Added to Cart..!</p>}
             </div>
             {/* <div className="row col-auto mx-auto mb-5">
                 <button className="btn col-6 col-md-4 col-xl-3 btn-success mt-3 ms-auto text-capitalize" onClick={onCheckout}>Checkout</button>

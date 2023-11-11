@@ -92,8 +92,8 @@ const UserNavbar = () => {
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "dashboard" && "border-bottom border-3"} `}>
                                             <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard"><AccountCircleIcon className={style.navIcon+' p-0'}/></Link>
                                         </li>
-                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "add-to-cart" && "border-bottom border-3"} `}>
-                                            <button onClick={() => setActiveLink("add-to-cart")} className={style.cartBtn+` nav-link `} aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/>{cartCount && <span className='d-flex justify-content-center align-items-center'>{cartCount}</span>}</button>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "user-product" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("user-product")} className={style.cartBtn+` nav-link `} href="/user-product" aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/>{cartCount && <span className='d-flex justify-content-center align-items-center'>{cartCount}</span>}</Link>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
                                             <Link onClick={LogOut} className={`nav-link `} aria-current="page" href=""><LogoutIcon className={style.navIcon+' p-0'}/></Link>
