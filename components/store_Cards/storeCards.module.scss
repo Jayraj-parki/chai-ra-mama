@@ -20,6 +20,13 @@
         color: $text-gray;
         text-align: justify;
       }
+      .storeIncharge{
+        text-transform: capitalize;
+        color: $chocolate-dark;
+        font-size: $font-sm;
+        // transform: scaleX(0.9);
+        background-color: #70404224;
+      }
     }
     .mapLink{
       button{
@@ -44,5 +51,8 @@
       transform: translate(-20px,-20px);
     }
 
+  }
+  .modal{
+    background-color: #00000079;
   }
 }
