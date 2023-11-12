@@ -12,16 +12,18 @@ export const useStoreUiContext = () => {
 const page = () => {
   const [storeCity, setStoreCity] = useState()
   const [storeDetails, setStoreDetails] = useState()
+  const [storeList,setStoreList]=useState()
   const helper = async () => {
     await getDataService(setStoreCity,"store-locator")
     await getDataService(setStoreDetails,"stores/all")
+    await getDataService(setStoreList, "store-incharge")
   }
   useEffect(() => {
     helper()
   }, [])
   return (
     <>
-      <StoreUiContext.Provider value={{storeCity,storeDetails}}>
+      <StoreUiContext.Provider value={{storeCity,storeDetails,storeList}}>
         <StoreBanner />
         <StoreCards />
       </StoreUiContext.Provider>

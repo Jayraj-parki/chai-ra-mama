@@ -1,21 +1,25 @@
 "use client"
-import { useDashboardContext } from '@/app/dashboard/page';
 import React, { useEffect, useState } from 'react';
 import style from "./purchaseHistory.module.scss"
 import Image from "next/image"
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Button } from '@mui/material';
+import { useAuth } from '@/app/layout';
+import { getPurchasedCart } from '@/services/localUser/getPurchasedCart';
 const PurchaseHistory = () => {
-    const { purchaseHistoryProduct, getPurchasedProduct } = useDashboardContext()
-    const fetchLatestData=()=>{getPurchasedProduct("history")}
-    // useEffect(()=>{
-    //     fetchLatestData()
-    // },[])
+    const { userCred} = useAuth()
+    const [purchaseHistoryProduct,setPurchaseHistoryProduct]=useState()
+    const fetchLatestData=async()=>{
+        await getPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
+    }
+    useEffect(()=>{
+        fetchLatestData()
+    },[userCred])
     return (
 
-        <div className={style.purchaseHistory + " container-fluid mt-4"}>
+        <div className={style.purchaseHistory + " container-fluid "}>
             <div className='row col-12 mx-auto d-flex align-items-center justify-content-between'>
-                <h4 className='col-auto'>My Orders</h4>
+                <h4 className='col-auto'>My Purchased Product</h4>
                 <Button onClick={fetchLatestData} className=' col-auto bg-dark text-capitalize text-light'><RefreshIcon /> reload</Button>
             </div>
             <p>{purchaseHistoryProduct?.length==0  && "Oops..! No active order found."}</p>

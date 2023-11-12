@@ -11,6 +11,7 @@ import WidgetsIcon from '@mui/icons-material/Widgets';
 import StoreIcon from '@mui/icons-material/Store';
 import InfoIcon from '@mui/icons-material/Info';
 import Link from 'next/link';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 const SiteContent = () => {
     return (
         <div className={style.siteContent+' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -66,6 +67,12 @@ const SiteContent = () => {
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer8+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><StoreIcon className={style.icon}/></div>
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Store Locators</p></div>
+                    </div>
+                </Link>
+                <Link href="./store-incharge" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                        <div className={style.iconContainer10+ " "+style.iconContainer+' col-2  d-flex justify-content-center align-items-center'}><SupervisorAccountIcon className={style.icon}/></div>
+                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Store incharge</p></div>
                     </div>
                 </Link>
                 <Link href="./site-enquiries" className={style.item+'  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
