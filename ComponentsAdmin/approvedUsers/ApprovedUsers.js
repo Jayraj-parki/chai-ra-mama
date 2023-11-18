@@ -31,7 +31,7 @@ const ApprovedUsers = () => {
             {
               approvedUser?.map((val, index) =>
                 val?.approval == "approved" ?
-                  <tr className='text-center'>
+                  <tr key={index+""+Math?.random(10000)} className='text-center'>
                     <td >{index + 1}</td>
                     <td className='px-3 '>{val?.firstName}</td>
                     <td className='px-3 '>{val?.lastName}</td>

@@ -3,7 +3,7 @@ export const handleAdminNavbar = async ({ url, setCollapse, SetMenu, setActiveLi
         if (url.toLowerCase().includes("signin")) setActiveLink("signin")
         else if (url.toLowerCase().includes("signup")) setActiveLink("signup")
         else if (url.toLowerCase().includes("home")) setActiveLink("home")
-        else if (url.toLowerCase().includes("profile")) setActiveLink("profile")
+        else if (url.toLowerCase().includes("client-request")) setActiveLink("client-request")
         setCollapse(true)
         SetMenu(true)
     }

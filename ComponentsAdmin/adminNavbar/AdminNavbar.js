@@ -10,7 +10,7 @@ import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
-import PersonIcon from '@mui/icons-material/Person';
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import { adminLogout } from '@/services/adminLogout';
 import { handleAdminNavbar } from '@/utils/handleAdminNavbar';
 const AdminNavbar = () => {
@@ -63,8 +63,8 @@ const AdminNavbar = () => {
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "home" && "border-bottom border-3"} `}>
                                             <Link onClick={() => setActiveLink("home")} className={`nav-link `} aria-current="page" href="/admin/home"><HomeIcon className={style.icon + ` `} /></Link>
                                         </li>
-                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "profile" && "border-bottom border-3"} `}>
-                                            <Link onClick={() => setActiveLink("profile")} className={`nav-link `} aria-current="page" href="/admin/profile"><PersonIcon className={style.icon + ` `} /></Link>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "client-request" && "border-bottom border-3"} `}>
+                                            <Link onClick={() => setActiveLink("client-request")} className={`nav-link `} aria-current="page" href="/admin/client-request"><CircleNotificationsIcon className={style.icon + ` `} /></Link>
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
                                             <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/auth/signin"><LogoutIcon className={style.icon + ` `} /></Link>
