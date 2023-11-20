@@ -1,27 +1,25 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const DeleteDataService = async ({ _id, helper, end_url }) => {
+export const getForceActionData = async ({ setData, end_url, request }) => {
     try {
-        const confirm = window.confirm("Do you want to delete this Item?")
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (confirm) {
+        if (adminAuthData?.authorized) {
             const result = await fetch(`/api/admin/${end_url}`, {
-                method: "DELETE",
+                method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    _id: _id,
-                    authId: adminAuthData
-                })
+                    email: adminAuthData?.id,
+                    request
+                })  
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setData(data?.data)
         }
     }
     catch (err) {
-        console.log(`ERROR: ${end_url} ` + err)
+        console.log("getForceActionData ERROR: " + err)
     }
 }
