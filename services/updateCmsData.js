@@ -7,10 +7,7 @@ export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent, _id, cle
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+       
         let url = ""
         if (typeof cmsImage === "string" && cmsImage.includes("http")) {
             url = cmsImage
@@ -27,9 +24,10 @@ export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent, _id, cle
                 "Content-type": "application/json"
             },
             body: JSON.stringify({
-                cmsHeading, cmsImage: url, cmsContent, _id
+                cmsHeading, cmsImage: url, cmsContent, _id,
+                authId:adminAuthData
             })
-        })
+        }) 
         const data = await result.json()
         alert(data?.message)
         helper()
