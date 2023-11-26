@@ -4,10 +4,7 @@ export const updateSiteEnquiryData = async ({ _id, contactName,contactEmail,cont
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+       
         if (contactName.trim() == "" || contactEmail.trim()==""||contactPhone.trim()=="") {
             alert("Please fill all the fields")
         }
@@ -21,7 +18,8 @@ export const updateSiteEnquiryData = async ({ _id, contactName,contactEmail,cont
                     _id: _id,
                     contactName:contactName,
                     contactEmail:contactEmail,
-                    contactPhone:contactPhone
+                    contactPhone:contactPhone,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()

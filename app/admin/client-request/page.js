@@ -16,11 +16,11 @@ const page = () => {
   const helper = async () => {
 
     await getForceActionData({setData:setDeleteReq,end_url:"force-approval",request:"delete"})
-    await getForceActionData({setData:setUpdateReq,end_url:"force-approval",request:"update"})
+    await getForceActionData({setData:setUpdateReq,end_url:"force-approval/update",request:"updated"})
   }
   useEffect(() => {
     if (adminCred) helper()
-  }, [])
+  }, [adminCred])
   return (
     <>
       {

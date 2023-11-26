@@ -1,0 +1,52 @@
+@import "../../styles/var";
+
+.tabsContainer {
+    overflow: auto;
+  .ul_tabs {
+    border-color: $primary-coffee;
+
+    li {
+      button,a {
+        color: $primary-coffee;
+        font-size: $font-sm - 3px;
+        font-weight: 600;
+      }
+      .active_tab {
+        color: $primary-light;
+        background-color: $primary-coffee;
+      }
+      .not_active {
+        color: $primary-coffee;
+        background-color: rgba(206, 202, 202, 0.119);
+      }
+      .refresh{
+        background-color: $grey-dark;
+        color: $white-light;
+      }
+      .back{
+        background-color: $bb-dark;
+        color: $white-light;
+      }
+      
+    }
+    &::-webkit-scrollbar {
+      height: 6px;
+      background-color: $primary-coffee-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-coffee;
+    }
+  }
+  table {
+    // overflo/w: auto;
+    thead{
+      th{
+        min-width: 200px;
+        &:first-child{
+          min-width: 20px;
+        }
+      }
+    }
+    
+  }
+}

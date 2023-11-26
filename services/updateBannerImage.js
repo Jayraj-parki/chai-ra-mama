@@ -7,15 +7,12 @@ export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, s
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         let url = ""
         if (bannerImage == "") {
             alert("Image is not selected")
         }
-        else {
+        else { 
 
             if (typeof bannerImage === "string" && bannerImage?.includes("http")) {
                 url = bannerImage
@@ -32,7 +29,8 @@ export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, s
                 },
                 body: JSON.stringify({
                     _id: _id,
-                    bannerImage: url
+                    bannerImage: url,
+                    authId:adminAuthData
                 })
             })
             const data = await result.json()
