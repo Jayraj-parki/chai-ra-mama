@@ -7,43 +7,39 @@ export const updateClientFbData = async ({ _id, clientImage, clientName, clientD
     try {
         if (clientImage == "" || clientComment.trim() == "" || clientName.trim() == "" || clientDesignation.trim() == "") {
             alert("Please fill all the fields")
-        } 
+        }
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
+
+        let url = ""
+        if (typeof clientImage === "string" && clientImage?.includes("http")) {
+            url = clientImage
         }
-        else {
-            let url = ""
-            if (typeof clientImage === "string" && clientImage?.includes("http")) {
-                url = clientImage
-            }
-            else if (clientImage != "") {
-                const imageRef = ref(storage, `images/${v4() + clientImage?.name}`)
-                const snapshot = await uploadBytes(imageRef, clientImage);
-                url = await getDownloadURL(snapshot.ref);
-            }
-            const result = await fetch("/api/admin/client-feedback", {
-                method: "PATCH",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    _id: _id,
-                    clientName: clientName,
-                    clientComment: clientComment,
-                    clientDesignation: clientDesignation,
-                    clientImage: url,
-                    authId:adminAuthData
-                })
+        else if (clientImage != "") {
+            const imageRef = ref(storage, `images/${v4() + clientImage?.name}`)
+            const snapshot = await uploadBytes(imageRef, clientImage);
+            url = await getDownloadURL(snapshot.ref);
+        }
+        const result = await fetch("/api/admin/client-feedback", {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                _id: _id,
+                clientName: clientName,
+                clientComment: clientComment,
+                clientDesignation: clientDesignation,
+                clientImage: url,
+                authId: adminAuthData
             })
-            const data = await result.json()
-            alert(data?.message)
-            helper()
-            clearForm()
-            setEditData({ active: false, _id: "", image: "", content: "", designation: "", name: "" })
-        }
+        })
+        const data = await result.json()
+        alert(data?.message)
+        helper()
+        clearForm()
+        setEditData({ active: false, _id: "", image: "", content: "", designation: "", name: "" })
+
     }
     catch (err) {
         console.log("CLIENT FEEDNACK ERROR: " + err)

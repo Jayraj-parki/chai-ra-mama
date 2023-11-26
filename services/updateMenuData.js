@@ -7,10 +7,7 @@ export const updateMenuData = async ({_id, menuName,menuImage,menuContent ,helpe
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         if (menuName.trim() == ""|| menuImage==""|| menuContent.trim()=="") {
             alert("Please fill all the fields")
             
@@ -36,7 +33,8 @@ export const updateMenuData = async ({_id, menuName,menuImage,menuContent ,helpe
                     _id:_id,
                     menuName: menuName,
                     menuImage: url,
-                    menuContent:menuContent
+                    menuContent:menuContent,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()

@@ -4,10 +4,7 @@ export const updateStoreIncharge = async ({ _id, inchargeName, inchargePhone, in
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         if (inchargeEmail.trim() == ""|| inchargeName.trim()==""|| inchargePhone.trim()==""||_id=="") {
             alert("Please fill all the fields")
         }
@@ -22,7 +19,8 @@ export const updateStoreIncharge = async ({ _id, inchargeName, inchargePhone, in
                     _id:_id,
                    inchargeEmail,
                    inchargeName,
-                   inchargePhone
+                   inchargePhone,
+                   authId: adminAuthData
                 })
             })
             const data = await result.json()

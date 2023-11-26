@@ -4,10 +4,7 @@ export const updateStoreCityData = async ({_id,storeCity ,helper,setEditData,cle
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         if (storeCity.trim() == "") {
             alert("Please fill all the fields")
             
@@ -21,7 +18,8 @@ export const updateStoreCityData = async ({_id,storeCity ,helper,setEditData,cle
                 },
                 body: JSON.stringify({
                     _id:_id,
-                    storeCity:storeCity
+                    storeCity:storeCity,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()

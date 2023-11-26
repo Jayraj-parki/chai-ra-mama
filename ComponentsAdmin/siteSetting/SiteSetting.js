@@ -10,6 +10,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Link from 'next/link';
+import HistoryIcon from '@mui/icons-material/History';
 import { useAuth } from "@/app/layout";
 const SiteSetting = () => {
     const { isAdminAuthorized } = useAuth()
@@ -21,30 +22,34 @@ const SiteSetting = () => {
             </div>
             <hr />
             <div className='row col-12 mx-auto  px-2 px-lg-3'>
-                <Link href="./site-details" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
-                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
-                        <div className={style.iconContainer1 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><SettingsApplicationsIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Site Details</p></div>
-                    </div>
-                </Link>
-                <Link href="./links-and-tags" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
-                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
-                        <div className={style.iconContainer2 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><LinkIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Social Links & SEO Tags</p></div>
-                    </div>
-                </Link>
-                <Link href="./pagewise-tags" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
-                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
-                        <div className={style.iconContainer3 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><TagIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Pagewise SEO Tags</p></div>
-                    </div>
-                </Link>
-                <Link href="./manage-uploads" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
-                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
-                        <div className={style.iconContainer4 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><UploadIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Manage uploads</p></div>
-                    </div>
-                </Link>
+                {isAdminAuthorized &&
+                    <>
+                        <Link href="./site-details" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                            <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                                <div className={style.iconContainer1 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><SettingsApplicationsIcon className={style.icon} /></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Site Details</p></div>
+                            </div>
+                        </Link>
+                        <Link href="./links-and-tags" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                            <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                                <div className={style.iconContainer2 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><LinkIcon className={style.icon} /></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Social Links & SEO Tags</p></div>
+                            </div>
+                        </Link>
+                        <Link href="./pagewise-tags" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                            <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                                <div className={style.iconContainer3 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><TagIcon className={style.icon} /></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Pagewise SEO Tags</p></div>
+                            </div>
+                        </Link>
+                        <Link href="./manage-uploads" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                            <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                                <div className={style.iconContainer4 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><UploadIcon className={style.icon} /></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Manage uploads</p></div>
+                            </div>
+                        </Link>
+                    </>
+                }
                 <Link href="./change-password" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer5 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><LockResetIcon className={style.icon} /></div>
@@ -73,6 +78,12 @@ const SiteSetting = () => {
                         </Link>
                     </>}
 
+                <Link href="./request-history" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                        <div className={style.iconContainer9 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><HistoryIcon className={style.icon} /></div>
+                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Request History</p></div>
+                    </div>
+                </Link>
 
             </div>
         </div>

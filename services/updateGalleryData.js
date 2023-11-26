@@ -7,10 +7,7 @@ export const updateGalleryData = async ({_id, galleryImage, galleryTitle ,helper
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         if (galleryTitle.trim() == ""||galleryImage=="") {
             alert("Please fill all the fields")
             return
@@ -33,7 +30,8 @@ export const updateGalleryData = async ({_id, galleryImage, galleryTitle ,helper
                 body: JSON.stringify({
                     _id:_id,
                     galleryTitle: galleryTitle,
-                    galleryImage: url
+                    galleryImage: url,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()

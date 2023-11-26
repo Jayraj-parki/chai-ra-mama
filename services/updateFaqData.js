@@ -4,10 +4,6 @@ export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearFo
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
         if (faqQuestion == "" || faqAnswer.trim()=="") {
             alert("Please fill all the fields")
         }
@@ -20,7 +16,8 @@ export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearFo
                 body: JSON.stringify({
                     _id: _id,
                     faqQuestion:faqQuestion,
-                    faqAnswer:faqAnswer
+                    faqAnswer:faqAnswer,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()

@@ -7,10 +7,7 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+       
         let url = ""
         if (typeof headerImage === "string" && headerImage.includes("http")) {
             url = headerImage
@@ -28,6 +25,7 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
             body: JSON.stringify({
                 _id: _id,
                 headerImage: url,
+                authId:adminAuthData
             })
         })
         const data = await result.json()

@@ -4,15 +4,11 @@ export const updateStoreData = async ({_id, storeAddress,storeMap,storePhone,hel
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-        if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
-            return
-        }
+        
         if (storeAddress.trim() == ""|| storeMap.trim()==""|| storePhone.trim()=="") {
             alert("Please fill all the fields")
         }
         else {
-            console.log(_id)
             const result = await fetch("/api/admin/stores", {
                 method: "PATCH",
                 headers: {
@@ -22,7 +18,8 @@ export const updateStoreData = async ({_id, storeAddress,storeMap,storePhone,hel
                     _id:_id,
                     storeAddress:storeAddress,
                     storePhone:storePhone,
-                    storeMap:storeMap
+                    storeMap:storeMap,
+                    authId: adminAuthData
                 })
             })
             const data = await result.json()
