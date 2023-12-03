@@ -3,10 +3,10 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateClientFbData = async ({ _id, clientImage, clientName, clientDesignation, clientComment, helper, clearForm, setEditData }) => {
+export const updateClientFbData = async ({ _id, clientImage, clientName, clientDesignation, clientComment, helper, clearForm, setEditData,setAlert }) => {
     try {
         if (clientImage == "" || clientComment.trim() == "" || clientName.trim() == "" || clientDesignation.trim() == "") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
@@ -35,8 +35,8 @@ export const updateClientFbData = async ({ _id, clientImage, clientName, clientD
             })
         })
         const data = await result.json()
-        alert(data?.message)
-        helper()
+        setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+        // helper()
         clearForm()
         setEditData({ active: false, _id: "", image: "", content: "", designation: "", name: "" })
 

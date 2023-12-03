@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearForm, setEditData }) => {
+export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearForm, setEditData,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         if (faqQuestion == "" || faqAnswer.trim()=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             const result = await fetch("/api/admin/franchise-faq", {
@@ -21,8 +21,8 @@ export const updateFaqData = async ({ _id, faqQuestion,faqAnswer,helper, clearFo
                 })
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+           //  helper()
             clearForm()
             setEditData({ active: false, _id: "", question:"",answer:"" })
         }

@@ -1,4 +1,5 @@
 "use client"
+import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import ClientRequest from '@/ComponentsAdmin/clientRequest/ClientRequest';
 import { useAuth } from '@/app/layout';
 import { getForceActionData } from '@/services/getForceActionData';
@@ -11,12 +12,14 @@ export const useClientRequestContext = () => {
 
 const page = () => {
   const { adminCred } = useAuth()
-  const [deleteReqData,setDeleteReq]=useState()
-  const [updateReqData,setUpdateReq]=useState()
+  const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
+  const [deleteReqData, setDeleteReq] = useState()
+  const [updateReqData, setUpdateReq] = useState()
   const helper = async () => {
-
-    await getForceActionData({setData:setDeleteReq,end_url:"force-approval",request:"delete"})
-    await getForceActionData({setData:setUpdateReq,end_url:"force-approval/update",request:"updated"})
+    // setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
+    await getForceActionData({ setData: setDeleteReq, end_url: "force-approval", request: "delete" })
+    await getForceActionData({ setData: setUpdateReq, end_url: "force-approval/update", request: "updated" })
+    // setAlert({ modalActive: false, workStatus: "", message: "" })
   }
   useEffect(() => {
     if (adminCred) helper()
@@ -26,9 +29,10 @@ const page = () => {
       {
         adminCred &&
         <>
-        <ClientRequestContext.Provider value={{helper,deleteReqData,updateReqData}}>
-          <ClientRequest/>
-        </ClientRequestContext.Provider>
+          <ClientRequestContext.Provider value={{ helper, deleteReqData, updateReqData }}>
+            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <ClientRequest />
+          </ClientRequestContext.Provider>
         </>
       }
     </>

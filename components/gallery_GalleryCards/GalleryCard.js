@@ -21,7 +21,7 @@ const GalleryCard = () => {
                 <div className={style.tabsContainer + "  row col-12 d-flex  my-5 d-flex flex-row mx-auto  justify-content-center  "}>
                     <div className="row  col-12 mx-auto d-flex justify-content-center ">
                         <ul className={style.ul_tabs + " border rounded overflow-auto col-md-8 px-3 flex-nowrap d-flex justify-content-start nav nav-pills mb-3"} id="pills-tab" role="tablist">
-                            <li className={` flex-nowrap  nav-item col-auto m-2  `} role="presentation">
+                             <li className={` flex-nowrap  nav-item col-auto m-2  `} role="presentation">
                                 <button onClick={() => setActiveTab("all")} className={`${activeTab == "all" ? style.active_tab : style.not_active} nav-link ${activeTab == "all" && "active"} `} id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected={`true   ${activeTab == "all" ? "true" : "false"} `}>All</button>
                             </li>
 
@@ -49,7 +49,7 @@ const GalleryCard = () => {
                                         )
                                     })
                                 )
-                            }
+                            } 
                         </div>
                         {
                             Object?.keys(products || {})?.map((val, index) => {

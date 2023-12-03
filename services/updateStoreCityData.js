@@ -1,12 +1,12 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateStoreCityData = async ({_id,storeCity ,helper,setEditData,clearForm}) => {
+export const updateStoreCityData = async ({_id,storeCity ,helper,setEditData,clearForm,setAlert}) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         
         if (storeCity.trim() == "") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
             
         }
         else {
@@ -23,8 +23,8 @@ export const updateStoreCityData = async ({_id,storeCity ,helper,setEditData,cle
                 })
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+            // helper()
             clearForm()
             setEditData({ active: false, _id: "", city:"" })
         }

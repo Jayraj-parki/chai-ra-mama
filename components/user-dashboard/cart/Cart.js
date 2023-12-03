@@ -19,15 +19,13 @@ const Cart = () => {
     const [productCounts, setProductCounts] = useState([]);
     const [removedProduct, setRemovedProduct] = useState([]);
     const removeCart = async ({ id }) => {
-        const confirm = window.confirm("Do you really want to remove this product? ")
-        if (confirm) {
-            await removeFromCart({ uId: id })
-            getCountOfAddedCart()
-            alert("Product removed Successfully")
-            setProductCounts(prevCounts => prevCounts.filter(item => item.id !== id));
-            setRemovedProduct({ ...removedProduct, id })
-            helper()
-        }
+
+        await removeFromCart({ uId: id })
+        getCountOfAddedCart()
+        setProductCounts(prevCounts => prevCounts.filter(item => item.id !== id));
+        setRemovedProduct({ ...removedProduct, id })
+        helper()
+
     }
     const proceeedCheckout = async () => {
         const userId = userCred;

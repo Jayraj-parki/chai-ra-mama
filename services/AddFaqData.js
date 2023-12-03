@@ -1,7 +1,7 @@
-export const AddFaqData = async ({faqQuestion,faqAnswer,helper, clearForm, setAddData }) => {
+export const AddFaqData = async ({faqQuestion,faqAnswer,helper, clearForm, setAddData ,setAlert}) => {
     try {
         if (faqQuestion == "" || faqAnswer.trim()=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             const result = await fetch("/api/admin/franchise-faq", {
@@ -15,7 +15,7 @@ export const AddFaqData = async ({faqQuestion,faqAnswer,helper, clearForm, setAd
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

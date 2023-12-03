@@ -23,8 +23,6 @@ const UserNavbar = () => {
     const router = useRouter();
     const url = usePathname()
     const LogOut = async () => {
-        const confirm = window.confirm("Do you really want to Logout?")
-        if (!confirm) return
         await localUserLogout({ setActiveLink, logOutUser })
         router.push("/user-signin")
     }

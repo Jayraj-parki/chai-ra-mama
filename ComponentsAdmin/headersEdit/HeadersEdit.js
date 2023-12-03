@@ -4,16 +4,19 @@ import style from "./headersEdit.module.scss"
 import Image from 'next/image';
 import { useHeaderContext } from '@/app/admin/page-headers/page';
 import { updateHeaderData } from '@/services/updateHeaderData';
+import PopUp from '../PopUp/PopUp';
 
 const HeadersEdit = ({ editData, setEditData }) => {
   const { helper } = useHeaderContext()
   const [headerTitle, setHeaderTitle] = useState();
+  const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
   const [headerImage, setHeaderImage] = useState();
   const [_id,setId]=useState()
   const imageRef = useRef()
 
   const updateData = async () => {
-    await updateHeaderData({ _id,headerImage,helper,setEditData})
+    setAlert({ modalActive: true, workStatus: "progress", message: "Sending update request to Admin" })
+    await updateHeaderData({ _id,headerImage,helper,setEditData,setAlert})
     clearForm()
   }
   const clearForm = () => {
@@ -29,6 +32,9 @@ const HeadersEdit = ({ editData, setEditData }) => {
     setId(editData?._id)
   }, [editData]);
   return (
+    <>
+      <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+      
     <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div className="modal-dialog modal-lg">
         <div className="modal-content">
@@ -66,6 +72,7 @@ const HeadersEdit = ({ editData, setEditData }) => {
         </div>
       </div>
     </div>
+    </>
   )
 }
 

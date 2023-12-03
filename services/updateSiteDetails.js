@@ -3,12 +3,12 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateSiteDetails = async ({ _id, siteName, sitePhone, siteEmail, siteFromEmail, siteForgetPassEmail, siteCloseOn, siteOpenHr, siteLogo, siteFavIcon, siteAddress, siteMap }) => {
+export const updateSiteDetails = async ({ _id, siteName, sitePhone, siteEmail, siteFromEmail, siteForgetPassEmail, siteCloseOn, siteOpenHr, siteLogo, siteFavIcon, siteAddress, siteMap,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Unautherized User can't perfrom Update Action" })
             return
         }
         let logo = ""
@@ -51,7 +51,7 @@ export const updateSiteDetails = async ({ _id, siteName, sitePhone, siteEmail, s
             })
         })
         const data = await result.json()
-        alert(data?.message)
+        setAlert({ modalActive: true, workStatus: "done", message: data?.message })
      }
 
     catch (err) {

@@ -1,7 +1,7 @@
-export const AddStoreData = async ({ parentId, storeAddress, storeMap, storePhone, helper, setAddData, clearForm }) => {
+export const AddStoreData = async ({ parentId, storeAddress, storeMap, storePhone, helper, setAddData, clearForm ,setAlert}) => {
     try {
         if (parentId.trim() == "" || storeAddress.trim() == "" || storeMap.trim() == "" || storePhone.trim() == "") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             const result = await fetch("/api/admin/stores", {
@@ -17,7 +17,7 @@ export const AddStoreData = async ({ parentId, storeAddress, storeMap, storePhon
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

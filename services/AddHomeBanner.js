@@ -1,11 +1,11 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const AddHomeBanner = async ({bannerImage, helper, clearForm, setAddData }) => {
+export const AddHomeBanner = async ({bannerImage, helper, clearForm, setAddData ,setAlert }) => {
     try {
         let url = ""
         if (bannerImage == "") {
-            alert("Image is not selected")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
 
@@ -27,14 +27,14 @@ export const AddHomeBanner = async ({bannerImage, helper, clearForm, setAddData 
                 })
             })
             const data = await result.json()
-            alert(data?.message)
             helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             clearForm()
             setAddData(false)
 
         }
     }
     catch (err) {
-        console.log("HOME BANNER ERROR: " + err)
+        setAlert({ modalActive: false, workStatus: "", message: "" })
     }
 }

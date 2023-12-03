@@ -1,6 +1,6 @@
-export const addToCart = async ({userCred,productId}) => {
+export const addToCart = async ({userCred,productId,setAlert}) => {
     if (!userCred || !productId ) {
-        alert("Oops! Something went wrong")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please Login to purchase products" })
         return false
     }
     else {

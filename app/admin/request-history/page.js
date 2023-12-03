@@ -1,4 +1,5 @@
 "use client"
+import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import RequestHistory from '@/ComponentsAdmin/requestHistory/RequestHistory';
 import { useAuth } from '@/app/layout';
 import { getRequestHistory } from '@/services/getRequestHistory';
@@ -12,9 +13,11 @@ export const useClientRequestHistoryContext = () => {
 const page = () => {
   const { adminCred } = useAuth()
   const [reqHistory, setReqHistory] = useState()
+  const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
   const helper = async () => {
-    console.log("indide helper")
+    setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
     await getRequestHistory({ setData: setReqHistory, end_url: "force-approval/history" })
+    setAlert({ modalActive: false, workStatus: "", message: "" })
   }
   useEffect(() => {
     if (adminCred) helper()
@@ -25,7 +28,8 @@ const page = () => {
         adminCred &&
         <>
           <ClientRequestHistoryContext.Provider value={{ helper, reqHistory }}>
-            <RequestHistory/>
+            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <RequestHistory />
           </ClientRequestHistoryContext.Provider>
         </>
       }

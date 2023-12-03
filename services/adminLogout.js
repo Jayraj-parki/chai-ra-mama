@@ -1,4 +1,4 @@
-export const adminLogout=async({setActiveLink,logOutAdmin})=>{
+export const adminLogout=async({setActiveLink,logOutAdmin,setAlert})=>{
     try {
         const result = await fetch("/api/admin/logout", {
             method: "GET",

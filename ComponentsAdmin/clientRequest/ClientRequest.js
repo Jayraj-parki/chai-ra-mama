@@ -6,6 +6,7 @@ import ImageModal from '../imageModal/ImageModal';
 import Image from 'next/image';
 import ActionModal from '../actionModal/ActionModal';
 import ActionUpdateModal from '../actionModal/ActionUpdateModal';
+import PopUp from '../PopUp/PopUp';
 const ClientRequest = () => {
     const [activeTab, setActiveTab] = useState("delete")
     const { helper, deleteReqData, updateReqData } = useClientRequestContext()
@@ -33,11 +34,12 @@ const ClientRequest = () => {
 
                     </ul>
                 </div>
+                <PopUp modalActive={false} workStatus={"progress"}/>
                 <ImageModal modal={modal} setModal={setModal} />
                 <ActionModal actionModal={actionModal} setActionModal={setActionModal} />
                 <ActionUpdateModal actionModal={actionUpdateModal} setActionModal={setActionUpdateModal} />
                 <div className={` row col-12    p-3 mx-auto d-flex justify-content-start align-items-center flexwrap   mb-4 tab-pane fade ${activeTab == "delete" ? "show active" : "d-none"}`} id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    {
+                    { 
                         deleteReqData?.map((val, index) =>
                             <table key={val?._id + "" + index + "" + Math?.random(10000)} className="col-12 table table-bordered table-hover   text-capitalize ">
                                 <thead className='border'>

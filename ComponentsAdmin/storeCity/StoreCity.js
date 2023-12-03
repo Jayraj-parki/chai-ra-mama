@@ -7,19 +7,24 @@ import StoreEditCity from '../storeEditCity/StoreEditCity';
 import StoreAddCity from '../storeAddCity/StoreAddCity';
 import { useStoreLocatorContext } from '@/app/admin/store/page';
 import { DeleteDataService } from '@/services/deleteData';
+import PopUp from '../PopUp/PopUp';
 const StoreCity = () => {
   const { storeCityData, helper } = useStoreLocatorContext()
   const [editData, setEditData] = useState({ active: false, city: "" })
+  const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
   const [addData, setAddData] = useState(false)
 
   const deleteData = async (_id) => {
-    await DeleteDataService({ _id, helper,end_url:"store-locator" })
+    setAlert({ modalActive: true, workStatus: "progress", message: "Sending delete request to Admin" })
+    await DeleteDataService({ _id, helper,end_url:"store-locator" ,setAlert})
   }
   useEffect(() => {
     helper()
   }, [])
   return (
-
+<>
+      <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+      
     <div className={style.storeCity + ' container-fluid my-4  shadow rounded-4 p-4'}>
       <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
         <div className='col-auto  d-flex flex-row justify-content-start '>
@@ -60,6 +65,7 @@ const StoreCity = () => {
         </table>
       </div>
     </div>
+    </>
   )
 }
 

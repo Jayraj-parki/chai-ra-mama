@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updatePagewiseTags = async ({ _id, pageId, metaTitle ,metaDesc, metaKeyword, helper, setEditData, clearForm }) => {
+export const updatePagewiseTags = async ({ _id, pageId, metaTitle ,metaDesc, metaKeyword, helper, setEditData, clearForm,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Unautherized User can't perfrom Update Action" })
             return
         }
         if (metaTitle.trim() == "" || metaKeyword.trim()==""||metaDesc.trim()=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             const result = await fetch("/api/admin/pagewise-tag", {
@@ -25,7 +25,7 @@ export const updatePagewiseTags = async ({ _id, pageId, metaTitle ,metaDesc, met
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setEditData({  active: false, title: "",_id:"",pId:"", keyword: "", desc: ""})

@@ -1,26 +1,23 @@
-export const adminSignUp = async ({ firstName, lastName, email, password ,confirmPassword,setAlert}) => {
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
+export const SentMessage = async ({ contactMessage,contactEmail,contactName,contactSubject,setAlert}) => {
+    if (!contactMessage.trim()||!contactEmail.trim()||!contactName.trim()||!contactSubject.trim()) {
         setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
-    }
-    else if (password != confirmPassword) {
-        setAlert({ modalActive: true, workStatus: "failed", message: "Confirm password not matched" })
     }
     else {
         try {
-            const result = await fetch("/api/admin/signUp", {
+            const result = await fetch("/api/admin/site-enquiry", {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    firstName, lastName, email, password
+                    contactMessage,contactEmail,contactName,contactSubject
                 })
             })
             const data = await result.json()
             setAlert({ modalActive: true, workStatus: "done", message: data?.message })
         }
         catch (e) {
-            console.log("error in signUp" + e)
+            console.log("error in Sending message" + e)
         }
     }
 }

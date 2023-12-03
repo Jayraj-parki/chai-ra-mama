@@ -1,7 +1,7 @@
-export const AddSiteEnquiryData = async ({ contactName,contactEmail,contactPhone, helper, clearForm, setAddData }) => {
+export const AddSiteEnquiryData = async ({ contactName,contactEmail,contactPhone, helper, clearForm, setAddData ,setAlert}) => {
     try {
         if (contactName.trim() == "" || contactEmail.trim() == "" || contactPhone.trim() == "") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             const result = await fetch("/api/admin/site-enquiry", {
@@ -16,7 +16,7 @@ export const AddSiteEnquiryData = async ({ contactName,contactEmail,contactPhone
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

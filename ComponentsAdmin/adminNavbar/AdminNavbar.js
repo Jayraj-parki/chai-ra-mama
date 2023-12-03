@@ -22,8 +22,6 @@ const AdminNavbar = () => {
     const url = usePathname()
     const router = useRouter();
     const LogOut = async () => {
-        const confirm=window.confirm("Do you really want to Logout?")
-        if(!confirm) return
         await adminLogout({ setActiveLink, logOutAdmin })
         router.push("/auth/signin")
     }

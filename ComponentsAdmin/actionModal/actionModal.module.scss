@@ -1,6 +1,7 @@
 @import "../../styles/var";
 .modal {
   background-color: #00000079;
+  z-index: 9999;
   &::-webkit-scrollbar {
     width: 0px;
     background-color: $primary-coffee-light;

@@ -1,20 +1,23 @@
 "use client"
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import style from "./localSignIn.module.scss"
 import { useRouter } from "next/navigation"
 import { useAuth } from '@/app/layout';
 import { userSignIn } from '@/services/localUser/userSignIn';
+import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 const LocalSignIn = () => {
 
     const {isUserLogin } = useAuth()
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const router = useRouter();
-    
+    const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
+  
     const handleLogin = async () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
-        const token = await userSignIn({ email, password })
+        setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
+        const token = await userSignIn({ email, password,setAlert })
         if (token) {
             router.push("/dashboard") 
            isUserLogin()
@@ -25,6 +28,8 @@ const LocalSignIn = () => {
 
     return (
         <>
+        <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            
             <div className={style.signIn + ' container-fluid m-0 my-5 p-0 py-5'}>
                 <h1 className={style.heading + " col-sm-4 p-2 mx-auto border-bottom text-center mb-2 text-justify"}><span className={style.text_blue}>Sign</span> <span className={style.text_orange}>In</span></h1>
                 <div className={style.container + ' row col-11 col-sm-12 col-xl-10 p-3 flex-wrap mx-auto d-flex justify-content-between align-content-center'}>

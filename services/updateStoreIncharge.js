@@ -1,12 +1,12 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateStoreIncharge = async ({ _id, inchargeName, inchargePhone, inchargeEmail, helper, setEditData, clearForm }) => {
+export const updateStoreIncharge = async ({ _id, inchargeName, inchargePhone, inchargeEmail, helper, setEditData, clearForm,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         
         if (inchargeEmail.trim() == ""|| inchargeName.trim()==""|| inchargePhone.trim()==""||_id=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             console.log(_id)
@@ -24,8 +24,8 @@ export const updateStoreIncharge = async ({ _id, inchargeName, inchargePhone, in
                 })
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+            // helper()
             clearForm()
             setEditData({ active: false, _id: "", name: "", email: "",phone:"" })
         }

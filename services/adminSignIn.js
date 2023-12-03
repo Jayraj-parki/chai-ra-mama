@@ -1,8 +1,8 @@
 import Cookies from 'js-cookie';
-export const adminSignIn = async ({ email, password, login, router }) => {
+export const adminSignIn = async ({ email, password, setAlert }) => {
     if (!email || !password) {
-        alert("please fill all input field")
-        return
+        setAlert({modalActive:true,workStatus:"failed",message:"Please fill all the fields"})
+        return null
     }
     else {
         try {
@@ -20,11 +20,11 @@ export const adminSignIn = async ({ email, password, login, router }) => {
                 Cookies.set("teaToken", data?.token, {
                     expires: 1
                 })
-                alert(data?.message)
+                setAlert({modalActive:true,workStatus:"progress",message:data?.message})
                 return data?.token
             }
             else {
-                alert(data?.message)
+                setAlert({modalActive:true,workStatus:"failed",message:"Invalid Credentials"})
                 return null
             }
         }

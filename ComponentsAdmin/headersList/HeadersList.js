@@ -9,13 +9,13 @@ import HeadersEdit from '../headersEdit/HeadersEdit';
 // import HeadersAdd from '../headerAdd/HeadersAdd';
 import { useHeaderContext } from '@/app/admin/page-headers/page';
 const HeadersList = () => {
-  const { headerData,helper } = useHeaderContext()
+  const { headerData, helper } = useHeaderContext()
   const [modal, setModal] = useState({ active: false, image: "" })
-  const [editData, setEditData] = useState({ active: false, image: "",title:"",_id:"" })
+  const [editData, setEditData] = useState({ active: false, image: "", title: "", _id: "" })
   // const [addData,setAddData]=useState(false)
   useEffect(() => {
-    helper() 
-  }, []) 
+    helper()
+  }, [])
 
   return (
 
@@ -34,28 +34,32 @@ const HeadersList = () => {
       {/* <HeadersAdd addData={addData} setAddData={setAddData} /> */}
 
       <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
-        <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
-          <thead className='border'>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Title</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
-            <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
-          </thead>
-          <tbody>
-            {
-              headerData?.map((val, index) =>
-                <tr key={val?.headerTitle+""+index+""+Math?.random(10000)} className=''>
-                  <td className='align-middle' >{index+1}</td>
-                  <td className='align-middle' >{val?.headerTitle}</td>
-                  <td className='align-middle'> <Image onClick={() => setModal({ active: true, image:val?.headerImage|| "/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.headerImage|| "/assets/images/1.png"} alt="..." /></td>
-                  <td className='text-center align-middle'>
-                    <button onClick={() => setEditData({ active: true, image: val?.headerImage, title: val?.headerTitle,_id:val?._id })} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
-                  </td>
-                </tr>
-              )
-            }
-          </tbody>
-        </table>
+        {
+          headerData ?
+            <table className="col-12 table table-bordered table-hover  text-center text-capitalize ">
+              <thead className='border'>
+                <th className='text-capitalize p-2 pb-4 border text-center' >Sr no</th>
+                <th className='text-capitalize p-2 pb-4 border text-center' >Title</th>
+                <th className='text-capitalize p-2 pb-4 border text-center' >Images</th>
+                <th className='text-capitalize p-2 pb-4 border text-center' >Actions</th>
+              </thead>
+              <tbody>
+                {
+                  headerData?.map((val, index) =>
+                    <tr key={val?.headerTitle + "" + index + "" + Math?.random(10000)} className=''>
+                      <td className='align-middle' >{index + 1}</td>
+                      <td className='align-middle' >{val?.headerTitle}</td>
+                      <td className='align-middle'> <Image onClick={() => setModal({ active: true, image: val?.headerImage || "/assets/images/1.png" })} className="rounded " width={250} height={200} objectFit="cover" src={val?.headerImage || "/assets/images/1.png"} alt="..." /></td>
+                      <td className='text-center align-middle'>
+                        <button onClick={() => setEditData({ active: true, image: val?.headerImage, title: val?.headerTitle, _id: val?._id })} className='btn btn-primary text-decoration-none mx-2  text-capitalize'>Edit</button>
+                      </td>
+                    </tr>
+                  )
+                }
+              </tbody>
+            </table>
+            : <p className='text-center   text-capitalize'>oops..! No record found</p>
+        }
       </div>
     </div>
   )
