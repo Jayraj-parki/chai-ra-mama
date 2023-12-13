@@ -1,13 +1,13 @@
 "use client"
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
-import ClientRequest from '@/ComponentsAdmin/clientRequest/ClientRequest';
+import StaffRequest from '@/ComponentsAdmin/staffRequest/StaffRequest';
 import { useAuth } from '@/app/layout';
 import { getForceActionData } from '@/services/getForceActionData';
 import { createContext, useContext, useEffect, useState } from 'react';
 
-const ClientRequestContext = createContext()
-export const useClientRequestContext = () => {
-  return useContext(ClientRequestContext)
+const StaffRequestContext = createContext()
+export const useStaffRequestContext = () => {
+  return useContext(StaffRequestContext)
 }
 
 const page = () => {
@@ -29,10 +29,10 @@ const page = () => {
       {
         adminCred &&
         <>
-          <ClientRequestContext.Provider value={{ helper, deleteReqData, updateReqData }}>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
-            <ClientRequest />
-          </ClientRequestContext.Provider>
+          <StaffRequestContext.Provider value={{ helper, deleteReqData, updateReqData }}>
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+            <StaffRequest />
+          </StaffRequestContext.Provider>
         </>
       }
     </>

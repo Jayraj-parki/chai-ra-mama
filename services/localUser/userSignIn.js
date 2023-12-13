@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
-export const userSignIn = async ({ email, password,setAlert}) => {
-    if (!email || !password) {
+export const userSignIn = async ({ email, password,setAlert,role}) => {
+    if (!email || !password|| !role) {
         setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return
     }
@@ -12,7 +12,7 @@ export const userSignIn = async ({ email, password,setAlert}) => {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    email, password
+                    email, password,role
                 })
             })
             const data = await result.json()

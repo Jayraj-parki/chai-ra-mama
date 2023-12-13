@@ -20,10 +20,12 @@ const page = () => {
     getUserUtils()
   }, [userCred])
   return (
-    <>
-      <dashboardContext.Provider value={{ userProfileData, getUserUtils}}>
-          <Dashboard />
+    <>{
+      userCred &&
+      <dashboardContext.Provider value={{ userProfileData, getUserUtils }}>
+        <Dashboard />
       </dashboardContext.Provider>
+    }
     </>
   )
 }

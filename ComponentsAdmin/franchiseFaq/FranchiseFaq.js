@@ -22,7 +22,7 @@ const FranchiseFaq = () => {
   }, [])
   return (
     <>
-      <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+      <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
       <div className={style.franchiseFaq + ' container-fluid my-4  shadow rounded-4 p-4'}>
         <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
           <div className='col-auto  d-flex flex-row justify-content-start '>

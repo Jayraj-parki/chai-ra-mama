@@ -9,10 +9,10 @@ import { SentMessage } from "@/services/localUser/SentMessage";
 import PopUp from "@/ComponentsAdmin/PopUp/PopUp";
 const ContactDetails = () => {
     const { siteUIData } = useSiteDataUIContext()
-    const [contactName, setContactName] = useState()
-    const [contactEmail, setContactEmail] = useState()
-    const [contactSubject, setContactSubject] = useState()
-    const [contactMessage, setContactMessage] = useState()
+    const [contactName, setContactName] = useState("")
+    const [contactEmail, setContactEmail] = useState("")
+    const [contactSubject, setContactSubject] = useState("")
+    const [contactMessage, setContactMessage] = useState("")
     const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
     const handleContactForm = async () => {
         setAlert({ modalActive: true, workStatus: "progress", message: "Please wait....." })
@@ -21,7 +21,7 @@ const ContactDetails = () => {
     }
     return (
         <>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})} modalActive={alert.modalActive}   workStatus={alert.workStatus} message={alert.message} />
             <div className={style.contact + ' container-fluid p-2 my-5 pb-5'}>
                 <div className={style.cardContainer + ' row col-xl-11 col-xxl-10 mx-auto py-5 p-xl-5   rounded-3 border'}>
                     <div className={' row col-12 mx-auto  '}>

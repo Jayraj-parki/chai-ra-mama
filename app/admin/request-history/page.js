@@ -28,7 +28,7 @@ const page = () => {
         adminCred &&
         <>
           <ClientRequestHistoryContext.Provider value={{ helper, reqHistory }}>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
             <RequestHistory />
           </ClientRequestHistoryContext.Provider>
         </>

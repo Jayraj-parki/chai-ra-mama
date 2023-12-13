@@ -40,6 +40,7 @@ const Cart = () => {
             await updateProduct({ userId, _id: userId, update: "cancel" })
         }
         helper()
+        getCountOfAddedCart()
     }
     useEffect(() => {
         helper()

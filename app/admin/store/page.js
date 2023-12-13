@@ -26,7 +26,7 @@ const page = () => {
         adminCred &&
         <storeLocatorContext.Provider value={{ storeCityData, helper }}>
           <div className='container-fluid p-lg-4  m-0'>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
             <StoreCity />
           </div>
         </storeLocatorContext.Provider>

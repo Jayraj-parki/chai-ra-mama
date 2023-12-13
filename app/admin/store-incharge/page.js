@@ -1,9 +1,11 @@
 "use client"
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import StoreIncharge from '@/ComponentsAdmin/storeIncharge/StoreIncharge';
+import StoreInchargeRequest from '@/ComponentsAdmin/storeInchargeRequest/StoreInchargeRequest';
 import { useAuth } from '@/app/layout';
 import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
+import { Tab, Tabs } from 'react-bootstrap';
 const StoreInchargeContext = createContext()
 
 export const useStoreInchargeData = () => {
@@ -16,6 +18,7 @@ const page = () => {
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
   const [storeCity, setStoreCity] = useState()
   const [storeDetails, setStoreDetails] = useState()
+  const [clientRequest, setClientRetrequest] = useState()
   const getStoresData = async () => {
     await getDataService(setStoreCity, "store-locator")
     await getDataService(setStoreDetails, "stores/all")
@@ -25,10 +28,14 @@ const page = () => {
     await getDataService(setData, "store-incharge")
     setAlert({ modalActive: false, workStatus: "", message: "" })
   }
+  const fetchRequest = async () => {
+    await getDataService(setClientRetrequest, "store-incharge-request")
+  }
   useEffect(() => {
     if (adminCred) {
       helper()
       getStoresData()
+      fetchRequest()
     }
 
   }, [adminCred])
@@ -36,10 +43,18 @@ const page = () => {
     <>
       {
         adminCred &&
-        <StoreInchargeContext.Provider value={{ data, helper, storeDetails, storeCity }}>
+        <StoreInchargeContext.Provider value={{ data, helper, storeDetails, storeCity,clientRequest,fetchRequest }}>
           <div className='container-fluid p-lg-4  m-0'>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
-            <StoreIncharge />
+            <PopUp closeAlert={() => setAlert({ modalActive: false, workStatus: "", message: "" })} modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <Tabs defaultActiveKey="store-incharge" id="store-incharge-tabs">
+              <Tab eventKey="store-incharge" title="Store Incharge">
+                <StoreIncharge />
+              </Tab>
+              <Tab eventKey="request" title="Request">
+                <StoreInchargeRequest />
+              </Tab>
+            </Tabs>
+
           </div>
         </StoreInchargeContext.Provider>
       }

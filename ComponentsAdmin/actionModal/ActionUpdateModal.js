@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import style from "./actionModal.module.scss"
-import { useClientRequestContext } from '@/app/admin/client-request/page'
+import {  useStaffRequestContext } from '@/app/admin/staff-request/page'
 import { updateForceActionData } from '@/services/updateForceActionData'
 import PopUp from '../PopUp/PopUp'
 const ActionUpdateModal = ({ actionModal, setActionModal }) => {
-    const { helper } = useClientRequestContext()
+    const { helper } = useStaffRequestContext()
     const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
     const [clientKey, setClientKey] = useState()
     const [adminLock, setAdminLock] = useState()
@@ -24,7 +24,7 @@ const ActionUpdateModal = ({ actionModal, setActionModal }) => {
     }, [actionModal])
     return (
         <>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
             <div className={style.modal + ` modal fade ${actionModal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">

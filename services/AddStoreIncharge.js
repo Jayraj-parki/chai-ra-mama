@@ -13,7 +13,7 @@ export const AddStoreIncharge = async ({ inchargeName, inchargeEmail, inchargePh
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    inchargeName, inchargeEmail, inchargePhone, helper, 
+                    inchargeName, inchargeEmail, inchargePhone, 
                     storeId:store
                 })
             })

@@ -4,7 +4,7 @@ import style from "./popUp.module.scss"
 import CheckCircleOutlineRoundedIcon from '@mui/icons-material/CheckCircleOutlineRounded';
 import HourglassEmptyRoundedIcon from '@mui/icons-material/HourglassEmptyRounded';
 import SentimentVeryDissatisfiedRoundedIcon from '@mui/icons-material/SentimentVeryDissatisfiedRounded';
-const PopUp = ({ modalActive, workStatus, message }) => {
+const PopUp = ({closeAlert, modalActive, workStatus, message }) => {
   const [active, setActive] = useState(false)
   const [status, setStatus] = useState()
   useEffect(() => {
@@ -27,7 +27,7 @@ const PopUp = ({ modalActive, workStatus, message }) => {
             </div>
           </div>
           <div className="modal-header">
-            <button onClick={() => setActive(false)} type="button" className=" ms-auto btn btn-primary shadow-none" data-bs-dismiss="modal" aria-label="Close">OK</button>
+            <button onClick={() => closeAlert()} type="button" className=" ms-auto btn btn-primary shadow-none" data-bs-dismiss="modal" aria-label="Close">OK</button>
           </div>
         </div>
       </div>

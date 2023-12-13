@@ -1,0 +1,36 @@
+@import "../../../styles/var";
+.cart {
+  img {
+    width: 90px;
+    height: 90px;
+    z-index: 100;
+  }
+  overflow: auto;
+  table {
+    thead {
+      th {
+        min-width: 200px;
+        &:nth-child(1) {
+          min-width: 80px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        .quantity {
+         color: $white-light;
+         background-color: $primary-coffee;
+         cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .addToCart {
+    background-color: $primary-coffee-light;
+    color: $black-light;
+    &:focus {
+      background-color: $primary-coffee;
+    }
+  }
+}

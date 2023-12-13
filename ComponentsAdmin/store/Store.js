@@ -22,7 +22,7 @@ const Store = () => {
   }, [])
   return (
     <>
-      <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+      <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
 
       <div className={style.store + ' container-fluid my-4  shadow rounded-4 p-4'}>
 

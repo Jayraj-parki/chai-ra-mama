@@ -11,6 +11,7 @@ const LocalSignUp = () => {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+    const [role,setRole]=useState();
     const { adminCred } = useAuth()
     const router = useRouter()
     const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
@@ -24,7 +25,7 @@ const LocalSignUp = () => {
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
         setAlert({ modalActive: true, workStatus: "progress", message: "Please wait....." })
-        const result = await userSignUp({ firstName, lastName, email, password, confirmPassword, setAlert })
+        const result = await userSignUp({ firstName, lastName, email, password, confirmPassword, setAlert,role })
         firstNameRef.current.value = null
         lastNameRef.current.value = null
         emailRef.current.value = null
@@ -35,7 +36,7 @@ const LocalSignUp = () => {
 
     return (
         <>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
 
             <div className={style.signUp + ' container-fluid m-0 my-5 p-0 py-5'}>
                 <h1 className={style.heading + " col-sm-4 p-2 mx-auto border-bottom text-center mb-2 text-justify"}><span className={style.text_blue}>Sign</span> <span className={style.text_orange}>Up</span></h1>
@@ -56,6 +57,13 @@ const LocalSignUp = () => {
                             </div>
                             <div className="col-12 mb-4">
                                 <input autocomplete="off" type="password" ref={confirmPasswordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Confirm Password" />
+                            </div>
+                            <div className="col-12 mb-4">
+                                <select className="form-select shadow-none" value={role} onChange={(e) => setRole(e.target?.value)}>
+                                    <option value="Select role" disabled selected>Select Role</option>
+                                    <option value="user"  >User</option>
+                                    <option value="client"  >Store Incharge</option>
+                                </select>
                             </div>
                             <div className={style.submitBtn + " col-12  "}>
                                 <button onClick={handleSignup} type="button" className="row col-12 mx-auto d-flex justify-content-center text-light  rounded  border-0 outline-none">Submit</button>

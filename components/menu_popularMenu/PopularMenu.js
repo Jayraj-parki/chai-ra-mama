@@ -8,7 +8,7 @@ import { addToCart } from "@/services/localUser/addToCart";
 import { removeFromCart } from "@/services/localUser/removeFromCart";
 import PopUp from "@/ComponentsAdmin/PopUp/PopUp";
 const PopularMenu = () => {
-    const { userCred, getCountOfAddedCart } = useAuth()
+    const { userCred, userRole, getCountOfAddedCart } = useAuth()
     const { menuData, subMenuData, cartProduct } = useMenuUiContext()
     const [cartButton, setCartButton] = useState(true)
     const [activeTab, setActiveTab] = useState("all")
@@ -27,7 +27,7 @@ const PopularMenu = () => {
         } else {
             const uId = await addToCart({ userCred, productId: product?.productId, setAlert })
             if (!uId) {
-                setAlert({ modalActive: true, workStatus: "failed", message: "Oops! Something went wrong" })
+                uId != false && setAlert({ modalActive: true, workStatus: "failed", message: "Oops! Something went wrong" })
             }
             else {
                 setCart(prevCart => (prevCart ? [...prevCart, { ...product, uId }] : [{ ...product, uId }]));
@@ -42,7 +42,7 @@ const PopularMenu = () => {
     }, [cartProduct])
     return (
         <>
-            <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={() => setAlert({ modalActive: false, workStatus: "", message: "" })} modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
             <div className={style.popularMenu + " container-fluid  pb-5"}>
 
                 <div className='row col-12 py-5 mx-auto'>
@@ -83,12 +83,15 @@ const PopularMenu = () => {
                                                     <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{val?.itemName}</h3>
                                                     <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {val?.itemPrice}/-</h6>
                                                 </div>
-                                                <div className="row col-auto ms-auto">
-                                                    {cartButton != val?._id ?
-                                                        <button onClick={() => handleCartAction({ productId: val?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(item => item?.productId === val?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
-                                                        : "Proccesing"
-                                                    }
-                                                </div>
+                                                {
+                                                    userRole == "user" &&
+                                                    <div className="row col-auto ms-auto">
+                                                        {cartButton != val?._id ?
+                                                            <button onClick={() => handleCartAction({ productId: val?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(item => item?.productId === val?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                            : "Proccesing"
+                                                        }
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     )
@@ -112,13 +115,15 @@ const PopularMenu = () => {
                                                                     <h3 className={style.itemName + " col-auto text-uppercase text-black my-auto fw-bold h5 text-light py-2 px-0"}>{item?.itemName}</h3>
                                                                     <h6 className={style.price + " col-auto py-2 px-0 fw-bold text-center my-auto "}>RS. {item?.itemPrice}/-</h6>
                                                                 </div>
-                                                                <div className="row col-auto ms-auto">
-                                                                    {cartButton != val?._id ?
-                                                                        <button onClick={() => handleCartAction({ productId: item?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(c => c?.productId === item?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
-                                                                        : "Proccesing"
-                                                                    }
-                                                                </div>
-
+                                                                {
+                                                                    userRole == "user" &&
+                                                                    <div className="row col-auto ms-auto">
+                                                                        {cartButton != val?._id ?
+                                                                            <button onClick={() => handleCartAction({ productId: item?._id })} className={style.addToCart + " row btn outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >{cart?.some(c => c?.productId === item?._id) ? 'Remove from Cart' : 'Add to Cart'}</button>
+                                                                            : "Proccesing"
+                                                                        }
+                                                                    </div>
+                                                                }
                                                             </div>
                                                         </div>
                                                     )

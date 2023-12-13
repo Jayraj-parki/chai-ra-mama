@@ -1,4 +1,6 @@
-export const updateUserProfile = async ({ firstName, lastName, address, contactNumber, email ,setAlert}) => {
+export const updateUserProfile = async ({ firstName, lastName, address, contactNumber, email ,setAlert,getUserUtils}) => {
+    
+    
     if (!firstName || !lastName || !email) {
         setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
@@ -16,9 +18,11 @@ export const updateUserProfile = async ({ firstName, lastName, address, contactN
                 })
             })
             const data = await result.json()
+            console.log(data)
             setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+            getUserUtils()
             return true
-        }
+        } 
         catch (e) {
             console.log("error in updateUserProfile" + e)
             return false

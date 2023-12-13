@@ -1,18 +1,21 @@
 "use client"
+import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import { useDashboardContext } from '@/app/dashboard/page';
 import { updateUserProfile } from '@/services/localUser/updateUserProfile';
 import React, { useEffect, useState } from 'react';
 
 const Profile = () => {
-    const { userProfileData } = useDashboardContext()
+    const { userProfileData ,getUserUtils} = useDashboardContext() 
     const [firstName, setFirstName] = useState()
     const [lastName, setLastName] = useState()
     const [address, setAddress] = useState()
+    const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
     const [contactNumber, setContactNumber] = useState()
-    const updateProfileUtild = async() => {
-        await updateUserProfile({ firstName, lastName, address, contactNumber, email:userProfileData?.email })
-    } 
-    useEffect(() => { 
+    const updateProfileUtil = async () => {
+        setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
+        await updateUserProfile({ firstName, lastName, address, contactNumber, email: userProfileData?.email, setAlert,getUserUtils })
+    }
+    useEffect(() => {
         setAddress(userProfileData?.address)
         setContactNumber(userProfileData?.contactNumber)
         setFirstName(userProfileData?.firstName)
@@ -20,6 +23,8 @@ const Profile = () => {
     }, [userProfileData])
     return (
         <div className="container my-4">
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+            
             <h4>User Profile</h4>
             <div className="card">
                 <div className="card-body">
@@ -51,13 +56,11 @@ const Profile = () => {
                     </div>
                     <div className='row col-12 '>
                         {/* <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button> */}
-                        <button onClick={updateProfileUtild} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                        <button onClick={updateProfileUtil} className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
                     </div>
                 </div>
             </div>
         </div>
-
-
     );
 };
 

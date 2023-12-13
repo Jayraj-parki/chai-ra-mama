@@ -11,6 +11,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Link from 'next/link';
 import HistoryIcon from '@mui/icons-material/History';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useAuth } from "@/app/layout";
 const SiteSetting = () => {
     const { isAdminAuthorized } = useAuth()
@@ -67,13 +68,19 @@ const SiteSetting = () => {
                         <Link href="./approve-account" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                             <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                                 <div className={style.iconContainer7 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><HowToRegIcon className={style.icon} /></div>
-                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Approve account</p></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Approve Staff account</p></div>
                             </div>
                         </Link>
                         <Link href="./approved-users" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                             <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                                 <div className={style.iconContainer8 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><VerifiedUserIcon className={style.icon} /></div>
-                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Verified account</p></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Verified staff account</p></div>
+                            </div>
+                        </Link>
+                        <Link href="./client-approval" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                            <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                                <div className={style.iconContainer10 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><DoneAllIcon className={style.icon} /></div>
+                                <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Client Approval request</p></div>
                             </div>
                         </Link>
                     </>}
@@ -81,7 +88,7 @@ const SiteSetting = () => {
                 <Link href="./request-history" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
                         <div className={style.iconContainer9 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><HistoryIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Request History</p></div>
+                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'> Staff Request History</p></div>
                     </div>
                 </Link>
 

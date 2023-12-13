@@ -33,7 +33,7 @@ const SubMenuEdit = ({ editData, setEditData }) => {
   }, [editData])
   return (
     <>
-      <PopUp modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
+      <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
       <div className={style.modal + ` modal fade ${editData?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">

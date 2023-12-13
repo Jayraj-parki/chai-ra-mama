@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import style from "./clientRequest.module.scss"
+import style from "./staffRequest.module.scss"
 import Link from 'next/link';
-import { useClientRequestContext } from '@/app/admin/client-request/page';
+import {  useStaffRequestContext } from '@/app/admin/staff-request/page';
 import ImageModal from '../imageModal/ImageModal';
 import Image from 'next/image';
 import ActionModal from '../actionModal/ActionModal';
 import ActionUpdateModal from '../actionModal/ActionUpdateModal';
 import PopUp from '../PopUp/PopUp';
-const ClientRequest = () => {
+const StaffRequest = () => {
     const [activeTab, setActiveTab] = useState("delete")
-    const { helper, deleteReqData, updateReqData } = useClientRequestContext()
+    const { helper, deleteReqData, updateReqData } = useStaffRequestContext()
     const [modal, setModal] = useState({ active: false, image: "" })
     const [actionModal, setActionModal] = useState({ active: false, _id: "", clientKey: "" })
     const [actionUpdateModal, setActionUpdateModal] = useState({ active: false, _id: "", clientKey: "" })
@@ -34,7 +34,7 @@ const ClientRequest = () => {
 
                     </ul>
                 </div>
-                <PopUp modalActive={false} workStatus={"progress"}/>
+                <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})} modalActive={alert.modalActive}  modalActive={false} workStatus={"progress"}/>
                 <ImageModal modal={modal} setModal={setModal} />
                 <ActionModal actionModal={actionModal} setActionModal={setActionModal} />
                 <ActionUpdateModal actionModal={actionUpdateModal} setActionModal={setActionUpdateModal} />
@@ -101,4 +101,4 @@ const ClientRequest = () => {
     )
 }
 
-export default ClientRequest
+export default StaffRequest
