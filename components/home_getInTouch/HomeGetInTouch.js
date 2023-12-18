@@ -28,16 +28,16 @@ const HomeGetInTouch = () => {
                 <div className="row col-12 col-sm-10 col-md-6 py-3 mx-auto mt-5 mt-md-0 p-0 d-flex justify-content-center">
                     <div className={style.form + " row col-12 mx-auto"}>
                         <div className="col-6 mb-4">
-                            <input autocomplete="off" value={firstName} onChange={(e) => setFirstName(e.target.value)} required type="text" className="  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="First name" />
+                            <input  autoComplete="off"  value={firstName} onChange={(e) => setFirstName(e.target.value)} required type="text" className="  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="First name" />
                         </div>
                         <div className="col-6 mb-4">
-                            <input autocomplete="off" value={lastName} onChange={(e) => setLastName(e.target.value)} required type="text" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Last name" />
+                            <input  autoComplete="off"  value={lastName} onChange={(e) => setLastName(e.target.value)} required type="text" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Last name" />
                         </div>
                         <div className="col-12 mb-4">
-                            <input autocomplete="off" value={email} onChange={(e) => setEmail(e.target.value)} required type="email" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Email" />
+                            <input  autoComplete="off"  value={email} onChange={(e) => setEmail(e.target.value)} required type="email" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Email" />
                         </div>
                         <div className="col-12 mb-4">
-                            <input autocomplete="off" value={message} onChange={(e) => setMessage(e.target.value)} required type="text" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Message" />
+                            <input  autoComplete="off"  value={message} onChange={(e) => setMessage(e.target.value)} required type="text" className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Message" />
                         </div>
                         <div className={style.submitBtn + " col-12  "}>
                             <button onClick={handleGetInTouch} type="submit" className="row col-12 mx-auto d-flex justify-content-center text-light  rounded  border-0 outline-none">Submit</button>

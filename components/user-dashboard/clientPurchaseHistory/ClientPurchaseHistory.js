@@ -5,15 +5,15 @@ import Image from "next/image"
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Button } from '@mui/material';
 import { useAuth } from '@/app/layout';
-import { getPurchasedCart } from '@/services/localUser/getPurchasedCart';
+import { getClientPurchasedCart } from '@/services/localUser/getClientPurchasedCart';
 const ClientPurchaseHistory = () => {
     const { userCred} = useAuth()
     const [purchaseHistoryProduct,setPurchaseHistoryProduct]=useState()
     const fetchLatestData=async()=>{
-        await getPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
+        await getClientPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
     }
     useEffect(()=>{
-        fetchLatestData()
+        fetchLatestData() 
     },[userCred])
     return (
 
@@ -57,10 +57,10 @@ const ClientPurchaseHistory = () => {
                                                     val?.productDetails?.map((product) =>
 
                                                         <tr className=''>
-                                                            <td className='align-middle' >{product?.menuDetails?.itemName}</td>
+                                                            <td className='align-middle' >{product?.menuDetails?.clientMenuName}</td>
                                                             <td className='align-middle' >{product?.quantity}</td>
                                                             <td className='align-middle'>{product?.totalPrice}</td>
-                                                            <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={product?.menuDetails?.itemImage || "/assets/images/1.png"} alt="..." /></td>
+                                                            <td className='align-middle'> <Image className="rounded " width={250} height={200} objectFit="cover" src={product?.menuDetails?.clientMenuImage || "/assets/images/1.png"} alt="..." /></td>
                                                         </tr>
                                                     )
                                                 }

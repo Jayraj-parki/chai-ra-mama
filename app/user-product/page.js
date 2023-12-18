@@ -1,19 +1,33 @@
 "use client"
 import style from "./userProduct.module.scss"
-import { useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { useAuth } from "../layout"
 import { Button } from "@mui/material";
 import Cart from "@/components/user-dashboard/cart/Cart";
 import PurchaseHistory from "@/components/user-dashboard/purchaseHistory/PurchaseHistory";
 import MyOrders from "@/components/user-dashboard/myOrders/MyOrders";
+import { getLocalUser } from "@/services/localUser/getLocalUser";
+const userProductContext = createContext()
+export const useUserProductContext = () => {
+  return useContext(userProductContext)
+}
+
 const page = () => {
   const [activeLink, setActiveLink] = useState("mycart")
   const { userCred } = useAuth()
+  const [userDetails, setUserDetails] = useState({})
+  const getUserDetails = async () => {
+    getLocalUser(userCred, setUserDetails)
+  }
+  useEffect(() => {
+    getUserDetails()
+  }, [userCred])
   return (
 
     <>
       {userCred &&
         <>
+
           <div className={style.navbar + " container-fluid row col-12 col-xl-10 mx-auto pt-5 "}>
             <ul className="nav justify-content-start">
               <Button onClick={() => setActiveLink("mycart")} className={` ${activeLink == "mycart" && style.activeBtn} nav-item mx-2 text-capitalize `}>
@@ -27,11 +41,13 @@ const page = () => {
               </Button>
             </ul>
           </div>
-          <div className={style.content + " container-fluid row col-12 col-xl-10  mx-auto mt-3 "}>
-            {activeLink == "mycart" && <Cart />}
-            {activeLink == "purchase-history" && <PurchaseHistory />}
-            {activeLink == "track-orders" && <MyOrders />}
-          </div>
+          <userProductContext.Provider value={{ userDetails }}>
+            <div className={style.content + " container-fluid row col-12 col-xl-10  mx-auto mt-3 "}>
+              {activeLink == "mycart" && <Cart />}
+              {activeLink == "purchase-history" && <PurchaseHistory />}
+              {activeLink == "track-orders" && <MyOrders />}
+            </div>
+          </userProductContext.Provider>
         </>}
     </>
   )

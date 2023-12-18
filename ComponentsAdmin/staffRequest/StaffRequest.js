@@ -34,7 +34,7 @@ const StaffRequest = () => {
 
                     </ul>
                 </div>
-                <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})} modalActive={alert.modalActive}  modalActive={false} workStatus={"progress"}/>
+                <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})} modalActive={alert.modalActive}   workStatus={"progress"}/>
                 <ImageModal modal={modal} setModal={setModal} />
                 <ActionModal actionModal={actionModal} setActionModal={setActionModal} />
                 <ActionUpdateModal actionModal={actionUpdateModal} setActionModal={setActionUpdateModal} />

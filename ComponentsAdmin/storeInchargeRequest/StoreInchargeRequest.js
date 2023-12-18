@@ -86,11 +86,11 @@ const StoreInchargeRequest = () => {
               <div className="modal-body d-flex flex-column justify-content-center align-items-center">
                 <div className={" mb-4 row col-12 mx-auto"}>
                   <label className="form-label">Store Address</label>
-                  <input autocomplete="off" value={modal?.storeAdd} disabled type="text" className="form-control shadow-none" placeholder='write name here' />
+                  <input  autoComplete="off"  value={modal?.storeAdd} disabled type="text" className="form-control shadow-none" placeholder='write name here' />
                 </div>
                 <div className={" mb-4  row col-12 mx-auto "}>
                   <label className="form-label">Store Contact</label>
-                  <input autocomplete="off" value={modal?.storeContact} disabled type="text" className="form-control shadow-none" placeholder='write name here' />
+                  <input  autoComplete="off"  value={modal?.storeContact} disabled type="text" className="form-control shadow-none" placeholder='write name here' />
                 </div>
                 <div className={" mb-4  row col-12 mx-auto "}>
                   <label className="form-label">Store Map</label>

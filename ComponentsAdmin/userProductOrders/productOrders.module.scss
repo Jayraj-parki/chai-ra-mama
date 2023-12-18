@@ -1,7 +1,9 @@
 @import "../../styles/var";
 
-.tabsContainer {
+.productOrders {
   overflow: auto;
+  
+
   .ul_tabs {
     border-color: $primary-coffee;
 
@@ -60,26 +62,55 @@
       }
     }
   }
-  table {
-    thead {
-      th {
-        min-width: 100px;
-        &:first-child {
-          min-width: 250px;
+ 
+  .container {
+    overflow: auto;
+    table {
+      thead {
+        th {
+          min-width: 150px;
+          &:first-child{
+            min-width: 300px;
+          }
         }
       }
     }
-  }
-  .container {
-    overflow: auto;
-  }
-  img {
-    width: 50px;
-    height: 50px;
-    z-index: 100;
+    &::-webkit-scrollbar {
+      height: 6px;
+      background-color: $primary-coffee-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-coffee;
+    }
+    .userDetails{
+      overflow: auto;
+      table {
+        thead {
+          th {
+            min-width: 150px;
+            &:last-child{
+              min-width: 300px;
+            }
+          }
+        }
+      }
+      &::-webkit-scrollbar {
+        height: 6px;
+        background-color: $primary-coffee-light;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-coffee;
+      }
+    }
+    img {
+      width: 50px;
+      height: 50px;
+      z-index: 100;
+    }
   }
   .otpModal {
     background-color: #00000079;
+    z-index: 999;
     &::-webkit-scrollbar {
       width: 0px;
       background-color: $primary-coffee-light;
@@ -99,5 +130,6 @@
       }
     }
   }
+  
   
 }

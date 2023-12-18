@@ -97,10 +97,16 @@ const SiteContent = () => {
                         <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Staff Request</p></div>
                     </div>
                 </Link>
-                <Link href="./product-orders" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                <Link href="./client-product-orders" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
                     <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
-                        <div className={style.iconContainer1 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><ShoppingBasketIcon className={style.icon} /></div>
-                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Product Orders</p></div>
+                        <div className={style.iconContainer12 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><ShoppingBasketIcon className={style.icon} /></div>
+                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Client Orders</p></div>
+                    </div>
+                </Link>
+                <Link href="./user-product-orders" className={style.item + '  col-12 col-md-6 col-lg-4 col-xl-3 my-2 d-flex p-0 '}>
+                    <div className='row col-12 d-flex   p-0 flex-row justify-content-start'>
+                        <div className={style.iconContainer13 + " " + style.iconContainer + ' col-2  d-flex justify-content-center align-items-center'}><ShoppingBasketIcon className={style.icon} /></div>
+                        <div className='col-8 d-flex flex-wrap justify-content-start align-items-center '><p className='h5  my-auto text-wrap text-capitalize'>Users Orders</p></div>
                     </div>
                 </Link>
             </div>

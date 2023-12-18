@@ -42,7 +42,7 @@ const StoreAddCity = ({ addData, setAddData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">City Name</label>
-                        <input autocomplete="off" value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='Write city name here' />
+                        <input  autoComplete="off"  value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='Write city name here' />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

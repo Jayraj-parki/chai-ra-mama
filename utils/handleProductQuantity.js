@@ -47,7 +47,6 @@ export const handleDecrement = async(productId, setProductCounts, productCounts,
 
 export const handleClientProductIncrement = async (productId, setProductCounts, productCounts,userId) => {
   const productIndex = productCounts.findIndex(item => item.id === productId);
-  console.log(productCounts)
   if (productIndex !== -1) {
     const updatedProductCounts = [...productCounts];
     const quantity=updatedProductCounts[productIndex]?.quantity + 1

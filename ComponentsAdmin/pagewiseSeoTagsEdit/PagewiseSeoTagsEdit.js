@@ -53,7 +53,7 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                     <div className="text-capitalize">
                       <div className="mb-4">
                         <label className="form-label">Page Id</label>
-                        <input autocomplete="off" disabled value={pageId} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
+                        <input  autoComplete="off"  disabled value={pageId} name="pageTitle" type="text" className="form-control" placeholder='write something here...' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label">meta title tags</label>
@@ -61,11 +61,11 @@ const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
                       </div>
                       <div className="mb-4">
                         <label className="form-label">meta keywords</label>
-                        <textarea autocomplete="off" onChange={(e) => setMetaKeyword(e.target.value)} value={metaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='meta keyword here' ></textarea>
+                        <textarea  autoComplete="off"  onChange={(e) => setMetaKeyword(e.target.value)} value={metaKeyword} name="pageMetaKeyword" type="text" className="form-control" placeholder='meta keyword here' ></textarea>
                       </div>
                       <div className="mb-4">
                         <label className="form-label">meta description</label>
-                        <textarea autocomplete="off" onChange={(e) => setMetaDesc(e.target.value)} value={metaDesc} name="pageMetaDescription" type="text" className="form-control" placeholder='meta description here' ></textarea>
+                        <textarea  autoComplete="off"  onChange={(e) => setMetaDesc(e.target.value)} value={metaDesc} name="pageMetaDescription" type="text" className="form-control" placeholder='meta description here' ></textarea>
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

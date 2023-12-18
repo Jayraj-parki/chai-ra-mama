@@ -10,6 +10,8 @@ import ImageModal from '../imageModal/ImageModal';
 import { useClientMenuContext } from '@/app/admin/client-menu/page';
 import ClientMenuEdit from '../clientMenuEdit/ClientMenuEdit';
 import ClientMenuAdd from '../clientMenuAdd/ClientMenuAdd';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+
 const ClientMenu = () => {
   const { clientMenuData, helper } = useClientMenuContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
@@ -29,7 +31,7 @@ const ClientMenu = () => {
       <div className={style.clientMenu + ' container-fluid my-4  shadow rounded-4 p-4'}>
         <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
           <div className='col-auto  d-flex flex-row justify-content-start '>
-            <QuestionAnswerIcon className={style.icon + ' col-auto my-auto p-0 '} />
+            <RestaurantMenuIcon className={style.icon + ' col-auto my-auto p-0 '} />
             <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Client Menu</h3>
           </div>
           <button onClick={() => setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Menu Item</button>

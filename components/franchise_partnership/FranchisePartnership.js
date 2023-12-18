@@ -31,7 +31,7 @@ const FranchisePartnership = () => {
                     </div>
                     <div className={style.franchisePartnership_list + " row col-12  mx-auto col-lg-12 d-flex  p-0 justify-content-around align-items-center  "}>
                         <div className="col-12  p-0  col-md-8 col-xl-9 mx-auto">
-                            <input  autocomplete="off"   type="email" className=" p-2 mx-auto col-12 lh-lg  border border-1 outline-none form-control shadow-none fw-bold text-capitalize" placeholder="Enter your email id" />
+                            <input   autoComplete="off"    type="email" className=" p-2 mx-auto col-12 lh-lg  border border-1 outline-none form-control shadow-none fw-bold text-capitalize" placeholder="Enter your email id" />
                         </div>
                         <div className="col-6 col-md-3 col-xl-3 mx-auto ">
                             <button type="submit" className="row text-uppercase h5 col-12 my-4 my-lg-0 m-auto d-flex justify-content-center text-light  rounded  border-0 outline-none ">Submit</button>

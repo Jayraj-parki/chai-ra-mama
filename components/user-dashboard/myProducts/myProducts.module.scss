@@ -1,0 +1,49 @@
+@import "../../../styles/var";
+.container {
+  .myProducts {
+    .modal {
+      background-color: #00000079;
+    }
+    .header {
+      .icon {
+        font-size: $font-lg;
+        color: $bb-dark;
+      }
+      .heading {
+        color: $bb-dark;
+      }
+    }
+    .tableContainer {
+      overflow: auto;
+
+      table {
+        thead {
+          th {
+            min-width: 200px;
+            &:nth-child(1) {
+              min-width: 80px;
+            }
+          }
+        }
+        input[type="number"] {
+          &::-webkit-inner-spin-button,
+          &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        
+          & {
+            -moz-appearance: textfield; // For Firefox
+          }
+        }
+        img {
+          width: min-content;
+          max-width: 100px;
+          height: min-content;
+          max-height: 100px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

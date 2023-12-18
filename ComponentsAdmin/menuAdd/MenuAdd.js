@@ -66,12 +66,12 @@ const MenuAdd = ({ addData, setAddData }) => {
                         </select>
                       </div>
                       <div className={" mb-4 "}>
-                        <input autocomplete="off" value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
+                        <input  autoComplete="off"  value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
                       </div>
                       <div className="mb-4 ">
                         <label className="form-label text-capitalize">add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof menuImage === "string" && menuImage?.includes("http") ? menuImage : menuImage != null && menuImage instanceof File ? URL.createObjectURL(menuImage) : "/assets/images/1.png"} hidden={menuImage ? false : true} alt="..." />
-                        <input autocomplete="off" onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input  autoComplete="off"  onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Content</label>

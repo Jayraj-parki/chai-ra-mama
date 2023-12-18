@@ -36,7 +36,7 @@ const ActionUpdateModal = ({ actionModal, setActionModal }) => {
                                 <div className=''>
                                     <div className="mb-4">
                                         <label for="editHeading" className="form-label">Client Refrence No.</label>
-                                        <input autocomplete="off" disabled value={clientKey} type="text" className="form-control" placeholder='write something here' />
+                                        <input  autoComplete="off"  disabled value={clientKey} type="text" className="form-control" placeholder='write something here' />
                                     </div>
                                     <div className="mb-4">
                                         <label for="editHeading" className="form-label">Admin Refrence No.</label>

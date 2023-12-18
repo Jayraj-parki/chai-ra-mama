@@ -1,9 +1,9 @@
-export const sendOrderOTP = async ({ orderId,userEmail,setAlert}) => {
+export const sendOrderOTP = async ({ orderId,userEmail,setAlert,end_url}) => {
     try {
         if(userEmail?.trim()==""){
             setAlert({ modalActive: true, workStatus: "failed", message: "Email Id is not mentioned" })
         }
-        const result = await fetch("/api/admin/client-orders", {
+        const result = await fetch(`/api/admin/${end_url}`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"

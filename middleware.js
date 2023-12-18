@@ -21,11 +21,17 @@ export function middleware(req, res) {
     }
     return NextResponse.redirect(new URL("/", req.url));
   }
-  console.log("dqwded")
+  else if (req.nextUrl.pathname.startsWith("/user-signin")||req.nextUrl.pathname.startsWith("/user-signup")) {
+    const session =  String([...req.headers])
+    if (session.includes('localUserToken')) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+    return NextResponse.next();
+  }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*','/dashboard/:path*','/user-product:path*']
+  matcher: ['/admin/:path*','/dashboard/:path*','/user-product:path*','/user-signin:path*']
 
 }

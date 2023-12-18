@@ -44,19 +44,19 @@ const LocalSignUp = () => {
                     <div className="row col-12 shadow rounded-3 col-sm-10 col-md-6 py-3 mx-auto  mt-md-0 p-0 d-flex justify-content-center">
                         <form className={style.form + " form row col-12 py-3 mx-auto needs-validation"}>
                             <div className="col-6 mb-4">
-                                <input autocomplete="off" type="text" ref={firstNameRef} required className="  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="First name" />
+                                <input  autoComplete="off"  type="text" ref={firstNameRef} required className="  border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="First name" />
                             </div>
                             <div className="col-6 mb-4">
-                                <input autocomplete="off" type="text" ref={lastNameRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Last name" />
+                                <input  autoComplete="off"  type="text" ref={lastNameRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Last name" />
                             </div>
                             <div className="col-12 mb-4">
-                                <input autocomplete="off" type="email" ref={emailRef} required={"true"} className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Email" />
+                                <input  autoComplete="off"  type="email" ref={emailRef} required={"true"} className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Email" />
                             </div>
                             <div className="col-12 mb-4">
-                                <input autocomplete="off" type="password" ref={passwordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Password" />
+                                <input  autoComplete="off"  type="password" ref={passwordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Password" />
                             </div>
                             <div className="col-12 mb-4">
-                                <input autocomplete="off" type="password" ref={confirmPasswordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Confirm Password" />
+                                <input  autoComplete="off"  type="password" ref={confirmPasswordRef} required className=" border-top-0 border-end-0 border-start-0 border-bottom-1 outline-none form-control shadow-none" placeholder="Confirm Password" />
                             </div>
                             <div className="col-12 mb-4">
                                 <select className="form-select shadow-none" value={role} onChange={(e) => setRole(e.target?.value)}>

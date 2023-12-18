@@ -1,5 +1,5 @@
-export const saveClientCheckoutData = async ({userId,setAlert}) => {
-    if (!userId) {
+export const saveClientCheckoutData = async ({userId,setAlert,storeId}) => {
+    if (!userId ||!storeId) {
         setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
     }
@@ -12,6 +12,7 @@ export const saveClientCheckoutData = async ({userId,setAlert}) => {
                 },
                 body: JSON.stringify({
                     userId,
+                    storeId,
                     purchaseTime:new Date()
                 })
             })

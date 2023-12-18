@@ -54,15 +54,15 @@ const StoreInchargeEdit = ({ editData, setEditData }) => {
                       <div className="mb-4">
                         <div className={" mb-4 "}>
                           <label className="form-label">Name</label>
-                          <input autocomplete="off" value={inchargeName} onChange={(e) => setInchargeName(e.target?.value)} type="text" className="form-control shadow-none" placeholder='write name here' />
+                          <input  autoComplete="off"  value={inchargeName} onChange={(e) => setInchargeName(e.target?.value)} type="text" className="form-control shadow-none" placeholder='write name here' />
                         </div>
                         <div className={" mb-4 "}>
                           <label className="form-label">Email</label>
-                          <input autocomplete="off" value={inchargeEmail} onChange={(e) => setInchargeEmail(e.target?.value)} type="email" className="form-control shadow-none" placeholder='write email here' />
+                          <input  autoComplete="off"  value={inchargeEmail} onChange={(e) => setInchargeEmail(e.target?.value)} type="email" className="form-control shadow-none" placeholder='write email here' />
                         </div>
                         <div className={" mb-4 "}>
                           <label className="form-label">Phone</label>
-                          <input autocomplete="off" value={inchargePhone} onChange={(e) => setInchargePhone(e.target?.value)} type="number" className="form-control shadow-none" placeholder='write phone number here' />
+                          <input  autoComplete="off"  value={inchargePhone} onChange={(e) => setInchargePhone(e.target?.value)} type="number" className="form-control shadow-none" placeholder='write phone number here' />
                         </div>
                       </div>
                       <div className='row col-12 '>

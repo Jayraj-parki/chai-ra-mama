@@ -18,7 +18,6 @@ export const updateUserProfile = async ({ firstName, lastName, address, contactN
                 })
             })
             const data = await result.json()
-            console.log(data)
             setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             getUserUtils()
             return true

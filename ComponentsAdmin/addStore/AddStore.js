@@ -47,15 +47,15 @@ const AddStore = ({ addData, setAddData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Address</label>
-                        <input autocomplete="off" value={storeAddress} onChange={(e) => setStoreAddress(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write address here' />
+                        <input  autoComplete="off"  value={storeAddress} onChange={(e) => setStoreAddress(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write address here' />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Contact Number</label>
-                        <input autocomplete="off" value={storePhone} onChange={(e) => setStorePhone(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write phone number here' />
+                        <input  autoComplete="off"  value={storePhone} onChange={(e) => setStorePhone(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write phone number here' />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Map Link</label>
-                        <input autocomplete="off" value={storeMap} onChange={(e) => setStoreMap(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write map link here' />
+                        <input  autoComplete="off"  value={storeMap} onChange={(e) => setStoreMap(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write map link here' />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

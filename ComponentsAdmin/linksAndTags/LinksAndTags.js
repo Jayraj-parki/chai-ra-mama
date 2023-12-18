@@ -54,22 +54,22 @@ const LinksAndTags = () => {
               <tbody>
                 <tr className=''>
                   <td className='align-middle' >Facebook</td>
-                  <td className='align-middle' ><input value={facebook} onChange={(e) => setFacebook(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='facebook link here' />
+                  <td className='align-middle' ><input value={facebook} onChange={(e) => setFacebook(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='facebook link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >instagram</td>
-                  <td className='align-middle' ><input value={instagram} onChange={(e) => setInstagram(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='instagram link here' />
+                  <td className='align-middle' ><input value={instagram} onChange={(e) => setInstagram(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='instagram link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >youtube</td>
-                  <td className='align-middle' ><input value={youtube} onChange={(e) => setYoutube(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='youtube link here' />
+                  <td className='align-middle' ><input value={youtube} onChange={(e) => setYoutube(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='youtube link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >whatsapp</td>
-                  <td className='align-middle' ><input value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)} autocomplete="off" name="" type="text" className="form-control" placeholder='whatsapp link here' />
+                  <td className='align-middle' ><input value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='whatsapp link here' />
                   </td>
                 </tr>
 

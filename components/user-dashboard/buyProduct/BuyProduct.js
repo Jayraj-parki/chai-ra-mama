@@ -1,18 +1,16 @@
 "use client"
 import style from "./buyProduct.module.scss"
-import Link from "next/link"
 import Image from 'next/image'
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useEffect, useState } from "react";
 import { getDataService } from "@/services/getDataService";
 import PopUp from "@/ComponentsAdmin/PopUp/PopUp";
-import { useClientMenuContextUI } from "@/components/dashboard/Dashboard";
 import { useAuth } from "@/app/layout";
 import { removeFromClientCart } from "@/services/localUser/removeFromClientCart";
 import { AddToClientCart } from "@/services/localUser/AddToClientCart";
 import { getClientCartProduct } from "@/services/localUser/getClientCartProduct";
+import { useClientDashboardContext } from "@/components/dashboard/Dashboard";
 const BuyProduct = () => {
-    const [clientMenu, setData] = useState()
+    const {clientMenu, helper} = useClientDashboardContext()
     const [clientCartProduct, setClientCartProduct] = useState()
     
     const { userCred, userRole, getCountOfAddedClientCart } = useAuth()
@@ -44,9 +42,6 @@ const BuyProduct = () => {
         }
         setCartButton("")
     };
-    const helper = async () => {
-        await getDataService(setData, "client-menu")
-    }
     const getClientMenuCartData=async()=>{
         await getClientCartProduct({ userCred, setData:setClientCartProduct ,status:"start"})
       }
@@ -54,7 +49,6 @@ const BuyProduct = () => {
         setCart(clientCartProduct?.map((val) => ({ productId: val?.productId, uId: val?._id })))
     }, [clientCartProduct])
     useEffect(() => {
-        helper()
         getClientMenuCartData()
     }, [])
     return (

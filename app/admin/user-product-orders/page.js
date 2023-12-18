@@ -1,12 +1,12 @@
 "use client"
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
-import ProductOrders from '@/ComponentsAdmin/productOrders/ProductOrders';
+import UserProductOrders from '@/ComponentsAdmin/userProductOrders/UserProductOrders';
 import { useAuth } from '@/app/layout';
 import { getDataService } from '@/services/getDataService';
 import { createContext, useContext, useEffect, useState } from 'react';
-const productOrdersContext = createContext()
-export const useProductOrdersContext = () => {
-  return useContext(productOrdersContext)
+const userProductOrdersContext = createContext()
+export const useUserProductOrdersContext = () => {
+  return useContext(userProductOrdersContext)
 }
 
 const page = () => {
@@ -15,7 +15,7 @@ const page = () => {
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
   const helper = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
-    await getDataService(setData, `client-orders`)
+    await getDataService(setData, `user-orders`)
     setAlert({ modalActive: false, workStatus: "", message: "" })
  
   }
@@ -26,12 +26,12 @@ const page = () => {
     <>
       {
         adminCred &&
-        <productOrdersContext.Provider value={{productOrders,helper}}>
+        <userProductOrdersContext.Provider value={{productOrders,helper}}>
           <div className='container-fluid p-lg-4  m-0'>
           <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
-            <ProductOrders />
+            <UserProductOrders />
           </div>
-        </productOrdersContext.Provider>
+        </userProductOrdersContext.Provider>
       }
     </>
   )

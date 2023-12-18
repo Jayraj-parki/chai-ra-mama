@@ -62,12 +62,12 @@ const GalleryAdd = ({ addData, setAddData }) => {
                       </div>
                       <div className="mb-4">
                         {/* <label className="form-label text-capitalize">Title</label> */}
-                        <input autocomplete="off" value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter new title here' />
+                        <input  autoComplete="off"  value={galleryTitle} onChange={(e) => setGalleryTitle(e.target?.value)} type="text" className="form-control" placeholder='Enter new title here' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label text-capitalize">add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof galleryImage === "string" && galleryImage?.includes("http") ? galleryImage : galleryImage != null && galleryImage instanceof File ? URL.createObjectURL(galleryImage) : "/assets/images/1.png"} hidden={galleryImage ? false : true} alt="..." />
-                        <input autocomplete="off" onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input  autoComplete="off"  onChange={(e) => setGalleryImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
