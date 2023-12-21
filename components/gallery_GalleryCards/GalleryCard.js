@@ -2,8 +2,9 @@
 import Image from "next/image";
 import style from "./galleryCard.module.scss"
 import { useEffect, useState } from "react";
-import { useGalleryContext } from "@/app/gallery/page";
+
 import { groupImagesByProduct } from "@/utils/groupImagesByProduct";
+import { useGalleryContext } from "../pageComponents/GalleryPage";
 const GalleryCard = () => {
     const { galleryData } = useGalleryContext()
     const [activeTab, setActiveTab] = useState("all")

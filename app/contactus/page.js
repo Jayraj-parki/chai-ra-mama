@@ -1,30 +1,22 @@
-"use client"
-import ContactBanner from '@/components/contact_banner/ContactBanner'
-import ContactDetails from '@/components/contact_contactDetails/ContactDetails'
-import { getDataService } from '@/services/getDataService'
-import { createContext, useContext, useEffect, useState } from 'react'
-
-const contactUsUIContext = createContext()
-export const useContactUsUIContext = () => {
-  return useContext(contactUsUIContext)
-}
+import ContactUsPage from "@/components/pageComponents/ContactUsPage"
+import { getMetaTagValues } from "@/services/getMetaTagValues"
 
 const page = () => {
-  const [contactData, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData, "site-details/ui")
-  }
-  useEffect(() => {
-   helper()
-  }, [])
+
   return (
     <>
-    <contactUsUIContext.Provider value={{contactData,helper}}>
-      <ContactBanner />
-      <ContactDetails/>
-    </contactUsUIContext.Provider>
-    </>
+    <ContactUsPage/>
+  </>
   )
 }
 
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("ContactUsPage")
+  return {
+    title: data?.metaTitle || 'ContactUs Page',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
+}
 export default page

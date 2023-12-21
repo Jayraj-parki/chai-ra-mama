@@ -3,9 +3,9 @@ import style from "./storeCards.module.scss"
 import { useEffect, useState } from "react";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import LocalPhoneRoundedIcon from '@mui/icons-material/LocalPhoneRounded';
-import { useStoreUiContext } from "@/app/storeLocators/page";
 
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount'; import { Button } from "@mui/material";
+import { useStoreUiContext } from "../pageComponents/StoreLocatorPage";
 const StoreCards = () => {
     const [modal, setModal] = useState({ active: false, storeId: "" })
     const { storeCity, storeDetails, storeList } = useStoreUiContext()

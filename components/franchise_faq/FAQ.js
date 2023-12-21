@@ -1,5 +1,6 @@
 "use client";
-import { useFaqUiContext } from "@/app/franchise/page";
+
+import { useFaqUiContext } from "../pageComponents/FrancisePage";
 import style from "./faq.module.scss"
 import {  useState } from 'react';
 const FAQ = () => {

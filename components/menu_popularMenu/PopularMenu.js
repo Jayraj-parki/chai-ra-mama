@@ -2,11 +2,11 @@
 import Image from "next/image";
 import style from "./popularMenu.module.scss"
 import { useEffect, useState } from "react";
-import { useMenuUiContext } from "@/app/menu/page";
 import { useAuth } from "@/app/layout";
 import { addToCart } from "@/services/localUser/addToCart";
 import { removeFromCart } from "@/services/localUser/removeFromCart";
 import PopUp from "@/ComponentsAdmin/PopUp/PopUp";
+import { useMenuUiContext } from "../pageComponents/MenuPage";
 const PopularMenu = () => {
     const { userCred, userRole, getCountOfAddedCart } = useAuth()
     const { menuData, subMenuData, cartProduct } = useMenuUiContext()

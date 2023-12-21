@@ -1,40 +1,23 @@
-"use client"
-import MenuBanner from '@/components/menu_banner/MenuBanner'
-import PopularMenu from '@/components/menu_popularMenu/PopularMenu'
-import { getDataService } from '@/services/getDataService'
-import { createContext, useContext, useEffect, useState } from "react"
-import { useAuth } from '../layout'
-import { getCartProduct } from '@/services/localUser/getCartProduct'
-const menuUiContext=createContext()
-export const useMenuUiContext=()=>{
-  return useContext(menuUiContext)
-}
+import MenuPage from '@/components/pageComponents/MenuPage'
+import { getMetaTagValues } from '@/services/getMetaTagValues'
+
 const page = () => {
-  const {userCred}=useAuth()
-  const [menuData, setMenuData] = useState()
-  const [subMenuData, setSubMenuData] = useState()
-  const [cartProduct, setCartProduct] = useState()
-  const helper = async () => {
-    await getDataService(setMenuData,"menu")
-    await getDataService(setSubMenuData,"sub-menu/all")
-  }
-  const getCartData=async(type,status="Start")=>{
-    let setData=setCartProduct
-    if(type=="myCart") setData=setCartProduct
-    await getCartProduct({ userCred, setData,status })
-  }
-  useEffect(() => {
-    helper()
-    getCartData("myCart","start")
-  }, [userCred])
+
   return (
     <>
-    <menuUiContext.Provider value={{menuData,subMenuData,cartProduct,getCartData}}>
-      <MenuBanner />
-      <PopularMenu  />
-    </menuUiContext.Provider>
+      <MenuPage />
     </>
   )
+}
+
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("MenuPage")
+  return {
+    title: data?.metaTitle || 'Menu Page',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
 }
 
 export default page

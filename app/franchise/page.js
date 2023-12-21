@@ -1,34 +1,23 @@
-"use client"
-import FranchiseBanner from '@/components/franchise_banner/FranchiseBanner'
-import FAQ from '@/components/franchise_faq/FAQ'
-import FranchisePartnerProfit from '@/components/franchise_partner_profit/FranchisePartnerProfit'
-import FranchisePartnership from '@/components/franchise_partnership/FranchisePartnership'
-import { getDataService } from '@/services/getDataService'
-import { createContext, useContext, useEffect, useState } from 'react'
-
-const faqUiContext=createContext()
-export const useFaqUiContext=()=>{
-  return useContext(faqUiContext)
-}
+import FrancisePage from "@/components/pageComponents/FrancisePage"
+import { getMetaTagValues } from "@/services/getMetaTagValues"
 
 const page = () => {
-  const [faqs, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"franchise-faq")
-  }
-  useEffect(() => {
-    helper()
-  }, [])
+
   return (
     <>
-    <faqUiContext.Provider value={{faqs}}>
-      <FranchiseBanner/>
-      <FranchisePartnership/>
-      <FranchisePartnerProfit/>
-      <FAQ/>
-    </faqUiContext.Provider>
+      <FrancisePage/>
     </>
   )
+}
+
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("FranchisePage")
+  return {
+    title: data?.metaTitle || 'Franchise Page',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
 }
 
 export default page

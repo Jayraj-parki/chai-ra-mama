@@ -6,7 +6,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 import { useEffect, useState } from "react";
-import { useFeedbackuiContext } from "@/app/feedback/page";
+import { useFeedbackuiContext } from "../pageComponents/FeedbackPage";
 const StarRating = ({ rating }) => {
     const fullStars = Math.floor(rating);
     const halfStar = rating - fullStars
@@ -29,6 +29,7 @@ const StarRating = ({ rating }) => {
 
 const FeedbackCards = () => {
     const {feedbacks}=useFeedbackuiContext()
+
     
     return (
         <div className={style.feedbackCards + " container-fluidm-0 p-0 my-5 "}>
