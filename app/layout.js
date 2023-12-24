@@ -1,6 +1,7 @@
 "use client"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/styles/globals.css'
+import Script from 'next/script';
 import Navbar from '@/components/navbar/Navbar'
 import { Inter } from 'next/font/google'
 const inter = Inter({ subsets: ['latin'] })
@@ -51,12 +52,12 @@ export default function RootLayout({ children }) {
     if (userCred) {
       await getCartCount({ userCred, setCartCount })
     }
-  } 
+  }
   const getCountOfAddedClientCart = async () => {
-    if (userCred && userRole=="client") {
-      await getClientCartCount({ userCred, setCartCount:setClientCartCount })
+    if (userCred && userRole == "client") {
+      await getClientCartCount({ userCred, setCartCount: setClientCartCount })
     }
-  } 
+  }
   const getAdmin = async () => {
     const cookie = Cookies.get("teaToken")
     try {
@@ -96,9 +97,13 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+      </head>
       <body className={inter.className}>
         <main>
-          <AuthContext.Provider value={{ adminCred, userCred,userRole, isAdminLogin, isUserLogin, logOutAdmin, logOutUser, isAdminAuthorized, cartCount,clientCartCount, getCountOfAddedCart,getCountOfAddedClientCart }}>
+          <AuthContext.Provider value={{ adminCred, userCred, userRole, isAdminLogin, isUserLogin, logOutAdmin, logOutUser, isAdminAuthorized, cartCount, clientCartCount, getCountOfAddedCart, getCountOfAddedClientCart }}>
             <siteDataUIContext.Provider value={{ siteUIData, helper }}>
               <Navbar />
               <headerCMSUiContext.Provider value={{ headers, cmsData }}>

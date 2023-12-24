@@ -1,15 +1,28 @@
 "use client"
 import style from "./clientProduct.module.scss"
-import { useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { useAuth } from "../layout"
 import { Button } from "@mui/material";
 import ClientCart from "@/components/user-dashboard/clientCart/ClientCart";
 import ClientOrders from "@/components/user-dashboard/clientOrders/ClientOrders";
 import ClientPurchaseHistory from "@/components/user-dashboard/clientPurchaseHistory/ClientPurchaseHistory";
+import { getLocalUser } from "@/services/localUser/getLocalUser";
+
+const clientProfileContext = createContext()
+export const useClientProfileContext = () => {
+  return useContext(clientProfileContext)
+}
+
 const page = () => {
   const [activeLink, setActiveLink] = useState("mycart")
   const { userCred } = useAuth()
-  
+  const [userProfileData, setUserData] = useState()
+  const getUserUtils = async () => {
+    await getLocalUser(userCred, setUserData)
+  }
+  useEffect(() => {
+    getUserUtils()
+  }, [userCred])
   return ( 
  
     <>
@@ -28,11 +41,13 @@ const page = () => {
               </Button>
             </ul>
           </div>
+          <clientProfileContext.Provider value={{ userProfileData}}>
           <div className={style.content + " container-fluid row col-12 col-xl-10  mx-auto mt-3 "}>
             {activeLink == "mycart" && <ClientCart />}
             {activeLink == "purchase-history" && <ClientPurchaseHistory />}
             {activeLink == "track-orders" && <ClientOrders />}
           </div>
+          </clientProfileContext.Provider>
         </>}
     </>
   )

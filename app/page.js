@@ -1,4 +1,3 @@
-
 import HomeBanner from "@/components/home_banner/HomeBanner"
 import HomeHeaderCard from "@/components/home_headerCard/HomeHeaderCard"
 import HomeAboutUs from "@/components/home_about/HomeAboutUs"
@@ -9,6 +8,8 @@ import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
 import { getMetaTagValues } from "@/services/getMetaTagValues"
 
 const page = () => {
+  
+
   return (
     <>
       <HomeBanner />
@@ -18,6 +19,7 @@ const page = () => {
       <HomeMenu />
       <HomeTestimonial />
       <HomeGetInTouch />
+
     </>
   )
 }
@@ -28,7 +30,6 @@ export async function generateMetadata({ params }) {
     title: data?.metaTitle || 'Home Page',
     description: data?.metaDesc || "This is chai-ra-mama website",
     keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
-
   }
 }
 

@@ -13,7 +13,9 @@ import { getClientCartProduct } from '@/services/localUser/getClientCartProduct'
 import { saveClientCheckoutData } from '@/services/localUser/saveClientCheckoutData';
 import { getAssignedStores } from '@/services/getAssignedStores';
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
+import { useClientProfileContext } from '@/app/client-product/page';
 const ClientCart = () => {
+    const { userProfileData } = useClientProfileContext()
     const { getCountOfAddedClientCart, userCred } = useAuth()
     const [cartProduct, setCartProduct] = useState()
     const [productCounts, setProductCounts] = useState([]);
@@ -32,24 +34,25 @@ const ClientCart = () => {
         helper()
     }
     const proceeedCheckout = async () => {
+        const { firstName, lastName, address, email, contactNumber } = userProfileData
         if (selectedStore == "") {
             setAlert({ modalActive: true, workStatus: "failed", message: "Please select store as delivery address" })
+            return
+        }
+        if (!firstName || !lastName || !address || !email || !contactNumber) {
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please complete your profile." })
             return
         }
         setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
         const userId = userCred;
         const isUpdated = await updateClientProduct({ userId, _id: userId, update: "checkout" })
-        let isPaymentSucessful = true
-        // if(isUpdated) isPaymentSucessful=await handlePayment({})
-        if (isPaymentSucessful) {
-            await updateClientProduct({ userId, _id: userId, update: "payment" })
-            await saveClientCheckoutData({ userId: userCred,storeId:selectedStore })
+        if (isUpdated) {
+            setAlert({ modalActive: false, workStatus: "", message: "" })
+            await handlePayment({ firstName, lastName, email, address, contactNumber, setAlert, selectedStore })
         }
-        else {
-            await updateClientProduct({ userId, _id: userId, update: "cancel" })
+        else{
+            await updateClientProduct({ userId:email, _id: email, update: "cancel" })
         }
-        setAlert({ modalActive: false, workStatus: "", message: "" })
-        
         helper()
         getCountOfAddedClientCart()
     }
@@ -124,7 +127,7 @@ const ClientCart = () => {
                                                     </tbody>
                                                 </table>
                                             </td>
-                                            <td rowSpan={4} className='text-center align-middle'>
+                                            <td className='text-center align-middle'>
                                                 <button onClick={() => removeCart({ id: val?._id })} className={style.addToCart + " row btn text-capitalize btn-secondary outline-none border-0 col-12 py-2 px-3 px-md-5 fw-bold text-center my-auto mx-auto"} >Remove from Cart</button>
                                             </td>
                                         </tr>
