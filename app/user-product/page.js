@@ -10,14 +10,14 @@ import { getLocalUser } from "@/services/localUser/getLocalUser";
 const userProductContext = createContext()
 export const useUserProductContext = () => {
   return useContext(userProductContext)
-}
+} 
 
 const page = () => {
   const [activeLink, setActiveLink] = useState("mycart")
   const { userCred } = useAuth()
   const [userDetails, setUserDetails] = useState({})
   const getUserDetails = async () => {
-    getLocalUser(userCred, setUserDetails)
+   await getLocalUser(userCred, setUserDetails)
   }
   useEffect(() => {
     getUserDetails()

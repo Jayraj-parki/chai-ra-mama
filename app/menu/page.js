@@ -16,7 +16,6 @@ export async function generateMetadata({ params }) {
     title: data?.metaTitle || 'Menu Page',
     description: data?.metaDesc || "This is chai-ra-mama website",
     keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
-
   }
 }
 

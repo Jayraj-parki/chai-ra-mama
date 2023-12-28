@@ -1,10 +1,10 @@
 import { getOrderId } from "../payment/getOrderId"
-import { saveClientCheckoutData } from "./saveClientCheckoutData"
-import { updateClientProduct } from "./updateClientProduct"
+import { saveCheckoutData } from "./saveCheckoutData"
+import { updateProduct } from "./updateProduct"
 
 const fetchCheckoutPrice = async (userId) => {
     try {
-        const result = await fetch(`/api/user/client-product/payment/?userId=${userId}`, { next: { revalidate: 1800 } })
+        const result = await fetch(`/api/user/product/payment/?userId=${userId}`, { next: { revalidate: 1800 } })
         const data = await result.json()
         return data.price
     }
@@ -16,7 +16,7 @@ const fetchCheckoutPrice = async (userId) => {
 
 const verifyPayement = async (orderId, paymentId, signature) => {
     try {
-        const result = await fetch(`/api/payment/client-payment-handler/complete-payment`,
+        const result = await fetch(`/api/payment/user-payment-handler/complete-payment`,
             {
                 method: "POST",
                 headers: {
@@ -37,21 +37,21 @@ const verifyPayement = async (orderId, paymentId, signature) => {
 }
 
 
-export const handlePayment = async ({ firstName, lastName, address, email, contactNumber, setAlert, selectedStore }) => {
+export const handleUserPayment = async ({ firstName, lastName, address, email, contactNumber, setAlert }) => {
     try {
         const price = await fetchCheckoutPrice(email)
         if (price <= 0) {
             setAlert({ modalActive: true, workStatus: "failed", message: "Failed to checkout now, please try again later" })
             return
         }
-        const orderId = await getOrderId("client", price)
+        const orderId = await getOrderId("user", price)
         if (!orderId) {
             setAlert({ modalActive: true, workStatus: "failed", message: "Failed to checkout now, please try again later" })
             return
         }
         const paymentPromise = new Promise(async (resolve) => {
             const options = {
-                key:  process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
                 amount: Number(price),
                 currency: "INR",
                 name: "Chai-ra-mama",
@@ -71,12 +71,13 @@ export const handlePayment = async ({ firstName, lastName, address, email, conta
                         const verification = await verifyPayement(orderId, paymentId, signature);
 
                         if (!verification) {
-                            await updateClientProduct({ userId: email, _id: userId, update: "cancel" });
+                            await updateProduct({ userId: email, _id: userId, update: "cancel" });
                             setAlert({ modalActive: true, workStatus: "failed", message: "Payment Failed" });
                         } else {
                             setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." });
-                            await updateClientProduct({ userId: email, _id: email, update: "payment" });
-                            await saveClientCheckoutData({ userId: email,setAlert, storeId: selectedStore });
+                            await updateProduct({ userId: email, _id: email, update: "payment" });
+                            await saveCheckoutData({ userId: email, setAlert});
+
                             setAlert({ modalActive: true, workStatus: "done", message: "Payment Successful" });
                         }
                         resolve();
@@ -88,7 +89,7 @@ export const handlePayment = async ({ firstName, lastName, address, email, conta
                 modal: {
                     ondismiss: async () => {
                         try {
-                            await updateClientProduct({ userId: email, _id: email, update: "cancel" });
+                            await updateProduct({ userId: email, _id: email, update: "cancel" });
                         } catch (error) {
                             console.error("Error during ondismiss:", error);
                         } finally {

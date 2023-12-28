@@ -20,7 +20,7 @@ const MenuAdd = ({ addData, setAddData }) => {
   const imageRef = useRef()
   const AddData = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
-    await AddMenuData({ menuName, menuImage, menuContent, helper, setAddData, clearForm ,setAlert})
+    await AddMenuData({ menuName, menuImage, menuContent, helper, setAddData, clearForm, setAlert })
   }
 
   const clearForm = () => {
@@ -35,7 +35,7 @@ const MenuAdd = ({ addData, setAddData }) => {
   }, [menuData])
   return (
     <>
-      <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+      <PopUp closeAlert={() => setAlert({ modalActive: false, workStatus: "", message: "" })} modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
       <div className={style.modal + ` modal fade ${addData && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
@@ -53,7 +53,7 @@ const MenuAdd = ({ addData, setAddData }) => {
                   <div className='row col-12 mx-auto mt-2'>
                     <div className=''>
                       <div className="mb-4">
-                        <label className="form-label text-capitalize">Choose an existing title or enter a new one</label>
+                        {/* <label className="form-label text-capitalize">Choose an existing title or enter a new one</label>
                         <select class="form-select" value={products.includes(menuName) ? menuName : ""} onChange={(e) => setMenuName(e.target?.value)}>
                           <option value="" disabled selected>Select Existing Title</option>
                           {
@@ -63,15 +63,17 @@ const MenuAdd = ({ addData, setAddData }) => {
                               )
                             })
                           }
-                        </select>
+                        </select> */}
                       </div>
                       <div className={" mb-4 "}>
-                        <input  autoComplete="off"  value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
+                        <label className="form-label text-capitalize">Enter Menu Title</label>
+                        <input autoComplete="off" value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
+                        <label className="form-label text-danger mt-2"><small>{products.includes(menuName) && "Menu title already exist"}</small></label>
                       </div>
                       <div className="mb-4 ">
                         <label className="form-label text-capitalize">add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof menuImage === "string" && menuImage?.includes("http") ? menuImage : menuImage != null && menuImage instanceof File ? URL.createObjectURL(menuImage) : "/assets/images/1.png"} hidden={menuImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input autoComplete="off" onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Content</label>
@@ -81,8 +83,8 @@ const MenuAdd = ({ addData, setAddData }) => {
                         )}
                       </div>
                       <div className='row col-12 '>
-                        <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
-                        <button onClick={AddData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
+                        <button onClick={clearForm}  type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>
+                        <button onClick={AddData} disabled={products.includes(menuName) && true} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-2 text-center justify-content-center text-capitalize">submit</button>
                       </div>
                     </div>
                   </div>

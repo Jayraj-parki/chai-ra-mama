@@ -8,13 +8,12 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { handleDecrement, handleIncrement } from '@/utils/handleProductQuantity';
 import { removeFromCart } from '@/services/localUser/removeFromCart';
 import { useAuth } from '@/app/layout';
-import { saveCheckoutData } from '@/services/localUser/saveCheckoutData';
 import { updateProduct } from '@/services/localUser/updateProduct';
-import { handlePayment } from '@/services/localUser/handlePayment';
 import { getCartProduct } from '@/services/localUser/getCartProduct';
 import { useUserProductContext } from '@/app/user-product/page';
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import { validateUserProfileData } from '@/utils/validateUserProfileData';
+import { handleUserPayment } from '@/services/localUser/handleUserPayment';
 const Cart = () => {
     const { getCountOfAddedCart, userCred } = useAuth()
     const { userDetails } = useUserProductContext()
@@ -32,18 +31,19 @@ const Cart = () => {
         helper()
     }
     const proceeedCheckout = async () => {
-        setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
+        const { firstName, lastName, address, email, contactNumber } = userDetails
         const isUserProfileCompleted = validateUserProfileData({ userDetails ,setAlert})
-        if(!isUserProfileCompleted){
+        if (!firstName || !lastName || !address || !email || !contactNumber || !isUserProfileCompleted) {
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please complete your profile." })
             return
         }
+        setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
         const userId = userCred;
         const isUpdated = await updateProduct({ userId, _id: userId, update: "checkout" })
-        let isPaymentSucessful = true
-        // if(isUpdated) isPaymentSucessful=await handlePayment({})
-        if (isPaymentSucessful) {
-            await updateProduct({ userId, _id: userId, update: "payment" })
-            await saveCheckoutData({ userId: userCred })
+        
+        if (isUpdated) {
+            setAlert({ modalActive: false, workStatus: "", message: "" })
+            await handleUserPayment({ firstName, lastName, email, address, contactNumber, setAlert })
         }
         else {
             await updateProduct({ userId, _id: userId, update: "cancel" })
