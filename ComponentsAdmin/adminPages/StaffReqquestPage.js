@@ -18,8 +18,9 @@ const StaffReqquestPage = () => {
   const [updateReqData, setUpdateReq] = useState()
   const helper = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
-    await getForceActionData({ setData: setUpdateReq, end_url: "force-approval/update", request: "updated" })
-    await getForceActionData({ setData: setDeleteReq, end_url: "force-approval", request: "delete" })
+    await Promise.all([ getForceActionData({ setData: setUpdateReq, end_url: "force-approval/update", request: "updated" }),
+      getForceActionData({ setData: setDeleteReq, end_url: "force-approval", request: "delete" })
+    ]);
     setAlert({ modalActive: false, workStatus: "", message: "" })
   }
   useEffect(() => {
@@ -31,7 +32,7 @@ const StaffReqquestPage = () => {
         adminCred &&
         <>
           <StaffRequestContext.Provider value={{ helper, deleteReqData, updateReqData }}>
-            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+            <PopUp closeAlert={() => setAlert({ modalActive: false, workStatus: "", message: "" })} modalActive={alert.modalActive} workStatus={alert.workStatus} message={alert.message} />
             <StaffRequest />
           </StaffRequestContext.Provider>
         </>
@@ -39,5 +40,5 @@ const StaffReqquestPage = () => {
     </>
   )
 }
- 
+
 export default StaffReqquestPage

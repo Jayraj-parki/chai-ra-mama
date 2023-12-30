@@ -27,14 +27,11 @@ const MyStores = () => {
     await SendRequestForStoreIncharge({ store, inchargeName: userProfileData?.firstName + " " + userProfileData?.lastName, inchargeEmail: userProfileData?.email, inchargePhone: userProfileData?.contactNumber, helper, setAlert })
     setStore(""); setCity("")
   }
-  const helper = async () => {
-    await getAssignedStores(userCred, setAssignedStore, "filter")
-  }
+  const helper = async () => await getAssignedStores(userCred, setAssignedStore, "filter")
 
   const getStoresData = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
-    await getDataService(setStoreCity, "store-locator")
-    await getDataService(setStoreDetails, "stores/all")
+    await Promise.all([getDataService(setStoreCity, "store-locator"),getDataService(setStoreDetails, "stores/all")])
     setAlert({ modalActive: false, workStatus: "", message: "" })
   }
 

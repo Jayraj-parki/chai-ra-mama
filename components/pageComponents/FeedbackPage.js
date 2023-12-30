@@ -12,9 +12,8 @@ export const useFeedbackuiContext = () => {
 
 const FeedbackPage = () => {
   const [feedbacks, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"client-feedback")
-  }
+  const helper = async () => await getDataService(setData,"client-feedback")
+
   useEffect(() => {
     helper()
   }, [])

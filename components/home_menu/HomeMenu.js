@@ -7,9 +7,8 @@ import { useEffect, useState } from "react";
 import { getDataService } from "@/services/getDataService";
 const HomeMenu = () => {
     const [data,setData]=useState()
-    const helper=async()=>{
-        await getDataService(setData,"menu")
-    }
+    const helper=async()=>await getDataService(setData,"menu")
+    
     useEffect(()=>{
         helper()
     },[])

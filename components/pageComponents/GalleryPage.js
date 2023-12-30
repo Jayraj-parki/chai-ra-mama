@@ -10,9 +10,8 @@ export const useGalleryContext = () => {
 }
 const GalleryPage = () => {
   const [galleryData, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"gallery")
-  } 
+  const helper = async () => await getDataService(setData,"gallery")
+
   useEffect(() => {
     helper()
   }, [])

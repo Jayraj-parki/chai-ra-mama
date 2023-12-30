@@ -16,9 +16,8 @@ const ClientProduct = () => {
     const [activeLink, setActiveLink] = useState("mycart")
     const { userCred } = useAuth()
     const [userProfileData, setUserData] = useState()
-    const getUserUtils = async () => {
-        await getLocalUser(userCred, setUserData)
-    }
+    const getUserUtils = async () => await getLocalUser(userCred, setUserData)
+
     useEffect(() => {
         getUserUtils()
     }, [userCred])

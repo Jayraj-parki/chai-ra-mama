@@ -32,9 +32,7 @@ const BuyProduct = () => {
             }
         } else {
             const uId = await AddToClientCart({ userCred, productId: product?.productId, setAlert })
-            if (!uId) {
-                setAlert({ modalActive: true, workStatus: "failed", message: "Oops! Something went wrong" })
-            }
+            if (!uId) setAlert({ modalActive: true, workStatus: "failed", message: "Oops! Something went wrong" })
             else {
                 setCart(prevCart => (prevCart ? [...prevCart, { ...product, uId }] : [{ ...product, uId }]));
                 getCountOfAddedClientCart()
@@ -42,9 +40,8 @@ const BuyProduct = () => {
         }
         setCartButton("")
     };
-    const getClientMenuCartData=async()=>{
-        await getClientCartProduct({ userCred, setData:setClientCartProduct ,status:"start"})
-      }
+    const getClientMenuCartData=async()=>await getClientCartProduct({ userCred, setData:setClientCartProduct ,status:"start"})
+      
     useEffect(() => {
         setCart(clientCartProduct?.map((val) => ({ productId: val?.productId, uId: val?._id })))
     }, [clientCartProduct])

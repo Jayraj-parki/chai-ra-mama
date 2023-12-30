@@ -12,9 +12,7 @@ const HomeGetInTouch = () => {
     const [email, setEmail] = useState()
     const [message, setMessage] = useState()
 
-    const handleGetInTouch = async () => {
-        await getInTouch({ firstName, lastName, email, message, setFirstName,setLastName,setEmail,setMessage })
-    }
+    const handleGetInTouch = async () => await getInTouch({ firstName, lastName, email, message, setFirstName,setLastName,setEmail,setMessage })
     useEffect(() => {
         setState(cmsData?.find(item => item?.cmsId === "HomeGetInTouch"))
     }, [cmsData])

@@ -13,9 +13,8 @@ export const useFaqUiContext=()=>{
 
 const FrancisePage = () => {
   const [faqs, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"franchise-faq")
-  }
+  const helper = async () =>await getDataService(setData,"franchise-faq")
+  
   useEffect(() => {
     helper()
   }, [])

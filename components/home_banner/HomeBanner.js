@@ -11,9 +11,8 @@ function HomeBanner() {
     const [banner, setBanner] = useState()
     const [currentSlide, setCurrentSlide] = useState(0);
     const [state,setState]=useState()
-    const fetchBanner = async () => {
-        await getDataService(setBanner,"home-banner")
-    } 
+    const fetchBanner = async () => await getDataService(setBanner,"home-banner")
+    
     useEffect(() => {
         fetchBanner()
         setState(cmsData?.find(item => item?.cmsId === "HomeBannerText"))

@@ -13,9 +13,7 @@ import { useAuth } from '@/app/layout';
 const MyOrders = () => {
     const { userCred } = useAuth()
     const [purchasedProduct, setPurchaseProduct] = useState()
-    const fetchLatestData = async () => {
-        await getPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
-    }
+    const fetchLatestData = async () => await getPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
     useEffect(() => {
         fetchLatestData()
     }, [userCred])

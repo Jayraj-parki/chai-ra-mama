@@ -9,9 +9,8 @@ import { getPurchasedCart } from '@/services/localUser/getPurchasedCart';
 const PurchaseHistory = () => {
     const { userCred} = useAuth()
     const [purchaseHistoryProduct,setPurchaseHistoryProduct]=useState()
-    const fetchLatestData=async()=>{
-        await getPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
-    }
+    const fetchLatestData=async()=>await getPurchasedCart({ userCred, setData:setPurchaseHistoryProduct,status:"history" })
+    
     useEffect(()=>{
         fetchLatestData()
     },[userCred])

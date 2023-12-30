@@ -14,7 +14,7 @@ import { getLocalUser } from '@/services/localUser/getLocalUser';
 
 const dashboardContext = createContext()
 export const useDashboardContext = () => {
-  return useContext(dashboardContext)
+    return useContext(dashboardContext)
 }
 
 const clientDashboardContext = createContext()
@@ -27,21 +27,14 @@ const Dashboard = () => {
     const [clientMenu, setData] = useState()
     const [myCollection, setCollection] = useState()
     const [userProfileData, setUserData] = useState()
-    const getUserUtils = async () => {
-        await getLocalUser(userCred, setUserData)
-    }
-    const helper = async () => {
-        await getDataService(setData, "client-menu")
-    }
-    const fetchCollection = async () => {
-        await getClientDataService(setCollection, "client-menu-collection")
-    }
+
+    const getUserUtils = async () => await getLocalUser(userCred, setUserData)
+    const helper = async () => await getDataService(setData, "client-menu")
+    const fetchCollection = async () => await getClientDataService(setCollection, "client-menu-collection")
+    const fetchRequiredData = async() => await Promise.all([helper(),fetchCollection()])
+    
     useEffect(() => {
-        if (userRole == "client") {
-            helper()
-            fetchCollection()
-           
-        }
+        if (userRole == "client") fetchRequiredData()
         getUserUtils()
     }, [userCred])
     return (

@@ -13,9 +13,8 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 const ClientOrders = () => {
     const { userCred } = useAuth()
     const [purchasedProduct, setPurchaseProduct] = useState()
-    const fetchLatestData = async () => {
-        await getClientPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
-    }
+    const fetchLatestData = async () => await getClientPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
+    
     useEffect(() => { 
         fetchLatestData()
     }, [userCred])

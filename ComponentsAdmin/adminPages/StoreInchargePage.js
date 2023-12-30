@@ -20,25 +20,18 @@ const StoreInchargePage = () => {
   const [storeCity, setStoreCity] = useState()
   const [storeDetails, setStoreDetails] = useState()
   const [clientRequest, setClientRetrequest] = useState()
-  const getStoresData = async () => {
-    await getDataService(setStoreCity, "store-locator")
-    await getDataService(setStoreDetails, "stores/all")
-  }
+  const getStoresData = async () => await Promise.all([getDataService(setStoreCity, "store-locator"),getDataService(setStoreDetails, "stores/all")])
+  
   const helper = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Loading....." })
     await getDataService(setData, "store-incharge")
     setAlert({ modalActive: false, workStatus: "", message: "" })
   }
-  const fetchRequest = async () => {
-    await getDataService(setClientRetrequest, "store-incharge-request")
-  }
+  const fetchRequest = async () => await getDataService(setClientRetrequest, "store-incharge-request")
+  const fetchInitailData =async()=>await Promise.all([helper(),getStoresData(),fetchRequest()])
+  
   useEffect(() => {
-    if (adminCred) {
-      helper()
-      getStoresData()
-      fetchRequest()
-    }
-
+    if (adminCred) fetchInitailData()
   }, [adminCred])
   return (
     <>
