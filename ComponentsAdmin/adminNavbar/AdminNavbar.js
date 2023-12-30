@@ -6,14 +6,15 @@ import style from "./adminNavbar.module.scss"
 import { usePathname } from 'next/navigation';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { useAuth } from '@/app/layout';
 import { useRouter } from "next/navigation"
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
 import { adminLogout } from '@/services/adminLogout';
 import { handleAdminNavbar } from '@/utils/handleAdminNavbar';
+import { useAuth, useSiteDataUIContext } from '@/app/layout';
 const AdminNavbar = () => {
+    const { siteUIData } = useSiteDataUIContext()
     const { adminCred, logOutAdmin } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("")
@@ -35,7 +36,7 @@ const AdminNavbar = () => {
                 <div className="container-fluid col-lg-12 col-xl-11  mx-auto">
                     <div className="navbar-brand  col-auto">
                         <Link href="# ">
-                            <Image src={logoImg || "/assets/images/logo.png"} className='' width={140} height={60} objectFit="cover" alt="logo" />
+                            <Image src={siteUIData?.siteLogo || "/assets/images/logo.png"} className='' width={140} height={60} objectFit="cover" alt="logo" />
                         </Link>
                     </div>
                     <button onClick={() => setCollapse(prev => (!prev))} className={`navbar-toggler shadow-none border-0  outline-none ${collapse && "collapsed"}`} type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded={`${collapse} && "false"`} aria-label="Toggle navigation">

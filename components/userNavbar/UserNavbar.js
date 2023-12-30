@@ -25,7 +25,7 @@ const UserNavbar = () => {
     const LogOut = async () => {
         await localUserLogout({ setActiveLink, logOutUser })
         router.push("/user-signin")
-    }
+    } 
     useEffect(() => {
         handleUserNavbar({ url, setCollapse, SetMenu, setActiveLink })
     }, [url])

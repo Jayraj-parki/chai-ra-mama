@@ -7,9 +7,9 @@ import HomeTestimonial from "@/components/home_testimonial/HomeTestimonial"
 import HomeGetInTouch from "@/components/home_getInTouch/HomeGetInTouch"
 import { getMetaTagValues } from "@/services/getMetaTagValues"
 
-const page = () => {
+const page = ({params}) => {
   
-
+  console.log(params)
   return (
     <>
       <HomeBanner />
