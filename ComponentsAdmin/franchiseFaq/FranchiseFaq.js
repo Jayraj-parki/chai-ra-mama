@@ -5,9 +5,9 @@ import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import Link from 'next/link';
 import FranchiseFaqEdit from '../franchiseFaqEdit/FranchiseFaqEdit';
 import FranchiseFaqAdd from '../franchiseFaqAdd/FranchiseFaqAdd';
-import { usefaqContext } from '@/app/admin/franchise-faq/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { usefaqContext } from '../adminPages/FranchiseFaqPage';
 const FranchiseFaq = () => {
   const { faqData, helper } = usefaqContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

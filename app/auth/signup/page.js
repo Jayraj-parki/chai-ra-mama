@@ -1,23 +1,23 @@
-"use client"
-import SignUp from "@/ComponentsAdmin/admin_SignUp/SignUp"
-import { useEffect } from "react";
-import { useAuth } from '@/app/layout';
-import { useRouter } from "next/navigation"
-const page = () => {
-  const { adminCred } = useAuth()
-  const router = useRouter()
 
-  useEffect(() => {
-    if (adminCred) {
-      router.push('/admin/home');
-    }
-  }, [adminCred,router])
+import AdminSignUp from "@/ComponentsAdmin/admin_SignUp/AdminSignUp";
+import { getMetaTagValues } from "@/services/getMetaTagValues";
+const page = () => {
+
   return (
     <>
-      <SignUp/>
+      <AdminSignUp/>
     </>
 
   )
 }
 
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("AdminSignUp")
+  return {
+    title: data?.metaTitle || 'AdminSignUp',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
+}
 export default page

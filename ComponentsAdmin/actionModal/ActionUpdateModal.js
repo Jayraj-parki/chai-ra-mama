@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import style from "./actionModal.module.scss"
-import {  useStaffRequestContext } from '@/app/admin/staff-request/page'
 import { updateForceActionData } from '@/services/updateForceActionData'
 import PopUp from '../PopUp/PopUp'
+import { useStaffRequestContext } from '../adminPages/StaffReqquestPage'
 const ActionUpdateModal = ({ actionModal, setActionModal }) => {
     const { helper } = useStaffRequestContext()
     const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

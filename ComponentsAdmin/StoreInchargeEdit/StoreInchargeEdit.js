@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from 'react'
 import style from "./storeInchargeEdit.module.scss"
-import { useStoreInchargeData } from '@/app/admin/store-incharge/page';
 import { updateStoreIncharge } from '@/services/updateStoreIncharge';
 import PopUp from '../PopUp/PopUp';
+import { useStoreInchargeData } from '../adminPages/StoreInchargePage';
 
 const StoreInchargeEdit = ({ editData, setEditData }) => {
   const { helper } = useStoreInchargeData()
@@ -46,7 +46,7 @@ const StoreInchargeEdit = ({ editData, setEditData }) => {
               <div className={' container-fluid my-4  '}>
                 <div className={style.storeInchargeEdit + 'row col-12 col-lg-10 shadow rounded-4 p-4 mx-auto'}>
                   <div className={style.header + ' row col-12 mx-auto'}>
-                    <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Add store incharge</h3>
+                    <h3 className={style.heading + ' fw-bold col-auto my-auto text-capitalize'}>Edit store incharge</h3>
                   </div>
                   <hr />
                   <div className='row col-12 mx-auto mt-2'>

@@ -2,9 +2,9 @@
 import style from "./subMenuAdd.module.scss"
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react";
-import { useSubMenuContext } from "@/app/admin/menu/submenu/[id]/page";
 import { AddSubMenuData } from "@/services/AddSubMenuData";
 import PopUp from "../PopUp/PopUp";
+import { useSubMenuContext } from "../adminPages/SubMenuPage";
 
 const SubMenuAdd = ({ addData, setAddData }) => {
   const { helper, pId } = useSubMenuContext()

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from "./requestHistory.module.scss"
 import Link from 'next/link';
-import Image from 'next/image';
-import { useClientRequestHistoryContext } from '@/app/admin/request-history/page';
+import { useClientRequestHistoryContext } from '../adminPages/RequestHistoryPage';
 
 const RequestHistory = () => {
     const { helper, reqHistory } = useClientRequestHistoryContext()

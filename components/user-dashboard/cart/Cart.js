@@ -1,5 +1,4 @@
 "use client"
-import { useDashboardContext } from '@/app/dashboard/page';
 import React, { useEffect, useState } from 'react';
 import style from "./cart.module.scss"
 import Image from "next/image"
@@ -10,10 +9,11 @@ import { removeFromCart } from '@/services/localUser/removeFromCart';
 import { useAuth } from '@/app/layout';
 import { updateProduct } from '@/services/localUser/updateProduct';
 import { getCartProduct } from '@/services/localUser/getCartProduct';
-import { useUserProductContext } from '@/app/user-product/page';
+
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import { validateUserProfileData } from '@/utils/validateUserProfileData';
 import { handleUserPayment } from '@/services/localUser/handleUserPayment';
+import { useUserProductContext } from '@/components/userProduct/UserProduct';
 const Cart = () => {
     const { getCountOfAddedCart, userCred } = useAuth()
     const { userDetails } = useUserProductContext()

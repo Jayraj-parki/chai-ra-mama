@@ -7,10 +7,11 @@ import Image from 'next/image';;
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
 import ImageModal from '../imageModal/ImageModal';
-import { useClientMenuContext } from '@/app/admin/client-menu/page';
+
 import ClientMenuEdit from '../clientMenuEdit/ClientMenuEdit';
 import ClientMenuAdd from '../clientMenuAdd/ClientMenuAdd';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import { useClientMenuContext } from '../adminPages/ClientMenuPage';
 
 const ClientMenu = () => {
   const { clientMenuData, helper } = useClientMenuContext()

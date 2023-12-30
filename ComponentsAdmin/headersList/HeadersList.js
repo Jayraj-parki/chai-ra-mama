@@ -6,13 +6,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import HeadersEdit from '../headersEdit/HeadersEdit';
-// import HeadersAdd from '../headerAdd/HeadersAdd';
-import { useHeaderContext } from '@/app/admin/page-headers/page';
+import { useHeaderContext } from '../adminPages/PageHeaderPage';
+
 const HeadersList = () => {
   const { headerData, helper } = useHeaderContext()
   const [modal, setModal] = useState({ active: false, image: "" })
   const [editData, setEditData] = useState({ active: false, image: "", title: "", _id: "" })
-  // const [addData,setAddData]=useState(false)
   useEffect(() => {
     helper()
   }, [])
@@ -25,14 +24,11 @@ const HeadersList = () => {
           <ImageIcon className={style.icon + ' col-auto my-auto p-0 '} />
           <h3 className={style.heading + ' fw-bold col-auto my-auto mx-2 text-capitalize'}>Header Images</h3>
         </div>
-        {/* <button  onClick={()=>setAddData(true)} className='col-auto  ms-auto btn btn-success text-decoration-none m-2 text-capitalize'> Add Header Images</button> */}
         <Link href="./home" className='col-auto btn btn-dark text-light  text-decoration-none ms-auto text-capitalize'> Go back</Link>
       </div>
       <hr />
       <ImageModal modal={modal} setModal={setModal} />
       <HeadersEdit editData={editData} setEditData={setEditData} />
-      {/* <HeadersAdd addData={addData} setAddData={setAddData} /> */}
-
       <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>
         {
           headerData ?

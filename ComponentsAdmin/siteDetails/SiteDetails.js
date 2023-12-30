@@ -6,10 +6,12 @@ import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import Image from 'next/image';
 import ImageModal from '../imageModal/ImageModal';
 import { updateSiteDetails } from '@/services/updateSiteDetails';
-import { useSiteDetailsContext } from '@/app/admin/site-details/page';
 import PopUp from '../PopUp/PopUp';
+import { useAuth } from '@/app/layout';
+import { useSiteDetailsContext } from '../adminPages/SiteDetailsPage';
 const SiteDetails = () => {
   const { siteData, helper } = useSiteDetailsContext()
+  const { isAdminAuthorized } = useAuth()
   const [modal, setModal] = useState({ active: false, image: "" })
   const [siteName, setSiteName] = useState(siteData?.siteName)
   const [sitePhone, setSitePhone] = useState(siteData?.sitePhone)
@@ -64,37 +66,37 @@ const SiteDetails = () => {
               <tbody>
                 <tr className=''>
                   <td className='align-middle' >Site name</td>
-                  <td className='align-middle' ><input value={siteName} onChange={(e) => setSiteName(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='Site Name' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteName} onChange={(e) => setSiteName(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='Site Name' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Site Phone number</td>
-                  <td className='align-middle' ><input value={sitePhone} onChange={(e) => setSitePhone(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='Site Phone number' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={sitePhone} onChange={(e) => setSitePhone(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='Site Phone number' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Site Email Id</td>
-                  <td className='align-middle' ><input value={siteEmail} onChange={(e) => setSiteEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control" placeholder='Site Email Id' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteEmail} onChange={(e) => setSiteEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control shadow-none" placeholder='Site Email Id' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >From Email Id</td>
-                  <td className='align-middle' ><input value={siteFromEmail} onChange={(e) => setSiteFromEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control" placeholder='From Email Id' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteFromEmail} onChange={(e) => setSiteFromEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control shadow-none" placeholder='From Email Id' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Forget password Email id</td>
-                  <td className='align-middle' ><input value={siteForgetPassEmail} onChange={(e) => setSiteForgetPassEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control" placeholder='Forget password Id' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteForgetPassEmail} onChange={(e) => setSiteForgetPassEmail(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control shadow-none" placeholder='Forget password Id' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Closed On</td>
-                  <td className='align-middle' ><input value={siteCloseOn} onChange={(e) => setSiteCloseOn(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control" placeholder='Saturday, Sunday' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteCloseOn} onChange={(e) => setSiteCloseOn(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control shadow-none" placeholder='Saturday, Sunday' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >Opening Hours</td>
-                  <td className='align-middle' ><input value={siteOpenHr} onChange={(e) => setSiteOpenHr(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control" placeholder='Mon - Sat (8:00 -6:00)' />
+                  <td className='align-middle' ><input disabled={!isAdminAuthorized}  value={siteOpenHr} onChange={(e) => setSiteOpenHr(e.target.value)}  autoComplete="off"  name="" type="email" className="form-control shadow-none" placeholder='Mon - Sat (8:00 -6:00)' />
                   </td>
                 </tr>
               </tbody>
@@ -118,7 +120,7 @@ const SiteDetails = () => {
                   <td className='align-middle' >Logo</td>
                   <td className='align-middle' >
                     <Image onClick={() => setModal({ active: true, image: siteLogo || "/assets/images/1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof siteLogo === "string" && siteLogo?.includes("http") ? siteLogo : siteLogo != null && siteLogo instanceof File ? URL.createObjectURL(siteLogo) : "/assets/images/1.png"} hidden={siteLogo ? false : true} alt="..." />
-                    <input onChange={(e) => setSiteLogo(e.target?.files[0])}  autoComplete="off"  type="file" accept="image/*" className="form-control" id="editImage" />
+                    <input disabled={!isAdminAuthorized}  onChange={(e) => setSiteLogo(e.target?.files[0])}  autoComplete="off"  type="file" accept="image/*" className="form-control shadow-none shadow-none" id="editImage" />
                     <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                     <p> <small>Please upload (210 x 160) pixel images to maintain designs</small></p>
                   </td>
@@ -128,7 +130,7 @@ const SiteDetails = () => {
                   <td className='align-middle' >Site Favicon</td>
                   <td className='align-middle' >
                     <Image onClick={() => setModal({ active: true, image: siteFavIcon || "/assets/images/1.png" })} className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof siteFavIcon === "string" && siteFavIcon?.includes("http") ? siteFavIcon : siteFavIcon != null && siteFavIcon instanceof File ? URL.createObjectURL(siteFavIcon) : "/assets/images/1.png"} hidden={siteFavIcon ? false : true} alt="..." />
-                    <input onChange={(e) => setSiteFavIcon(e.target?.files[0])}  autoComplete="off"  type="file" accept="image/*" className="form-control" id="editImage" />
+                    <input disabled={!isAdminAuthorized}  onChange={(e) => setSiteFavIcon(e.target?.files[0])}  autoComplete="off"  type="file" accept="image/*" className="form-control shadow-none shadow-none" id="editImage" />
                     <p className='m-0 mt-2 p-0'><small><strong>Note: </strong> Only .jpeg, .jpg, .png format images are allowed</small></p>
                     <p> <small>Please upload (80 x 80) pixel images to maintain designs</small></p>
                   </td>
@@ -150,18 +152,18 @@ const SiteDetails = () => {
                 <tbody>
                   <tr className=''>
                     <td className='align-middle' >Address</td>
-                    <td className='align-middle' ><textarea value={siteAddress} onChange={(e) => setSiteAddress(e.target.value)} name="" type="text" className="form-control" placeholder='Address here' ></textarea>
+                    <td className='align-middle' ><textarea disabled={!isAdminAuthorized}  value={siteAddress} onChange={(e) => setSiteAddress(e.target.value)} name="" type="text" className="form-control shadow-none shadow-none" placeholder='Address here' ></textarea>
                     </td>
                   </tr>
                   <tr className=''>
                     <td className='align-middle' >Map</td>
-                    <td className='align-middle' ><textarea value={siteMap} onChange={(e) => setSiteMap(e.target.value)} name="" type="text" className="form-control" placeholder='Address Map here'  ></textarea>
+                    <td className='align-middle' ><textarea disabled={!isAdminAuthorized}  value={siteMap} onChange={(e) => setSiteMap(e.target.value)} name="" type="text" className="form-control shadow-none shadow-none" placeholder='Address Map here'  ></textarea>
                     </td>
                   </tr>
                 </tbody>
               </table>
               <div className='col-12'>
-                <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
+                <button onClick={updateData} type="submit" disabled={!isAdminAuthorized}  className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
               </div>
             </div>
           </div>

@@ -7,9 +7,9 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import ClientFeedbackEdit from '../clientFeedbackEdit/ClientFeedbackEdit';
 import ClientFeedbackAdd from '../clientFeedbackAdd/ClientFeedbackAdd';
-import { useClientFeedbackContext } from '@/app/admin/client-feedback/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useClientFeedbackContext } from '../adminPages/ClientFeedbackPage';
 const ClientFeedback = () => {
   const { clientFbData, helper } = useClientFeedbackContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

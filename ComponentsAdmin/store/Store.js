@@ -5,9 +5,9 @@ import StoreIcon from '@mui/icons-material/Store';
 import Link from 'next/link';
 import EditStore from '../editStore/EditStore';
 import AddStore from '../addStore/AddStore';
-import { useStoreContext } from '@/app/admin/store/add-store/[id]/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useStoreContext } from '../adminPages/AddStorePage';
 const Store = () => {
   const { storeData, helper } = useStoreContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

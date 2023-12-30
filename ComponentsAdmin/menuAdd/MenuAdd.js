@@ -7,8 +7,8 @@ import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
 import { useEffect, useRef, useState } from "react";
 import { AddMenuData } from "@/services/AddMenuData";
-import { useMenuContext } from "@/app/admin/menu/page";
 import PopUp from "../PopUp/PopUp";
+import { useMenuContext } from "../adminPages/MenuPage";
 
 const MenuAdd = ({ addData, setAddData }) => {
   const { menuData, helper } = useMenuContext()
@@ -67,13 +67,13 @@ const MenuAdd = ({ addData, setAddData }) => {
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label text-capitalize">Enter Menu Title</label>
-                        <input autoComplete="off" value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control" placeholder='Enter new title here' />
+                        <input autoComplete="off" value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuName" type="text" className="form-control shadow-none" placeholder='Enter new title here' />
                         <label className="form-label text-danger mt-2"><small>{products.includes(menuName) && "Menu title already exist"}</small></label>
                       </div>
                       <div className="mb-4 ">
                         <label className="form-label text-capitalize">add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof menuImage === "string" && menuImage?.includes("http") ? menuImage : menuImage != null && menuImage instanceof File ? URL.createObjectURL(menuImage) : "/assets/images/1.png"} hidden={menuImage ? false : true} alt="..." />
-                        <input autoComplete="off" onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input autoComplete="off" onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Content</label>

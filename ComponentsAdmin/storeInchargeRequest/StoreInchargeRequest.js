@@ -4,12 +4,12 @@ import style from "./storeInchargeRequest.module.scss"
 import Link from 'next/link';
 import { DeleteDataService } from '@/services/deleteData';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import { useStoreInchargeData } from '@/app/admin/store-incharge/page';
 import StoreInchargeAdd from '../StoreInchargeAdd/StoreInchargeAdd';
 import { Button } from '@mui/material';
 import StoreInchargeEdit from '../StoreInchargeEdit/StoreInchargeEdit';
 import PopUp from '../PopUp/PopUp';
 import { updateRequestForStoreIncharge } from '@/services/updateRequestForStoreIncharge';
+import { useStoreInchargeData } from '../adminPages/StoreInchargePage';
 
 const StoreInchargeRequest = () => {
   const [modal, setModal] = useState({ active: false, storeAdd: "", storeContact: "", storeMap: "" })

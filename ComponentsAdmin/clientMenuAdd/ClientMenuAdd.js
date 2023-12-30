@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import style from "./clientMenuAdd.module.scss"
 import Image from 'next/image';
 import PopUp from "../PopUp/PopUp";
-import { useClientMenuContext } from "@/app/admin/client-menu/page";
+
 import { AddClientMenu } from "@/services/AddClientMenu";
+import { useClientMenuContext } from "../adminPages/ClientMenuPage";
 
 const ClientMenuAdd = ({ addData, setAddData }) => {
   const { helper } = useClientMenuContext()
@@ -48,16 +49,16 @@ const ClientMenuAdd = ({ addData, setAddData }) => {
 
                       <div className="mb-4">
                         <label className="form-label"> Item Name</label>
-                        <input  autoComplete="off"  value={clientMenuName} onChange={(e) => setClientMenuName(e.target?.value)} type="text" className="form-control" placeholder='Enter title here' />
+                        <input  autoComplete="off"  value={clientMenuName} onChange={(e) => setClientMenuName(e.target?.value)} type="text" className="form-control shadow-none" placeholder='Enter title here' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label"> Item Price</label>
-                        <input  autoComplete="off"  value={clientMenuPrice} onChange={(e) => setClientMenuPrice(e.target?.value)} type="number" className="form-control" placeholder='Enter title here' />
+                        <input  autoComplete="off"  value={clientMenuPrice} onChange={(e) => setClientMenuPrice(e.target?.value)} type="number" className="form-control shadow-none" placeholder='Enter title here' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label"> Item Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof clientMenuImage === "string" && clientMenuImage?.includes("http") ? clientMenuImage : clientMenuImage != null && clientMenuImage instanceof File ? URL.createObjectURL(clientMenuImage) : "/assets/images/1.png"} hidden={clientMenuImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setClientMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input  autoComplete="off"  onChange={(e) => setClientMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

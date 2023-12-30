@@ -7,7 +7,8 @@ import Link from 'next/link';
 import CmsEdit from '../cmsEdit/CmsEdit';
 import ImageModal from '../imageModal/ImageModal';
 import CmsAdd from '../cmsAdd/CmsAdd';
-import { useCmsData } from '@/app/admin/cmspages/page';
+import { useCmsData } from '../adminPages/CmsPagesListPage';
+
 const CmsPages = () => {
   const { data, helper } = useCmsData()
   const [modal, setModal] = useState({ active: false, image: "", })

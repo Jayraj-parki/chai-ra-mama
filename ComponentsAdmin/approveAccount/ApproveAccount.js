@@ -3,9 +3,9 @@ import { useEffect, useState, } from 'react'
 import style from "./approveAccount.module.scss"
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Link from 'next/link';
-import { useUserVerificationContext } from '@/app/admin/approve-account/page';
 import { updateUserApprovalStatus } from '@/services/updateUserApprovalStatus';
 import PopUp from '../PopUp/PopUp';
+import { useUserVerificationContext } from '../adminPages/ApproveAccountPage';
 const ApproveAccount = () => {
   const { userVerification, helper } = useUserVerificationContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

@@ -6,9 +6,10 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { useClientFeedbackContext } from "@/app/admin/client-feedback/page";
+
 import { updateClientFbData } from "@/services/updateClientFbData";
 import PopUp from "../PopUp/PopUp";
+import { useClientFeedbackContext } from "../adminPages/ClientFeedbackPage";
 
 const ClientFeedbackEdit = ({ editData, setEditData }) => {
   const { helper } = useClientFeedbackContext()
@@ -63,16 +64,16 @@ const ClientFeedbackEdit = ({ editData, setEditData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">Client Name</label>
-                        <input  autoComplete="off"  value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
+                        <input  autoComplete="off"  value={clientName} onChange={(e) => setClientName(e.target?.value)} name="clientName" type="text" className="form-control shadow-none" placeholder='write something here' />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Client Designation</label>
-                        <input  autoComplete="off"  value={clientDesignation} onChange={(e) => setClientDesignation(e.target?.value)} name="clientName" type="text" className="form-control" placeholder='write something here' />
+                        <input  autoComplete="off"  value={clientDesignation} onChange={(e) => setClientDesignation(e.target?.value)} name="clientName" type="text" className="form-control shadow-none" placeholder='write something here' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Edit Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof clientImage === "string" && clientImage?.includes("http") ? clientImage : clientImage != null && clientImage instanceof File ? URL.createObjectURL(clientImage) : "/assets/images/1.png"} hidden={clientImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setclientImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" id="editImage2" />
+                        <input  autoComplete="off"  onChange={(e) => setclientImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" id="editImage2" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Client Feedback</label>

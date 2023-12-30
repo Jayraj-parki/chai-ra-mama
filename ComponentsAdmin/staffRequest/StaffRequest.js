@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import style from "./staffRequest.module.scss"
 import Link from 'next/link';
-import {  useStaffRequestContext } from '@/app/admin/staff-request/page';
 import ImageModal from '../imageModal/ImageModal';
 import Image from 'next/image';
 import ActionModal from '../actionModal/ActionModal';
 import ActionUpdateModal from '../actionModal/ActionUpdateModal';
 import PopUp from '../PopUp/PopUp';
+import { useStaffRequestContext } from '../adminPages/StaffReqquestPage';
 const StaffRequest = () => {
     const [activeTab, setActiveTab] = useState("delete")
     const { helper, deleteReqData, updateReqData } = useStaffRequestContext()

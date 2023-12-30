@@ -7,9 +7,10 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import HomeBannerEdit from '../homeBannerEdit/HomeBannerEdit';
 import HomeBannerAdd from '../homeBannerAdd/HomeBannerAdd';
-import { useHomeBannerContext } from '@/app/admin/homebanner/page';
+
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useHomeBannerContext } from '../adminPages/HomeBannerPage';
 const HomeBanners = () => {
   const { bannerData, helper } = useHomeBannerContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })

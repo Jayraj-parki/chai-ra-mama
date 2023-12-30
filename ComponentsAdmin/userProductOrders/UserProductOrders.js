@@ -9,8 +9,8 @@ import StartIcon from '@mui/icons-material/Start';
 import Image from "next/image";
 import { sendOrderOTP } from '@/services/sendOrderOTP';
 import { verifyOtpAndDeliver } from '@/services/verifyOtpAndDeliver';
-import { useUserProductOrdersContext } from '@/app/admin/user-product-orders/page';
 import { updateUserOrderStatus } from '@/services/updateUserOrderStatus';
+import { useUserProductOrdersContext } from '../adminPages/UserProductOrdersPage';
 
 const UserProductOrders = () => {
     const [activeTab, setActiveTab] = useState("new orders")

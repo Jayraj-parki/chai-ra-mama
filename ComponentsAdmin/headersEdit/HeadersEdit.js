@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 import style from "./headersEdit.module.scss"
 import Image from 'next/image';
-import { useHeaderContext } from '@/app/admin/page-headers/page';
 import { updateHeaderData } from '@/services/updateHeaderData';
 import PopUp from '../PopUp/PopUp';
+import { useHeaderContext } from '../adminPages/PageHeaderPage';
 
 const HeadersEdit = ({ editData, setEditData }) => {
   const { helper } = useHeaderContext()
@@ -53,12 +53,12 @@ const HeadersEdit = ({ editData, setEditData }) => {
                   <div className=''>
                     <div className={" mb-4 "}>
                       <label className="form-label">Header Name</label>
-                      <input   autoComplete="off"    disabled={true} value={headerTitle} name="headerName" type="text" className="form-control" placeholder='write something here' />
+                      <input   autoComplete="off"    disabled={true} value={headerTitle} name="headerName" type="text" className="form-control shadow-none" placeholder='write something here' />
                     </div>
                     <div className="mb-4">
                       <label className="form-label">Edit Image</label>
                       <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof headerImage === "string" && headerImage?.includes("http") ? headerImage : headerImage != null && headerImage instanceof File ? URL.createObjectURL(headerImage) : "/assets/images/1.png"} hidden={headerImage ? false : true} alt="..." />
-                      <input   autoComplete="off"    onChange={(e) => setHeaderImage(e.target?.files[0])} ref={imageRef}  type="file" accept="image/*" className="form-control" />
+                      <input   autoComplete="off"    onChange={(e) => setHeaderImage(e.target?.files[0])} ref={imageRef}  type="file" accept="image/*" className="form-control shadow-none" />
                     </div>
                     <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">update</button>
                   </div>

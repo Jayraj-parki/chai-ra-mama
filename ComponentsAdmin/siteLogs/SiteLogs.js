@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import style from "./siteLogs.module.scss"
 import LoginIcon from '@mui/icons-material/Login';
 import Link from 'next/link';
-import { useUserLogContext } from '@/app/admin/site-logs/page';
+import { useUserLogContext } from '../adminPages/SiteLogsPage';
 const SiteLogs = () => {
   const { logs, helper } = useUserLogContext()
   useEffect(() => {

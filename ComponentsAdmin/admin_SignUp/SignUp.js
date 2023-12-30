@@ -1,9 +1,10 @@
 "use client"
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from "./signUp.module.scss"
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/layout';
 import { adminSignUp } from '@/services/adminSignUp';
+import PopUp from '../PopUp/PopUp';
 const SignUp = () => {
     const firstNameRef = useRef(null);
     const lastNameRef = useRef(null);
@@ -12,7 +13,8 @@ const SignUp = () => {
     const confirmPasswordRef = useRef(null);
     const { adminCred } = useAuth()
     const router = useRouter()
-
+    const [alert,setAlert]=useState({modalActive:false,workStatus:"",message:""})
+    
     const handleSignup = async (e) => {
         e.preventDefault()
         const firstName = firstNameRef.current.value.trim()
@@ -20,13 +22,16 @@ const SignUp = () => {
         const email = emailRef.current.value.trim()
         const password = passwordRef.current.value.trim()
         const confirmPassword = confirmPasswordRef.current.value.trim()
-        await adminSignUp({ firstName, lastName, email, password, confirmPassword })
+        const response=await adminSignUp({ firstName, lastName, email, password, confirmPassword,setAlert })
         firstNameRef.current.value = null
         lastNameRef.current.value = null
         emailRef.current.value = null
         passwordRef.current.value = null
         confirmPasswordRef.current.value = null
-        router.push("/auth/signin")
+        if (response) router.push("/auth/signin")
+        setTimeout(()=>{
+            setAlert({modalActive:false,workStatus:"",message:""})
+        },2000)
 
     }
 
@@ -38,6 +43,8 @@ const SignUp = () => {
     return (
         <>
             <div className={style.signUp + ' container-fluid m-0 my-5 p-0 py-5'}>
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message}/>
+               
                 <h1 className={style.heading + " col-sm-4 p-2 mx-auto border-bottom text-center mb-2 text-justify"}><span className={style.text_blue}>Sign</span> <span className={style.text_orange}>Up</span></h1>
 
                 <div className={style.container + ' row col-11 col-sm-12 col-xl-10 p-3 flex-wrap mx-auto d-flex justify-content-between align-content-center'}>

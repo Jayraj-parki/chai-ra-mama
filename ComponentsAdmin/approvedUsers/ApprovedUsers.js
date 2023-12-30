@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import style from "./approvedUsers.module.scss"
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import Link from 'next/link';
-import { useApprovedUserContext } from '@/app/admin/approved-users/page';
+import { useApprovedUserContext } from '../adminPages/ApprovedUsersPage';
 
 const ApprovedUsers = () => {
-  const { approvedUser, helper } = useApprovedUserContext()
+  const { approvedUser, helper } = useApprovedUserContext ()
   useEffect(() => {
     helper()
   }, [])

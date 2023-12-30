@@ -1,6 +1,6 @@
 "use client"
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
-import { useDashboardContext } from '@/app/dashboard/page';
+import { useDashboardContext } from '@/components/dashboard/Dashboard';
 import { updateUserProfile } from '@/services/localUser/updateUserProfile';
 import React, { useEffect, useState } from 'react';
 

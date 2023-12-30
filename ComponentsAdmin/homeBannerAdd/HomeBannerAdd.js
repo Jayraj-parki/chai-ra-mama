@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import style from "./homeBannerAdd.module.scss"
 import Image from 'next/image';
-import { useHomeBannerContext } from "@/app/admin/homebanner/page";
 import { AddHomeBanner } from "@/services/AddHomeBanner";
 import PopUp from "../PopUp/PopUp";
+import { useHomeBannerContext } from "../adminPages/HomeBannerPage";
 const HomeBannerAdd = ({ addData, setAddData }) => {
   const { helper } = useHomeBannerContext()
   const [bannerImage, setBannerImage] = useState("");
@@ -45,7 +45,7 @@ const HomeBannerAdd = ({ addData, setAddData }) => {
                       <div className="mb-4">
                         <label className="form-label">Add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof bannerImage === "string" && bannerImage?.includes("http") ? bannerImage : bannerImage != null && bannerImage instanceof File ? URL.createObjectURL(bannerImage) : "/assets/images/1.png"} hidden={bannerImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setBannerImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input  autoComplete="off"  onChange={(e) => setBannerImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

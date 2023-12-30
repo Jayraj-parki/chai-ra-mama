@@ -7,9 +7,9 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import SubMenuEdit from '../subMenuEdit/SubMenuEdit';
 import SubMenuAdd from '../subMenuAdd/subMenuAdd';
-import { useSubMenuContext } from '@/app/admin/menu/submenu/[id]/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useSubMenuContext } from '../adminPages/SubMenuPage';
 const SubMenu = () => {
   const { subMenuData, helper } = useSubMenuContext()
   const [modal, setModal] = useState({ active: false, image: "" })

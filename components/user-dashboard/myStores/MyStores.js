@@ -7,9 +7,10 @@ import { Button } from '@mui/material';
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
 import { useAuth } from '@/app/layout';
 import { getDataService } from '@/services/getDataService';
-import { useDashboardContext } from '@/app/dashboard/page';
+
 import { SendRequestForStoreIncharge } from '@/services/SendRequestForStoreIncharge';
 import { getAssignedStores } from '@/services/getAssignedStores';
+import { useDashboardContext } from '@/components/dashboard/Dashboard';
 
 const MyStores = () => {
   const { userCred } = useAuth()

@@ -6,11 +6,9 @@ import { formats, modules } from "@/utils/ReactTextEditor";
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
-import { useCmsData } from "@/app/admin/cmspages/page";
-import { storage } from "@/firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
-import { v4 } from "uuid"
+
 import PopUp from "../PopUp/PopUp";
+import { useCmsData } from "../adminPages/CmsPagesListPage";
 const CmsAdd = ({ addData, setAddData }) => {
   const { data } = useCmsData()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
@@ -45,7 +43,7 @@ const CmsAdd = ({ addData, setAddData }) => {
                     <div>
                       <div className="mb-4">
                         <label className="form-label">Select Cms Id</label>
-                        <select class="form-select" value={cmsId} onChange={(e) => setCmsId(e.target.value)} aria-label="Default select example">
+                        <select class="form-select shadow-none" value={cmsId} onChange={(e) => setCmsId(e.target.value)} aria-label="Default select example">
                           {
                             data?.map((val) => val?.status == "None" ? <option key={val?._id} value={val?.cmsId}>{val?.cmsId}</option> : null)
                           }
@@ -53,12 +51,12 @@ const CmsAdd = ({ addData, setAddData }) => {
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Heading</label>
-                        <input  autoComplete="off"  onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control" placeholder='write something here' />
+                        <input  autoComplete="off"  onChange={(e) => setCmsHeading(e.target.value)} value={cmsHeading} name="cmsHeading" type="text" className="form-control shadow-none" placeholder='write something here' />
                       </div>
                       <div className="mb-4">
                         <label className="form-label">Upload Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={cmsImage != null ? URL.createObjectURL(cmsImage) : "/assets/images/1.png"} hidden={cmsImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control" id="editImage" />
+                        <input  autoComplete="off"  type="file" onChange={(e) => setCmsImage(e.target.files[0])} accept="image/*" className="form-control shadow-none" id="editImage" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Content</label>

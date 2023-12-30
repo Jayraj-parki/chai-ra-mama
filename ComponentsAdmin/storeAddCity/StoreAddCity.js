@@ -2,13 +2,13 @@
 import { AddStoreCityData } from "@/services/AddStoreCityData";
 import style from "./storeAddCity.module.scss"
 import { useEffect, useState } from "react";
-import { useStoreLocatorContext } from "@/app/admin/store/page";
 import PopUp from "../PopUp/PopUp";
+import { useStoreLocatorContext } from "../adminPages/StorePage";
 
 const StoreAddCity = ({ addData, setAddData }) => {
   const { storeCityData, helper } = useStoreLocatorContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
-  const [storeCity, setStoreCity] = useState()
+  const [storeCity, setStoreCity] = useState("")
   const AddData = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
     await AddStoreCityData({ storeCity, helper, setAddData, clearForm ,setAlert})
@@ -42,7 +42,7 @@ const StoreAddCity = ({ addData, setAddData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">City Name</label>
-                        <input  autoComplete="off"  value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control" placeholder='Write city name here' />
+                        <input  autoComplete="off"  value={storeCity} onChange={(e) => setStoreCity(e.target?.value)} name="city" type="text" className="form-control shadow-none" placeholder='Write city name here' />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

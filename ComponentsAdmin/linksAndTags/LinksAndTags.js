@@ -4,10 +4,12 @@ import style from "./linksAndTags.module.scss"
 import Link from 'next/link';
 import LinkIcon from '@mui/icons-material/Link';
 import TagIcon from '@mui/icons-material/Tag';
-import { useLinkAndTagContext } from '@/app/admin/links-and-tags/page';
 import { updateLinkTagData } from '@/services/updateLinkTagData';
 import PopUp from '../PopUp/PopUp';
+import { useAuth } from '@/app/layout';
+import { useLinkAndTagContext } from '../adminPages/LinkAndTagsPage';
 const LinksAndTags = () => {
+  const { isAdminAuthorized } = useAuth()
   const { linkTagData, helper } = useLinkAndTagContext()
   const [facebook, setFacebook] = useState(linkTagData?.facebook)
   const [instagram, setInstagram] = useState(linkTagData?.instagram)
@@ -54,22 +56,22 @@ const LinksAndTags = () => {
               <tbody>
                 <tr className=''>
                   <td className='align-middle' >Facebook</td>
-                  <td className='align-middle' ><input value={facebook} onChange={(e) => setFacebook(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='facebook link here' />
+                  <td className='align-middle' >< input disabled={!isAdminAuthorized} value={facebook} onChange={(e) => setFacebook(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='facebook link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >instagram</td>
-                  <td className='align-middle' ><input value={instagram} onChange={(e) => setInstagram(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='instagram link here' />
+                  <td className='align-middle' >< input disabled={!isAdminAuthorized} value={instagram} onChange={(e) => setInstagram(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='instagram link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >youtube</td>
-                  <td className='align-middle' ><input value={youtube} onChange={(e) => setYoutube(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='youtube link here' />
+                  <td className='align-middle' >< input disabled={!isAdminAuthorized} value={youtube} onChange={(e) => setYoutube(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='youtube link here' />
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >whatsapp</td>
-                  <td className='align-middle' ><input value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control" placeholder='whatsapp link here' />
+                  <td className='align-middle' >< input disabled={!isAdminAuthorized} value={whatsapp} onChange={(e) => setWhatsapp(e.target.value)}  autoComplete="off"  name="" type="text" className="form-control shadow-none" placeholder='whatsapp link here' />
                   </td>
                 </tr>
 
@@ -90,24 +92,24 @@ const LinksAndTags = () => {
               <tbody>
                 <tr className=''>
                   <td className='align-middle' >Meta Title tag</td>
-                  <td className='align-middle' ><textarea value={metaTitleTag} onChange={(e) => setMetaTitleTag(e.target.value)} name="" type="text" className="form-control" placeholder='metaTag value here' ></textarea>
+                  <td className='align-middle' ><textarea disabled={!isAdminAuthorized}  value={metaTitleTag} onChange={(e) => setMetaTitleTag(e.target.value)} name="" type="text" className="form-control shadow-none" placeholder='metaTag value here' ></textarea>
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >meta keywords</td>
-                  <td className='align-middle' ><textarea value={metaKeyword} onChange={(e) => setMetaKeyword(e.target.value)} name="" type="text" className="form-control" placeholder='metaKeyword value here'  ></textarea>
+                  <td className='align-middle' ><textarea disabled={!isAdminAuthorized}  value={metaKeyword} onChange={(e) => setMetaKeyword(e.target.value)} name="" type="text" className="form-control shadow-none" placeholder='metaKeyword value here'  ></textarea>
                   </td>
                 </tr>
                 <tr className=''>
                   <td className='align-middle' >meta description</td>
-                  <td className='align-middle' ><textarea value={metaDesc} onChange={(e) => setMetaDesc(e.target.value)} name="" type="text" className="form-control" placeholder='metaDescription value here'  ></textarea>
+                  <td className='align-middle' ><textarea disabled={!isAdminAuthorized}  value={metaDesc} onChange={(e) => setMetaDesc(e.target.value)} name="" type="text" className="form-control shadow-none" placeholder='metaDescription value here'  ></textarea>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div className='col-12'>
-            <button onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
+            <button disabled={!isAdminAuthorized}  onClick={updateData} type="submit" className="btn btn-primary d-flex col-auto px-4 py-2 mx-auto text-center justify-content-center text-capitalize">Save</button>
           </div>
         </div>
       </div>

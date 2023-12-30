@@ -1,17 +1,8 @@
-"use client"
-import { useEffect } from "react";
-import { useAuth } from '@/app/layout';
-import { useRouter } from "next/navigation"
-import LocalSignUp from "@/components/LocalSignUp/LocalSignUp";
-const page = () => {
-  // const { adminCred } = useAuth()
-  // const router = useRouter()
 
-  // useEffect(() => {
-  //   if (adminCred) {
-  //     router.push('/admin/home');
-  //   }
-  // }, [adminCred,router])
+import LocalSignUp from "@/components/LocalSignUp/LocalSignUp";
+import { getMetaTagValues } from "@/services/getMetaTagValues";
+const page = () => {
+
   return (
     <>
       <LocalSignUp/>
@@ -19,5 +10,13 @@ const page = () => {
 
   )
 }
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("SignUp")
+  return {
+    title: data?.metaTitle || 'Sign Up',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
 
+  }
+}
 export default page

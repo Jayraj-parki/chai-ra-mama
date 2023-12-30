@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from 'react'
 import style from "./storeInchargeAdd.module.scss"
-import { useStoreInchargeData } from '@/app/admin/store-incharge/page';
 import { AddStoreIncharge } from '@/services/AddStoreIncharge';
 import PopUp from '../PopUp/PopUp';
+import { useStoreInchargeData } from '../adminPages/StoreInchargePage';
 
 const StoreInchargeAdd = ({ addData, setAddData }) => {
   const { storeCity, storeDetails, helper } = useStoreInchargeData()

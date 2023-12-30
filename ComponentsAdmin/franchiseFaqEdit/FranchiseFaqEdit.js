@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { usefaqContext } from "@/app/admin/franchise-faq/page";
 import { updateFaqData } from "@/services/updateFaqData";
 import PopUp from "../PopUp/PopUp";
+import { usefaqContext } from "../adminPages/FranchiseFaqPage";
 
 const FranchiseFaqEdit = ({ editData, setEditData }) => {
   const { helper } = usefaqContext()

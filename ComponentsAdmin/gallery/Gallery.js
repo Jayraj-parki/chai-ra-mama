@@ -7,9 +7,9 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import GalleryEdit from '../galleryEdit/GalleryEdit';
 import GalleryAdd from '../galleryAdd/GalleryAdd';
-import { useGalleryData } from '@/app/admin/gallery/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useGalleryData } from '../adminPages/GalleryPage';
 const Gallery = () => {
   const { data, helper } = useGalleryData()
   const [modal, setModal] = useState({ active: false, image: "" })

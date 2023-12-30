@@ -36,9 +36,9 @@ const LocalSignUp = () => {
 
     return (
         <>
-            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
-
+ 
             <div className={style.signUp + ' container-fluid m-0 my-5 p-0 py-5'}>
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
                 <h1 className={style.heading + " col-sm-4 p-2 mx-auto border-bottom text-center mb-2 text-justify"}><span className={style.text_blue}>Sign</span> <span className={style.text_orange}>Up</span></h1>
                 <div className={style.container + ' row col-11 col-sm-12 col-xl-10 p-3 flex-wrap mx-auto d-flex justify-content-between align-content-center'}>
                     <div className="row col-12 shadow rounded-3 col-sm-10 col-md-6 py-3 mx-auto  mt-md-0 p-0 d-flex justify-content-center">

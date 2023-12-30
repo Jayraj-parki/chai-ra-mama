@@ -1,10 +1,10 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import style from "./subMenuEdit.module.scss"
-import { useSubMenuContext } from "@/app/admin/menu/submenu/[id]/page";
 import { updateSubMenuData } from "@/services/updateSubMenuData";
 import Image from "next/image"
 import PopUp from "../PopUp/PopUp";
+import { useSubMenuContext } from "../adminPages/SubMenuPage";
 
 const SubMenuEdit = ({ editData, setEditData }) => {
   const { helper } = useSubMenuContext()

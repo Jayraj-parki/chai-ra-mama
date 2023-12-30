@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 import style from "./siteEnquiry.module.scss"
 import InfoIcon from '@mui/icons-material/Info'
 import Link from 'next/link';
-import { useSiteEnquiryContext } from '@/app/admin/site-enquiries/page';
+import { useSiteEnquiryContext } from '../adminPages/SiteEnquiriesPage';
 const SiteEnquiry = () => {
   const { siteEnqData, helper } = useSiteEnquiryContext()
-
   useEffect(() => {
     helper()
   }, [])

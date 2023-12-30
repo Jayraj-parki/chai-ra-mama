@@ -1,10 +1,11 @@
+"use client"
 import React, { useEffect, useState } from 'react'
 import style from "./clientApproval.module.scss"
 import Link from 'next/link';
 import PopUp from '../PopUp/PopUp';
-import { useClientApprovalContext } from '@/app/admin/client-approval/page';
 import { updateClientApprovalStatus } from '@/services/updateClientApprovalStatus';
-const ClientApproval = () => {
+import { useClientApprovalContext } from '../adminPages/ClientApprovalPage';
+const   ClientApproval = () => {
     const [activeTab, setActiveTab] = useState("pending request")
     const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
     const { helper, clientApproval } = useClientApprovalContext()

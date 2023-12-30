@@ -2,9 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 import style from "./homeBannerEdit.module.scss"
 import Image from 'next/image';
-import { useHomeBannerContext } from '@/app/admin/homebanner/page';
 import { updateBannerImage } from '@/services/updateBannerImage';
 import PopUp from '../PopUp/PopUp';
+import { useHomeBannerContext } from '../adminPages/HomeBannerPage';
 const HomeBannerEdit = ({ editData, setEditData }) => {
   const { helper } = useHomeBannerContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
@@ -47,7 +47,7 @@ const HomeBannerEdit = ({ editData, setEditData }) => {
                       <div className="mb-4">
                         <label for="editImage2" className="form-label">Edit Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof bannerImage === "string" && bannerImage?.includes("http") ? bannerImage : bannerImage != null && bannerImage instanceof File ? URL.createObjectURL(bannerImage) : "/assets/images/1.png"} hidden={bannerImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setBannerImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" id="editImage2" />
+                        <input  autoComplete="off"  onChange={(e) => setBannerImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" id="editImage2" />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

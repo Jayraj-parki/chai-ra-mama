@@ -1,9 +1,9 @@
 "use client"
 import { useEffect, useState } from "react";
 import style from "./pagewiseSeoTagsEdit.module.scss"
-import { usePageTagContext } from "@/app/admin/pagewise-tags/page";
 import { updatePagewiseTags } from "@/services/updatePagewiseTags";
 import PopUp from "../PopUp/PopUp";
+import { usePageTagContext } from "../adminPages/PagewiseTagsPage";
 
 const PagewiseSeoTagsEdit = ({ editData, setEditData }) => {
 

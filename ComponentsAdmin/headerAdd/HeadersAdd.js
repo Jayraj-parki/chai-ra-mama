@@ -32,13 +32,13 @@ const HeadersAdd = ({ addData, setAddData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">Header Name</label>
-                        <input  autoComplete="off"  value={headerName} onChange={(e) => setHeaderName(e.target?.value)} name="headerName" type="text" className="form-control" placeholder='write something here' />
+                        <input  autoComplete="off"  value={headerName} onChange={(e) => setHeaderName(e.target?.value)} name="headerName" type="text" className="form-control shadow-none" placeholder='write something here' />
 
                       </div>
                       <div className="mb-4 ">
                         <label for="editImage" className="form-label">Upload Header Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={"/assets/images/1.png"} alt="..." />
-                        <input  autoComplete="off"  type="file" accept="image/*" className="form-control" id="editImage" />
+                        <input  autoComplete="off"  type="file" accept="image/*" className="form-control shadow-none" id="editImage" />
                       </div>
                       <button type="submit" className="btn btn-primary d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">submit</button>
                     </div>

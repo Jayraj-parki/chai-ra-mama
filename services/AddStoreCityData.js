@@ -23,5 +23,7 @@ export const AddStoreCityData = async ({ storeCity ,helper,setAddData,clearForm,
     }
     catch (err) {
         console.log("STORE CITY ERROR: " + err)
+        setAlert({ modalActive: true, workStatus: "failed", message: "Opps! Something went wrong" })
+        
     }
 }

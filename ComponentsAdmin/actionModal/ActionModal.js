@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import style from "./actionModal.module.scss"
 import { deleteForceActionData } from '@/services/deleteForceActionData'
-import {  useStaffRequestContext } from '@/app/admin/staff-request/page'
 import PopUp from '../PopUp/PopUp'
+import { useStaffRequestContext } from '../adminPages/StaffReqquestPage'
 const ActionModal = ({ actionModal, setActionModal }) => {
     const { helper } = useStaffRequestContext()
     const [clientKey, setClientKey] = useState()

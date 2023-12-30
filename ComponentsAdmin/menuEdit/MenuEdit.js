@@ -6,9 +6,9 @@ import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { formats, modules } from "@/utils/ReactTextEditor";
-import { useMenuContext } from "@/app/admin/menu/page";
 import { updateMenuData } from "@/services/updateMenuData";
 import PopUp from "../PopUp/PopUp";
+import { useMenuContext } from "../adminPages/MenuPage";
 
 const MenuEdit = ({ editData, setEditData }) => {
   const { menuData, helper } = useMenuContext()
@@ -59,7 +59,7 @@ const MenuEdit = ({ editData, setEditData }) => {
                     <div className=''>
                       <div className="mb-4">
                         <label className="form-label text-capitalize">Choose an existing title or enter a new one</label>
-                        <select class="form-select" value={products.includes(menuName) ? menuName : ""} onChange={(e) => setMenuName(e.target?.value)}>
+                        <select class="form-select shadow-none" value={products.includes(menuName) ? menuName : ""} onChange={(e) => setMenuName(e.target?.value)}>
                           <option value="" disabled selected>Select Existing Title</option>
                           {
                             products?.map((val, index) => {
@@ -71,12 +71,12 @@ const MenuEdit = ({ editData, setEditData }) => {
                         </select>
                       </div>
                       <div className={" mb-4 "}>
-                        <input  autoComplete="off"  value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuHeading" type="text" className="form-control" placeholder='write something here' />
+                        <input  autoComplete="off"  value={menuName} onChange={(e) => setMenuName(e.target?.value?.toUpperCase())} name="menuHeading" type="text" className="form-control shadow-none" placeholder='write something here' />
                       </div>
                       <div className="mb-4 ">
                         <label className="form-label text-capitalize">add Image</label>
                         <Image className={style.image + " rounded w-100 h-100 mb-4"} width={250} height={200} objectFit="cover" src={typeof menuImage === "string" && menuImage?.includes("http") ? menuImage : menuImage != null && menuImage instanceof File ? URL.createObjectURL(menuImage) : "/assets/images/1.png"} hidden={menuImage ? false : true} alt="..." />
-                        <input  autoComplete="off"  onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control" />
+                        <input  autoComplete="off"  onChange={(e) => setMenuImage(e.target?.files[0])} ref={imageRef} type="file" accept="image/*" className="form-control shadow-none" />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Content</label>

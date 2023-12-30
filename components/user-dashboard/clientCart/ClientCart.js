@@ -13,7 +13,8 @@ import { getClientCartProduct } from '@/services/localUser/getClientCartProduct'
 import { saveClientCheckoutData } from '@/services/localUser/saveClientCheckoutData';
 import { getAssignedStores } from '@/services/getAssignedStores';
 import PopUp from '@/ComponentsAdmin/PopUp/PopUp';
-import { useClientProfileContext } from '@/app/client-product/page';
+import { useClientProfileContext } from '@/components/clientProduct/ClientProduct';
+
 const ClientCart = () => {
     const { userProfileData } = useClientProfileContext()
     const { getCountOfAddedClientCart, userCred } = useAuth()

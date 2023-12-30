@@ -1,17 +1,17 @@
 "use client"
-import { useStoreContext } from "@/app/admin/store/add-store/[id]/page";
 import style from "./addStore.module.scss"
 
 import { useEffect, useState } from "react";
 import { AddStoreData } from "@/services/AddStoreData";
 import PopUp from "../PopUp/PopUp";
+import { useStoreContext } from "../adminPages/AddStorePage";
 
 const AddStore = ({ addData, setAddData }) => {
   const { pId, helper } = useStoreContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
-  const [storeAddress, setStoreAddress] = useState()
-  const [storePhone, setStorePhone] = useState()
-  const [storeMap, setStoreMap] = useState()
+  const [storeAddress, setStoreAddress] = useState("")
+  const [storePhone, setStorePhone] = useState("")
+  const [storeMap, setStoreMap] = useState("")
   const AddData = async () => {
     setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
     await AddStoreData({ parentId: pId, storeAddress, storeMap, storePhone, helper, setAddData, clearForm ,setAlert})
@@ -47,15 +47,15 @@ const AddStore = ({ addData, setAddData }) => {
                     <div className=''>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Address</label>
-                        <input  autoComplete="off"  value={storeAddress} onChange={(e) => setStoreAddress(e.target?.value)} name="storeHeading" type="text" className="form-control" placeholder='write address here' />
+                        <input  autoComplete="off"  value={storeAddress} onChange={(e) => setStoreAddress(e.target?.value)} name="storeHeading" type="text" className="form-control shadow-none" placeholder='write address here' />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Contact Number</label>
-                        <input  autoComplete="off"  value={storePhone} onChange={(e) => setStorePhone(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write phone number here' />
+                        <input  autoComplete="off"  value={storePhone} onChange={(e) => setStorePhone(e.target?.value)} name="storeContact" type="text" className="form-control shadow-none" placeholder='write phone number here' />
                       </div>
                       <div className={" mb-4 "}>
                         <label className="form-label">Store Map Link</label>
-                        <input  autoComplete="off"  value={storeMap} onChange={(e) => setStoreMap(e.target?.value)} name="storeContact" type="text" className="form-control" placeholder='write map link here' />
+                        <input  autoComplete="off"  value={storeMap} onChange={(e) => setStoreMap(e.target?.value)} name="storeContact" type="text" className="form-control shadow-none" placeholder='write map link here' />
                       </div>
                       <div className='row col-12 '>
                         <button onClick={clearForm} type="reset" className="btn btn-dark d-flex col-auto px-4 ms-auto text-center justify-content-center text-capitalize">reset</button>

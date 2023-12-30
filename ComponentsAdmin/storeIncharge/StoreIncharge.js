@@ -4,11 +4,12 @@ import style from "./storeIncharge.module.scss"
 import Link from 'next/link';
 import { DeleteDataService } from '@/services/deleteData';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
-import { useStoreInchargeData } from '@/app/admin/store-incharge/page';
+
 import StoreInchargeAdd from '../StoreInchargeAdd/StoreInchargeAdd';
 import { Button } from '@mui/material';
 import StoreInchargeEdit from '../StoreInchargeEdit/StoreInchargeEdit';
 import PopUp from '../PopUp/PopUp';
+import { useStoreInchargeData } from '../adminPages/StoreInchargePage';
 
 const StoreIncharge = () => {
   const [modal, setModal] = useState({ active: false, storeAdd: "", storeContact: "", storeMap: "" })
@@ -42,7 +43,6 @@ const StoreIncharge = () => {
         <hr />
 
         <StoreInchargeEdit editData={editData} setEditData={setEditData} />
-
         <StoreInchargeAdd addData={addData} setAddData={setAddData} />
 
         <div className={style.tableContainer + ' row col-12 mx-auto mt-5'}>

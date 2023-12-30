@@ -7,9 +7,9 @@ import Link from 'next/link';
 import ImageModal from '../imageModal/ImageModal';
 import MenuEdit from '../menuEdit/MenuEdit';
 import MenuAdd from '../menuAdd/MenuAdd';
-import { useMenuContext } from '@/app/admin/menu/page';
 import { DeleteDataService } from '@/services/deleteData';
 import PopUp from '../PopUp/PopUp';
+import { useMenuContext } from '../adminPages/MenuPage';
 const Menu = () => {
   const { menuData, helper } = useMenuContext()
   const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
