@@ -45,21 +45,21 @@ const UserFooter = () => {
                         <div className={style.company + " col-sm-6  col-lg-4 p-0 mt-0 px-2 mb-3"}>
                             <h1 className="m-0 p-0 h3 fw-bold text-center text-sm-start">Company</h1>
                             <ul className="m-0 mt-4 px-3 mx-auto text-center text-sm-start">
-                                <li className="my-2 p-0"><Link href="#">FAQs</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Contact Us</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Disclaimer</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Privacy Policy</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Terms and Conditions</Link></li>
-                                <li><Link href="#">Site Map</Link></li>
+                                <li className="my-2 p-0"><Link href="/franchise">FAQs</Link></li>
+                                <li className="my-2 p-0"><Link href="/contactus">Contact Us</Link></li>
+                                <li className="my-2 p-0"><Link href="/">Disclaimer</Link></li>
+                                <li className="my-2 p-0"><Link href="/">Privacy Policy</Link></li>
+                                <li className="my-2 p-0"><Link href="/">Terms and Conditions</Link></li>
+                                <li><button className="outline-none shadow-none bg-transparent border-0 p-0 text-light" onClick={() => window.open(siteUIData?.siteMap || "", "_blank")}>Site Map</button></li>
                             </ul>
                         </div>
                         <div className={style.quickLink + "  col-sm-6  col-lg-4 p-0 mt-5 mt-sm-0 px-2 "}>
                             <h1 className="m-0 p-0 h3 fw-bold text-center text-sm-start">Quick Links</h1>
                             <ul className="m-0 mt-4 px-3 mx-auto text-center text-sm-start">
-                                <li className="my-2 p-0"><Link href="#">About Us</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Menu</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Gallery</Link></li>
-                                <li className="my-2 p-0"><Link href="#">Contact Us</Link></li>
+                                <li className="my-2 p-0"><Link href="/aboutUs">About Us</Link></li>
+                                <li className="my-2 p-0"><Link href="/menu">Menu</Link></li>
+                                <li className="my-2 p-0"><Link href="/gallery">Gallery</Link></li>
+                                <li className="my-2 p-0"><Link href="/contactus">Contact Us</Link></li>
 
                             </ul>
                         </div>
