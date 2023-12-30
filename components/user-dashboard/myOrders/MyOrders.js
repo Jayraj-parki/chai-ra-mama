@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import style from "./myOrders.module.scss"
 import Image from "next/image"
 import StartIcon from '@mui/icons-material/Start';
+import PaymentIcon from '@mui/icons-material/Payment';
+import SellIcon from '@mui/icons-material/Sell';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Button } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { getPurchasedCart } from '@/services/localUser/getPurchasedCart';
@@ -10,9 +13,7 @@ import { useAuth } from '@/app/layout';
 const MyOrders = () => {
     const { userCred } = useAuth()
     const [purchasedProduct, setPurchaseProduct] = useState()
-    const fetchLatestData = async () => {
-        await getPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
-    }
+    const fetchLatestData = async () => await getPurchasedCart({ userCred, setData: setPurchaseProduct, status: "processing" })
     useEffect(() => {
         fetchLatestData()
     }, [userCred])
@@ -75,24 +76,16 @@ const MyOrders = () => {
                                         <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Start</p><small className='col-12 text-center text-capitalize '>{val?.start?.status ? "Completed" : ""}</small></div>
                                     </div>
                                     <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                                        <div className={style.statusIcon + ` ${!val?.payment?.status && style.activeStatus}  ${!val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusIcon + ` ${!val?.payment?.status && style.activeStatus}  ${!val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><PaymentIcon className={style.icon + ' p-0'} /></div>
                                         <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>payment</p><small className='col-12 text-center text-capitalize '>{val?.payment?.status ? "Completed" : ""}</small></div>
                                     </div>
                                     <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                                        <div className={style.statusIcon + ` ${!val?.orderPlaced?.status && style.activeStatus}  ${!val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusIcon + ` ${!val?.orderPlaced?.status && style.activeStatus}  ${!val?.payment?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><SellIcon className={style.icon + ' p-0'} /></div>
                                         <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Order Placed</p><small className='col-12 text-center text-capitalize '>{val?.orderPlaced?.status ? "Completed" : val?.payment?.status ? "processing" : ""}</small></div>
                                     </div>
                                     <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                                        <div className={style.statusIcon + ` ${!val?.packing?.status && style.activeStatus}  ${!val?.orderPlaced?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
-                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Packing</p><small className='col-12 text-center text-capitalize '>{val?.packing?.status ? "Completed" : val?.orderPlaced?.status ? "processing" : ""}</small></div>
-                                    </div>
-                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                                        <div className={style.statusIcon + ` ${!val?.shipping?.status && style.activeStatus}  ${!val?.packing?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
-                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Shipping</p><small className='col-12 text-center text-capitalize '>{val?.shipping?.status ? "Completed" : val?.packing?.status ? "processing" : ""}</small></div>
-                                    </div>
-                                    <div className=' col-4 col-md-2 d-flex justify-content-start flex-column align-items-center '>
-                                        <div className={style.statusIcon + ` ${!val?.delivered?.status && style.activeStatus}  ${!val?.shipping?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><StartIcon className={style.icon + ' p-0'} /></div>
-                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Delivered</p><small className='col-12 text-center text-capitalize '>{val?.delivered?.status ? "Completed" : val?.shipping?.status ? "processing" : ""}</small></div>
+                                        <div className={style.statusIcon + ` ${!val?.delivered?.status && style.activeStatus}  ${!val?.orderPlaced?.status && style.reqStatus} text-center rounded-pill   d-flex justify-content-center align-items-center `}><LocalShippingIcon className={style.icon + ' p-0'} /></div>
+                                        <div className={style.statusText + ' text-center'}><p className='col-12 text-center m-0  text-capitalize pb-0 '>Delivered</p><small className='col-12 text-center text-capitalize '>{val?.delivered?.status ? "Completed" : val?.orderPlaced?.status ? "processing" : ""}</small></div>
                                     </div>
                                 </div>
                             </div >

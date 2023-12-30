@@ -3,13 +3,13 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateSubMenuData = async ({_id, itemPrice,itemName,itemImage,helper,setEditData,clearForm}) => {
+export const updateSubMenuData = async ({_id, itemPrice,itemName,itemImage,helper,setEditData,clearForm,setAlert}) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         
         if (itemPrice.trim() == ""|| itemImage==""|| itemName.trim()=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             let url = ""
@@ -37,8 +37,8 @@ export const updateSubMenuData = async ({_id, itemPrice,itemName,itemImage,helpe
                 })
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+            // helper()
             clearForm()
             setEditData({ active: false, _id: "", title: "", image: "",price:"" })
         }

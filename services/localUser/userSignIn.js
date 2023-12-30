@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
-export const userSignIn = async ({ email, password}) => {
-    if (!email || !password) {
-        alert("please fill all input field")
+export const userSignIn = async ({ email, password,setAlert,role}) => {
+    if (!email || !password|| !role) {
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return
     }
     else {
@@ -12,7 +12,7 @@ export const userSignIn = async ({ email, password}) => {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    email, password
+                    email, password,role
                 })
             })
             const data = await result.json()
@@ -20,11 +20,11 @@ export const userSignIn = async ({ email, password}) => {
                 Cookies.set("localUserToken", data?.token, {
                     expires: 1
                 })
-                alert(data?.message)
+                setAlert({ modalActive: true, workStatus: "done", message: data?.message })
                 return data?.token
             }
             else {
-                alert(data?.message)
+                setAlert({ modalActive: true, workStatus: "done", message: data?.message })
                 return null
             }
         }

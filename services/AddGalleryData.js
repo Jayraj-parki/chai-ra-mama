@@ -1,10 +1,10 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const AddGalleryData = async ({ galleryImage, galleryTitle ,helper,setAddData,clearForm}) => {
+export const AddGalleryData = async ({ galleryImage, galleryTitle ,helper,setAddData,clearForm,setAlert}) => {
     try {
         if (galleryTitle.trim() == ""||galleryImage=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
             return
         }
         else {
@@ -30,7 +30,7 @@ export const AddGalleryData = async ({ galleryImage, galleryTitle ,helper,setAdd
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

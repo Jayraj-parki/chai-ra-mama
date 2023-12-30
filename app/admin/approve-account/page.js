@@ -1,35 +1,17 @@
-"use client"
-import ApproveAccount from '@/ComponentsAdmin/approveAccount/ApproveAccount';
-import { useAuth } from '@/app/layout';
-import { getDataService } from '@/services/getDataService';
-import { createContext, useContext, useEffect, useState } from 'react';
-const userVerificationContext = createContext()
-export const useUserVerificationContext = () => {
-  return useContext(userVerificationContext)
-}
+import ApproveAccountPage from "@/ComponentsAdmin/adminPages/ApproveAccountPage"
 
 const page = () => {
-  const { adminCred } = useAuth()
-  const [userVerification, setData] = useState()
-
-  const helper = async () => {
-    await getDataService(setData, "signUp")
-  }
-  useEffect(() => {
-    if (adminCred) helper()
-  }, [])
+  
   return (
     <>
-      {
-        adminCred &&
-        <userVerificationContext.Provider value={{userVerification,helper}}>
-          <div className='container-fluid p-lg-4  m-0'>
-            <ApproveAccount />
-          </div>
-        </userVerificationContext.Provider>
-      }
+      <ApproveAccountPage/>
     </>
   )
 }
 
+
+export const metadata = {
+  title: "Approve / Reject Accounts",
+  description: "Static Desciption"
+}
 export default page

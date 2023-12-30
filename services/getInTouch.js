@@ -1,6 +1,6 @@
 export const getInTouch = async ({ firstName, lastName, email, message ,setFirstName,setLastName,setEmail,setMessage}) => {
     if (!firstName.trim() || !lastName.trim() || !email.trim() || !message.trim()) {
-        alert("please fill all the fields correctly")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
     }
     else {
         try {
@@ -14,7 +14,7 @@ export const getInTouch = async ({ firstName, lastName, email, message ,setFirst
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             setFirstName("")
             setLastName("")
             setEmail("")

@@ -1,29 +1,23 @@
-"use client"
-import GalleryCard from '@/components/gallery_GalleryCards/GalleryCard'
-import GalleryBanner from '@/components/gallery_banner/GalleryBanner'
-import { getDataService } from '@/services/getDataService'
-import { createContext, useContext, useEffect, useState } from 'react'
+import GalleryPage from "@/components/pageComponents/GalleryPage"
+import { getMetaTagValues } from "@/services/getMetaTagValues"
 
-const galleryContext = createContext()
-export const useGalleryContext = () => {
-  return useContext(galleryContext)
-}
 const page = () => {
-  const [galleryData, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"gallery")
-  } 
-  useEffect(() => {
-    helper()
-  }, [])
   return (
     <>
-      <galleryContext.Provider value={{galleryData}}>
-        <GalleryBanner />
-        <GalleryCard />
-      </galleryContext.Provider>
+      <GalleryPage/>
     </>
   )
+}
+
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("GalleryPage")
+
+  return {
+    title: data?.metaTitle || 'Home Page',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
 }
 
 export default page

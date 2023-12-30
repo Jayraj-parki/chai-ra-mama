@@ -14,18 +14,13 @@ const Footer = () => {
     const url = usePathname()
     const [userRole, setUserRole] = useState("")
     const [socialLink, setData] = useState("")
-    const helper = async () => {
-        await getDataService(setData, "site-link-tags")
-    }
+    const helper = async () => await getDataService(setData, "site-link-tags")
     
     useEffect(() => {
-        if (url.toLowerCase().includes("admin") || url.toLowerCase().includes("auth")) {
-            setUserRole("admin")
-        }
-        else {
-            setUserRole("user")
-        }
+        if (url.toLowerCase().includes("admin") || url.toLowerCase().includes("auth")) setUserRole("admin")
+        else setUserRole("user")
     }, [url])
+    
     useEffect(() => {
         helper()
     }, [])

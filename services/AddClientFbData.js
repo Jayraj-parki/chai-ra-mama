@@ -1,11 +1,11 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const AddClientFbData = async ({clientImage, clientDesignation,clientName,clientComment,helper, clearForm, setAddData }) => {
+export const AddClientFbData = async ({clientImage, clientDesignation,clientName,clientComment,helper, clearForm, setAddData,setAlert }) => {
     try {
         let url = ""
         if (clientImage == "" || clientComment.trim()==""||clientName.trim()==""||clientDesignation.trim()=="") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
 
@@ -30,7 +30,7 @@ export const AddClientFbData = async ({clientImage, clientDesignation,clientName
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

@@ -3,14 +3,14 @@ import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, setEditData }) => {
+export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, setEditData,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         
         let url = ""
         if (bannerImage == "") {
-            alert("Image is not selected")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else { 
 
@@ -34,13 +34,13 @@ export const updateBannerImage = async ({ _id, bannerImage, helper, clearForm, s
                 })
             })
             const data = await result.json()
-            alert(data?.message)
-            helper()
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             clearForm()
             setEditData({ active: false, _id: "", image: "" })
         }
     }
     catch (err) {
         console.log("HOME BANNER ERROR: " + err)
+        setAlert({ modalActive: false, workStatus: "", message: "" })
     }
 }

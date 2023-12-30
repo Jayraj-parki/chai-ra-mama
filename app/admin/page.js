@@ -1,4 +1,4 @@
-"use client"
+
 const page = () => {
   return (
     <>
@@ -6,5 +6,8 @@ const page = () => {
     </>
   )
 }
-
+export const metadata = {
+  title: "Page Not Found",
+  description: "Page Not Found"
+}
 export default page

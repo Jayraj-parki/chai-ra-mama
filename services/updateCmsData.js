@@ -3,17 +3,21 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent, _id, clearForm, helper, setEditData }) => {
+export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent, _id, clearForm, helper, setEditData, setAlert }) => {
     try {
+        if (!cmsHeading.trim() || !cmsContent.trim()) {
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
+            return null
+        }
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
-       
+
         let url = ""
         if (typeof cmsImage === "string" && cmsImage.includes("http")) {
             url = cmsImage
         }
         else if (cmsImage != "") {
-            const imageRef = ref(storage, `images/${v4()+cmsImage.name  }`)
+            const imageRef = ref(storage, `images/${v4() + cmsImage.name}`)
             const snapshot = await uploadBytes(imageRef, cmsImage);
             url = await getDownloadURL(snapshot.ref);
         }
@@ -25,15 +29,13 @@ export const updateCmsData = async ({ cmsHeading, cmsImage, cmsContent, _id, cle
             },
             body: JSON.stringify({
                 cmsHeading, cmsImage: url, cmsContent, _id,
-                authId:adminAuthData
+                authId: adminAuthData
             })
-        }) 
+        })
         const data = await result.json()
-        alert(data?.message)
-        helper()
-        clearForm()
+        setAlert({ modalActive: true, workStatus: "done", message: data?.message })
         setEditData({ active: false, heading: "", image: "", content: "" })
-
+        clearForm()
     }
     catch (err) {
         console.log("CMS ERROR: " + err)

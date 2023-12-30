@@ -1,0 +1,31 @@
+@import "../../../styles/var";
+.buyProduct {
+  .itemCard {
+    transform: scaleX(0.98);
+    .cardImage {
+      img {
+        width: 120px;
+        height: 120px;
+        z-index: 100;
+      }
+      z-index: 100;
+    }
+    .cardBody {
+      min-height: 200px;
+      z-index: 1;
+      .itemName {
+        color: $bb-dark;
+      }
+      .price {
+        color: $primary-coffee;
+        font-size: 18px;
+      }
+      .addToCart {
+        background-color: $primary-coffee-light;
+        &:active {
+          background-color: $primary-coffee;
+        }
+      }
+    }
+  }
+}

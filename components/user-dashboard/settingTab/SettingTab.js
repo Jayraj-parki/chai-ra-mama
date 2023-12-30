@@ -3,18 +3,26 @@ import { useState } from "react";
 import style from "./settingTab.module.scss"
 import { changeLocalUserPassword } from "@/services/localUser/changeLocalUserPassword";
 import { useAuth } from "@/app/layout";
+import PopUp from "@/ComponentsAdmin/PopUp/PopUp";
 const SettingTab = () => {
     const {userCred}=useAuth()
     const [currentPassword, setCurrentPassword] = useState()
     const [newPassword, setNewPassword] = useState()
     const [confirmNewPassword, setConfirmNewPassword] = useState()
+    const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
+  
     const ChangePasswordHandler = async () => {
-        await changeLocalUserPassword({ currentPassword,newPassword,confirmNewPassword,userCred})
+        setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
+        await changeLocalUserPassword({ currentPassword,newPassword,confirmNewPassword,userCred,setAlert})
         setCurrentPassword("")
         setNewPassword("")
         setConfirmNewPassword("")
     }
     return (
+        <>
+        
+        <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+
         <div className={style.setting + ' container-fluid my-4  shadow rounded-4 p-4'}>
             <div className={style.header + ' row col-12 mx-auto d-flex justify-content-start '}>
                 <div className='col-auto  d-flex flex-row justify-content-start '>
@@ -28,17 +36,17 @@ const SettingTab = () => {
                         <tbody>
                             <tr className=''>
                                 <td className='align-middle' >Current Password</td>
-                                <td className='align-middle' ><input autocomplete="off" value={currentPassword} onChange={(e) => setCurrentPassword(e.target?.value)} name="currentPassword" type="password" className="form-control shadow-none " placeholder='Write current password' />
+                                <td className='align-middle' ><input  autoComplete="off"  value={currentPassword} onChange={(e) => setCurrentPassword(e.target?.value)} name="currentPassword" type="password" className="form-control shadow-none " placeholder='Write current password' />
                                 </td>
                             </tr>
                             <tr className=''>
                                 <td className='align-middle' >New Password</td>
-                                <td className='align-middle' ><input autocomplete="off" value={newPassword} onChange={(e) => setNewPassword(e.target?.value)} name="newPassword" type="password" className="form-control shadow-none " placeholder='Write new password' />
+                                <td className='align-middle' ><input  autoComplete="off"  value={newPassword} onChange={(e) => setNewPassword(e.target?.value)} name="newPassword" type="password" className="form-control shadow-none " placeholder='Write new password' />
                                 </td>
                             </tr>
                             <tr className=''>
                                 <td className='align-middle' >Confirm new Password</td>
-                                <td className='align-middle' ><input autocomplete="off" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="password" className="form-control shadow-none " placeholder='confirm new password' />
+                                <td className='align-middle' ><input  autoComplete="off"  value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target?.value)} name="confirmNewPassword" type="password" className="form-control shadow-none " placeholder='confirm new password' />
                                 </td>
                             </tr>
 
@@ -50,6 +58,7 @@ const SettingTab = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

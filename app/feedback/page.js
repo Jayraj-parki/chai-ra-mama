@@ -1,30 +1,22 @@
-"use client"
-import FeedbackCards from '@/components/feedback_Cards/FeedbackCards'
-import FeedbackBanner from '@/components/feedback_banner/FeedbackBanner'
-import { getDataService } from '@/services/getDataService'
-import { createContext, useContext, useEffect, useState } from 'react'
-
-const feedbackUiContext = createContext()
-
-export const useFeedbackuiContext = () => {
-  return useContext(feedbackUiContext)
-}
-
+import FeedbackPage from '@/components/pageComponents/FeedbackPage'
+import { getMetaTagValues } from '@/services/getMetaTagValues'
 const page = () => {
-  const [feedbacks, setData] = useState()
-  const helper = async () => {
-    await getDataService(setData,"client-feedback")
-  }
-  useEffect(() => {
-    helper()
-  }, [])
+
   return (
     <>
-      <feedbackUiContext.Provider value={{feedbacks}}>
-        <FeedbackBanner />
-        <FeedbackCards  />
-      </feedbackUiContext.Provider>
+      <FeedbackPage />
     </>
   )
 }
+
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("FeedbackPage")
+  return {
+    title: data?.metaTitle || 'Feedback Page',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
+
+  }
+}
+
 export default page

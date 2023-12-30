@@ -7,9 +7,7 @@ import { useEffect, useState } from "react"
 import { getDataService } from "@/services/getDataService";
 const HomeGallery = () => {
     const [data,setData]=useState()
-    const helper=async()=>{
-        await getDataService(setData,"gallery")
-    }
+    const helper=async()=>await getDataService(setData,"gallery")
     useEffect(()=>{
         helper()
     },[])

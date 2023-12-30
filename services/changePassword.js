@@ -1,9 +1,9 @@
-export const changePassword = async ({ currentPassword,newPassword,confirmNewPassword,adminCred}) => {
+export const changePassword = async ({ currentPassword,newPassword,confirmNewPassword,adminCred,setAlert}) => {
     if (!currentPassword?.trim() || !newPassword?.trim() || !confirmNewPassword?.trim()) {
-        alert("please fill all the fields correctly")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
       }
       else if (newPassword.trim() != confirmNewPassword.trim()) {
-        alert("Confirm password not matching with new password")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Confirm password not matching with new password" })
       }
       else {
         try {
@@ -19,7 +19,7 @@ export const changePassword = async ({ currentPassword,newPassword,confirmNewPas
             })
           })
           const data = await result.json()
-          alert(data?.message)
+          setAlert({ modalActive: true, workStatus: "done", message: data?.message })
           
         }
         catch (e) {

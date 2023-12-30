@@ -1,7 +1,7 @@
-export const AddStoreCityData = async ({ storeCity ,helper,setAddData,clearForm}) => {
+export const AddStoreCityData = async ({ storeCity ,helper,setAddData,clearForm,setAlert}) => {
     try {
         if (storeCity.trim() == "") {
-            alert("Please fill all the fields")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         }
         else {
             
@@ -15,7 +15,7 @@ export const AddStoreCityData = async ({ storeCity ,helper,setAddData,clearForm}
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)
@@ -23,5 +23,7 @@ export const AddStoreCityData = async ({ storeCity ,helper,setAddData,clearForm}
     }
     catch (err) {
         console.log("STORE CITY ERROR: " + err)
+        setAlert({ modalActive: true, workStatus: "failed", message: "Opps! Something went wrong" })
+        
     }
 }

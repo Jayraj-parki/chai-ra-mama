@@ -1,10 +1,10 @@
-export const userSignUp = async ({ firstName, lastName, email, password ,confirmPassword}) => {
-    if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        alert("please fill all the fields correctly")
+export const userSignUp = async ({ firstName, lastName, email, password ,confirmPassword,setAlert,role}) => {
+    if (!firstName || !lastName || !email || !password || !confirmPassword||!role) {
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
     }
     else if (password != confirmPassword) {
-        alert("Confirm password not matched")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Confirm password not matched" })
         return false
     }
     else {
@@ -15,11 +15,11 @@ export const userSignUp = async ({ firstName, lastName, email, password ,confirm
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    firstName, lastName, email, password
+                    firstName, lastName, email, password,role
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             return true
         }
         catch (e) {

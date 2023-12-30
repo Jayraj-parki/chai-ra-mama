@@ -10,14 +10,28 @@ export function middleware(req, res) {
   else if (req.nextUrl.pathname.startsWith("/dashboard")) {
     const session =  String([...req.headers])
     if (session.includes('localUserToken')) {
+      return NextResponse.next(); 
+    }
+    return NextResponse.redirect(new URL("/", req.url));
+  }
+  else if (req.nextUrl.pathname.startsWith("/user-product")) {
+    const session =  String([...req.headers])
+    if (session.includes('localUserToken')) {
       return NextResponse.next();
     }
     return NextResponse.redirect(new URL("/", req.url));
+  }
+  else if (req.nextUrl.pathname.startsWith("/user-signin")||req.nextUrl.pathname.startsWith("/user-signup")) {
+    const session =  String([...req.headers])
+    if (session.includes('localUserToken')) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+    return NextResponse.next();
   }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/admin/:path*','/dashboard/:path*']
+  matcher: ['/admin/:path*','/dashboard/:path*','/user-product:path*','/user-signin:path*']
 
 }

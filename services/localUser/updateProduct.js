@@ -1,6 +1,6 @@
-export const updateProduct = async ({_id,quantity,userId,update,totalPrice}) => {
+export const updateProduct = async ({_id,quantity,userId,update,totalPrice,setAlert}) => {
     if (!userId || !_id ) {
-        alert("Oops! Something went wrong")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
     }
     else {

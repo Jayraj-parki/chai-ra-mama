@@ -1,21 +1,15 @@
-"use client"
-import { useAuth } from '@/app/layout';
-import SiteContent from '@/ComponentsAdmin/siteContent/SiteContent';
-import SiteSetting from '@/ComponentsAdmin/siteSetting/SiteSetting';
-const page = () => {
-  const { adminCred } = useAuth()
+import HomePage from "@/ComponentsAdmin/adminPages/HomePage"
 
+const page = () => {
+ 
   return (
     <>
-      {
-        adminCred && 
-        <div className='container-fluid p-lg-4  m-0'>
-          <SiteContent />
-          <SiteSetting/>
-        </div>
-      }
+      <HomePage/>
     </>
   )
 }
-
+export const metadata = {
+  title: "Home",
+  description: "Static Desciption"
+}
 export default page

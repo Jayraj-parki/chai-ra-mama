@@ -1,11 +1,11 @@
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateLinkTagData = async ({ _id, facebook, instagram, whatsapp, youtube, metaTitleTag, metaKeyword, metaDesc }) => {
+export const updateLinkTagData = async ({ _id, facebook, instagram, whatsapp, youtube, metaTitleTag, metaKeyword, metaDesc,setAlert }) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
         if (!adminAuthData?.authorized) {
-            alert("Unautherized User can't perfrom Update Action")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Unautherized User can't perfrom Update Action" })
             return
         }
         const result = await fetch("/api/admin/site-link-tags", {
@@ -19,7 +19,7 @@ export const updateLinkTagData = async ({ _id, facebook, instagram, whatsapp, yo
             })
         })
         const data = await result.json()
-        alert(data?.message)
+        setAlert({ modalActive: true, workStatus: "done", message: data?.message })
     }
 
     catch (err) {

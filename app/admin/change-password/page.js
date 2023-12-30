@@ -1,19 +1,19 @@
-"use client"
+
 import ChangePassword from '@/ComponentsAdmin/changePassword/ChangePassword';
-import { useAuth } from '@/app/layout';
 
 const page = () => {
-  const { adminCred } = useAuth()
   return (
     <>
-      {
-        adminCred &&  
+      
         <div className='container-fluid p-lg-4  m-0'>
           <ChangePassword/>
         </div>
-      }
+      
     </>
   )
 }
-
+export const metadata = {
+  title: "Change Password",
+  description: "Static Desciption"
+}
 export default page

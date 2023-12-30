@@ -22,8 +22,6 @@ const AdminNavbar = () => {
     const url = usePathname()
     const router = useRouter();
     const LogOut = async () => {
-        const confirm=window.confirm("Do you really want to Logout?")
-        if(!confirm) return
         await adminLogout({ setActiveLink, logOutAdmin })
         router.push("/auth/signin")
     }
@@ -63,9 +61,9 @@ const AdminNavbar = () => {
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "home" && "border-bottom border-3"} `}>
                                             <Link onClick={() => setActiveLink("home")} className={`nav-link `} aria-current="page" href="/admin/home"><HomeIcon className={style.icon + ` `} /></Link>
                                         </li>
-                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "client-request" && "border-bottom border-3"} `}>
+                                        {/* <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "client-request" && "border-bottom border-3"} `}>
                                             <Link onClick={() => setActiveLink("client-request")} className={`nav-link `} aria-current="page" href="/admin/client-request"><CircleNotificationsIcon className={style.icon + ` `} /></Link>
-                                        </li>
+                                        </li> */}
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
                                             <Link onClick={LogOut} className={`nav-link `} aria-current="page" href="/auth/signin"><LogoutIcon className={style.icon + ` `} /></Link>
                                         </li>

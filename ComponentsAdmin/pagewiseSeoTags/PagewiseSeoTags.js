@@ -4,14 +4,16 @@ import style from "./pagewiseSeoTags.module.scss"
 import TagIcon from '@mui/icons-material/Tag';
 import Link from 'next/link';
 import PagewiseSeoTagsEdit from '../pagewiseSeoTagsEdit/PagewiseSeoTagsEdit';
-import { usePageTagContext } from '@/app/admin/pagewise-tags/page';
+import { useAuth } from '@/app/layout';
+import { usePageTagContext } from '../adminPages/PagewiseTagsPage';
 
 const PagewiseSeoTags = () => {
   const { pageTags, helper } = usePageTagContext()
-  const [editData, setEditData] = useState({ active: false, title: "",_id:"",pId:"", keyword: "", desc: ""})
-  useEffect(()=>{
+  const { isAdminAuthorized } = useAuth()
+  const [editData, setEditData] = useState({ active: false, title: "", _id: "", pId: "", keyword: "", desc: "" })
+  useEffect(() => {
     helper()
-  },[])
+  }, [])
   return (
 
     <div className={style.pagewiseSeoTags + ' container-fluid my-4  shadow rounded-4 p-4'}>
@@ -32,18 +34,18 @@ const PagewiseSeoTags = () => {
             <th className='text-capitalize p-2 pb-4 border ' >Meta Title</th>
             <th className='text-capitalize p-2 pb-4 border ' >Meta Keyword</th>
             <th className='text-capitalize p-2 pb-4 border ' >Meta Description</th>
-            <th className='text-capitalize p-2 pb-4 border ' >Actions</th>
+            {isAdminAuthorized && <th className='text-capitalize p-2 pb-4 border ' >Actions</th>}
           </thead>
           <tbody>
             {
-              pageTags?.map((val,index) =>
-                <tr key={val?.pageId+""+index} className=''>
-                  <td >{index+1}</td>
+              pageTags?.map((val, index) =>
+                <tr key={val?.pageId + "" + index} className=''>
+                  <td >{index + 1}</td>
                   <td className='px-3 text-start'>{val?.pageId}</td>
                   <td className='px-3 text-start'>{val?.metaTitle}</td>
                   <td className='px-3 text-start'>{val?.metaKeyword}</td>
                   <td className='px-3 text-start'>{val?.metaDesc}</td>
-                  <td ><button onClick={() => setEditData({ active: true, title:val?.metaTitle,_id:val?._id,pId:val?.pageId,  keyword:val?.metaKeyword, desc:val?.metaDesc })} className='btn btn-primary text-decoration-none '>Edit</button></td>
+                  {isAdminAuthorized && <td ><button onClick={() => setEditData({ active: true, title: val?.metaTitle, _id: val?._id, pId: val?.pageId, keyword: val?.metaKeyword, desc: val?.metaDesc })} className='btn btn-primary text-decoration-none '>Edit</button></td>}
                 </tr>
               )}
           </tbody>

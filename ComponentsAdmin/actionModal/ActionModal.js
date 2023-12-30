@@ -1,26 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import style from "./actionModal.module.scss"
 import { deleteForceActionData } from '@/services/deleteForceActionData'
-import { useClientRequestContext } from '@/app/admin/client-request/page'
+import PopUp from '../PopUp/PopUp'
+import { useStaffRequestContext } from '../adminPages/StaffReqquestPage'
 const ActionModal = ({ actionModal, setActionModal }) => {
-    const { helper } = useClientRequestContext()
+    const { helper } = useStaffRequestContext()
     const [clientKey, setClientKey] = useState()
     const [adminLock, setAdminLock] = useState()
+    const [alert, setAlert] = useState({ modalActive: false, workStatus: "", message: "" })
     const [_id, setId] = useState("")
     const clearForm = () => {
         setClientKey("")
         setAdminLock("")
     }
-    const handleRequest=async(req="")=>{
-        await deleteForceActionData({_id,clientKey,adminLock,request:req,end_url:"force-approval",clearForm,setActionModal,helper})
+    const handleRequest = async (req = "") => {
+        // setAlert({ modalActive: true, workStatus: "progress", message: "Please wait..." })
+        await deleteForceActionData({ _id, clientKey, adminLock, request: req, end_url: "force-approval", clearForm, setActionModal, helper, setAlert })
     }
     useEffect(() => {
         clearForm()
         setClientKey(actionModal?.clientKey)
         setId(actionModal?._id)
-    }, [actionModal])   
+    }, [actionModal])
     return (
         <>
+            <PopUp closeAlert={()=>setAlert({modalActive: false,workStatus: "", message: ""})}  modalActive={alert.modalActive}  workStatus={alert.workStatus} message={alert.message} />
+
             <div className={style.modal + ` modal fade ${actionModal?.active && "show d-block"} `} id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
@@ -32,18 +37,18 @@ const ActionModal = ({ actionModal, setActionModal }) => {
                                 <div className=''>
                                     <div className="mb-4">
                                         <label for="editHeading" className="form-label">Client Refrence No.</label>
-                                        <input autocomplete="off" disabled value={clientKey} type="text" className="form-control" placeholder='write something here' />
+                                        <input  autoComplete="off"  disabled value={clientKey} type="text" className="form-control" placeholder='write something here' />
                                     </div>
                                     <div className="mb-4">
                                         <label for="editHeading" className="form-label">Admin Refrence No.</label>
-                                        <input autocomplete="off" value={adminLock} onChange={(e) => setAdminLock(e.target.value)} type="text" className="form-control" placeholder='Admin Refrence Number' />
+                                        <input  autoComplete="off"  value={adminLock} onChange={(e) => setAdminLock(e.target.value)} type="text" className="form-control" placeholder='Admin Refrence Number' />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button onClick={()=>handleRequest("reject")}  type="button" className="btn btn-danger" data-bs-dismiss="modal">Reject</button>
-                            <button onClick={()=>handleRequest("approve")} type="button" className="btn btn-success" data-bs-dismiss="modal">Approve</button>
+                            <button onClick={() => handleRequest("reject")} type="button" className="btn btn-danger" data-bs-dismiss="modal">Reject</button>
+                            <button onClick={() => handleRequest("approve")} type="button" className="btn btn-success" data-bs-dismiss="modal">Approve</button>
                         </div>
                     </div>
                 </div>

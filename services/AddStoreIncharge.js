@@ -1,10 +1,10 @@
 import { storage } from "@/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
-export const AddStoreIncharge = async ({ inchargeName, inchargeEmail, inchargePhone, helper, store, setAddData, clearForm }) => {
+export const AddStoreIncharge = async ({ inchargeName, inchargeEmail, inchargePhone, helper, store, setAddData, clearForm,setAlert }) => {
     try {
         if (!inchargeEmail?.trim() || !inchargeName?.trim() || !inchargePhone?.trim() || !store) {
-            alert("Please fill all the details")
+            setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the details" })
         }
         else {
             const result = await fetch("/api/admin/store-incharge", {
@@ -13,12 +13,12 @@ export const AddStoreIncharge = async ({ inchargeName, inchargeEmail, inchargePh
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify({
-                    inchargeName, inchargeEmail, inchargePhone, helper, 
+                    inchargeName, inchargeEmail, inchargePhone, 
                     storeId:store
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
             helper()
             clearForm()
             setAddData(false)

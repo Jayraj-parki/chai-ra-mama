@@ -1,6 +1,6 @@
 export const removeFromCart = async ({uId}) => {
     if (!uId) {
-        alert("Oops! Something went wrong")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
     }
     else {

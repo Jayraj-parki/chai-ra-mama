@@ -1,9 +1,11 @@
-export const adminSignUp = async ({ firstName, lastName, email, password ,confirmPassword}) => {
+export const adminSignUp = async ({ firstName, lastName, email, password ,confirmPassword,setAlert}) => {
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
-        alert("please fill all the fields correctly")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
+        return false
     }
     else if (password != confirmPassword) {
-        alert("Confirm password not matched")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Confirm password not matched" })
+        return false
     }
     else {
         try {
@@ -17,10 +19,12 @@ export const adminSignUp = async ({ firstName, lastName, email, password ,confir
                 })
             })
             const data = await result.json()
-            alert(data?.message)
+            setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+            return true
         }
         catch (e) {
             console.log("error in signUp" + e)
+            return false
         }
     }
 }

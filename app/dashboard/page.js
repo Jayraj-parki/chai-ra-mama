@@ -1,46 +1,23 @@
-"use client"
-
 import Dashboard from "@/components/dashboard/Dashboard"
-import { createContext, useContext, useEffect, useState } from "react"
-import { useAuth } from "../layout"
-import { getLocalUser } from "@/services/localUser/getLocalUser"
-
-const dashboardContext = createContext()
-export const useDashboardContext = () => {
-  return useContext(dashboardContext)
-}
+import { getMetaTagValues } from "@/services/getMetaTagValues"
 
 const page = () => {
-  const { userCred } = useAuth()
-  const [userProfileData, setUserData] = useState()
-  const getUserUtils = async () => {
-    await getLocalUser(userCred, setUserData)
-  }
-  useEffect(() => {
-    getUserUtils()
-  }, [userCred])
+
   return (
     <>
-      <dashboardContext.Provider value={{ userProfileData, getUserUtils}}>
-          <Dashboard />
-      </dashboardContext.Provider>
+      <Dashboard />
     </>
   )
 }
 
-// Static MetaTag
-// export const metadata = {
-//   title: " Static title",
-//   description: "Static Desciption"
-// }
+export async function generateMetadata({ params }) {
+  const data = await getMetaTagValues("UserDashboard")
+  return {
+    title: data?.metaTitle || 'UserDashboard',
+    description: data?.metaDesc || "This is chai-ra-mama website",
+    keywords: data?.metaKeywords || "keyword1, keyword2, keyword3",
 
-// dynamic metadata
-
-// export async function generateMetadata({ params }) {
-//   return {
-//     title: 'Dynamic Title',
-//     description: "Dynamic Desciption"
-//   }
-// }
+  }
+}
 
 export default page

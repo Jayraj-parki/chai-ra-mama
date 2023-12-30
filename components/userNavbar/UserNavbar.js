@@ -14,8 +14,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 const UserNavbar = () => {
-    const { siteUIData} = useSiteDataUIContext()
-    const { userCred, logOutUser,cartCount,getCountOfAddedCart } = useAuth()
+    const { siteUIData } = useSiteDataUIContext()
+    const { userCred, userRole, logOutUser, cartCount, getCountOfAddedCart, clientCartCount, getCountOfAddedClientCart } = useAuth()
     const [collapse, setCollapse] = useState(true)
     const [activeLink, setActiveLink] = useState("/")
     const [logoImg, setLogoImg] = useState("/assets/images/logo.png'")
@@ -23,17 +23,16 @@ const UserNavbar = () => {
     const router = useRouter();
     const url = usePathname()
     const LogOut = async () => {
-        const confirm = window.confirm("Do you really want to Logout?")
-        if (!confirm) return
         await localUserLogout({ setActiveLink, logOutUser })
         router.push("/user-signin")
     }
     useEffect(() => {
         handleUserNavbar({ url, setCollapse, SetMenu, setActiveLink })
     }, [url])
-    useEffect(()=>{
+    useEffect(() => {
         getCountOfAddedCart()
-    },[userCred])
+        userRole == "client" && getCountOfAddedClientCart()
+    }, [userCred])
     return (
 
         <>
@@ -90,13 +89,14 @@ const UserNavbar = () => {
                                     :
                                     <>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "dashboard" && "border-bottom border-3"} `}>
-                                            <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard"><AccountCircleIcon className={style.navIcon+' p-0'}/></Link>
+                                            <Link onClick={() => setActiveLink("dashboard")} className={`nav-link `} aria-current="page" href="/dashboard"><AccountCircleIcon className={style.navIcon + ' p-0'} /></Link>
                                         </li>
-                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${activeLink == "user-product" && "border-bottom border-3"} `}>
-                                            <Link onClick={() => setActiveLink("user-product")} className={style.cartBtn+` nav-link `} href="/user-product" aria-current="page"><AddShoppingCartIcon className={style.navIcon+' p-0'}/>{cartCount && <span className='d-flex justify-content-center align-items-center'>{cartCount}</span>}</Link>
+                                        <li className={`nav-item d-flex col-auto mx-auto mx-lg-0  ${(activeLink == "user-product" || activeLink == "client-product") && "border-bottom border-3"} `}>
+                                            {userRole == "user" && <Link onClick={() => setActiveLink("user-product")} className={style.cartBtn + ` nav-link `} href="/user-product" aria-current="page"><AddShoppingCartIcon className={style.navIcon + ' p-0'} />{cartCount && <span className='d-flex justify-content-center align-items-center'>{cartCount}</span>}</Link>}
+                                            {userRole == "client" && <Link onClick={() => setActiveLink("client-product")} className={style.cartBtn + ` nav-link `} href="/client-product" aria-current="page"><AddShoppingCartIcon className={style.navIcon + ' p-0'} />{clientCartCount && <span className='d-flex justify-content-center align-items-center'>{clientCartCount}</span>}</Link>}
                                         </li>
                                         <li className={`nav-item d-flex col-auto mx-auto mx-lg-0   `}>
-                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href=""><LogoutIcon className={style.navIcon+' p-0'}/></Link>
+                                            <Link onClick={LogOut} className={`nav-link `} aria-current="page" href=""><LogoutIcon className={style.navIcon + ' p-0'} /></Link>
                                         </li>
                                     </>
                             }

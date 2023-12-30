@@ -1,6 +1,6 @@
-export const saveCheckoutData = async ({userId}) => {
+export const saveCheckoutData = async ({userId,setAlert}) => {
     if (!userId) {
-        alert("Oops! Something went wrong")
+        setAlert({ modalActive: true, workStatus: "failed", message: "Please fill all the fields" })
         return false
     }
     else {

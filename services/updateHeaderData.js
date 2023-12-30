@@ -3,7 +3,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { v4 } from "uuid"
 import Cookies from 'js-cookie';
 import { checkAdminLoginToken } from './checkAdminLoginToken';
-export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData}) => {
+export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData,setAlert}) => {
     try {
         const cookie = Cookies.get("teaToken")
         const adminAuthData = await checkAdminLoginToken(cookie)
@@ -29,8 +29,8 @@ export const updateHeaderData = async ({ _id, headerImage, helper ,setEditData})
             })
         })
         const data = await result.json()
-        alert(data?.message)
-        helper()
+        setAlert({ modalActive: true, workStatus: "done", message: data?.message })
+        // helper()
         setEditData({ active: false, image: "", title: "", _id: "" })
 
     }

@@ -1,0 +1,135 @@
+@import "../../styles/var";
+
+.productOrders {
+  overflow: auto;
+  
+
+  .ul_tabs {
+    border-color: $primary-coffee;
+
+    li {
+      button,
+      a {
+        color: $primary-coffee;
+        font-size: $font-sm - 3px;
+        font-weight: 600;
+      }
+      .active_tab {
+        color: $primary-light;
+        background-color: $primary-coffee;
+      }
+      .not_active {
+        color: $primary-coffee;
+        background-color: rgba(206, 202, 202, 0.119);
+      }
+      .refresh {
+        background-color: $grey-dark;
+        color: $white-light;
+      }
+      .back {
+        background-color: $bb-dark;
+        color: $white-light;
+      }
+    }
+    &::-webkit-scrollbar {
+      height: 6px;
+      background-color: $primary-coffee-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-coffee;
+    }
+  }
+  .orderStatus {
+    overflow: auto;
+    .statusIcon {
+      height: 70px;
+      width: 70px;
+      background-color: $green-dark;
+      .icon {
+        font-size: $font-lg - 7px;
+        color: white;
+      }
+    }
+    .activeStatus {
+      background-color: $chocolate-dark;
+    }
+    .reqStatus {
+      background-color: $grey-light;
+    }
+    .statusText {
+      small {
+        color: $grey-light;
+      }
+    }
+  }
+ 
+  .container {
+    overflow: auto;
+    table {
+      thead {
+        th {
+          min-width: 150px;
+          &:first-child{
+            min-width: 300px;
+          }
+        }
+      }
+    }
+    &::-webkit-scrollbar {
+      height: 6px;
+      background-color: $primary-coffee-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-coffee;
+    }
+    .userDetails{
+      overflow: auto;
+      table {
+        thead {
+          th {
+            min-width: 150px;
+            &:last-child{
+              min-width: 300px;
+            }
+          }
+        }
+      }
+      &::-webkit-scrollbar {
+        height: 6px;
+        background-color: $primary-coffee-light;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: $primary-coffee;
+      }
+    }
+    img {
+      width: 50px;
+      height: 50px;
+      z-index: 100;
+    }
+  }
+  .otpModal {
+    background-color: #00000079;
+    z-index: 999;
+    &::-webkit-scrollbar {
+      width: 0px;
+      background-color: $primary-coffee-light;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $primary-coffee;
+    }
+    .otpVerification {
+      .header {
+        .icon {
+          font-size: $font-lg;
+          color: $bb-dark;
+        }
+        .heading {
+          color: $bb-dark;
+        }
+      }
+    }
+  }
+  
+  
+}
